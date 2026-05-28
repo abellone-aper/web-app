@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import HomePage from './pages/HomePage';
-import ParaTuViajePage from './pages/ParaTuViajePage';
-import HomeBankingPage from './pages/HomeBankingPage';
-import DesignSuitesPage from './pages/DesignSuitesPage';
+import HomePage from './pages/Home/HomePage';
+import ParaTuViajePage from './pages/ParaTuViaje/ParaTuViajePage';
+import HomeBankingPage from './pages/HomeBanking/HomeBankingPage';
+import DesignSuitesPage from './pages/DesignSuites/DesignSuitesPage';
 import Footer from './components/Footer';
 import ChatPanel from './components/ChatPanel';
 import MobileBottomNav from './components/MobileBottomNav';

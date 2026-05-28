@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../para-tu-viaje.css';
-import Header from '../components/Header';
+import './ParaTuViaje.css';
+import Header from '../../components/Header';
 
 const FILTERS = ['todo','alojamiento','moda','actividades','seguros'];
 const FILTER_LABELS = { todo:'Todo', alojamiento:'Alojamiento', moda:'Moda', actividades:'Actividades', seguros:'Seguros' };

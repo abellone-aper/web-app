@@ -1,7 +1,7 @@
 import { useState, useRef, useId } from 'react';
 import { Link } from 'react-router-dom';
-import '../hospedaje.css';
-import Header from '../components/Header';
+import './DesignSuites.css';
+import Header from '../../components/Header';
 
 const GALLERY_IMGS = [
   { src: 'https://www.designsuites.com/images/bariloche/habitacion_junior_suite_9.jpg', alt: 'Habitación' },
