@@ -1,0 +1,836 @@
+/* ═══════════════════════════════════════════════════════════════
+   PARA TU VIAJE — PAGE STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Mobile app bar ────────────────────────────────────────── */
+.ptv-mobile-bar {
+  display: none;
+}
+
+/* ─── Desktop breadcrumb ─────────────────────────────────────── */
+.ptv-breadcrumb { display: none; }
+
+/* ─── Page wrapper ───────────────────────────────────────────── */
+.ptv-page {
+  background: var(--neutral-two);
+}
+
+/* ─── Context banner ─────────────────────────────────────────── */
+.ptv-ctx-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--action-primary) 0%, var(--action-primary-hover) 100%);
+  padding: 14px 16px;
+  color: #fff;
+}
+
+.ptv-ctx-icon {
+  width: 38px; height: 38px; flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+
+.ptv-ctx-body { flex: 1; min-width: 0; }
+
+.ptv-ctx-sub {
+  font-size: 13px; font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 2px; line-height: 1.3;
+}
+
+.ptv-ctx-title {
+  font-size: 16px; font-weight: 600;
+  color: #fff; margin: 0; line-height: 1.4;
+}
+
+.ptv-ctx-cta {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 15px; font-weight: 700;
+  color: #000;
+  white-space: nowrap;
+  margin-top: 3px;
+}
+
+.ptv-ctx-cta i { font-size: 14px; }
+
+/* ─── Page title (desktop only) ──────────────────────────────── */
+.ptv-page-header { display: none; }
+
+/* ─── Filter chips ───────────────────────────────────────────── */
+.ptv-filters-wrap {
+  background: #fff;
+  border-bottom: 1px solid var(--neutral-four);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.ptv-filters {
+  display: flex;
+  gap: 4px;
+  padding: 10px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.ptv-filters::-webkit-scrollbar { display: none; }
+
+.ptv-filter {
+  display: inline-flex; align-items: center;
+  height: 40px; padding: 0 18px;
+  border-radius: var(--radius-pill);
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px; font-weight: 600;
+  background: transparent;
+  color: var(--neutral-nine);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.ptv-filter:hover {
+  background: var(--neutral-three);
+}
+
+.ptv-filter.active {
+  background: var(--brand-primary);
+  color: #fff;
+}
+
+/* ─── Sections ───────────────────────────────────────────────── */
+.ptv-section {
+  padding: 20px 0 4px;
+}
+
+.ptv-section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px 14px;
+}
+
+.ptv-section-title {
+  font-size: 18px; font-weight: 700;
+  color: var(--neutral-nine); margin: 0;
+  line-height: 1.3;
+}
+
+.ptv-section-count {
+  font-size: 15px; font-weight: 500;
+  color: var(--neutral-six);
+  flex-shrink: 0;
+}
+
+/* ─── Cards grid track ───────────────────────────────────────── */
+.ptv-cards-track {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 0 16px 20px;
+}
+
+/* ─── Card ───────────────────────────────────────────────────── */
+.ptv-card {
+  width: auto;
+  display: flex; flex-direction: column;
+  cursor: pointer;
+  color: inherit;
+  background: #fff;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  border: 1px solid var(--neutral-four);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s;
+}
+
+.ptv-card--link {
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.ptv-card--link:hover .ptv-card-img img {
+  transform: scale(1.03);
+}
+
+.ptv-card-img {
+  width: 100%; height: 130px;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  background: var(--neutral-four);
+}
+
+.ptv-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.3s;
+}
+
+/* Gradient placeholder variants */
+.ptv-card-img--hotel {
+  background: linear-gradient(145deg, #5b7ba8 0%, #2e4d7a 100%);
+}
+.ptv-card-img--boots {
+  background: linear-gradient(145deg, #4a7c59 0%, #2d5a3d 100%);
+}
+.ptv-card-img--backpack {
+  background: linear-gradient(145deg, #8b6914 0%, #5c4209 100%);
+}
+.ptv-card-img--thermal {
+  background: linear-gradient(145deg, #3d5a73 0%, #1e3045 100%);
+}
+.ptv-card-img--trek {
+  background: linear-gradient(145deg, #4a7a8a 0%, #2d5566 100%);
+}
+.ptv-card-img--horseriding {
+  background: linear-gradient(145deg, #8a6b4a 0%, #5c4030 100%);
+}
+.ptv-card-img--rafting {
+  background: linear-gradient(145deg, #2d7a8a 0%, #1a4f5c 100%);
+}
+
+.ptv-card-placeholder-icon {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 40px;
+}
+
+/* Favorite button */
+.ptv-fav-btn {
+  position: absolute; top: 8px; right: 8px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--neutral-six);
+  font-size: 14px;
+  transition: color 0.15s, background 0.15s;
+  backdrop-filter: blur(4px);
+}
+
+.ptv-fav-btn.active { color: var(--action-primary); }
+.ptv-fav-btn:hover { background: #fff; }
+
+/* Badge */
+.ptv-card-badge {
+  position: absolute; top: 8px; left: 8px;
+  background: var(--action-primary);
+  color: #fff;
+  font-size: 12px; font-weight: 700;
+  padding: 2px 8px; border-radius: var(--radius-xs);
+  letter-spacing: 0.02em;
+}
+
+/* Card body */
+.ptv-card-body {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 10px 10px 12px;
+}
+
+.ptv-card-cat {
+  font-size: 12px; font-weight: 600;
+  color: var(--neutral-six);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+
+.ptv-card-name {
+  font-size: 14px; font-weight: 600;
+  color: var(--neutral-nine); line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+
+.ptv-card-price {
+  font-size: 13px; font-weight: 600;
+  color: var(--information-primary); line-height: 1.3;
+  margin-top: 2px;
+}
+
+.ptv-card-rating {
+  display: flex; align-items: center; gap: 3px;
+  margin-top: 2px;
+}
+
+.ptv-card-rating i {
+  font-size: 13px; color: var(--action-primary);
+}
+
+.ptv-card-rating span {
+  font-size: 13px; font-weight: 500;
+  color: var(--neutral-seven);
+}
+
+/* ─── Insurance card ─────────────────────────────────────────── */
+.ptv-insurance {
+  margin: 4px 16px 16px;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  background: var(--neutral-three);
+  position: relative;
+}
+
+.ptv-insurance-media {
+  height: 160px; overflow: hidden; position: relative;
+}
+
+.ptv-insurance-media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.ptv-insurance-body {
+  padding: 16px;
+}
+
+.ptv-insurance-sub {
+  font-size: 15px; font-weight: 500;
+  color: var(--neutral-seven); margin: 0 0 6px;
+}
+
+.ptv-insurance-title {
+  font-size: 18px; font-weight: 700;
+  color: var(--neutral-nine); margin: 0 0 12px; line-height: 1.35;
+}
+
+.ptv-insurance-features {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-bottom: 16px;
+}
+
+.ptv-insurance-features span {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 15px; color: var(--neutral-eight);
+}
+
+.ptv-insurance-features i {
+  font-size: 16px; color: var(--information-primary); flex-shrink: 0;
+}
+
+.ptv-insurance-btn {
+  width: 100%;
+  background: var(--action-primary);
+  color: #fff;
+  border: none; border-radius: var(--radius-pill);
+  padding: 14px 20px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px; font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  box-shadow: 0 2px 8px rgba(242, 101, 34, 0.3);
+}
+
+.ptv-insurance-btn:hover { background: var(--action-primary-hover); }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE — max-width: 480px
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  /* App bar */
+  .ptv-mobile-bar {
+    display: flex; align-items: center;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 56px;
+    background: #fff;
+    border-bottom: 1px solid var(--neutral-four);
+    padding: 0 8px 0 4px;
+    gap: 4px;
+  }
+
+  .ptv-back-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    color: var(--neutral-nine); font-size: 22px;
+    transition: background 0.15s; flex-shrink: 0;
+  }
+
+  .ptv-back-btn:hover { background: var(--neutral-three); }
+
+  .ptv-bar-title {
+    flex: 1;
+    font-size: 16px; font-weight: 700;
+    color: var(--neutral-nine); line-height: 1;
+  }
+
+  .ptv-bar-actions {
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  .ptv-bar-icon-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    color: var(--neutral-nine); font-size: 22px;
+    border: none; background: none; cursor: pointer;
+  }
+
+  /* Page spacing for fixed bar */
+  .ptv-page {
+    padding-top: 56px;
+    padding-bottom: 80px;
+    min-height: 100vh;
+  }
+
+  /* Hide filters sticky offset: account for mobile bar */
+  .ptv-filters-wrap {
+    top: 56px;
+  }
+
+  /* Context banner — full bleed */
+  .ptv-ctx-banner {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  /* Insurance card — more breathing room */
+  .ptv-insurance {
+    margin: 8px 16px 8px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DESKTOP — min-width: 1025px
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 1025px) {
+
+  /* Mobile bar: hidden */
+  .ptv-mobile-bar { display: none !important; }
+
+  /* Page layout */
+  .ptv-page {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 80px 60px;
+    background: transparent;
+  }
+
+  /* Breadcrumb */
+  .ptv-breadcrumb {
+    display: block;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px 80px 0;
+  }
+
+  .ptv-breadcrumb-inner {
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .ptv-breadcrumb-back {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 16px; font-weight: 600;
+    color: var(--neutral-seven);
+    transition: color 0.15s;
+  }
+
+  .ptv-breadcrumb-back:hover { color: var(--action-primary); }
+  .ptv-breadcrumb-back i { font-size: 16px; }
+
+  .ptv-breadcrumb-sep {
+    font-size: 12px; color: var(--neutral-five);
+  }
+
+  .ptv-breadcrumb-current {
+    font-size: 16px; font-weight: 600;
+    color: var(--neutral-nine);
+  }
+
+  /* Page top: title + banner side by side */
+  .ptv-page-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 28px 0 0;
+  }
+
+  /* Page header */
+  .ptv-page-header {
+    display: block;
+    padding: 0;
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ptv-page-title {
+    font-family: 'Montserrat', 'Nunito', sans-serif;
+    font-size: 30px; font-weight: 700;
+    color: var(--neutral-nine); margin: 0 0 6px;
+  }
+
+  .ptv-page-subtitle {
+    font-size: 17px; color: var(--neutral-seven);
+    margin: 0;
+  }
+
+  /* Context banner */
+  .ptv-ctx-banner {
+    border-radius: var(--radius-l);
+    margin: 0;
+    padding: 20px 28px;
+    width: 620px;
+    flex-shrink: 0;
+  }
+
+  .ptv-ctx-title { font-size: 17px; }
+  .ptv-ctx-cta { font-size: 16px; }
+
+  /* Filter chips row */
+  .ptv-filters-wrap {
+    background: transparent;
+    border-bottom: none;
+    position: static;
+    padding: 24px 0 0;
+  }
+
+  .ptv-filters {
+    padding: 0;
+    gap: 8px;
+    border-bottom: 1px solid var(--neutral-four);
+    padding-bottom: 0;
+  }
+
+  .ptv-filter {
+    height: 44px; padding: 0 22px;
+    font-size: 17px;
+    border-radius: 0;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .ptv-filter:hover {
+    background: transparent;
+    color: var(--action-primary);
+    border-bottom-color: var(--neutral-four);
+  }
+
+  .ptv-filter.active {
+    background: transparent;
+    color: var(--action-primary);
+    border-bottom: 3px solid var(--action-primary);
+  }
+
+  /* Sections */
+  .ptv-section {
+    padding: 32px 0 0;
+  }
+
+  .ptv-section-header {
+    padding: 0 0 20px;
+  }
+
+  .ptv-section-title { font-size: 22px; }
+
+  .ptv-section-count {
+    font-size: 16px;
+  }
+
+  /* Cards: grid layout */
+  .ptv-cards-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .ptv-card {
+    width: auto;
+    border-radius: var(--radius-l);
+    background: #fff;
+    border: 1px solid var(--neutral-four);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .ptv-card:hover {
+    box-shadow: var(--shadow-2);
+    transform: translateY(-2px);
+  }
+
+  .ptv-card-img {
+    width: 100%;
+    height: 180px;
+    border-radius: 0;
+  }
+
+  .ptv-card-body {
+    padding: 12px 14px 16px;
+    gap: 4px;
+  }
+
+  .ptv-card-cat { font-size: 13px; }
+  .ptv-card-name { font-size: 15px; }
+  .ptv-card-price { font-size: 14px; }
+
+  /* Insurance: horizontal layout */
+  .ptv-insurance {
+    display: flex;
+    align-items: stretch;
+    margin: 32px 0 0;
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    background: var(--neutral-three);
+    border: 1px solid var(--neutral-four);
+  }
+
+  .ptv-insurance-media {
+    width: 360px; height: auto;
+    flex-shrink: 0;
+  }
+
+  .ptv-insurance-media img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+
+  .ptv-insurance-body {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 32px 40px;
+  }
+
+  .ptv-insurance-sub { font-size: 16px; }
+  .ptv-insurance-title { font-size: 24px; margin-bottom: 16px; }
+
+  .ptv-insurance-features {
+    flex-direction: row; flex-wrap: wrap; gap: 10px 24px;
+    margin-bottom: 24px;
+  }
+
+  .ptv-insurance-features span { font-size: 16px; }
+
+  .ptv-insurance-btn {
+    width: auto; align-self: flex-start;
+    padding: 12px 32px; font-size: 17px;
+  }
+}
+
+/* ─── Mid breakpoint: 2 columns ──────────────────────────────── */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .ptv-cards-track {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLET — 481px – 1024px
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 481px) and (max-width: 1024px) {
+
+  /* Mobile bar: always hidden */
+  .ptv-mobile-bar { display: none !important; }
+
+  /* Page wrapper */
+  .ptv-page {
+    max-width: 100%;
+    padding: 0 32px 48px;
+    background: transparent;
+  }
+
+  /* Breadcrumb */
+  .ptv-breadcrumb {
+    display: block;
+    padding: 20px 32px 0;
+  }
+
+  .ptv-breadcrumb-inner {
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .ptv-breadcrumb-back {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 16px; font-weight: 600;
+    color: var(--neutral-seven);
+    transition: color 0.15s;
+  }
+
+  .ptv-breadcrumb-back:hover { color: var(--action-primary); }
+  .ptv-breadcrumb-back i { font-size: 16px; }
+
+  .ptv-breadcrumb-sep {
+    font-size: 12px; color: var(--neutral-five);
+  }
+
+  .ptv-breadcrumb-current {
+    font-size: 16px; font-weight: 600; color: var(--neutral-nine);
+  }
+
+  /* Page top: title + banner side by side */
+  .ptv-page-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 24px 0 0;
+  }
+
+  /* Page header */
+  .ptv-page-header {
+    display: block;
+    flex: 1; min-width: 0;
+    padding: 0; margin-bottom: 0;
+  }
+
+  .ptv-page-title {
+    font-family: 'Montserrat', 'Nunito', sans-serif;
+    font-size: 24px; font-weight: 700;
+    color: var(--neutral-nine); margin: 0 0 4px;
+  }
+
+  .ptv-page-subtitle {
+    font-size: 16px; color: var(--neutral-seven); margin: 0;
+  }
+
+  /* Context banner */
+  .ptv-ctx-banner {
+    border-radius: var(--radius-l);
+    margin: 0;
+    padding: 16px 20px;
+    width: 520px;
+    flex-shrink: 0;
+  }
+
+  /* Filter chips — tab style */
+  .ptv-filters-wrap {
+    background: transparent;
+    border-bottom: none;
+    position: static;
+    padding: 20px 0 0;
+  }
+
+  .ptv-filters {
+    padding: 0;
+    gap: 8px;
+    border-bottom: 1px solid var(--neutral-four);
+    padding-bottom: 0;
+  }
+
+  .ptv-filter {
+    height: 44px; padding: 0 20px;
+    font-size: 16px;
+    border-radius: 0;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .ptv-filter:hover {
+    background: transparent;
+    color: var(--action-primary);
+    border-bottom-color: var(--neutral-four);
+  }
+
+  .ptv-filter.active {
+    background: transparent;
+    color: var(--action-primary);
+    border-bottom: 3px solid var(--action-primary);
+  }
+
+  /* Sections */
+  .ptv-section { padding: 28px 0 0; }
+  .ptv-section-header { padding: 0 0 16px; }
+  .ptv-section-title { font-size: 20px; }
+  .ptv-section-count { font-size: 16px; }
+
+  /* Cards: 3 columns */
+  .ptv-cards-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .ptv-card {
+    width: auto;
+    border-radius: var(--radius-l);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .ptv-card:hover {
+    box-shadow: var(--shadow-2);
+    transform: translateY(-2px);
+  }
+
+  .ptv-card-img { height: 160px; }
+
+  .ptv-card-body { padding: 12px 12px 14px; gap: 4px; }
+  .ptv-card-cat { font-size: 13px; }
+  .ptv-card-name { font-size: 15px; }
+  .ptv-card-price { font-size: 14px; }
+
+  /* Insurance: horizontal layout */
+  .ptv-insurance {
+    display: flex;
+    align-items: stretch;
+    margin: 28px 0 0;
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    background: var(--neutral-three);
+    border: 1px solid var(--neutral-four);
+  }
+
+  .ptv-insurance-media {
+    width: 280px; height: auto;
+    flex-shrink: 0;
+  }
+
+  .ptv-insurance-media img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+
+  .ptv-insurance-body {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 24px 32px;
+  }
+
+  .ptv-insurance-features {
+    flex-direction: column; gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .ptv-insurance-btn {
+    width: auto; align-self: flex-start;
+    padding: 12px 28px; font-size: 17px;
+  }
+}
+
+/* ─── Chat push (desktop) ─────────────────────────────────────── */
+@media (min-width: 481px) {
+  body.chat-open .ptv-main {
+    padding-right: 420px;
+    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  body:not(.chat-open) .ptv-main {
+    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* ─── Chat-open: layout adjustments ─────────────────────────── */
+@media (min-width: 1025px) {
+  body.chat-open .ptv-page {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  body.chat-open .ptv-breadcrumb {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  body.chat-open .ptv-page-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  body.chat-open .ptv-ctx-banner {
+    width: 100%;
+  }
+  body.chat-open .ptv-cards-track {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
