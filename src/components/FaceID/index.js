@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function FaceIDOverlay({ open, onDeny, onSuccess }) {
+export default function FaceID({ open, onDeny, onSuccess }) {
   const [phase, setPhase] = useState('alert'); // 'alert' | 'scan' | 'success'
 
   function handleAllow() {

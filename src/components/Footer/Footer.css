@@ -1,6 +1,6 @@
 .site-footer {
-  background: #ffffff;
-  border-top: 1px solid var(--neutral-four);
+  background: var(--color-bg-surface);
+  border-top: 1px solid var(--color-border-subtle);
   width: 100%;
 }
 
@@ -39,11 +39,11 @@
 }
 
 .site-footer__address {
-  color: #000000;
+  color: var(--color-text-primary);
 }
 
 .site-footer__copy {
-  color: var(--blue-deep, #0a142f);
+  color: var(--blue-deep);
 }
 
 /* Social icons */
@@ -60,13 +60,13 @@
   width: 36px;
   height: 36px;
   border-radius: 24px;
-  background: var(--action-secondary, #fdece3);
+  background: var(--action-secondary);
   flex-shrink: 0;
-  transition: background 0.15s;
+  transition: background var(--transition-fast);
 }
 
 .site-footer__social-btn:hover {
-  background: #f9d9c7;
+  background: var(--action-secondary-hover);
 }
 
 .site-footer__social-btn img {
@@ -94,19 +94,19 @@
 @media (min-width: 481px) and (max-width: 1024px) {
   body.chat-open .site-footer {
     padding-right: 380px;
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: padding-right var(--transition-panel);
   }
   body:not(.chat-open) .site-footer {
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: padding-right var(--transition-panel);
   }
 }
 
 @media (min-width: 1025px) {
   body.chat-open .site-footer {
     padding-right: 420px;
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: padding-right var(--transition-panel);
   }
   body:not(.chat-open) .site-footer {
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: padding-right var(--transition-panel);
   }
 }

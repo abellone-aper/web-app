@@ -82,7 +82,7 @@
   color: var(--neutral-nine);
   background: none; border: none; cursor: pointer;
   flex-shrink: 0;
-  transition: background 0.15s;
+  transition: background var(--transition-fast);
 }
 
 .header__mobile-page__back:active { background: var(--neutral-three); }
@@ -108,7 +108,7 @@
   border-radius: 50%;
   color: var(--neutral-nine);
   background: none; border: none; cursor: pointer;
-  transition: background 0.15s;
+  transition: background var(--transition-fast);
 }
 
 .header__mobile-page__action-btn:active { background: var(--neutral-three); }

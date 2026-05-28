@@ -22,7 +22,7 @@
   gap: 12px;
   background: linear-gradient(135deg, var(--action-primary) 0%, var(--action-primary-hover) 100%);
   padding: 14px 16px;
-  color: #fff;
+  color: var(--color-text-on-brand);
 }
 
 .ptv-ctx-icon {
@@ -43,13 +43,13 @@
 
 .ptv-ctx-title {
   font-size: 16px; font-weight: 600;
-  color: #fff; margin: 0; line-height: 1.4;
+  color: var(--color-text-on-brand); margin: 0; line-height: 1.4;
 }
 
 .ptv-ctx-cta {
   display: inline-flex; align-items: center; gap: 4px;
   font-size: 15px; font-weight: 700;
-  color: #000;
+  color: var(--color-text-primary);
   white-space: nowrap;
   margin-top: 3px;
 }
@@ -61,7 +61,7 @@
 
 /* ─── Filter chips ───────────────────────────────────────────── */
 .ptv-filters-wrap {
-  background: #fff;
+  background: var(--color-bg-surface);
   border-bottom: 1px solid var(--neutral-four);
   position: sticky;
   top: 0;
@@ -84,7 +84,7 @@
   height: 40px; padding: 0 18px;
   border-radius: var(--radius-pill);
   border: none;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 16px; font-weight: 600;
   background: transparent;
   color: var(--neutral-nine);
@@ -100,7 +100,7 @@
 
 .ptv-filter.active {
   background: var(--brand-primary);
-  color: #fff;
+  color: var(--color-text-on-brand);
 }
 
 /* ─── Sections ───────────────────────────────────────────────── */
@@ -139,7 +139,7 @@
   display: flex; flex-direction: column;
   cursor: pointer;
   color: inherit;
-  background: #fff;
+  background: var(--color-bg-surface);
   border-radius: var(--radius-l);
   overflow: hidden;
   border: 1px solid var(--neutral-four);
@@ -215,13 +215,13 @@
 }
 
 .ptv-fav-btn.active { color: var(--action-primary); }
-.ptv-fav-btn:hover { background: #fff; }
+.ptv-fav-btn:hover { background: var(--color-bg-surface); }
 
 /* Badge */
 .ptv-card-badge {
   position: absolute; top: 8px; left: 8px;
   background: var(--action-primary);
-  color: #fff;
+  color: var(--color-text-on-brand);
   font-size: 12px; font-weight: 700;
   padding: 2px 8px; border-radius: var(--radius-xs);
   letter-spacing: 0.02em;
@@ -314,10 +314,10 @@
 .ptv-insurance-btn {
   width: 100%;
   background: var(--action-primary);
-  color: #fff;
+  color: var(--color-text-on-brand);
   border: none; border-radius: var(--radius-pill);
   padding: 14px 20px;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 17px; font-weight: 700;
   cursor: pointer;
   transition: background 0.15s;
@@ -336,7 +336,7 @@
     display: flex; align-items: center;
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     height: 56px;
-    background: #fff;
+    background: var(--color-bg-surface);
     border-bottom: 1px solid var(--neutral-four);
     padding: 0 8px 0 4px;
     gap: 4px;
@@ -458,7 +458,7 @@
   }
 
   .ptv-page-title {
-    font-family: 'Montserrat', 'Nunito', sans-serif;
+    font-family: var(--font-accent), var(--font-body);
     font-size: 30px; font-weight: 700;
     color: var(--neutral-nine); margin: 0 0 6px;
   }
@@ -542,7 +542,7 @@
   .ptv-card {
     width: auto;
     border-radius: var(--radius-l);
-    background: #fff;
+    background: var(--color-bg-surface);
     border: 1px solid var(--neutral-four);
     overflow: hidden;
     transition: box-shadow 0.2s, transform 0.2s;
@@ -677,7 +677,7 @@
   }
 
   .ptv-page-title {
-    font-family: 'Montserrat', 'Nunito', sans-serif;
+    font-family: var(--font-accent), var(--font-body);
     font-size: 24px; font-weight: 700;
     color: var(--neutral-nine); margin: 0 0 4px;
   }

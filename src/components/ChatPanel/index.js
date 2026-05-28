@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import FaceIDOverlay from '../FaceIDOverlay';
+import FaceID from '../FaceID';
 
 const STORE_OFFER = {
   img: 'https://static-catalog.tiendamia.com/marketplace_manager_service/production/product_62498b26_mirakl_image_1_large.jpg',
@@ -942,7 +942,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
         )}
       </div>
 
-      <FaceIDOverlay
+      <FaceID
         open={faceIdOpen}
         onDeny={() => setFaceIdOpen(false)}
         onSuccess={() => { setFaceIdOpen(false); showPurchaseConfirmation(pendingTabIdRef.current); }}

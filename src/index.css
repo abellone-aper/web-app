@@ -1,9 +1,10 @@
 :root {
-    --brand-primary:      #4c4f5d;
+  --brand-primary:      #4c4f5d;
   --brand-secondary:    #6d7288;
   --brand-on-primary:   #ffffff;
   --brand-on-secondary: #4c4f5d;
 
+  /* ─── Extended palette ──────────────────────────────────────── */
   --blue-primary:  #0077fa;
   --blue-dark:     #006be0;
   --blue-light:    #edf4ff;
@@ -11,7 +12,7 @@
   --purple-active: #6929c4;
   --purple-light:  #dceaff;
 
-  
+  /* ─── Neutral scale ─────────────────────────────────────────── */
   --neutral-one:   #ffffff;
   --neutral-two:   #f8f8f8;
   --neutral-three: #f3f3f3;
@@ -22,19 +23,19 @@
   --neutral-eight: #494949;
   --neutral-nine:  #1c1c1c;
 
-  
+  /* ─── Action colors ─────────────────────────────────────────── */
   --action-primary:       #F26522;
   --action-primary-hover: #D9541A;
   --action-secondary:     #FDECE3;
 
-  
+  /* ─── Semantic status ───────────────────────────────────────── */
   --information-primary:   #2e844a;
   --information-secondary: #e9f3e6;
   --promotion-primary:     #FF4750;
   --promotion-secondary:   #FFE5E6;
   --promotion-tertiary:    #B8000A;
 
-  
+  /* ─── Border radius ─────────────────────────────────────────── */
   --radius-xxs:  2px;
   --radius-xs:   4px;
   --radius-s:    8px;
@@ -43,7 +44,7 @@
   --radius-xl:  20px;
   --radius-pill: 1000px;
 
-  
+  /* ─── Type scale ────────────────────────────────────────────── */
   --text-xs:   13px;
   --text-sm:   14px;
   --text-base: 16px;
@@ -54,7 +55,7 @@
   --text-3xl:  34px;
   --text-4xl:  50px;
 
-  
+  /* ─── Spacing scale ─────────────────────────────────────────── */
   --sp-1:  4px;
   --sp-2:  8px;
   --sp-3:  12px;
@@ -65,24 +66,78 @@
   --sp-10: 40px;
   --sp-12: 48px;
 
-  
+  /* ─── Layout ────────────────────────────────────────────────── */
   --container-px:  136px;
   --container-max: 1440px;
 
-  
+  /* ─── Surface gradients ─────────────────────────────────────── */
   --surface-warm-start: #b89b7a;
   --surface-warm-end:   #6f5d4f;
 
-  
+  /* ─── Elevation (box shadows) ───────────────────────────────── */
   --shadow-1: 0 2px 4px rgba(46,49,47,0.08);
   --shadow-2: 0 8px 8px -4px rgba(46,49,47,0.15);
   --shadow-3: 0 8px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
+
+  /* ─── Font families ─────────────────────────────────────────── */
+  --font-body:    'Nunito', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-accent:  'Montserrat', sans-serif;
+  --font-system:  -apple-system, BlinkMacSystemFont, var(--font-body);
+
+  /* ─── Font weights ──────────────────────────────────────────── */
+  --font-weight-regular:   400;
+  --font-weight-medium:    500;
+  --font-weight-semibold:  600;
+  --font-weight-bold:      700;
+  --font-weight-extrabold: 800;
+
+  /* ─── Line heights ──────────────────────────────────────────── */
+  --line-height-tight:  1.15;
+  --line-height-snug:   1.3;
+  --line-height-base:   1.5;
+
+  /* ─── Spacing (extended) ────────────────────────────────────── */
+  --sp-14: 56px;
+  --sp-16: 64px;
+
+  /* ─── Transitions ───────────────────────────────────────────── */
+  --transition-fast:   0.15s ease;
+  --transition-base:   0.25s ease;
+  --transition-panel:  0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ─── Z-index scale ─────────────────────────────────────────── */
+  --z-sticky:  10;
+  --z-fixed:   50;
+  --z-overlay: 100;
+  --z-modal:   200;
+  --z-toast:   300;
+
+  /* ─── Semantic color aliases ────────────────────────────────── */
+  --color-text-primary:   var(--neutral-nine);
+  --color-text-secondary: var(--neutral-seven);
+  --color-text-disabled:  var(--neutral-six);
+  --color-text-on-brand:  var(--brand-on-primary);
+
+  --color-bg-surface:    var(--neutral-one);
+  --color-bg-muted:      var(--neutral-two);
+  --color-bg-subtle:     var(--neutral-three);
+
+  --color-border:        var(--neutral-five);
+  --color-border-subtle: var(--neutral-four);
+  --color-border-strong: var(--neutral-six);
+
+  /* ─── Component-level tokens ────────────────────────────────── */
+  --action-secondary-hover: #f9d9c7;
+  --badge-discount-bg:      var(--action-secondary);
+  --badge-discount-text:    #c33f00;
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   color: var(--neutral-nine);
   background: var(--neutral-one);
   -webkit-font-smoothing: antialiased;
@@ -108,7 +163,7 @@ img { max-width: 100%; display: block; }
 .header-left { display: flex; align-items: center; gap: 40px; }
 .logo {
   display: inline-flex; align-items: center; gap: 8px;
-  font-family: 'Outfit', sans-serif; font-weight: 600;
+  font-family: var(--font-display); font-weight: 600;
   font-size: 26.5px; line-height: 1; color: var(--brand-primary);
 }
 .logo-bag {
@@ -232,7 +287,7 @@ img { max-width: 100%; display: block; }
 .hero-slide-title {
   font-size: 40px; font-weight: 700; color: #fff;
   line-height: 1.15; margin: 0;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
 }
 @media (max-width: 768px) {
   .hero-slide-inner { padding: 28px 32px; }
@@ -253,7 +308,7 @@ img { max-width: 100%; display: block; }
   display: flex; flex-direction: column; gap: 32px;
 }
 .hero-title {
-  font-family: 'Nunito', sans-serif; font-weight: 600;
+  font-family: var(--font-body); font-weight: 600;
   font-size: 48px; line-height: 54px; color: var(--neutral-one);
   margin: 0;
 }
@@ -610,7 +665,7 @@ img { max-width: 100%; display: block; }
   background: var(--neutral-one);
 }
 .mobile-greeting {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: var(--text-md);
   line-height: 20px;
@@ -658,7 +713,7 @@ img { max-width: 100%; display: block; }
   padding: 0 var(--sp-4);
   border: 1px solid var(--action-primary);
   border-radius: var(--radius-pill);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: var(--text-base);
   color: var(--action-primary);
@@ -705,7 +760,7 @@ img { max-width: 100%; display: block; }
   justify-content: space-between;
 }
 .offer-toast-label {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-weight: 500;
   font-size: var(--text-sm);
   line-height: 16px;
@@ -738,7 +793,7 @@ img { max-width: 100%; display: block; }
 }
 .offer-toast-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
 .offer-toast-name {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 400;
   line-height: 16px;
@@ -752,7 +807,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   gap: var(--sp-1);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--text-sm);
 }
 .offer-toast-price strong { font-weight: 700; color: var(--neutral-nine); line-height: 16px; }
@@ -1229,13 +1284,13 @@ img { max-width: 100%; display: block; }
 .chat-bot-label {
   display: flex; align-items: center; gap: 6px;
   font-size: 12px; color: var(--neutral-seven);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
 }
 .chat-bot-text {
   font-size: 14px; line-height: 20px;
   color: var(--neutral-nine);
   margin: 0;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
 }
 
 .chat-offer-card {
@@ -1439,7 +1494,7 @@ img { max-width: 100%; display: block; }
   color: #000;
   font-size: 17px;
   letter-spacing: -0.43px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Nunito', sans-serif;
+  font-family: var(--font-system);
 }
 .faceid-alert-title {
   width: 100%; font-weight: 600; line-height: 22px; margin: 0;
@@ -1457,7 +1512,7 @@ img { max-width: 100%; display: block; }
   border-radius: 100px;
   background: rgba(120,120,128,0.16);
   border: none; cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, 'Nunito', sans-serif;
+  font-family: var(--font-system);
   font-size: 17px; font-weight: 500;
   letter-spacing: -0.43px;
   color: #000;
@@ -1497,7 +1552,7 @@ img { max-width: 100%; display: block; }
 .faceid-scan-hint {
   font-size: 15px; color: rgba(255,255,255,0.7);
   margin: 0; text-align: center; letter-spacing: -0.2px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Nunito', sans-serif;
+  font-family: var(--font-system);
 }
 
 .chat-user-bubble {
@@ -1817,7 +1872,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
   text-transform: uppercase; letter-spacing: 0.06em;
 }
 .balance-amount {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-display);
   font-size: 44px; font-weight: 700; line-height: 1;
   display: flex; align-items: center; gap: 12px;
 }
@@ -2650,7 +2705,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
   flex: 1;
   border: none; outline: none; cursor: pointer;
   background: transparent;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--text-sm); font-weight: 600;
   color: var(--neutral-seven);
   padding: 8px 16px;
@@ -2718,7 +2773,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
   background: var(--neutral-three);
   border: 1.5px solid transparent;
   border-radius: var(--radius-pill);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 12px; font-weight: 600;
   color: var(--neutral-seven);
   cursor: pointer;
@@ -2911,7 +2966,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
   border: none; border-bottom: 1px solid var(--neutral-four);
   cursor: pointer;
   padding: 13px 14px;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 13px; font-weight: 600; color: var(--neutral-nine);
   transition: background 0.15s;
   text-align: left; border-radius: 0;
@@ -3003,7 +3058,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
   background: #dc2626; color: #fff;
   border: none; cursor: pointer;
   padding: 13px 24px;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 13px; font-weight: 700;
   transition: background 0.15s;
   border-bottom: 1px solid #fecaca;
@@ -3014,7 +3069,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
   background: transparent; color: var(--neutral-nine);
   border: none; cursor: pointer;
   padding: 13px 24px;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 13px; font-weight: 600;
   transition: background 0.15s;
   width: 100%; text-align: center;
@@ -3277,7 +3332,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
     height: auto;
   }
   .mobile-greeting {
-    font-family: 'Montserrat', 'Nunito', sans-serif;
+    font-family: var(--font-accent), var(--font-body);
     font-size: 16px; font-weight: 600;
     color: #242226; line-height: 20px;
   }
@@ -3960,7 +4015,6 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
   body.chat-open .search           { max-width: 350px; }
   body.chat-open .dh-promo-card    { padding: 16px; }
   body.chat-open .dh-promo-illustration { width: 64px; height: 64px; }
-  body.chat-open .product-card     { flex: 0 0 190px; width: 190px; }
   body.chat-open .carousel-arrow:first-child { left: -36px; }
   body.chat-open .carousel-arrow:last-child  { right: -36px; }
   body.chat-open .footer-inner     { padding: 40px 40px; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -4005,7 +4059,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
 
   /* Mobile header tweaks */
   .mobile-greeting {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-accent);
     font-weight: 600;
   }
   .mobile-user-avatar {

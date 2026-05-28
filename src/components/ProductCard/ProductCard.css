@@ -1,6 +1,6 @@
 .product-card {
   flex: 0 0 216px; width: 216px;
-  background: var(--neutral-one); border: 1px solid #c9c9c9;
+  background: var(--color-bg-surface); border: 1px solid var(--color-border);
   border-radius: var(--radius-s);
   overflow: hidden;
   display: flex; flex-direction: column;
@@ -13,7 +13,7 @@
   display: flex; align-items: center; justify-content: center;
   padding: 32px 12px 6px; background: var(--neutral-one);
   position: relative;
-  border-bottom: 1px solid #c9c9c9;
+  border-bottom: 1px solid var(--color-border);
 }
 .product-image img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
@@ -34,9 +34,9 @@
 .product-info { display: flex; flex-direction: column; gap: 8px; }
 
 .badge-disc {
-  background: #fdece3; color: #c33f00;
-  font-family: 'Nunito', sans-serif;
-  font-size: 14px; font-weight: 600;
+  background: var(--badge-discount-bg); color: var(--badge-discount-text);
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: var(--font-weight-semibold);
   letter-spacing: 0.028px; line-height: 18px;
   padding: 4px 8px; border-radius: var(--radius-xxs);
   display: inline-flex; align-items: center;
