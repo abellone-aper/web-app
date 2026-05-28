@@ -244,21 +244,7 @@ export default function HomePage() {
       </aside>
 
       <div className="tienda-main">
-        <div className="mobile-header">
-          <div className="mobile-header-left">
-            <div className="mobile-user-avatar">{CURRENT_USER.initial}</div>
-            <span className="mobile-greeting">Hola, {CURRENT_USER.name.split(' ')[0]}</span>
-          </div>
-          <div className="mobile-header-right">
-            <span className="icon-wrap">
-              <i className="ph ph-bell" style={{fontSize:'24px'}}></i>
-              <span className="notif-dot">1</span>
-            </span>
-            <i className="ph ph-heart" style={{fontSize:'24px'}}></i>
-          </div>
-        </div>
-
-        <Header />
+        <Header variant="home" user={CURRENT_USER} />
 
         <div className="desktop-greeting">
           <div className="desktop-greeting-left">

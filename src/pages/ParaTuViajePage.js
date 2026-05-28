@@ -100,7 +100,7 @@ export default function ParaTuViajePage() {
       </div>
 
       <div className="ptv-main">
-        <Header />
+        <Header variant="page" title="Para tu viaje" />
 
         <div className="ptv-breadcrumb">
           <div className="ptv-breadcrumb-inner">

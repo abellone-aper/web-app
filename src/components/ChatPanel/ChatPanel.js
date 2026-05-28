@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import FaceIDOverlay from './FaceIDOverlay';
+import FaceIDOverlay from '../FaceIDOverlay';
 
 const STORE_OFFER = {
   img: 'https://static-catalog.tiendamia.com/marketplace_manager_service/production/product_62498b26_mirakl_image_1_large.jpg',

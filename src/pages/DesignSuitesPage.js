@@ -358,7 +358,7 @@ export default function DesignSuitesPage({ onChatOpen }) {
       </div>
 
       <div className="hd-main">
-        <Header />
+        <Header variant="page" title="Hospedaje" />
 
         <div className="hd-breadcrumb">
           <div className="hd-breadcrumb-inner">
