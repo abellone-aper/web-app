@@ -2,6 +2,9 @@ import { useState, useRef, useId, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Hospedaje.css';
 import Header from '../../components/Header';
+import PrimaryButton from '../../components/Buttons/PrimaryButton';
+import SecondaryButton from '../../components/Buttons/SecondaryButton';
+import DateRangePicker from '../../components/DateRangePicker';
 
 const GALLERY_IMGS = [
   { src: 'https://www.designsuites.com/images/bariloche/habitacion_junior_suite_9.jpg', alt: 'Habitación' },
@@ -11,7 +14,6 @@ const GALLERY_IMGS = [
   { src: 'https://www.designsuites.com/images/bariloche/foto_13.jpg', alt: 'Vista' },
 ];
 
-const MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 const MONTHS_SHORT = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 const ROOM_PRICES = {
   doble:       { current: 171500, original: 245000 },
@@ -25,73 +27,6 @@ function fmtARS(n) {
   return '$' + n.toLocaleString('es-AR');
 }
 
-function Calendar({ onConfirm, onClose }) {
-  const today = new Date(); today.setHours(0,0,0,0);
-  const [viewYear, setViewYear] = useState(2026);
-  const [viewMonth, setViewMonth] = useState(5);
-  const [startDate, setStartDate] = useState(new Date(2026,5,26));
-  const [endDate, setEndDate] = useState(new Date(2026,6,2));
-
-  function nightsBetween(a, b) { return Math.round((b - a) / 86400000); }
-
-  function handleDayClick(day) {
-    const clicked = new Date(viewYear, viewMonth, day); clicked.setHours(0,0,0,0);
-    if (!startDate || endDate || clicked <= startDate) {
-      setStartDate(clicked); setEndDate(null);
-    } else {
-      setEndDate(clicked);
-    }
-  }
-
-  const firstDay = new Date(viewYear, viewMonth, 1).getDay();
-  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-  const offset = firstDay === 0 ? 6 : firstDay - 1;
-  const days = [];
-  for (let i = 0; i < offset; i++) days.push(<span key={`e${i}`} className="hd-cal-day hd-cal-day--empty"></span>);
-  for (let d = 1; d <= daysInMonth; d++) {
-    const dateD = new Date(viewYear, viewMonth, d); dateD.setHours(0,0,0,0);
-    const disabled = dateD < today;
-    let cls = 'hd-cal-day';
-    if (disabled) cls += ' hd-cal-day--disabled';
-    else if (startDate && dateD.getTime() === startDate.getTime()) cls += ' hd-cal-day--start';
-    else if (endDate && dateD.getTime() === endDate.getTime()) cls += ' hd-cal-day--end';
-    else if (startDate && endDate && dateD > startDate && dateD < endDate) cls += ' hd-cal-day--in-range';
-    days.push(<button key={d} type="button" className={cls} disabled={disabled} onClick={() => handleDayClick(d)}>{d}</button>);
-  }
-
-  function prevMonth() {
-    if (viewMonth > 0) setViewMonth(m => m - 1);
-    else { setViewMonth(11); setViewYear(y => y - 1); }
-  }
-  function nextMonth() {
-    if (viewMonth < 11) setViewMonth(m => m + 1);
-    else { setViewMonth(0); setViewYear(y => y + 1); }
-  }
-
-  const nights = startDate && endDate ? nightsBetween(startDate, endDate) : null;
-
-  return (
-    <div className="hd-calendar hd-calendar--open" onClick={e => e.stopPropagation()}>
-      <div className="hd-calendar-header">
-        <button className="hd-cal-nav" type="button" onClick={prevMonth}><i className="ph ph-caret-left"></i></button>
-        <span className="hd-cal-month">{MONTHS[viewMonth]} {viewYear}</span>
-        <button className="hd-cal-nav" type="button" onClick={nextMonth}><i className="ph ph-caret-right"></i></button>
-      </div>
-      <div className="hd-calendar-grid">
-        {['Lu','Ma','Mi','Ju','Vi','Sá','Do'].map(d => <span key={d} className="hd-cal-dow">{d}</span>)}
-      </div>
-      <div className="hd-calendar-days">{days}</div>
-      <div className="hd-calendar-footer">
-        <span className="hd-cal-nights">
-          {nights ? `${nights} noches seleccionadas` : 'Seleccioná la fecha de salida'}
-        </span>
-        <button className="hd-cal-confirm" type="button" onClick={() => { if (startDate && endDate) onConfirm(startDate, endDate, nights); onClose(); }}>
-          Confirmar
-        </button>
-      </div>
-    </div>
-  );
-}
 
 function BookingWidget({ onReserve }) {
   const uid = useId();
@@ -129,7 +64,14 @@ function BookingWidget({ onReserve }) {
           <span>{dateLabel}</span>
           <i className="ph ph-caret-down"></i>
         </button>
-        {calOpen && <Calendar onConfirm={handleCalConfirm} onClose={() => setCalOpen(false)} />}
+        {calOpen && (
+          <DateRangePicker
+            startDate={new Date(2026,5,26)}
+            endDate={new Date(2026,6,2)}
+            onConfirm={handleCalConfirm}
+            onClose={() => setCalOpen(false)}
+          />
+        )}
       </div>
 
       <div className="hd-field">
@@ -179,7 +121,7 @@ function BookingWidget({ onReserve }) {
         </div>
       </div>
 
-      <button className="hd-reserve-btn" type="button" onClick={onReserve}>Reservar</button>
+      <PrimaryButton style={{width:'100%'}} type="button" onClick={onReserve}>Reservar</PrimaryButton>
     </div>
   );
 }
@@ -323,7 +265,7 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
             </div>
           ))}
         </div>
-        <button className="hd-see-reviews-btn" type="button">Ver 47 comentarios</button>
+        <SecondaryButton style={{width:'100%', marginTop:'16px'}} type="button">Ver 47 comentarios</SecondaryButton>
       </div>
     </div>
   );
@@ -467,7 +409,7 @@ export default function DesignSuitesPage({ onChatOpen }) {
                     </div>
                   ))}
                 </div>
-                <button className="hd-see-reviews-btn" type="button">Ver 47 comentarios</button>
+                <SecondaryButton style={{width:'100%', marginTop:'16px'}} type="button">Ver 47 comentarios</SecondaryButton>
               </div>
             </div>
           </div>

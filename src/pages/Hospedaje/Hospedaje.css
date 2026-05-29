@@ -291,100 +291,6 @@
 .hd-dropdown:focus { outline: none; border-color: var(--action-primary); box-shadow: 0 0 0 3px rgba(242,101,34,0.12); }
 .hd-dropdown i { font-size: 18px; color: var(--neutral-seven); flex-shrink: 0; }
 
-/* ─── Calendar popup ─────────────────────────────────────────── */
-.hd-calendar {
-  display: none;
-  position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 200;
-  background: var(--color-bg-surface);
-  border: 1px solid var(--neutral-four);
-  border-radius: var(--radius-m);
-  padding: 16px;
-  box-shadow: var(--shadow-3);
-}
-
-.hd-calendar.hd-calendar--open { display: block; }
-
-.hd-calendar-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.hd-cal-month {
-  font-family: var(--font-body);
-  font-size: 17px; font-weight: 600; color: var(--neutral-nine);
-}
-
-.hd-cal-nav {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--neutral-three); border: none; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; color: var(--neutral-nine);
-  transition: background 0.15s;
-}
-.hd-cal-nav:hover { background: var(--neutral-four); }
-
-.hd-calendar-grid {
-  display: grid; grid-template-columns: repeat(7, 1fr);
-  gap: 2px; margin-bottom: 8px;
-}
-
-.hd-cal-dow {
-  font-size: 13px; font-weight: 600; color: var(--neutral-six);
-  text-align: center; padding: 4px 0;
-  font-family: var(--font-body);
-}
-
-.hd-calendar-days {
-  display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px;
-}
-
-.hd-cal-day {
-  aspect-ratio: 1; border: none; background: none; cursor: pointer;
-  border-radius: var(--radius-xs);
-  font-family: var(--font-body);
-  font-size: 15px; font-weight: 500; color: var(--neutral-nine);
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.1s;
-}
-
-.hd-cal-day:hover:not(.hd-cal-day--disabled):not(.hd-cal-day--start):not(.hd-cal-day--end) {
-  background: var(--neutral-three);
-}
-
-.hd-cal-day--empty { cursor: default; }
-.hd-cal-day--disabled { color: var(--neutral-five); cursor: not-allowed; }
-
-.hd-cal-day--start,
-.hd-cal-day--end {
-  background: var(--action-primary); color: var(--color-text-on-brand); border-radius: var(--radius-xs);
-}
-
-.hd-cal-day--in-range {
-  background: var(--action-secondary); color: var(--action-primary);
-  border-radius: 0;
-}
-
-.hd-calendar-footer {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-top: 12px; padding-top: 12px;
-  border-top: 1px solid var(--neutral-four);
-}
-
-.hd-cal-nights {
-  font-size: 15px; color: var(--neutral-seven);
-}
-
-.hd-cal-confirm {
-  background: var(--action-primary); color: var(--color-text-on-brand);
-  border: none; border-radius: var(--radius-s);
-  padding: 8px 18px;
-  font-family: var(--font-body);
-  font-size: 16px; font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.hd-cal-confirm:hover { background: var(--action-primary-hover); }
-
 /* ─── Guest stepper ──────────────────────────────────────────── */
 .hd-stepper {
   display: flex; align-items: center; gap: 8px;
@@ -418,18 +324,6 @@
   font-family: var(--font-body);
   font-size: 16px; font-weight: 400; color: var(--neutral-nine);
 }
-
-/* ─── Reserve button ─────────────────────────────────────────── */
-.hd-reserve-btn {
-  width: 100%; height: 52px;
-  background: var(--action-primary); color: var(--color-text-on-brand);
-  border: none; border-radius: var(--radius-s);
-  font-family: var(--font-body);
-  font-size: 16px; font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.hd-reserve-btn:hover { background: var(--action-primary-hover); }
 
 .hd-price-note {
   font-size: 14px; color: var(--neutral-six);
@@ -507,21 +401,6 @@
 }
 
 .hd-schedule-item i { font-size: 22px; flex-shrink: 0; color: var(--neutral-seven); margin-top: 1px; }
-
-/* ─── See reviews button ─────────────────────────────────────── */
-.hd-see-reviews-btn {
-  display: block; width: 100%;
-  height: 40px;
-  background: var(--color-bg-surface);
-  border: 1px solid var(--action-primary);
-  border-radius: 8px;
-  color: var(--action-primary);
-  font-family: var(--font-body);
-  font-size: 16px; font-weight: 600;
-  cursor: pointer; margin-top: 16px;
-  transition: background 0.15s;
-}
-.hd-see-reviews-btn:hover { background: var(--action-secondary); }
 
 /* ─── Info sections (mobile extra) ───────────────────────────── */
 .hd-mobile-info {

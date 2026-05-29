@@ -149,9 +149,6 @@
   font-size: var(--text-xl); font-weight: 700; color: var(--neutral-nine);
   line-height: 28px; margin: 0;
 }
-.section-link {
-  font-size: var(--text-base); font-weight: 600; color: var(--action-primary);
-}
 
 /* ═══════════════════════════════════════════════════════════════
    CAROUSEL
@@ -875,11 +872,6 @@
     font-size: 19px; font-weight: 700;
     color: #242226;
   }
-  .nmh-section-link {
-    font-family: inherit;
-    font-size: 16px; font-weight: 600;
-    color: var(--action-primary);
-  }
   .nmh-trip-cards {
     display: flex; flex-wrap: nowrap; gap: 8px;
     overflow-x: auto;
@@ -953,19 +945,6 @@
     color: #fff;
     line-height: 1.35;
   }
-  .nmh-insurance-btn {
-    width: 100%;
-    background: var(--action-primary);
-    color: #fff;
-    border: none; border-radius: 8px;
-    height: 52px;
-    font-family: inherit;
-    font-size: 17px; font-weight: 700;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .nmh-insurance-btn:hover { background: var(--action-primary-hover); }
-
   /* ── nmh trip section spacing ── */
   .nmh-trip-section {
     border-radius: 20px;
@@ -1000,11 +979,6 @@
   }
   .nmh-insurance-sub   { margin: 0; font-size: 17px; font-weight: 500; color: #fff; line-height: 22px; }
   .nmh-insurance-title { margin: 0; font-size: 21px; font-weight: 700; color: #fff; line-height: 1.35; }
-  .nmh-insurance-btn {
-    width: 100%; background: var(--action-primary); color: #fff;
-    border: none; border-radius: 8px; height: 52px;
-    font-size: 17px; font-weight: 700; font-family: inherit; cursor: pointer;
-  }
 
   /* ── Promo 2×2 ── */
   .nmh-promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -1088,15 +1062,6 @@
 
   .dh-trip-cards { display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
   .dh-trip-cards::-webkit-scrollbar { display: none; }
-  .dh-cta-outline {
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--neutral-five); color: var(--neutral-nine); background: #fff;
-    border-radius: var(--radius-s); padding: 11px;
-    font-size: 14px; font-weight: 600;
-    transition: background 0.15s;
-  }
-  .dh-cta-outline:hover { background: var(--neutral-two); }
-
   .dh-explore-panel { display: flex; flex-direction: column; gap: 16px; }
   .dh-explore-chips-card {
     grid-column: 2 / span 2; grid-row: 1;
@@ -1151,13 +1116,6 @@
   }
   .dh-insurance-sub   { font-size: 10px; color: rgba(255,255,255,0.8); margin: 0; }
   .dh-insurance-title { font-size: 12px; font-weight: 600; color: #fff; margin: 0; line-height: 1.4; }
-  .dh-insurance-btn {
-    background: var(--action-primary); color: #fff; border: none;
-    border-radius: var(--radius-s); padding: 8px 10px;
-    font-size: 11px; font-weight: 600; font-family: inherit; cursor: pointer;
-    transition: background 0.15s;
-  }
-  .dh-insurance-btn:hover { background: var(--action-primary-hover); }
 
   /* ─── Dashboard grid ─── */
   .dashboard-grid {
@@ -1287,15 +1245,6 @@
   .dh-ctx-card .dh-ctx-title { font-size: 15px; font-weight: 700; color: #fff; margin: 0; line-height: 1.4; }
   .dh-ctx-link { font-size: 14px; font-weight: 700; color: #001d39; }
 
-  .dh-cta-outline {
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid #f26522; color: #f26522; background: transparent;
-    border-radius: 8px; height: 40px;
-    font-size: 14px; font-weight: 700;
-    transition: background 0.15s;
-  }
-  .dh-cta-outline:hover { background: #fff9f6; }
-
   /* ── Explore chips: col 3-6, row 1 ── */
   .dh-explore-chips-card {
     grid-column: 3 / span 4;
@@ -1306,7 +1255,6 @@
   }
   .dh-explore-header { display: flex; align-items: center; gap: 16px; }
   .dh-explore-title  { font-size: 16px; font-weight: 700; color: #242226; }
-  .dh-explore-link   { font-size: 14px; font-weight: 700; color: var(--action-primary); }
   .dh-chips-row { display: flex; gap: 12px; flex-wrap: wrap; }
   .dh-chip {
     display: inline-flex; align-items: center; gap: 8px;
@@ -1349,13 +1297,6 @@
   }
   .dh-insurance-sub   { font-size: 14px; font-weight: 500; color: #fff; margin: 0; }
   .dh-insurance-title { font-size: 18px; font-weight: 700; color: #fff; margin: 0; line-height: 1.4; }
-  .dh-insurance-btn {
-    background: var(--action-primary); color: #fff; border: none;
-    border-radius: var(--radius-s); height: 40px; padding: 0 24px;
-    font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer;
-    transition: background 0.15s; text-align: center; width: 100%;
-  }
-  .dh-insurance-btn:hover { background: var(--action-primary-hover); }
 
   /* ─── Dashboard grid: full-width, no aside ─── */
   .dashboard-grid {

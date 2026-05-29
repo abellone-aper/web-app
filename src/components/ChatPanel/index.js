@@ -2,6 +2,8 @@ import './ChatPanel.css';
 import { useState, useRef, useEffect } from 'react';
 import FaceID from '../FaceID';
 import ChatHistory from './ChatHistory';
+import PrimaryButton from '../Buttons/PrimaryButton';
+import LinkButton from '../Buttons/LinkButton';
 
 const STORE_OFFER = {
   img: 'https://static-catalog.tiendamia.com/marketplace_manager_service/production/product_62498b26_mirakl_image_1_large.jpg',
@@ -63,6 +65,8 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
   const [tabData, setTabData] = useState({ offer: initOfferTab() });
   const [offerTabClosed, setOfferTabClosed] = useState(false);
   const [histOpen, setHistOpen] = useState(false);
+  const [histDetailTitle, setHistDetailTitle] = useState(null);
+  const [backToListSignal, setBackToListSignal] = useState(0);
   const [faceIdOpen, setFaceIdOpen] = useState(false);
   const [showOptionsMenu, setShowOptionsMenu] = useState(false);
 
@@ -95,11 +99,14 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
     }
   }, [hotelTabOpen]);
 
+  const currentMessages = tabData[activeTabId]?.messages;
+  const currentIsTyping = tabData[activeTabId]?.isTyping;
+
   useEffect(() => {
     if (messagesRef.current) {
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     }
-  }, [tabData, activeTabId]);
+  }, [currentMessages, currentIsTyping, activeTabId]);
 
   const isDesktop = () => window.innerWidth > 480;
 
@@ -211,7 +218,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
             <p className="chat-offer-price">{STORE_OFFER.price}</p>
           </div>
         </div>
-        <button className="chat-offer-buy" onClick={handleBuyAction}>{STORE_OFFER.cta}</button>
+        <PrimaryButton style={{width:'100%'}} onClick={handleBuyAction}>{STORE_OFFER.cta}</PrimaryButton>
       </div>
       <div className="chat-suggestions">
         <div className="chat-suggestions-header">
@@ -266,8 +273,8 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
             <p className="chat-offer-price">$1.200.500</p>
           </div>
         </div>
-        <button className="chat-offer-buy" onClick={handleBuyAction}>Confirmar reserva</button>
-        <button className="chat-offer-more" onClick={() => setTd({ showMoreDetail: true })}>Más información</button>
+        <PrimaryButton style={{width:'100%'}} onClick={handleBuyAction}>Confirmar reserva</PrimaryButton>
+        <LinkButton onClick={() => setTd({ showMoreDetail: true })}>Más información</LinkButton>
       </div>
     </>
   );
@@ -292,23 +299,47 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
             </div>
           </div>
           <div className="chat-desktop-header">
-            <div className="chat-header-identity">
-              <div className="chat-header-avatar">
-                <i className="ph ph-sparkle" style={{fontSize:'22px'}}></i>
-              </div>
-              <div className="chat-header-info">
-                <span className="chat-header-name">Hablemos</span>
-                <span className="chat-header-sub">Tienda Galicia</span>
-              </div>
-            </div>
-            <div className="chat-header-right">
-              <button className="chat-header-icon-btn" aria-label="Opciones" onClick={() => setShowOptionsMenu(v => !v)}>
-                <i className="ph ph-dots-three-vertical" style={{fontSize:'20px'}}></i>
-              </button>
-              <button className="chat-close-btn chat-header-icon-btn" aria-label="Cerrar" onClick={onClose}>
-                <i className="ph ph-x" style={{fontSize:'20px'}}></i>
-              </button>
-            </div>
+            {histOpen ? (
+              <>
+                <div className="chat-header-identity">
+                  <button className="chat-header-icon-btn" aria-label="Volver" onClick={() => {
+                    if (histDetailTitle) {
+                      setBackToListSignal(s => s + 1);
+                    } else {
+                      setHistOpen(false);
+                    }
+                  }}>
+                    <i className="ph ph-arrow-left" style={{fontSize:'20px'}}></i>
+                  </button>
+                  <span className="chat-header-name" style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',maxWidth:'260px'}}>
+                    {histDetailTitle || 'Historial'}
+                  </span>
+                </div>
+                <button className="chat-close-btn chat-header-icon-btn" aria-label="Cerrar" onClick={onClose}>
+                  <i className="ph ph-x" style={{fontSize:'20px'}}></i>
+                </button>
+              </>
+            ) : (
+              <>
+                <div className="chat-header-identity">
+                  <div className="chat-header-avatar">
+                    <i className="ph ph-sparkle" style={{fontSize:'22px'}}></i>
+                  </div>
+                  <div className="chat-header-info">
+                    <span className="chat-header-name">Hablemos</span>
+                    <span className="chat-header-sub">Tienda Galicia</span>
+                  </div>
+                </div>
+                <div className="chat-header-right">
+                  <button className="chat-header-icon-btn" aria-label="Opciones" onClick={() => setShowOptionsMenu(v => !v)}>
+                    <i className="ph ph-dots-three-vertical" style={{fontSize:'20px'}}></i>
+                  </button>
+                  <button className="chat-close-btn chat-header-icon-btn" aria-label="Cerrar" onClick={onClose}>
+                    <i className="ph ph-x" style={{fontSize:'20px'}}></i>
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -346,7 +377,13 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
           </div>
         )}
 
-        <ChatHistory open={histOpen} onClose={() => setHistOpen(false)} />
+        <ChatHistory
+          open={histOpen}
+          onClose={() => { setHistOpen(false); setHistDetailTitle(null); }}
+          onDetailEnter={title => setHistDetailTitle(title)}
+          onDetailLeave={() => setHistDetailTitle(null)}
+          backToListSignal={backToListSignal}
+        />
 
         <>
           <div className={`chat-messages${histOpen ? ' chat-messages--hidden' : ''}`} ref={messagesRef}>
@@ -441,7 +478,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
                         <p className="chat-confirm-product-price">{msg.product.price}</p>
                       </div>
                     </div>
-                    <button className="chat-confirm-cta">Ir a mis compras</button>
+                    <PrimaryButton style={{width:'100%'}}>Ir a mis compras</PrimaryButton>
                   </div>
                 </div>
               );
@@ -471,7 +508,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
                         <div className="chat-confirm-res-row"><span className="chat-confirm-res-key">Pago</span><span className="chat-confirm-res-val" style={{fontSize:'12px'}}>{r.installments}</span></div>
                         <div className="chat-confirm-res-row"><span className="chat-confirm-res-key">N° reserva</span><span className="chat-confirm-res-val" style={{fontSize:'12px',color:'var(--neutral-seven)'}}>{r.reservationNum}</span></div>
                       </div>
-                      <button className="chat-confirm-cta">Ver mi reserva</button>
+                      <PrimaryButton style={{width:'100%'}}>Ver mi reserva</PrimaryButton>
                     </div>
                   </div>
                 );
@@ -537,7 +574,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
             {td.isTyping && <TypingIndicator />}
           </div>
 
-          <div className={`chat-input-bar${histOpen ? ' chat-input-bar--hidden' : ''}`} id="chatMainInputBar">
+          <div className={`chat-input-bar${(histOpen && !histDetailTitle) ? ' chat-input-bar--hidden' : ''}`} id="chatMainInputBar">
             <input
               ref={inputRef}
               type={td.awaitingCvv ? 'password' : 'text'}

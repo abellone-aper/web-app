@@ -1,0 +1,18 @@
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--action-primary);
+  padding: 0;
+  height: auto;
+  text-decoration: none;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+.link-btn:hover { opacity: 0.8; }

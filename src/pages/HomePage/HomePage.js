@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import ProductCard from '../../components/ProductCard';
 import TripCard from '../../components/TripCard';
+import PrimaryButton from '../../components/Buttons/PrimaryButton';
+import SecondaryButton from '../../components/Buttons/SecondaryButton';
+import LinkButton from '../../components/Buttons/LinkButton';
 
 const CURRENT_USER = { name: 'Sol García', initial: 'S', role: 'Cuenta Galicia', avatar: 'https://images.pexels.com/photos/7679591/pexels-photo-7679591.jpeg' };
 
@@ -87,7 +90,7 @@ function ProductCarousel({ title, products }) {
     <section className="section">
       <div className="section-header">
         <h2 className="section-title">{title}</h2>
-        <a href="#" className="section-link">Mostrar todo</a>
+        <LinkButton as="a" href="#">Mostrar todo</LinkButton>
       </div>
       <div className="carousel-wrap">
         <button className="carousel-arrow" aria-label="Anterior" onClick={() => scroll(-1)}><i className="ph ph-caret-left"></i></button>
@@ -210,7 +213,7 @@ export default function HomePage() {
           <section className="nmh-trip-section">
             <div className="nmh-section-header">
               <h2 className="nmh-section-title">Para tu viaje</h2>
-              <Link to="/para-tu-viaje" className="nmh-section-link">Mostrar todo</Link>
+              <LinkButton as={Link} to="/para-tu-viaje">Mostrar todo</LinkButton>
             </div>
             <div className="nmh-trip-cards-wrap">
               <div className="nmh-trip-cards" id="nmh-trip-cards-scroll">
@@ -238,7 +241,7 @@ export default function HomePage() {
             <div className="nmh-insurance-body">
               <p className="nmh-insurance-sub">Recomendado para el viaje</p>
               <p className="nmh-insurance-title">Agregá un seguro de viaje y viajá más tranquila</p>
-              <button className="nmh-insurance-btn">Contratar cobertura</button>
+              <PrimaryButton style={{alignSelf:'flex-start'}}>Contratar cobertura</PrimaryButton>
             </div>
           </div>
 
@@ -273,13 +276,13 @@ export default function HomePage() {
                   <a href="#" className="dh-ctx-link">Ver mi viaje</a>
                 </div>
               </div>
-              <Link to="/para-tu-viaje" className="dh-cta-outline">Ver todo</Link>
+              <SecondaryButton as={Link} to="/para-tu-viaje" style={{width:'100%'}}>Ver todo</SecondaryButton>
             </div>
 
             <div className="dh-explore-chips-card">
               <div className="dh-explore-header">
                 <span className="dh-explore-title">Explorá</span>
-                <a href="#" className="dh-explore-link">Conocer todas</a>
+                <LinkButton as="a" href="#">Conocer todas</LinkButton>
               </div>
               <div className="dh-chips-row">
                 {CHIPS.map(c => (
@@ -303,7 +306,7 @@ export default function HomePage() {
               <div className="dh-insurance-overlay">
                 <p className="dh-insurance-sub">Recomendado para el viaje</p>
                 <p className="dh-insurance-title">Agregá un seguro de viaje y viajá más tranquila</p>
-                <button className="dh-insurance-btn">Contratar cobertura</button>
+                <PrimaryButton style={{alignSelf:'flex-start'}}>Contratar cobertura</PrimaryButton>
               </div>
             </div>
           </div>
@@ -338,7 +341,7 @@ export default function HomePage() {
               <section className="section">
                 <div className="section-header">
                   <h2 className="section-title">Tiendas Oficiales</h2>
-                  <a href="#" className="section-link">Mostrar todo</a>
+                  <LinkButton as="a" href="#">Mostrar todo</LinkButton>
                 </div>
                 <div className="carousel-wrap">
                   <button className="carousel-arrow"><i className="ph ph-caret-left"></i></button>

@@ -69,7 +69,7 @@ const FILTER_MAP = {
   entregado: 'hist-badge--delivered', cancelado: 'hist-badge--cancelled',
 };
 
-export default function ChatHistory({ open, onClose }) {
+export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeave, backToListSignal }) {
   const [histTab, setHistTab] = useState('chats');
   const [histFilter, setHistFilter] = useState('todos');
   const [activeOrder, setActiveOrder] = useState(null);
@@ -82,8 +82,16 @@ export default function ChatHistory({ open, onClose }) {
     if (!open) {
       setView('main');
       setActiveOrder(null);
+      onDetailLeave?.();
     }
   }, [open]);
+
+  useEffect(() => {
+    if (backToListSignal && view === 'orderDetail') {
+      setView('main');
+      onDetailLeave?.();
+    }
+  }, [backToListSignal]);
 
   useEffect(() => {
     if (messagesRef.current) {
@@ -134,77 +142,85 @@ export default function ChatHistory({ open, onClose }) {
 
   return (
     <div className={`chat-history-panel${open ? ' open' : ''}`}>
-      <div className="chat-history-hd">
-        <button className="chat-history-back-btn" onClick={onClose}>
-          <i className="ph ph-arrow-left" style={{fontSize:'18px'}}></i>
-        </button>
-        <span className="chat-history-hd-title">Historial</span>
-      </div>
-
-      <div className="hist-tabs-wrap">
-        <div className="hist-tabs">
-          <button className={`hist-tab${histTab === 'chats' ? ' active' : ''}`} onClick={() => setHistTab('chats')}>Chats</button>
-          <button className={`hist-tab${histTab === 'compras' ? ' active' : ''}`} onClick={() => setHistTab('compras')}>Mis compras</button>
+      {view !== 'orderDetail' && (
+        <div className="chat-history-hd">
+          <button className="chat-history-back-btn" onClick={onClose}>
+            <i className="ph ph-arrow-left" style={{fontSize:'18px'}}></i>
+          </button>
+          <span className="chat-history-hd-title">Historial</span>
         </div>
-      </div>
+      )}
 
-      {/* Chats tab */}
-      <div className="hist-tab-pane" style={{display: histTab === 'chats' ? '' : 'none'}}>
-        {HIST_TAB_CHATS.map(group => (
-          <div key={group.group}>
-            <div className="hist-section-label">{group.group}</div>
-            {group.items.map(item => (
-              <button key={item} className="hist-chat-item">
-                <span className="hist-chat-text">{item}</span>
-                <i className="ph ph-caret-right hist-chat-arrow"></i>
-              </button>
+      {view !== 'orderDetail' && (
+        <div className="hist-tabs-wrap">
+          <div className="hist-tabs">
+            <button className={`hist-tab${histTab === 'chats' ? ' active' : ''}`} onClick={() => setHistTab('chats')}>Chats</button>
+            <button className={`hist-tab${histTab === 'compras' ? ' active' : ''}`} onClick={() => setHistTab('compras')}>Mis compras</button>
+          </div>
+        </div>
+      )}
+
+      {view !== 'orderDetail' && (
+        <>
+          {/* Chats tab */}
+          <div className="hist-tab-pane" style={{display: histTab === 'chats' ? '' : 'none'}}>
+            {HIST_TAB_CHATS.map(group => (
+              <div key={group.group}>
+                <div className="hist-section-label">{group.group}</div>
+                {group.items.map(item => (
+                  <button key={item} className="hist-chat-item">
+                    <span className="hist-chat-text">{item}</span>
+                    <i className="ph ph-caret-right hist-chat-arrow"></i>
+                  </button>
+                ))}
+              </div>
             ))}
           </div>
-        ))}
-      </div>
 
-      {/* Compras tab */}
-      <div className="hist-tab-pane" style={{display: histTab === 'compras' ? '' : 'none'}}>
-        <div className="hist-filter-row">
-          {Object.keys(FILTER_MAP).map(f => (
-            <button key={f} className={`hist-filter-chip${histFilter === f ? ' active' : ''}`} onClick={() => setHistFilter(f)}>
-              {f === 'todos' ? 'Todos' : f === 'preparacion' ? 'En preparación' : f === 'camino' ? 'En camino' : f === 'entregado' ? 'Entregado' : 'Cancelado'}
-            </button>
-          ))}
-        </div>
-        {HIST_ORDERS.map(({ id }) => {
-          const o = orders[id];
-          const targetClass = FILTER_MAP[histFilter];
-          if (targetClass && o.badgeClass !== targetClass) return null;
-          return (
-            <button key={id} className="hist-order-card" onClick={() => { setActiveOrder(id); setView('orderDetail'); }}>
-              <div className="hist-order-card-inner">
-                <div className="hist-order-hd">
-                  <span className={`hist-badge ${o.badgeClass}`}>{o.badge}</span>
-                  <div className="hist-order-hd-meta">
-                    <span className="hist-order-date">{o.date}</span>
-                    <span className="hist-order-num">{o.num}</span>
+          {/* Compras tab */}
+          <div className="hist-tab-pane" style={{display: histTab === 'compras' ? '' : 'none'}}>
+            <div className="hist-filter-row">
+              {Object.keys(FILTER_MAP).map(f => (
+                <button key={f} className={`hist-filter-chip${histFilter === f ? ' active' : ''}`} onClick={() => setHistFilter(f)}>
+                  {f === 'todos' ? 'Todos' : f === 'preparacion' ? 'En preparación' : f === 'camino' ? 'En camino' : f === 'entregado' ? 'Entregado' : 'Cancelado'}
+                </button>
+              ))}
+            </div>
+            {HIST_ORDERS.map(({ id }) => {
+              const o = orders[id];
+              const targetClass = FILTER_MAP[histFilter];
+              if (targetClass && o.badgeClass !== targetClass) return null;
+              return (
+                <button key={id} className="hist-order-card" onClick={() => { setActiveOrder(id); setView('orderDetail'); onDetailEnter?.(orders[id].title); }}>
+                  <div className="hist-order-card-inner">
+                    <div className="hist-order-hd">
+                      <span className={`hist-badge ${o.badgeClass}`}>{o.badge}</span>
+                      <div className="hist-order-hd-meta">
+                        <span className="hist-order-date">{o.date}</span>
+                        <span className="hist-order-num">{o.num}</span>
+                      </div>
+                      <i className="ph ph-caret-right hist-order-caret"></i>
+                    </div>
+                    <div className="hist-order-body">
+                      <img className="hist-order-img" src={o.img} alt={o.name} />
+                      <div className="hist-order-info">
+                        <span className="hist-order-name">{o.name}</span>
+                        <span className="hist-order-price">{o.price}</span>
+                      </div>
+                    </div>
                   </div>
-                  <i className="ph ph-caret-right hist-order-caret"></i>
-                </div>
-                <div className="hist-order-body">
-                  <img className="hist-order-img" src={o.img} alt={o.name} />
-                  <div className="hist-order-info">
-                    <span className="hist-order-name">{o.name}</span>
-                    <span className="hist-order-price">{o.price}</span>
-                  </div>
-                </div>
-              </div>
-            </button>
-          );
-        })}
-      </div>
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
 
       {/* Order detail sub-panel */}
       {activeOrder && (
         <div className={`hist-order-detail${view === 'orderDetail' ? ' open' : ''}`}>
           <div className="hist-order-detail-hd">
-            <button className="hist-order-detail-back" onClick={() => setView('main')}>
+            <button className="hist-order-detail-back" onClick={() => { setView('main'); onDetailLeave?.(); }}>
               <i className="ph ph-arrow-left"></i>
             </button>
             <span className="hist-order-detail-title">{orders[activeOrder]?.title}</span>

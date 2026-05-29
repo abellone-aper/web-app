@@ -1,0 +1,19 @@
+.secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+  background: transparent;
+  color: var(--action-primary);
+  border: 1px solid var(--action-primary);
+  border-radius: var(--radius-s);
+  height: 40px;
+  padding: 0 24px;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.secondary-btn:hover { background: #fff9f6; }

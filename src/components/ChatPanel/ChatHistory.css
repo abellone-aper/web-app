@@ -5,6 +5,7 @@
 .chat-history-panel {
   display: none;
   flex: 1;
+  min-height: 0;
   flex-direction: column;
   overflow: hidden;
   background: var(--neutral-two);
@@ -17,6 +18,9 @@
   background: var(--neutral-one);
   border-bottom: 1px solid var(--neutral-four);
   flex-shrink: 0;
+}
+@media (min-width: 481px) {
+  .chat-history-hd { display: none; }
 }
 .chat-history-back-btn {
   width: 32px; height: 32px; flex-shrink: 0;
@@ -247,14 +251,12 @@
 }
 
 /* ── Order detail sub-panel ─────────────────────────────────── */
-.chat-history-panel { position: relative; }
-
 .hist-order-detail {
   display: none;
-  position: absolute; inset: 0;
+  flex: 1;
+  min-height: 0;
   flex-direction: column;
   background: var(--neutral-two);
-  z-index: 2;
 }
 .hist-order-detail.open { display: flex; }
 
@@ -265,6 +267,9 @@
   background: var(--neutral-one);
   border-bottom: 1px solid var(--neutral-four);
   flex-shrink: 0;
+}
+@media (min-width: 481px) {
+  .hist-order-detail-hd { display: none; }
 }
 .hist-order-detail-back {
   width: 40px; height: 40px; flex-shrink: 0;

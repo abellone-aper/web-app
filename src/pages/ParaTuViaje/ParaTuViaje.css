@@ -178,20 +178,6 @@
   font-size: 16px; color: var(--information-primary); flex-shrink: 0;
 }
 
-.ptv-insurance-btn {
-  width: 100%;
-  background: var(--action-primary);
-  color: var(--color-text-on-brand);
-  border: none; border-radius: var(--radius-pill);
-  padding: 14px 20px;
-  font-family: var(--font-body);
-  font-size: 17px; font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s;
-  box-shadow: 0 2px 8px rgba(242, 101, 34, 0.3);
-}
-
-.ptv-insurance-btn:hover { background: var(--action-primary-hover); }
 
 /* ═══════════════════════════════════════════════════════════════
    MOBILE — max-width: 480px
@@ -454,11 +440,6 @@
   }
 
   .ptv-insurance-features span { font-size: 16px; }
-
-  .ptv-insurance-btn {
-    width: auto; align-self: flex-start;
-    padding: 12px 32px; font-size: 17px;
-  }
 }
 
 /* ─── Mid breakpoint: 2 columns ──────────────────────────────── */
@@ -625,11 +606,6 @@
   .ptv-insurance-features {
     flex-direction: column; gap: 8px;
     margin-bottom: 20px;
-  }
-
-  .ptv-insurance-btn {
-    width: auto; align-self: flex-start;
-    padding: 12px 28px; font-size: 17px;
   }
 }
 

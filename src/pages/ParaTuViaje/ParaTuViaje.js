@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './ParaTuViaje.css';
 import Header from '../../components/Header';
 import TripCard from '../../components/TripCard';
+import PrimaryButton from '../../components/Buttons/PrimaryButton';
 
 const FILTERS = ['todo','alojamiento','moda','actividades','seguros'];
 const FILTER_LABELS = { todo:'Todo', alojamiento:'Alojamiento', moda:'Moda', actividades:'Actividades', seguros:'Seguros' };
@@ -137,7 +138,7 @@ export default function ParaTuViajePage() {
                   <span><i className="ph-fill ph-check-circle"></i> Cancelación de vuelos y paquetes</span>
                   <span><i className="ph-fill ph-check-circle"></i> Cobertura por pérdida de equipaje</span>
                 </div>
-                <button className="ptv-insurance-btn">Contratar cobertura</button>
+                <PrimaryButton style={{alignSelf:'flex-start'}}>Contratar cobertura</PrimaryButton>
               </div>
             </div>
           )}
