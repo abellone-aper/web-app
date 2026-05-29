@@ -323,7 +323,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
           </div>
         )}
 
-        {hotelTabOpen && !offerTabClosed && (
+        {hotelTabOpen && !offerTabClosed && !histOpen && (
           <div className="chat-tabs">
             <button
               className={`chat-tab${activeTabId === 'offer' ? ' chat-tab--active' : ''}`}

@@ -210,6 +210,11 @@
     border-bottom: 1px solid var(--neutral-four);
     padding: 0 8px 0 4px;
     gap: 4px;
+    transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .ptv-mobile-bar--hidden {
+    transform: translateY(-100%);
   }
 
   .ptv-back-btn {
@@ -248,6 +253,11 @@
   /* Hide filters sticky offset: account for mobile bar */
   .ptv-filters-wrap {
     top: 56px;
+    transition: top 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .ptv-filters-wrap--bar-hidden {
+    top: 0;
   }
 
   /* Context banner — full bleed */

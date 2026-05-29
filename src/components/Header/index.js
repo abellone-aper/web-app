@@ -1,4 +1,5 @@
 import './Header.css';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export default function Header({
@@ -10,12 +11,24 @@ export default function Header({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const [scrollHidden, setScrollHidden] = useState(false);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    function onScroll() {
+      const y = window.scrollY;
+      setScrollHidden(y > lastY && y > 60);
+      lastY = y;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   const isViajes = location.pathname === '/para-tu-viaje' || location.pathname.startsWith('/hospedaje');
 
   const handleBack = onBack || (() => navigate(-1));
 
   return (
-    <header className={`header header--${variant}`}>
+    <header className={`header header--${variant}${scrollHidden ? ' header--scroll-hidden' : ''}`}>
 
       {/* ── Mobile: home variant ──────────────────────────────── */}
       <div className="header__mobile-home">

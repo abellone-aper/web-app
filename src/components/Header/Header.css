@@ -217,7 +217,13 @@
 /* ─── Mobile (≤ 480px) ────────────────────────────────────── */
 @media (max-width: 480px) {
   /* Override the global display:none on .header; show only the mobile slot */
-  .header { display: block !important; border-bottom: none; position: sticky; top: 0; z-index: 90; }
+  .header {
+    display: block !important;
+    border-bottom: none;
+    position: sticky; top: 0; z-index: 90;
+    transition: transform 0.3s ease;
+  }
+  .header--scroll-hidden { transform: translateY(-100%); }
   .header-top    { display: none !important; }
   .header-bottom { display: none !important; }
 

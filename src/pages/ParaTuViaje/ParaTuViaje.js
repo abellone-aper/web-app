@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ParaTuViaje.css';
 import Header from '../../components/Header';
@@ -59,12 +59,25 @@ function PtvSection({ title, items, category, visible }) {
 
 export default function ParaTuViajePage() {
   const [filter, setFilter] = useState('todo');
+  const [barHidden, setBarHidden] = useState(false);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    function onScroll() {
+      const y = window.scrollY;
+      if (y > lastY && y > 56) setBarHidden(true);
+      else if (y < lastY) setBarHidden(false);
+      lastY = y;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const show = (cat) => filter === 'todo' || filter === cat;
 
   return (
     <>
-      <div className="ptv-mobile-bar">
+      <div className={`ptv-mobile-bar${barHidden ? ' ptv-mobile-bar--hidden' : ''}`}>
         <Link to="/" className="ptv-back-btn" aria-label="Volver">
           <i className="ph ph-arrow-left"></i>
         </Link>
@@ -99,7 +112,7 @@ export default function ParaTuViajePage() {
             </div>
           </div>
 
-          <div className="ptv-filters-wrap">
+          <div className={`ptv-filters-wrap${barHidden ? ' ptv-filters-wrap--bar-hidden' : ''}`}>
             <div className="ptv-filters">
               {FILTERS.map(f => (
                 <button key={f} className={`ptv-filter${filter === f ? ' active' : ''}`} onClick={() => setFilter(f)}>

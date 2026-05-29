@@ -694,7 +694,9 @@
     height: 56px; padding: 0 8px;
     background: var(--color-bg-surface);
     border-bottom: 1px solid var(--neutral-four);
+    transition: transform 0.3s ease;
   }
+  .hd-mobile-bar--hidden { transform: translateY(-100%); }
 
   .hd-bar-title {
     flex: 1;

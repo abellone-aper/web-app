@@ -56,12 +56,10 @@ function AppContent() {
         <Route path="/hospedaje" element={<Layout><Hospedaje onChatOpen={handleHotelReserve} /></Layout>} />
       </Routes>
 
-      {location.pathname === '/' && (
-        <MobileBottomNav onChatOpen={() => setChatOpen(true)} hidden={navHidden} />
-      )}
+      <MobileBottomNav onChatOpen={() => setChatOpen(true)} hidden={navHidden} />
 
       <button
-        className={`boti-fab${chatOpen ? ' is-open' : ''}${location.pathname !== '/' ? ' boti-fab--show-mobile' : ''}`}
+        className={`boti-fab${chatOpen ? ' is-open' : ''}`}
         aria-label={chatOpen ? 'Cerrar chat' : 'Abrir chat'}
         onClick={() => setChatOpen(v => !v)}
       >

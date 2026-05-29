@@ -1,4 +1,4 @@
-import { useState, useRef, useId } from 'react';
+import { useState, useRef, useId, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Hospedaje.css';
 import Header from '../../components/Header';
@@ -332,7 +332,19 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
 export default function DesignSuitesPage({ onChatOpen }) {
   const [galleryIdx, setGalleryIdx] = useState(0);
   const [fav, setFav] = useState(false);
+  const [barHidden, setBarHidden] = useState(false);
   const trackRef = useRef(null);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    function onScroll() {
+      const y = window.scrollY;
+      setBarHidden(y > lastY && y > 60);
+      lastY = y;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   function goGallery(idx) {
     const newIdx = ((idx % GALLERY_IMGS.length) + GALLERY_IMGS.length) % GALLERY_IMGS.length;
@@ -348,7 +360,7 @@ export default function DesignSuitesPage({ onChatOpen }) {
 
   return (
     <>
-      <div className="hd-mobile-bar">
+      <div className={`hd-mobile-bar${barHidden ? ' hd-mobile-bar--hidden' : ''}`}>
         <Link to="/para-tu-viaje" className="hd-back-btn" aria-label="Volver">
           <i className="ph ph-arrow-left"></i>
         </Link>
