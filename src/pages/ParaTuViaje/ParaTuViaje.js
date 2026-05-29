@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ParaTuViaje.css';
 import Header from '../../components/Header';
+import TripCard from '../../components/TripCard';
 
 const FILTERS = ['todo','alojamiento','moda','actividades','seguros'];
 const FILTER_LABELS = { todo:'Todo', alojamiento:'Alojamiento', moda:'Moda', actividades:'Actividades', seguros:'Seguros' };
@@ -42,34 +43,6 @@ const ACTIVIDADES = [
   { img: 'https://images.pexels.com/photos/1267361/pexels-photo-1267361.jpeg?auto=compress&cs=tinysrgb&w=800', cat:'Actividad', name:'Tour chocolaterías y cervecerías artesanales', price:'Desde $8.500 por persona', rating:'4.7' },
 ];
 
-function PtvCard({ card }) {
-  const [fav, setFav] = useState(card.favActive || false);
-  const inner = (
-    <>
-      <div className="ptv-card-img">
-        <img src={card.img} alt={card.name} />
-        <button className={`ptv-fav-btn${fav ? ' active' : ''}`} aria-label="Favorito" onClick={e => { e.preventDefault(); e.stopPropagation(); setFav(v => !v); }}>
-          <i className={fav ? 'ph-fill ph-heart' : 'ph ph-heart'}></i>
-        </button>
-        {card.badge && <span className="ptv-card-badge">{card.badge}</span>}
-      </div>
-      <div className="ptv-card-body">
-        <span className="ptv-card-cat">{card.cat}</span>
-        <span className="ptv-card-name">{card.name}</span>
-        <span className="ptv-card-price">{card.price}</span>
-        {card.rating && (
-          <div className="ptv-card-rating">
-            <i className="ph-fill ph-star"></i>
-            <span>{card.rating}</span>
-          </div>
-        )}
-      </div>
-    </>
-  );
-  if (card.to) return <Link to={card.to} className="ptv-card ptv-card--link">{inner}</Link>;
-  return <div className="ptv-card">{inner}</div>;
-}
-
 function PtvSection({ title, items, category, visible }) {
   if (!visible) return null;
   return (
@@ -78,7 +51,7 @@ function PtvSection({ title, items, category, visible }) {
         <h2 className="ptv-section-title">{title}</h2>
       </div>
       <div className="ptv-cards-track">
-        {items.map(card => <PtvCard key={card.name} card={card} />)}
+        {items.map(card => <TripCard key={card.name} card={card} variant="page" />)}
       </div>
     </section>
   );

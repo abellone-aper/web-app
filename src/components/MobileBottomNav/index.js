@@ -1,10 +1,11 @@
+import './MobileBottomNav.css';
 import { Link, useLocation } from 'react-router-dom';
 
-export default function MobileBottomNav({ onChatOpen }) {
+export default function MobileBottomNav({ onChatOpen, hidden }) {
   const location = useLocation();
 
   return (
-    <nav className="mobile-bottom-nav">
+    <nav className={`mobile-bottom-nav${hidden ? ' mobile-bottom-nav--hidden' : ''}`}>
       <Link to="/" className={`mobile-nav-item${location.pathname === '/' ? ' active' : ''}`}>
         <i className={`ph${location.pathname === '/' ? '-fill' : ''} ph-house`} style={{fontSize:'22px'}}></i>
         <span className="mobile-nav-label">Home</span>

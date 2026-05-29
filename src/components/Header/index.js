@@ -77,6 +77,9 @@ export default function Header({
         </div>
         <a href="#" className="header-cta">Ampliar el límite de tus tarjetas</a>
         <div className="header-icons">
+          <a href="#" className="header-icon-btn header-search-btn" aria-label="Buscar">
+            <i className="ph ph-magnifying-glass" style={{ fontSize: '22px' }}></i>
+          </a>
           <a href="#" className="header-icon-btn" aria-label="Notificaciones">
             <span className="icon-wrap">
               <i className="ph ph-bell" style={{ fontSize: '22px' }}></i>

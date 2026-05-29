@@ -1,6 +1,6 @@
 import { useState, useRef, useId } from 'react';
 import { Link } from 'react-router-dom';
-import './DesignSuites.css';
+import './Hospedaje.css';
 import Header from '../../components/Header';
 
 const GALLERY_IMGS = [
@@ -352,6 +352,7 @@ export default function DesignSuitesPage({ onChatOpen }) {
         <Link to="/para-tu-viaje" className="hd-back-btn" aria-label="Volver">
           <i className="ph ph-arrow-left"></i>
         </Link>
+        <span className="hd-bar-title">Hospedaje</span>
         <span className="hd-bar-actions">
           <button className="hd-bar-icon-btn" aria-label="Compartir"><i className="ph ph-share-network"></i></button>
         </span>
@@ -386,12 +387,6 @@ export default function DesignSuitesPage({ onChatOpen }) {
               ))}
             </div>
             <div className="hd-gallery-counter">{galleryIdx + 1} / {GALLERY_IMGS.length}</div>
-            <button className="hd-gallery-arrow hd-gallery-arrow--prev" aria-label="Anterior" onClick={() => goGallery(galleryIdx - 1)}>
-              <i className="ph ph-caret-left"></i>
-            </button>
-            <button className="hd-gallery-arrow hd-gallery-arrow--next" aria-label="Siguiente" onClick={() => goGallery(galleryIdx + 1)}>
-              <i className="ph ph-caret-right"></i>
-            </button>
           </div>
 
           <div className="hd-layout">

@@ -1,9 +1,11 @@
+import './HomePage.css';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import ProductCard from '../../components/ProductCard';
+import TripCard from '../../components/TripCard';
 
-const CURRENT_USER = { name: 'Sol García', initial: 'S', role: 'Cuenta Galicia' };
+const CURRENT_USER = { name: 'Sol García', initial: 'S', role: 'Cuenta Galicia', avatar: 'https://images.pexels.com/photos/7679591/pexels-photo-7679591.jpeg' };
 
 const PROMO_CARDS = [
   { file: 'promo-envio', alt: 'Envío gratis', label: 'Productos con envío gratis' },
@@ -26,11 +28,11 @@ const CHIPS = [
 ];
 
 const TRIP_CARDS = [
-  { img: 'https://www.designsuites.com/images/bariloche/foto_33.jpg', cat: 'Hospedaje', name: 'Design Suites Bariloche', price: 'Desde $49.999 por 2 noches', badge: 'Destino', favActive: false, to: '/hospedaje' },
+  { img: 'https://www.designsuites.com/images/bariloche/foto_33.jpg', cat: 'Hospedaje', name: 'Design Suites Bariloche', price: 'Desde $49.999 por 2 noches', favActive: false, to: '/hospedaje' },
   { img: 'https://www.switchbacktravel.com/sites/default/files/image_fields/In-Depth%20Gear%20Reviews/Patagonia%20Tres%203-in-1%20Parka/Patagonia%20Tres%203-in-1%20Parka%20%28adjusting%20hood%29.jpg', cat: 'Indumentaria', name: 'Campera Patagonia', price: '$239.000 en 6 cuotas sin interés', favActive: true },
   { img: 'https://media.staticontent.com/media/pictures/8faf882d-b4cd-4306-b0d8-ac5ab26fd85b/853x380?op=NONE&enlarge=false&gravity=ce_0_0&quality=80&dpr=1', cat: 'Actividad', name: 'Catamarán Isla Victoria', price: 'Desde $18.500 por persona' },
   { img: 'https://upload.wikimedia.org/wikipedia/commons/6/66/Base_del_Cerro_Catedral_en_Bariloche._%28Patagonia_Argentina%29_20.JPG', cat: 'Actividad', name: 'Ski Cerro Catedral', price: 'Desde $32.000 por día' },
-  { img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Lago_Nahuel_Huapi%2C_Bariloche%2C_Argentina.jpg/1200px-Lago_Nahuel_Huapi%2C_Bariloche%2C_Argentina.jpg', cat: 'Gastronomía', name: 'El Boliche de Alberto', price: 'Reservá tu mesa' },
+  { img: 'https://images.pexels.com/photos/9292084/pexels-photo-9292084.jpeg?auto=compress&cs=tinysrgb&w=800', cat: 'Gastronomía', name: 'El Boliche de Alberto', price: 'Reservá tu mesa' },
 ];
 
 const TECH_PRODUCTS = [
@@ -149,41 +151,6 @@ function HeroSlider() {
   );
 }
 
-const TRIP_CARD_CLASSES = {
-  mobile: {
-    root: 'nmh-trip-card', img: 'nmh-trip-card-img', badge: 'nmh-trip-card-badge',
-    fav: 'nmh-fav-btn', body: 'nmh-trip-card-body', cat: 'nmh-card-category',
-    name: 'nmh-card-name', price: 'nmh-card-price',
-  },
-  desktop: {
-    root: 'dh-trip-card', img: 'dh-trip-card-img', badge: 'dh-trip-badge',
-    fav: 'dh-fav-btn', body: 'dh-trip-card-body', cat: 'dh-card-cat',
-    name: 'dh-card-name', price: 'dh-card-price',
-  },
-};
-
-function TripCard({ card, variant = 'mobile' }) {
-  const [fav, setFav] = useState(card.favActive || false);
-  const cls = TRIP_CARD_CLASSES[variant];
-  const inner = (
-    <>
-      <div className={cls.img}>
-        <img src={card.img} alt={card.name} />
-        {card.badge && <span className={cls.badge}>{card.badge}</span>}
-        <button className={`${cls.fav}${fav ? ' active' : ''}`} aria-label="Favorito" onClick={e => { e.preventDefault(); setFav(v => !v); }}>
-          <i className={fav ? 'ph-fill ph-heart' : 'ph ph-heart'}></i>
-        </button>
-      </div>
-      <div className={cls.body}>
-        <span className={cls.cat}>{card.cat}</span>
-        <span className={cls.name}>{card.name}</span>
-        <span className={cls.price}>{card.price}</span>
-      </div>
-    </>
-  );
-  if (card.to) return <Link to={card.to} className={cls.root}>{inner}</Link>;
-  return <div className={cls.root}>{inner}</div>;
-}
 
 export default function HomePage() {
   return (
@@ -218,7 +185,11 @@ export default function HomePage() {
 
         <div className="desktop-greeting">
           <div className="desktop-greeting-left">
-            <div className="desktop-greeting-avatar">{CURRENT_USER.initial}</div>
+            <div className="desktop-greeting-avatar">
+            {CURRENT_USER.avatar
+              ? <img src={CURRENT_USER.avatar} alt={CURRENT_USER.name} />
+              : CURRENT_USER.initial}
+          </div>
             <span className="desktop-greeting-name">Hola, {CURRENT_USER.name.split(' ')[0]}</span>
           </div>
         </div>

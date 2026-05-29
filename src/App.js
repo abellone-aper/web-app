@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import HomePage from './pages/Home/HomePage';
-import ParaTuViajePage from './pages/ParaTuViaje/ParaTuViajePage';
-import HomeBankingPage from './pages/HomeBanking/HomeBankingPage';
-import DesignSuitesPage from './pages/DesignSuites/DesignSuitesPage';
+import HomePage from './pages/HomePage/HomePage';
+import ParaTuViaje from './pages/ParaTuViaje/ParaTuViaje';
+import HomeBanking from './pages/HomeBanking/HomeBanking';
+import Hospedaje from './pages/Hospedaje/Hospedaje';
 import Footer from './components/Footer';
 import ChatPanel from './components/ChatPanel';
 import MobileBottomNav from './components/MobileBottomNav';
@@ -20,8 +20,20 @@ function Layout({ children }) {
 function AppContent() {
   const [chatOpen, setChatOpen] = useState(false);
   const [hotelTabOpen, setHotelTabOpen] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const location = useLocation();
   const isBanking = location.pathname === '/homebanking';
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    function onScroll() {
+      const y = window.scrollY;
+      setNavHidden(y > lastY && y > 60);
+      lastY = y;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const variant = isBanking ? 'banking' : 'tienda';
 
@@ -39,13 +51,13 @@ function AppContent() {
     <>
       <Routes>
         <Route path="/" element={<Layout><HomePage /></Layout>} />
-        <Route path="/para-tu-viaje" element={<Layout><ParaTuViajePage /></Layout>} />
-        <Route path="/homebanking" element={<Layout><HomeBankingPage chatOpen={chatOpen} onChatOpen={() => setChatOpen(true)} onChatClose={() => setChatOpen(false)} /></Layout>} />
-        <Route path="/hospedaje" element={<Layout><DesignSuitesPage onChatOpen={handleHotelReserve} /></Layout>} />
+        <Route path="/para-tu-viaje" element={<Layout><ParaTuViaje /></Layout>} />
+        <Route path="/homebanking" element={<Layout><HomeBanking chatOpen={chatOpen} onChatOpen={() => setChatOpen(true)} onChatClose={() => setChatOpen(false)} /></Layout>} />
+        <Route path="/hospedaje" element={<Layout><Hospedaje onChatOpen={handleHotelReserve} /></Layout>} />
       </Routes>
 
       {location.pathname === '/' && (
-        <MobileBottomNav onChatOpen={() => setChatOpen(true)} />
+        <MobileBottomNav onChatOpen={() => setChatOpen(true)} hidden={navHidden} />
       )}
 
       <button

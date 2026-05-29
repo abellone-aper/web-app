@@ -93,7 +93,7 @@
 
 /* ─── Mobile detail section ──────────────────────────────────── */
 .hd-mobile-detail {
-  padding: 16px 16px 0;
+  padding: var(--page-px) var(--page-px) 0;
 }
 
 /* ─── Common detail elements ─────────────────────────────────── */
@@ -684,6 +684,9 @@
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
 
+  /* Hide shared Header component — hd-mobile-bar handles mobile nav */
+  .hd-main .header { display: none !important; }
+
   /* Mobile bar */
   .hd-mobile-bar {
     display: flex; align-items: center; justify-content: space-between;
@@ -691,6 +694,14 @@
     height: 56px; padding: 0 8px;
     background: var(--color-bg-surface);
     border-bottom: 1px solid var(--neutral-four);
+  }
+
+  .hd-bar-title {
+    flex: 1;
+    font-size: 16px; font-weight: 700;
+    color: var(--neutral-nine);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    padding: 0 8px;
   }
 
   .hd-back-btn {
@@ -1082,4 +1093,28 @@
 @media (min-width: 1025px) and (max-width: 1280px) {
   .hd-info { grid-template-columns: 1fr 360px; }
   .hd-gallery-main { height: 340px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SMALL TABLET — 481px – 680px
+   Fixes hd-layout (1fr 320px) that leaves only ~92px for content
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 481px) and (max-width: 680px) {
+
+  /* Tighter page padding */
+  .hd-page       { padding: 16px 16px 60px; }
+  .hd-breadcrumb { padding: 12px 16px 0; }
+
+  /* Stack layout: single column */
+  .hd-layout { grid-template-columns: 1fr; gap: 16px; }
+
+  /* hd-info (desktop-only grid) also to single column */
+  .hd-info { grid-template-columns: 1fr; }
+  .hd-info > .hd-col-aside { grid-column: 1; grid-row: auto; }
+
+  /* Smaller gallery height */
+  .hd-gallery-main { height: 260px; }
+
+  /* Booking card: remove sticky so it appears inline */
+  .hd-booking-card { position: static; }
 }

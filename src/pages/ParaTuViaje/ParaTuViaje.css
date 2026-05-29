@@ -21,7 +21,7 @@
   align-items: center;
   gap: 12px;
   background: linear-gradient(135deg, var(--action-primary) 0%, var(--action-primary-hover) 100%);
-  padding: 14px 16px;
+  padding: 14px var(--page-px);
   color: var(--color-text-on-brand);
 }
 
@@ -71,7 +71,7 @@
 .ptv-filters {
   display: flex;
   gap: 4px;
-  padding: 10px 16px;
+  padding: 10px var(--page-px);
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -110,7 +110,7 @@
 
 .ptv-section-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 16px 14px;
+  padding: 0 var(--page-px) 14px;
 }
 
 .ptv-section-title {
@@ -130,140 +130,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  padding: 0 16px 20px;
-}
-
-/* ─── Card ───────────────────────────────────────────────────── */
-.ptv-card {
-  width: auto;
-  display: flex; flex-direction: column;
-  cursor: pointer;
-  color: inherit;
-  background: var(--color-bg-surface);
-  border-radius: var(--radius-l);
-  overflow: hidden;
-  border: 1px solid var(--neutral-four);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  transition: box-shadow 0.2s;
-}
-
-.ptv-card--link {
-  text-decoration: none;
-  color: inherit;
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-
-.ptv-card--link:hover .ptv-card-img img {
-  transform: scale(1.03);
-}
-
-.ptv-card-img {
-  width: 100%; height: 130px;
-  border-radius: 0;
-  overflow: hidden;
-  position: relative;
-  background: var(--neutral-four);
-}
-
-.ptv-card-img img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  transition: transform 0.3s;
-}
-
-/* Gradient placeholder variants */
-.ptv-card-img--hotel {
-  background: linear-gradient(145deg, #5b7ba8 0%, #2e4d7a 100%);
-}
-.ptv-card-img--boots {
-  background: linear-gradient(145deg, #4a7c59 0%, #2d5a3d 100%);
-}
-.ptv-card-img--backpack {
-  background: linear-gradient(145deg, #8b6914 0%, #5c4209 100%);
-}
-.ptv-card-img--thermal {
-  background: linear-gradient(145deg, #3d5a73 0%, #1e3045 100%);
-}
-.ptv-card-img--trek {
-  background: linear-gradient(145deg, #4a7a8a 0%, #2d5566 100%);
-}
-.ptv-card-img--horseriding {
-  background: linear-gradient(145deg, #8a6b4a 0%, #5c4030 100%);
-}
-.ptv-card-img--rafting {
-  background: linear-gradient(145deg, #2d7a8a 0%, #1a4f5c 100%);
-}
-
-.ptv-card-placeholder-icon {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 40px;
-}
-
-/* Favorite button */
-.ptv-fav-btn {
-  position: absolute; top: 8px; right: 8px;
-  width: 28px; height: 28px; border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  border: none; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--neutral-six);
-  font-size: 14px;
-  transition: color 0.15s, background 0.15s;
-  backdrop-filter: blur(4px);
-}
-
-.ptv-fav-btn.active { color: var(--action-primary); }
-.ptv-fav-btn:hover { background: var(--color-bg-surface); }
-
-/* Badge */
-.ptv-card-badge {
-  position: absolute; top: 8px; left: 8px;
-  background: var(--action-primary);
-  color: var(--color-text-on-brand);
-  font-size: 12px; font-weight: 700;
-  padding: 2px 8px; border-radius: var(--radius-xs);
-  letter-spacing: 0.02em;
-}
-
-/* Card body */
-.ptv-card-body {
-  display: flex; flex-direction: column; gap: 2px;
-  padding: 10px 10px 12px;
-}
-
-.ptv-card-cat {
-  font-size: 12px; font-weight: 600;
-  color: var(--neutral-six);
-  text-transform: uppercase; letter-spacing: 0.05em;
-}
-
-.ptv-card-name {
-  font-size: 14px; font-weight: 600;
-  color: var(--neutral-nine); line-height: 1.35;
-  display: -webkit-box; -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical; overflow: hidden;
-}
-
-.ptv-card-price {
-  font-size: 13px; font-weight: 600;
-  color: var(--information-primary); line-height: 1.3;
-  margin-top: 2px;
-}
-
-.ptv-card-rating {
-  display: flex; align-items: center; gap: 3px;
-  margin-top: 2px;
-}
-
-.ptv-card-rating i {
-  font-size: 13px; color: var(--action-primary);
-}
-
-.ptv-card-rating span {
-  font-size: 13px; font-weight: 500;
-  color: var(--neutral-seven);
+  padding: 0 var(--page-px) 20px;
 }
 
 /* ─── Insurance card ─────────────────────────────────────────── */
@@ -330,6 +197,9 @@
    MOBILE — max-width: 480px
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
+
+  /* Hide shared Header component — ptv-mobile-bar handles mobile nav */
+  .ptv-main .header { display: none !important; }
 
   /* App bar */
   .ptv-mobile-bar {
@@ -539,35 +409,6 @@
     overflow: visible;
   }
 
-  .ptv-card {
-    width: auto;
-    border-radius: var(--radius-l);
-    background: var(--color-bg-surface);
-    border: 1px solid var(--neutral-four);
-    overflow: hidden;
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-
-  .ptv-card:hover {
-    box-shadow: var(--shadow-2);
-    transform: translateY(-2px);
-  }
-
-  .ptv-card-img {
-    width: 100%;
-    height: 180px;
-    border-radius: 0;
-  }
-
-  .ptv-card-body {
-    padding: 12px 14px 16px;
-    gap: 4px;
-  }
-
-  .ptv-card-cat { font-size: 13px; }
-  .ptv-card-name { font-size: 15px; }
-  .ptv-card-price { font-size: 14px; }
-
   /* Insurance: horizontal layout */
   .ptv-insurance {
     display: flex;
@@ -745,24 +586,6 @@
     overflow: visible;
   }
 
-  .ptv-card {
-    width: auto;
-    border-radius: var(--radius-l);
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-
-  .ptv-card:hover {
-    box-shadow: var(--shadow-2);
-    transform: translateY(-2px);
-  }
-
-  .ptv-card-img { height: 160px; }
-
-  .ptv-card-body { padding: 12px 12px 14px; gap: 4px; }
-  .ptv-card-cat { font-size: 13px; }
-  .ptv-card-name { font-size: 15px; }
-  .ptv-card-price { font-size: 14px; }
-
   /* Insurance: horizontal layout */
   .ptv-insurance {
     display: flex;
@@ -798,6 +621,40 @@
     width: auto; align-self: flex-start;
     padding: 12px 28px; font-size: 17px;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SMALL TABLET — 481px – 750px  (banner stacking)
+   El banner de 520px fijo deja muy poco espacio para el título
+   por debajo de ~750px
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 481px) and (max-width: 750px) {
+  .ptv-page-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .ptv-ctx-banner {
+    width: 100%;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SMALL TABLET — 481px – 640px
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 481px) and (max-width: 640px) {
+
+  /* Tighter page padding */
+  .ptv-page       { padding: 0 16px 48px; }
+  .ptv-breadcrumb { padding: 12px 16px 0; }
+
+  /* Cards: 2 columns instead of 3 */
+  .ptv-cards-track {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .ptv-section-header { padding: 0 0 12px; }
 }
 
 /* ─── Chat push (desktop) ─────────────────────────────────────── */
