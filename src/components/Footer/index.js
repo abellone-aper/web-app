@@ -25,6 +25,15 @@ export default function Footer() {
           </a>
         </div>
       </div>
+
+      <div className="site-footer__legal">
+        <div className="site-footer__legal-inner">
+          <a href="#" className="site-footer__legal-link">Términos y condiciones</a>
+          <a href="#" className="site-footer__legal-link">Política de privacidad</a>
+          <a href="#" className="site-footer__legal-link">Defensa del consumidor</a>
+          <a href="#" className="site-footer__legal-link">Cómo cuidamos tu privacidad</a>
+        </div>
+      </div>
     </footer>
   );
 }

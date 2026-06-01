@@ -1,0 +1,250 @@
+/* ═══════════════════════════════════════════════════════════════
+   HELP SECTION
+   ═══════════════════════════════════════════════════════════════ */
+.help-section {
+  background: #fff;
+  padding: 24px 0 0;
+}
+
+.help-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 80px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.help-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #000;
+  margin: 0;
+  line-height: 24px;
+  letter-spacing: 0.048px;
+}
+
+/* ── Top 6 cards grid ── */
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.help-item-card {
+  height: 154px;
+  background: #f3f3f3;
+  border-radius: 16px;
+  padding: 23px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.help-item-icon {
+  width: 48px;
+  height: 48px;
+  padding: 6px;
+  box-sizing: border-box;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  filter: brightness(0);
+}
+
+.help-item-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #242226;
+  line-height: 20px;
+  letter-spacing: 0.032px;
+}
+
+/* ── Bottom row: siempre en fila ── */
+.help-bottom {
+  display: flex;
+  gap: 16px;
+}
+
+/* ── Bottom left: arrepentimiento ── */
+.help-arrepentimiento {
+  flex: 1;
+  background: #f3f3f3;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-width: 0;
+}
+
+.help-arrepentimiento-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1c1c1c;
+  margin: 0;
+  line-height: 1.2;
+  flex: 1;
+  min-width: 0;
+}
+
+.help-arrepentimiento-btn {
+  border: 1px solid #bc4b00;
+  border-radius: 8px;
+  background: transparent;
+  color: #bc4b00;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  padding: 0 16px;
+  height: 48px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.help-arrepentimiento-btn:hover { background: rgba(188, 75, 0, 0.06); }
+
+/* ── Bottom right: compras protegidas ── */
+.help-protegidas {
+  flex: 1;
+  background: #f3f3f3;
+  border-radius: 16px;
+  padding: 23px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.help-protegidas-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #242226;
+  line-height: 20px;
+  letter-spacing: 0.032px;
+  margin: 0;
+  flex-shrink: 0;
+  width: 140px;
+}
+
+.help-logos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: 12px;
+  min-width: 0;
+}
+
+.help-logo {
+  max-height: 44px;
+  max-width: 110px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLET — 641px – 1024px
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .help-inner { padding: 0 32px 40px; }
+  .help-grid  { grid-template-columns: repeat(3, 1fr); }
+
+  /* Título más chico para que no wrapee tanto junto al botón */
+  .help-arrepentimiento-title { font-size: 18px; }
+
+  /* Protegidas: texto y logos en columna para dar más ancho a los logos */
+  .help-protegidas {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .help-protegidas-text { width: auto; }
+  .help-logos { width: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SMALL TABLET — 481px – 640px
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 481px) and (max-width: 640px) {
+  .help-inner { padding: 0 16px 32px; gap: 12px; }
+  .help-grid  { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .help-item-card { height: 130px; padding: 16px; }
+  .help-item-icon { width: 40px; height: 40px; padding: 4px; }
+  .help-item-label { font-size: 13px; }
+
+  /* Ambas cards inferiores: contenido en columna */
+  .help-arrepentimiento {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .help-arrepentimiento-title { font-size: 16px; }
+  .help-arrepentimiento-btn   { width: 100%; }
+
+  .help-protegidas {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .help-protegidas-text { width: auto; font-size: 14px; }
+  .help-logos { width: 100%; justify-content: flex-start; gap: 16px; }
+  .help-logo  { max-height: 38px; max-width: 100px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE — ≤ 480px
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .help-section { padding: 24px 0 0; }
+  .help-inner   { padding: 0 16px 24px; gap: 10px; }
+
+  .help-title { font-size: 19px; font-weight: 700; }
+
+  .help-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .help-item-card {
+    height: 116px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .help-item-icon  { width: 40px; height: 40px; }
+  .help-item-label { font-size: 14px; }
+
+  /* Bottom: apiladas en mobile */
+  .help-bottom {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .help-arrepentimiento {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    border-radius: 12px;
+  }
+  .help-arrepentimiento-title { font-size: 18px; }
+  .help-arrepentimiento-btn   { width: 100%; }
+
+  .help-protegidas {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    border-radius: 12px;
+  }
+  .help-protegidas-text { width: auto; }
+  .help-logos { justify-content: flex-start; gap: 20px; flex-wrap: wrap; }
+  .help-logo  { max-height: 38px; max-width: 100px; }
+}

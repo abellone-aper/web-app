@@ -23,7 +23,7 @@ export default function ProductCard({ product }) {
           <p className="price-old">{product.oldPrice}</p>
           <div className="price-row"><p className="price-now">{product.price}</p></div>
           <p className="installments">{product.install}</p>
-          <p className="shipping">Envío Gratis</p>
+          <p className="shipping">{product.shipping || 'Envío Gratis'}</p>
           <p className="product-title">{product.title}</p>
         </div>
         <p className="product-seller">Vendido por <a href="#">{product.seller}</a></p>

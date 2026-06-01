@@ -1,4 +1,39 @@
 /* ═══════════════════════════════════════════════════════════════
+   COUPON TOGGLE SWITCH
+   ═══════════════════════════════════════════════════════════════ */
+.coupon-toggle {
+  flex-shrink: 0;
+  width: 40px;
+  height: 22px;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background: #494949;
+  transition: background 0.2s;
+}
+.coupon-toggle::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 2px 4px rgba(39,39,39,0.1);
+  top: 2px;
+  right: 2px;
+  transition: right 0.2s, left 0.2s;
+}
+.coupon-toggle.off {
+  background: #d2d5da;
+}
+.coupon-toggle.off::after {
+  right: auto;
+  left: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    HERO
    ═══════════════════════════════════════════════════════════════ */
 .hero-wrap {
@@ -106,6 +141,93 @@
 }
 .hero-dot:hover { transform: scale(1.2); }
 .hero-dot.active { background: var(--neutral-one); transform: scale(1.1); }
+
+/* ═══════════════════════════════════════════════════════════════
+   FEATURED SECTION
+   ═══════════════════════════════════════════════════════════════ */
+.featured-section {
+  display: flex;
+  gap: 12px;
+  padding: 20px 0 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.featured-section::-webkit-scrollbar { display: none; }
+
+/* ═══════════════════════════════════════════════════════════════
+   STATUS SECTION
+   ═══════════════════════════════════════════════════════════════ */
+.status-section {
+  display: flex;
+  gap: 16px;
+  padding: 8px 0 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MÁS ACCEDIDOS SECTION
+   ═══════════════════════════════════════════════════════════════ */
+.mas-accedidos-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0 4px;
+}
+.mas-accedidos-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+  line-height: 24px;
+}
+.mas-accedidos-grid {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.mas-accedidos-grid::-webkit-scrollbar { display: none; }
+.mas-accedidos-card {
+  flex: 0 0 140px;
+  background: #fff9f6;
+  border-radius: 16px;
+  padding: 20px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-decoration: none;
+  cursor: pointer;
+}
+.mas-accedidos-icon {
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mas-accedidos-icon i   { font-size: 28px; color: #242226; }
+.mas-accedidos-icon img { width: 54px; height: 54px; filter: brightness(0) invert(19.6%); }
+.mas-accedidos-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #242226;
+  line-height: 20px;
+}
+
+@media (max-width: 480px) {
+  .status-section {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .status-section::-webkit-scrollbar { display: none; }
+  .status-section .status-card {
+    flex: 0 0 280px;
+  }
+}
 
 /* ═══════════════════════════════════════════════════════════════
    FEATURE STRIP
@@ -262,7 +384,6 @@
   display: flex; flex-direction: column;
   overflow: hidden; background: var(--neutral-one);
 }
-.category-card:hover { box-shadow: var(--shadow-2); }
 .category-icon {
   display: flex; align-items: center; justify-content: center;
   height: 126px;
@@ -792,9 +913,9 @@
     font-weight: 600;
   }
 
-  /* ── Contextual card — naranja ── */
+  /* ── Contextual card — oscura ── */
   .nmh-ctx-card {
-    background: linear-gradient(135deg, var(--action-primary) 0%, var(--action-primary-hover) 100%);
+    background: #323232;
     border-radius: 16px;
     padding: 16px;
     display: flex;
@@ -803,7 +924,7 @@
   }
   .nmh-ctx-icon {
     width: 38px; height: 38px;
-    background: rgba(0,0,0,0.15);
+    background: #000;
     border-radius: 19px;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
@@ -829,9 +950,10 @@
   }
   .nmh-ctx-link {
     font-family: inherit;
-    font-size: 16px; font-weight: 600;
-    color: #000;
-    line-height: 20px;
+    font-size: 14px; font-weight: 700;
+    color: #ffb795;
+    line-height: 18px;
+    letter-spacing: 0.028px;
   }
 
   /* ── Para tu viaje section ── */
@@ -980,14 +1102,80 @@
   .nmh-insurance-sub   { margin: 0; font-size: 17px; font-weight: 500; color: #fff; line-height: 22px; }
   .nmh-insurance-title { margin: 0; font-size: 21px; font-weight: 700; color: #fff; line-height: 1.35; }
 
-  /* ── Promo 2×2 ── */
-  .nmh-promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .nmh-promo-card {
-    background: #fff9f6; border-radius: 16px;
-    padding: 16px; display: flex; flex-direction: column; gap: 8px;
+  /* ── Credit card ── */
+  .nmh-credit-card {
+    background: #fef9f6; border-radius: 16px;
+    padding: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
   }
-  .nmh-promo-illustration { width: 88px; height: 68px; object-fit: contain; }
-  .nmh-promo-label { font-size: 18px; font-weight: 500; color: #242226; line-height: 22px; margin: 0; }
+  .nmh-credit-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .nmh-credit-label { font-size: 16px; font-weight: 700; color: #242226; margin: 0; line-height: 20px; }
+  .nmh-credit-amount { font-size: 30px; font-weight: 600; color: #0a0a0a; margin: 0; line-height: 36px; }
+  .nmh-credit-sub { font-size: 12px; color: #4a5565; margin: 0; line-height: 20px; }
+  .nmh-credit-btn {
+    border: 1.5px solid #bc4b00; border-radius: 8px;
+    background: transparent; color: #bc4b00;
+    font-size: 14px; font-weight: 700; font-family: inherit;
+    padding: 10px 20px; cursor: pointer; white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .nmh-credit-btn:hover { background: rgba(188,75,0,0.06); }
+
+  /* ── Más accedidos: grilla 2×3 ── */
+  .mas-accedidos-section {
+    padding-top: var(--sp-5);
+  }
+  .mas-accedidos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-2);
+    overflow-x: visible;
+  }
+  .mas-accedidos-card {
+    flex: none;
+    width: auto;
+    height: 120px;
+    padding: var(--sp-4);
+    border-radius: var(--radius-l);
+  }
+  .mas-accedidos-icon {
+    width: var(--sp-10);
+    height: var(--sp-10);
+  }
+  .mas-accedidos-icon img {
+    width: var(--sp-10);
+    height: var(--sp-10);
+  }
+  .mas-accedidos-label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* ── Coupons card ── */
+  .nmh-coupons-card {
+    background: #fef9f6; border-radius: 16px;
+    padding: 24px; display: flex; flex-direction: column; gap: 16px;
+  }
+  .nmh-coupons-header { display: flex; align-items: center; justify-content: space-between; }
+  .nmh-coupons-title { font-size: 16px; font-weight: 700; color: #242226; }
+  .nmh-coupons-link { font-size: 14px; font-weight: 700; color: #bc4b00; }
+  .nmh-coupons-list { display: flex; flex-direction: column; }
+  .nmh-coupon-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid #e5e7eb;
+  }
+  .nmh-coupon-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .nmh-coupon-icon { width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #4a5565; }
+  .nmh-coupon-icon i   { font-size: 20px; }
+  .nmh-coupon-icon img { width: 20px; height: 20px; filter: brightness(0) invert(19.6%); }
+  .nmh-coupon-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .nmh-coupon-name { font-size: 14px; font-weight: 500; color: #0a0a0a; margin: 0; line-height: 20px; }
+  .nmh-coupon-sub { font-size: 12px; color: #6a7282; margin: 0; line-height: 16px; }
+  .nmh-coupon-badge {
+    display: inline-block; align-self: flex-start; margin-top: 4px;
+    background: #494949; color: #fff;
+    font-size: 12px; font-weight: 700;
+    padding: 1px 8px; border-radius: 8px; line-height: 16px;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1046,19 +1234,19 @@
   }
   .dh-ctx-card {
     display: flex; align-items: flex-start; gap: 12px;
-    background: linear-gradient(135deg, var(--action-primary) 0%, var(--action-primary-hover) 100%);
+    background: #323232;
     border-radius: var(--radius-m); padding: 14px; color: #fff;
   }
   .dh-ctx-icon {
     width: 36px; height: 36px; flex-shrink: 0;
-    background: rgba(255,255,255,0.18); border-radius: 50%;
+    background: #000; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
   }
   .dh-ctx-body { flex: 1; display: flex; flex-direction: column; gap: 5px; }
   .dh-ctx-sub  { font-size: 11px; color: rgba(255,255,255,0.75); margin: 0; }
   .dh-ctx-title { font-size: 13px; font-weight: 600; color: #fff; margin: 0; line-height: 1.4; }
-  .dh-ctx-link { font-size: 13px; font-weight: 700; color: #fff; opacity: 0.85; margin-top: 4px; display: block; }
-  .dh-ctx-link:hover { opacity: 1; }
+  .dh-ctx-link { font-size: 13px; font-weight: 700; color: #ffb795; letter-spacing: 0.028px; margin-top: 4px; display: block; }
+  .dh-ctx-link:hover { opacity: 0.85; }
 
   .dh-trip-cards { display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
   .dh-trip-cards::-webkit-scrollbar { display: none; }
@@ -1069,12 +1257,41 @@
     border-radius: var(--radius-l); padding: 16px;
   }
 
-  .dh-promo-card {
-    background: #fff9f6; border-radius: 16px;
-    padding: 16px; display: flex; flex-direction: column; gap: 12px;
+  .dh-credit-card {
+    grid-column: 2 / span 2; grid-row: 2;
+    background: #fef9f6; border-radius: 16px;
+    padding: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
   }
-  .dh-promo-illustration { width: 72px; height: 72px; object-fit: contain; }
-  .dh-promo-label { font-size: 14px; font-weight: 500; color: #242226; line-height: 1.3; margin: 0; }
+  .dh-coupons-card {
+    grid-column: 2 / span 2; grid-row: 3;
+    background: #fef9f6; border-radius: 16px;
+    padding: 20px; display: flex; flex-direction: column; gap: 14px;
+  }
+  .dh-credit-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .dh-credit-label { font-size: 14px; font-weight: 700; color: #242226; margin: 0; }
+  .dh-credit-amount { font-size: 26px; font-weight: 600; color: #0a0a0a; margin: 0; line-height: 1.2; }
+  .dh-credit-sub { font-size: 11px; color: #4a5565; margin: 0; }
+  .dh-credit-btn {
+    border: 1.5px solid #bc4b00; border-radius: 8px;
+    background: transparent; color: #bc4b00;
+    font-size: 13px; font-weight: 700; font-family: inherit;
+    padding: 8px 16px; cursor: pointer; white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .dh-credit-btn:hover { background: rgba(188,75,0,0.06); }
+  .dh-coupons-header { display: flex; align-items: center; justify-content: space-between; }
+  .dh-coupons-title { font-size: 14px; font-weight: 700; color: #242226; }
+  .dh-coupons-link { font-size: 13px; font-weight: 700; color: #bc4b00; }
+  .dh-coupons-list { display: flex; flex-direction: column; }
+  .dh-coupon-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #e5e7eb; }
+  .dh-coupon-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .dh-coupon-icon { width: 22px; height: 22px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #4a5565; }
+  .dh-coupon-icon i   { font-size: 18px; }
+  .dh-coupon-icon img { width: 18px; height: 18px; filter: brightness(0) invert(19.6%); }
+  .dh-coupon-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .dh-coupon-name { font-size: 13px; font-weight: 500; color: #0a0a0a; margin: 0; line-height: 18px; }
+  .dh-coupon-sub { font-size: 11px; color: #6a7282; margin: 0; }
+  .dh-coupon-badge { display: inline-block; margin-top: 3px; background: #494949; color: #fff; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 7px; line-height: 15px; }
   .dh-explore-title { font-size: 16px; font-weight: 700; color: var(--neutral-nine); margin: 0 0 12px; }
   .dh-chips-row { display: flex; gap: 8px; flex-wrap: wrap; }
   .dh-chip {
@@ -1082,9 +1299,8 @@
     border: 1px solid var(--neutral-five); border-radius: var(--radius-pill);
     padding: 6px 12px 6px 8px; cursor: pointer;
     font-size: 12px; font-weight: 500; color: var(--neutral-nine);
-    background: #fff; transition: border-color 0.15s;
+    background: #fff;
   }
-  .dh-chip:hover { border-color: var(--action-primary); background: var(--action-secondary); }
   .dh-chip img { width: 18px; height: 18px; object-fit: contain; }
 
   .dh-explore-bottom { display: flex; gap: 12px; }
@@ -1094,9 +1310,8 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 8px; padding: 20px 12px;
     font-size: 12px; font-weight: 600; color: var(--neutral-seven);
-    transition: background 0.15s; cursor: pointer;
+    cursor: pointer;
   }
-  .dh-cat-card:hover { background: var(--neutral-two); }
   .dh-cat-card i { font-size: 28px; }
   .dh-cat-tecno { color: var(--neutral-eight); }
   .dh-cat-tecno i { color: var(--neutral-seven); }
@@ -1117,10 +1332,18 @@
   .dh-insurance-sub   { font-size: 10px; color: rgba(255,255,255,0.8); margin: 0; }
   .dh-insurance-title { font-size: 12px; font-weight: 600; color: #fff; margin: 0; line-height: 1.4; }
 
+  /* ─── Section gaps: 48px ─── */
+  .featured-section { padding: 48px 0 0; overflow-x: visible; }
+  .status-section { padding-top: 48px; padding-bottom: 0; }
+  .mas-accedidos-section { gap: 20px; padding: 48px 0 0; }
+  .mas-accedidos-title { font-size: 22px; }
+  .mas-accedidos-grid { gap: 12px; overflow-x: visible; }
+  .mas-accedidos-card { flex: 1; min-width: 0; height: 144px; }
+
   /* ─── Dashboard grid ─── */
   .dashboard-grid {
     display: block;
-    padding-top: 20px; padding-bottom: 48px;
+    padding-top: 48px; padding-bottom: 0;
   }
   .dashboard-aside { display: none !important; }
   .dashboard-main  { display: flex; flex-direction: column; gap: 16px; }
@@ -1155,7 +1378,6 @@
   .carousel-track { overflow: hidden; width: 100%; }
   .product-row    { display: flex; gap: 14px; }
   .product-card   { flex: 0 0 190px; width: 190px; background: #fff; border-color: var(--neutral-four); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  .product-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
   .product-image  { height: 180px; border-bottom: 1px solid var(--neutral-four); background: #fff; }
 
   /* ─── Newsletter ─── */
@@ -1228,22 +1450,22 @@
   .dh-trip-cards { display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
   .dh-trip-cards::-webkit-scrollbar { display: none; }
 
-  /* Orange CTA card */
+  /* Dark CTA card */
   .dh-ctx-card {
-    background: #f26522; border-radius: 16px; padding: 16px;
+    background: #323232; border-radius: 16px; padding: 16px;
     display: flex; flex-direction: column; gap: 14px; align-items: flex-start;
     flex: 1;
   }
   .dh-ctx-icon {
     width: 38px; height: 38px; flex-shrink: 0;
-    background: rgba(255,255,255,0.15); border-radius: 50%;
+    background: #000; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     color: #fff;
   }
   .dh-ctx-body { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-  .dh-ctx-card .dh-ctx-sub   { font-size: 12px; color: #edf4ff; margin: 0; }
+  .dh-ctx-card .dh-ctx-sub   { font-size: 12px; color: rgba(255,255,255,0.8); margin: 0; }
   .dh-ctx-card .dh-ctx-title { font-size: 15px; font-weight: 700; color: #fff; margin: 0; line-height: 1.4; }
-  .dh-ctx-link { font-size: 14px; font-weight: 700; color: #001d39; }
+  .dh-ctx-link { font-size: 14px; font-weight: 700; color: #ffb795; letter-spacing: 0.028px; }
 
   /* ── Explore chips: col 3-6, row 1 ── */
   .dh-explore-chips-card {
@@ -1261,23 +1483,45 @@
     background: #f3f3f3; border-radius: 8px;
     padding: 8px 12px; cursor: pointer;
     font-size: 14px; color: #2e312f;
-    transition: background 0.15s;
   }
   .dh-chip img { width: 24px; height: 24px; object-fit: contain; }
-  .dh-chip:hover { background: var(--neutral-four); }
 
-  /* ── Promo cards: col 3-4, rows 2-3 ── */
-  .dh-promo-card {
-    background: #fff9f6; border-radius: 16px;
-    padding: 24px 24px 23px;
-    display: flex; flex-direction: column; gap: 16px; justify-content: center;
+  /* ── Credit + Coupons cards: col 3-4, rows 2-3 ── */
+  .dh-credit-card {
+    grid-column: 3 / span 2; grid-row: 2;
+    background: #fef9f6; border-radius: 16px;
+    padding: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
   }
-  .dh-promo-card:nth-of-type(3) { grid-column: 3; grid-row: 2; }
-  .dh-promo-card:nth-of-type(4) { grid-column: 4; grid-row: 2; }
-  .dh-promo-card:nth-of-type(5) { grid-column: 3; grid-row: 3; }
-  .dh-promo-card:nth-of-type(6) { grid-column: 4; grid-row: 3; }
-  .dh-promo-illustration { width: 88px; height: 88px; object-fit: contain; }
-  .dh-promo-label { font-size: 16px; font-weight: 500; color: #242226; line-height: 20px; margin: 0; }
+  .dh-coupons-card {
+    grid-column: 3 / span 2; grid-row: 3;
+    background: #fef9f6; border-radius: 16px;
+    padding: 24px; display: flex; flex-direction: column; gap: 16px;
+  }
+  .dh-credit-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .dh-credit-label { font-size: 16px; font-weight: 700; color: #242226; margin: 0; line-height: 20px; }
+  .dh-credit-amount { font-size: 30px; font-weight: 600; color: #0a0a0a; margin: 0; line-height: 36px; }
+  .dh-credit-sub { font-size: 12px; color: #4a5565; margin: 0; line-height: 20px; }
+  .dh-credit-btn {
+    border: 1.5px solid #bc4b00; border-radius: 8px;
+    background: transparent; color: #bc4b00;
+    font-size: 14px; font-weight: 700; font-family: inherit;
+    padding: 10px 20px; cursor: pointer; white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .dh-credit-btn:hover { background: rgba(188,75,0,0.06); }
+  .dh-coupons-header { display: flex; align-items: center; justify-content: space-between; }
+  .dh-coupons-title { font-size: 16px; font-weight: 700; color: #242226; }
+  .dh-coupons-link { font-size: 14px; font-weight: 700; color: #bc4b00; }
+  .dh-coupons-list { display: flex; flex-direction: column; }
+  .dh-coupon-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #e5e7eb; }
+  .dh-coupon-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .dh-coupon-icon { width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #4a5565; }
+  .dh-coupon-icon i   { font-size: 20px; }
+  .dh-coupon-icon img { width: 20px; height: 20px; filter: brightness(0) invert(19.6%); }
+  .dh-coupon-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .dh-coupon-name { font-size: 14px; font-weight: 500; color: #0a0a0a; margin: 0; line-height: 20px; }
+  .dh-coupon-sub { font-size: 12px; color: #6a7282; margin: 0; }
+  .dh-coupon-badge { display: inline-block; align-self: flex-start; margin-top: 4px; background: #494949; color: #fff; font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 8px; line-height: 16px; }
 
   /* ── Insurance card: col 5-6, rows 2-3 ── */
   .dh-insurance-card {
@@ -1298,10 +1542,37 @@
   .dh-insurance-sub   { font-size: 14px; font-weight: 500; color: #fff; margin: 0; }
   .dh-insurance-title { font-size: 18px; font-weight: 700; color: #fff; margin: 0; line-height: 1.4; }
 
+  /* ─── Featured section ─── */
+  .featured-section {
+    gap: 24px;
+    padding: 48px 0 0;
+    overflow-x: visible;
+  }
+  .featured-section .featured-card {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+  }
+
+  /* ─── Status section ─── */
+  .status-section { padding-top: 48px; padding-bottom: 0; }
+
+  /* ─── Más accedidos section ─── */
+  .mas-accedidos-section {
+    gap: 24px;
+    padding: 48px 0 0;
+  }
+  .mas-accedidos-title { font-size: 24px; font-weight: 500; }
+  .mas-accedidos-grid { gap: 16px; overflow-x: visible; }
+  .mas-accedidos-card { flex: 1; min-width: 0; height: 154px; padding: 24px; }
+  .mas-accedidos-icon { width: 54px; height: 54px; }
+  .mas-accedidos-icon i { font-size: 32px; }
+  .mas-accedidos-label { font-size: 16px; }
+
   /* ─── Dashboard grid: full-width, no aside ─── */
   .dashboard-grid {
     display: block;
-    padding-top: 20px; padding-bottom: 48px;
+    padding-top: 48px; padding-bottom: 0;
   }
   .dashboard-aside  { display: none !important; }
   .dashboard-main   { display: flex; flex-direction: column; gap: 16px; }
@@ -1345,9 +1616,7 @@
     flex: 0 0 220px; width: 220px;
     background: #fff; border-color: var(--neutral-four);
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
   }
-  .product-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
   .product-image { height: 190px; border-bottom: 1px solid var(--neutral-four); background: #fff; }
 
   /* ─── Categories ─── */
@@ -1368,8 +1637,6 @@
   body.chat-open .desktop-greeting { padding: 20px 40px 0; }
   body.chat-open .container        { padding: 0 40px; }
   body.chat-open .search           { max-width: 350px; }
-  body.chat-open .dh-promo-card    { padding: 16px; }
-  body.chat-open .dh-promo-illustration { width: 64px; height: 64px; }
   body.chat-open .carousel-arrow:first-child { left: -36px; }
   body.chat-open .carousel-arrow:last-child  { right: -36px; }
 }
@@ -1378,12 +1645,11 @@
   .desktop-greeting  { padding: 20px 48px 0; }
   .container         { padding: 0 48px; }
   .search            { max-width: 400px; }
-  .dh-promo-card     { padding: 16px; }
-  .dh-promo-illustration { width: 64px; height: 64px; }
   .categories-row    { grid-template-columns: repeat(4, 1fr); }
   .product-card      { flex: 0 0 190px; width: 190px; }
   .carousel-arrow:first-child { left: -36px; }
   .carousel-arrow:last-child  { right: -36px; }
+  .featured-section  { gap: 16px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1416,6 +1682,13 @@
 
   /* Insurance: too wide for this breakpoint */
   .dh-insurance-card { display: none !important; }
+
+  /* Credit + Coupons: full width in collapsed grid */
+  .dh-credit-card,
+  .dh-coupons-card {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
 
   /* Narrower product cards to fit more per scroll */
   .product-card { flex: 0 0 160px; width: 160px; }

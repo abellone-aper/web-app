@@ -10,16 +10,12 @@
   overflow: hidden;
   border: 1px solid var(--neutral-four);
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  transition: box-shadow 0.2s;
 }
 
 .ptv-card--link {
   text-decoration: none;
   color: inherit;
-  transition: box-shadow 0.2s, transform 0.2s;
 }
-
-.ptv-card--link:hover .ptv-card-img img { transform: scale(1.03); }
 
 .ptv-card-img {
   width: 100%; height: 130px;
@@ -32,7 +28,6 @@
 .ptv-card-img img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
-  transition: transform 0.3s;
 }
 
 .ptv-card-img--hotel      { background: linear-gradient(145deg, #5b7ba8 0%, #2e4d7a 100%); }
@@ -110,9 +105,7 @@
   .ptv-card {
     width: auto;
     border-radius: var(--radius-l);
-    transition: box-shadow 0.2s, transform 0.2s;
   }
-  .ptv-card:hover  { box-shadow: var(--shadow-2); transform: translateY(-2px); }
   .ptv-card-img    { height: 160px; }
   .ptv-card-body   { padding: 12px 12px 14px; gap: 4px; }
   .ptv-card-cat    { font-size: 13px; }
@@ -127,9 +120,7 @@
     background: var(--color-bg-surface);
     border: 1px solid var(--neutral-four);
     overflow: hidden;
-    transition: box-shadow 0.2s, transform 0.2s;
   }
-  .ptv-card:hover  { box-shadow: var(--shadow-2); transform: translateY(-2px); }
   .ptv-card-img    { width: 100%; height: 180px; border-radius: 0; }
   .ptv-card-body   { padding: 12px 14px 16px; gap: 4px; }
   .ptv-card-cat    { font-size: 13px; }

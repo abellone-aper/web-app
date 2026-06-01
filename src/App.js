@@ -5,6 +5,7 @@ import ParaTuViaje from './pages/ParaTuViaje/ParaTuViaje';
 import HomeBanking from './pages/HomeBanking/HomeBanking';
 import Hospedaje from './pages/Hospedaje/Hospedaje';
 import Footer from './components/Footer';
+import HelpSection from './components/HelpSection';
 import ChatPanel from './components/ChatPanel';
 import MobileBottomNav from './components/MobileBottomNav';
 
@@ -12,6 +13,7 @@ function Layout({ children }) {
   return (
     <>
       {children}
+      <HelpSection />
       <Footer />
     </>
   );
