@@ -104,5 +104,10 @@
   .product-card { flex: 0 0 175px; width: 175px; }
   .product-image { width: 175px; height: 175px; }
   .product-body { padding: 10px 0 0; }
+  .product-title { font-size: 15px; line-height: 20px; }
+  .price-old { font-size: 15px; }
   .price-now { font-size: 18px; }
+  .installments { font-size: 15px; line-height: 20px; }
+  .shipping { font-size: 15px; line-height: 20px; }
+  .product-card-badge { font-size: 13px; }
 }

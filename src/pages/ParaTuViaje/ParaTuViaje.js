@@ -104,11 +104,11 @@ export default function ParaTuViajePage() {
               <p className="ptv-page-subtitle">Seleccionamos lo mejor para que disfrutes Bariloche al máximo</p>
             </div>
             <div className="ptv-ctx-banner">
-              <div className="ptv-ctx-icon"><i className="ph ph-airplane-takeoff"></i></div>
+              <div className="ptv-ctx-icon"><img src="/icons/vehículo.svg" alt="" width={24} height={24} /></div>
               <div className="ptv-ctx-body">
-                <p className="ptv-ctx-sub">Te sacaste un pasaje a Bariloche</p>
-                <p className="ptv-ctx-title">Ya tenés el vuelo. Armamos todo lo que necesitas para el viaje.</p>
-                <a href="#" className="ptv-ctx-cta">Ver mi viaje</a>
+                <p className="ptv-ctx-sub">El viaje se acerca</p>
+                <p className="ptv-ctx-title">Reservá un transfer o alquilá un auto y evitá sorpresas al llegar.</p>
+                <a href="#" className="ptv-ctx-cta">Ver opciones de transporte</a>
               </div>
             </div>
           </div>

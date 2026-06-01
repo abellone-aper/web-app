@@ -10,7 +10,7 @@ import SecondaryButton from '../../components/Buttons/SecondaryButton';
 import LinkButton from '../../components/Buttons/LinkButton';
 import StatusCard from '../../components/StatusCard';
 
-const CTX_CAR_ICON = 'https://www.figma.com/api/mcp/asset/48f9c26d-2697-49e6-b003-4d63f509e2ad';
+const CTX_CAR_ICON = '/icons/vehículo.svg';
 
 const CURRENT_USER = { name: 'Sol García', initial: 'S', role: 'Cuenta Galicia', avatar: 'https://images.pexels.com/photos/7679591/pexels-photo-7679591.jpeg' };
 
@@ -234,7 +234,7 @@ export default function HomePage() {
             </div>
             <div className="nmh-ctx-body">
               <p className="nmh-ctx-sub">El viaje se acerca</p>
-              <p className="nmh-ctx-title">Ya tenés el vuelo. Armamos todo lo que necesitas para el viaje.</p>
+              <p className="nmh-ctx-title">Reservá un transfer o alquilá un auto y evitá sorpresas al llegar.</p>
               <a href="#" className="nmh-ctx-link">Ver opciones de transporte</a>
             </div>
           </div>
@@ -324,7 +324,7 @@ export default function HomePage() {
                 <div className="dh-ctx-icon"><img src={CTX_CAR_ICON} alt="" width={24} height={24} /></div>
                 <div className="dh-ctx-body">
                   <p className="dh-ctx-sub">El viaje se acerca</p>
-                  <p className="dh-ctx-title">Ya tenés el vuelo. Armamos todo lo que necesitas para el viaje.</p>
+                  <p className="dh-ctx-title">Reservá un transfer o alquilá un auto y evitá sorpresas al llegar.</p>
                   <a href="#" className="dh-ctx-link">Ver opciones de transporte</a>
                 </div>
               </div>
@@ -405,7 +405,7 @@ export default function HomePage() {
             <div className="desktop-ctx-icon"><img src={CTX_CAR_ICON} alt="" width={22} height={22} /></div>
             <div className="desktop-ctx-body">
               <p className="desktop-ctx-sub">El viaje se acerca</p>
-              <p className="desktop-ctx-title">Ya tenés el vuelo. Armamos todo lo que necesitas para el viaje.</p>
+              <p className="desktop-ctx-title">Reservá un transfer o alquilá un auto y evitá sorpresas al llegar.</p>
             </div>
             <a href="#" className="desktop-ctx-link">Ver opciones de transporte <i className="ph ph-arrow-right" style={{fontSize:'14px',verticalAlign:'middle'}}></i></a>
           </div>

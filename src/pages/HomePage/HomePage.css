@@ -720,11 +720,13 @@
   .feature-icon i { font-size: 28px; }
   .feature-text { text-align: center; }
   .feature-text strong { font-size: 15px; font-weight: 600; line-height: 19px; }
-  .feature-text span { font-size: 13px; line-height: 17px; }
+  .feature-text span { font-size: 14px; line-height: 18px; }
 
   .section { padding: 0; background: #fff; }
-  .section-title { font-size: 19px; line-height: 24px; }
-  .section-header { padding: 16px var(--page-px) 12px; }
+  .section-title { font-size: 19px; line-height: 24px; white-space: normal; }
+  .section-header { padding: 16px var(--page-px) 12px; flex-wrap: wrap; align-items: center; }
+  .section-title-group { flex-direction: column; align-items: flex-start; gap: 6px; flex: 1 1 0; min-width: 0; }
+  .section-title-badge { align-self: flex-start; }
 
   .carousel-arrow { display: none; }
   .carousel-wrap { padding: 0 0 20px; }
@@ -879,15 +881,15 @@
     flex: 1; display: flex; flex-direction: column; gap: 4px;
   }
   .mobile-ctx-sub {
-    font-size: 12px; font-weight: 500;
+    font-size: 13px; font-weight: 500;
     color: rgba(255,255,255,0.8); margin: 0; line-height: 1.4;
   }
   .mobile-ctx-title {
-    font-size: 15px; font-weight: 600;
+    font-size: 16px; font-weight: 600;
     color: #fff; margin: 0; line-height: 1.4;
   }
   .mobile-ctx-link {
-    font-size: 14px; font-weight: 600;
+    font-size: 15px; font-weight: 600;
     color: rgba(255,255,255,0.9); margin-top: 4px;
     display: block;
   }
@@ -949,14 +951,14 @@
   .nmh-ctx-sub {
     margin: 0;
     font-family: inherit;
-    font-size: 15px; font-weight: 500;
+    font-size: 12px; font-weight: 400;
     color: rgba(255,255,255,0.8);
     line-height: normal;
   }
   .nmh-ctx-title {
     margin: 0;
     font-family: inherit;
-    font-size: 18px; font-weight: 600;
+    font-size: 15px; font-weight: 700;
     color: #fff;
     line-height: normal;
   }
@@ -1122,7 +1124,7 @@
   .nmh-credit-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
   .nmh-credit-label { font-size: 16px; font-weight: 700; color: #242226; margin: 0; line-height: 20px; }
   .nmh-credit-amount { font-size: 30px; font-weight: 600; color: #0a0a0a; margin: 0; line-height: 36px; }
-  .nmh-credit-sub { font-size: 12px; color: #4a5565; margin: 0; line-height: 20px; }
+  .nmh-credit-sub { font-size: 13px; color: #4a5565; margin: 0; line-height: 20px; }
   .nmh-credit-btn {
     border: 1.5px solid #bc4b00; border-radius: 8px;
     background: transparent; color: #bc4b00;
@@ -1168,8 +1170,8 @@
     padding: 24px; display: flex; flex-direction: column; gap: 16px;
   }
   .nmh-coupons-header { display: flex; align-items: center; justify-content: space-between; }
-  .nmh-coupons-title { font-size: 16px; font-weight: 700; color: #242226; }
-  .nmh-coupons-link { font-size: 14px; font-weight: 700; color: #bc4b00; }
+  .nmh-coupons-title { font-size: 17px; font-weight: 700; color: #242226; }
+  .nmh-coupons-link { font-size: 15px; font-weight: 700; color: #bc4b00; }
   .nmh-coupons-list { display: flex; flex-direction: column; }
   .nmh-coupon-item {
     display: flex; align-items: center; gap: 12px;
@@ -1180,13 +1182,13 @@
   .nmh-coupon-icon i   { font-size: 20px; }
   .nmh-coupon-icon img { width: 20px; height: 20px; filter: brightness(0) invert(19.6%); }
   .nmh-coupon-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-  .nmh-coupon-name { font-size: 14px; font-weight: 500; color: #0a0a0a; margin: 0; line-height: 20px; }
-  .nmh-coupon-sub { font-size: 12px; color: #6a7282; margin: 0; line-height: 16px; }
+  .nmh-coupon-name { font-size: 15px; font-weight: 500; color: #0a0a0a; margin: 0; line-height: 20px; }
+  .nmh-coupon-sub { font-size: 13px; color: #6a7282; margin: 0; line-height: 18px; }
   .nmh-coupon-badge {
     display: inline-block; align-self: flex-start; margin-top: 4px;
     background: #494949; color: #fff;
-    font-size: 12px; font-weight: 700;
-    padding: 1px 8px; border-radius: 8px; line-height: 16px;
+    font-size: 13px; font-weight: 700;
+    padding: 1px 8px; border-radius: 8px; line-height: 18px;
   }
 }
 

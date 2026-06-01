@@ -15,13 +15,13 @@ export default function Footer() {
 
         <div className="site-footer__social">
           <a href="#" className="site-footer__social-btn" aria-label="Facebook">
-            <img src="/img/icon-facebook.svg" alt="Facebook" />
+            <img src="/icons/facebook.svg" alt="Facebook" />
           </a>
           <a href="#" className="site-footer__social-btn" aria-label="Instagram">
-            <img src="/img/icon-instagram.svg" alt="Instagram" />
+            <img src="/icons/instagram.svg" alt="Instagram" />
           </a>
           <a href="#" className="site-footer__social-btn" aria-label="WhatsApp">
-            <img src="/img/icon-whatsapp.svg" alt="WhatsApp" />
+            <img src="/icons/whatsapp.svg" alt="WhatsApp" />
           </a>
         </div>
       </div>
