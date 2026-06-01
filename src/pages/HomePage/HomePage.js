@@ -40,23 +40,21 @@ const TRIP_CARDS = [
 ];
 
 const TECH_PRODUCTS = [
-  { id: 'tech-1', img: 'https://multipoint.com.ar/Image/0/700_700-Samsung-123506515-ar-galaxy-book3-pro-14-inch-np940-np940xfg-ka1ar-537093813--Download-Source--zoom.jpg', disc: '30% Off', oldPrice: '$999.999,00', price: '$699.999', install: 'Mismo precio en 12 cuotas de $23.142', title: 'Notebook Samsung Galaxy Book3 Pro 14 Intel Core I5 12 Núcleos 16gb Color Graphite', seller: 'Start_' },
-  { id: 'tech-2', img: 'https://images.fravega.com/f500/15432a04096368c7b949c3baf53a08b1.png', disc: '10% Off', oldPrice: '$308.570', price: '$277.715', install: 'Mismo precio en 12 cuotas de $23.142', title: 'Moto G13 128gb 4gb Ram Rosa', seller: 'AlClick', favActive: true },
-  { id: 'tech-3', img: 'https://images.samsung.com/ar/galaxy-buds2/feature/galaxy-buds2-battery-life-mo.jpg', disc: '23% Off', oldPrice: '$297.698', price: '$228.999', install: 'Mismo precio en 12 cuotas de $19.083', title: 'Auriculares in-ear inalámbricos Samsung Galaxy Buds2 SM-R177', seller: 'Samsung' },
-  { id: 'tech-4', img: 'https://http2.mlstatic.com/D_NQ_NP_787750-MLA91558386024_092025-O.webp', disc: '15% Off', oldPrice: '$2.899.999', price: '$2.464.999', install: 'Mismo precio en 15 cuotas de $164.333', title: 'Samsung Galaxy Tab S10 Ultra 256gb Black Color Gris', seller: 'Diggit' },
-  { id: 'tech-5', img: 'https://http2.mlstatic.com/D_NQ_NP_670516-MLA99966056855_112025-O.webp', disc: '10% Off', oldPrice: '$399.999', price: '$359.999', install: 'Mismo precio en 12 cuotas de $29.999', title: 'Apple Watch SE 2da Gen 44mm Midnight Aluminium', seller: 'Apple' },
-  { id: 'tech-6', img: 'https://printy.photos/wp-content/uploads/2024/01/INSTAX-mini-12-product-photography-pink-hero-with-photo.jpg', disc: '21% Off', oldPrice: '$189.999', price: '$149.999', install: 'Mismo precio en 12 cuotas de $12.499', title: 'Cámara Instantánea Fujifilm Instax Mini 12 Rosa Pastel', seller: 'Fujifilm' },
-  { id: 'tech-7', img: 'https://tiendadedrones.com.ar/wp-content/uploads/2024/01/DRDJI064.webp', disc: '20% Off', oldPrice: '$1.199.999', price: '$959.999', install: 'Mismo precio en 12 cuotas de $79.999', title: 'Drone DJI Mini 4 Pro Fly More Combo con Control RC-N2', seller: 'DJI' },
+  { id: 'tech-1', img: 'https://media.traveler.es/photos/6712429132de56225d8bb7ff/4:3/w_1776,h_1332,c_limit/GettyImages-1752719931.jpg', price: '$1.339.208', install: 'Mismo precio en 12 cuotas de $199.560', title: 'Vuelos desde Buenos Aires a Madrid ida y vuelta', badge: 'Oferta imperdible', withPoints: true, imgFilled: true },
+  { id: 'tech-2', img: 'https://www.figma.com/api/mcp/asset/f02e1145-950e-44a9-9a9c-e3fb5eba16eb', oldPrice: '$59.999', price: '$24.999', shipping: 'Envío Gratis', title: 'Escurridor Secaplatos Platos Cubiertos Acero Negro Cocina Organizador Vajilla Porta', favActive: true, withPoints: true },
+  { id: 'tech-3', img: 'https://www.figma.com/api/mcp/asset/849adfbe-111f-4c22-9dfb-cf68cd35d7c0', oldPrice: '$1.392.763', price: '$1.079.763', install: 'Mismo precio en 12 cuotas de $199.560', title: 'iPhone 14 Dual SIM 256 GB amarillo', withPoints: true },
+  { id: 'tech-4', img: 'https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg', oldPrice: '$2.670.000', price: '$2.124.000', install: 'Mismo precio en 12 cuotas de $199.560', title: '5 días y 4 noches en Petit Hotel Panambi', withPoints: true, imgFilled: true },
+  { id: 'tech-5', img: 'https://www.figma.com/api/mcp/asset/ef6c33cb-56af-4e94-b2b3-8dc071e70aa1', oldPrice: '$2.895.226', price: '$205.000', shipping: 'Envío Gratis', title: 'Bota Trekking Timberland Maddsen Peak Waterproof Dama', withPoints: true },
+  { id: 'tech-6', img: 'https://www.figma.com/api/mcp/asset/c85697e1-2aab-4b78-8d8b-c51c7f6bad44', oldPrice: '$2.895.226', price: '$2.895.226', shipping: 'Envío Gratis', title: 'Notebook Samsung Galaxy Book3 Pro 14 Intel Core I5 12 Núcleos 16gb Color Graphite', withPoints: true },
 ];
 
 const ELECTRO_PRODUCTS = [
-  { id: 'electro-1', img: 'https://jumboargentina.vtexassets.com/arquivos/ids/867022-800-600?v=638826167044170000&width=800&height=600&aspect=true', disc: '25% Off', oldPrice: '$650.000', price: '$487.500', install: 'Mismo precio en 12 cuotas de $40.625', title: 'Lavarropas Whirlpool 8kg Carga Frontal WNQ80AB', seller: 'Whirlpool', shipping: 'Envío Gratis' },
-  { id: 'electro-2', img: 'https://petenattiar.vtexassets.com/arquivos/ids/211467/HORNO-SAMSUNG-ME731K-K-20Lts-BCO.jpg?v=638006860733200000', disc: '20% Off', oldPrice: '$420.000', price: '$336.000', install: 'Mismo precio en 12 cuotas de $28.000', title: 'Microondas Samsung 28L con Grill ME731K', seller: 'Samsung', shipping: 'Entrega Rápida' },
-  { id: 'electro-3', img: 'https://www.electromax.com.py/storage/6702_2.png', disc: '15% Off', oldPrice: '$1.250.000', price: '$1.062.500', install: 'Mismo precio en 12 cuotas de $88.541', title: 'Heladera Whirlpool No Frost 400L Acero Inoxidable', seller: 'Whirlpool', shipping: 'Envío Incluido' },
-  { id: 'electro-4', img: 'https://images.fravega.com/f1000/9c41fa374b8dbc321d3e8b9c8cfbb4df.jpg', disc: '35% Off', oldPrice: '$890.000', price: '$578.500', install: 'Mismo precio en 12 cuotas de $48.208', title: 'Smart TV LG 55" 4K UHD ThinQ AI', seller: 'LG', shipping: 'Envío a Domicilio' },
-  { id: 'electro-5', img: 'https://http2.mlstatic.com/D_798473-MLA92443866264_092025-C.jpg', disc: '18% Off', oldPrice: '$520.000', price: '$426.400', install: 'Mismo precio en 12 cuotas de $35.533', title: 'Horno Eléctrico Ultracomb 60L con Grill Digital UC-60DG', seller: 'Ultracomb', shipping: 'Envío Rápido' },
-  { id: 'electro-6', img: 'https://arcencohogar.vtexassets.com/arquivos/ids/416612-500-auto?v=639058166515970000&width=500&height=auto&aspect=true', disc: '20% Off', oldPrice: '$980.000', price: '$784.000', install: 'Mismo precio en 12 cuotas de $65.333', title: 'Heladera Freezer Whirlpool No Frost 265L WRB35AB Blanco', seller: 'Whirlpool', shipping: 'Envío a Todo el País' },
-  { id: 'electro-7', img: 'https://images.fravega.com/f1000/cefcf2d0a3a81ee05ac26ad9707f5e50.jpg', disc: '30% Off', oldPrice: '$380.000', price: '$266.000', install: 'Mismo precio en 12 cuotas de $22.166', title: 'Aspiradora Robot Xiaomi Mi Robot Vacuum S10+ con Base Vaciado', seller: 'Xiaomi', shipping: 'Envío Gratis' },
+  { id: 'electro-1', img: 'https://www.figma.com/api/mcp/asset/c90e0eff-6988-43a6-8ce5-d448d1f9d96e', oldPrice: '$45.999', price: '$39.999', shipping: 'Envío Gratis', title: 'Cafetera Espresso Profesional' },
+  { id: 'electro-2', img: 'https://www.figma.com/api/mcp/asset/9d1b83ce-7eef-49e9-8d03-f054273be82d', oldPrice: '$18.499', price: '$16.999', shipping: 'Envío Gratis', title: 'Batidora de Mano Compacta y Potente', favActive: true },
+  { id: 'electro-3', img: 'https://www.figma.com/api/mcp/asset/e4a642d2-63a8-437f-b3e8-c35f42b69e3a', oldPrice: '$22.999', price: '$19.999', shipping: 'Envío Gratis', title: 'Olla de Cocción Lenta con Temporizador' },
+  { id: 'electro-4', img: 'https://www.figma.com/api/mcp/asset/be05f592-1b95-4539-9db4-eb0af9f25671', oldPrice: '$50.999', price: '$44.999', shipping: 'Envío Gratis', title: 'Freidora de Aire Saludable y Eficiente' },
+  { id: 'electro-5', img: 'https://www.figma.com/api/mcp/asset/cb196128-65fa-45bf-b1e3-423160e55554', oldPrice: '$35.499', price: '$32.499', shipping: 'Envío Gratis', title: 'Extractor de Jugo de Alta Velocidad' },
+  { id: 'electro-6', img: 'https://www.figma.com/api/mcp/asset/d385cf95-030f-4ea3-852d-1575f293b77f', oldPrice: '$15.999', price: '$13.999', shipping: 'Envío Gratis', title: 'Plancha de Vapor Vertical Portátil' },
 ];
 
 
@@ -98,7 +96,7 @@ const HERO_SLIDES = [
 ];
 
 
-function ProductCarousel({ title, products }) {
+function ProductCarousel({ title, badge, products }) {
   const trackRef = useRef(null);
 
   function scroll(dir) {
@@ -112,7 +110,10 @@ function ProductCarousel({ title, products }) {
   return (
     <section className="section">
       <div className="section-header">
-        <h2 className="section-title">{title}</h2>
+        <div className="section-title-group">
+          <h2 className="section-title">{title}</h2>
+          {badge && <span className="section-title-badge">{badge}</span>}
+        </div>
         <LinkButton as="a" href="#">Mostrar todo</LinkButton>
       </div>
       <div className="carousel-wrap">
@@ -431,7 +432,7 @@ export default function HomePage() {
 
           <div className="dashboard-grid">
             <div className="dashboard-main">
-              <ProductCarousel title="Para comprar con tus puntos" products={TECH_PRODUCTS} />
+              <ProductCarousel title="Para comprar con tus puntos" badge="54.000 puntos disponibles - Vence el 31/05" products={TECH_PRODUCTS} />
               <ProductCarousel title="Relacionados con tu última compra" products={ELECTRO_PRODUCTS} />
 
             </div>

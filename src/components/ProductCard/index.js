@@ -14,20 +14,20 @@ export default function ProductCard({ product }) {
   return (
     <article className="product-card">
       <div className="product-image">
-        <img src={product.img} alt={product.title} style={{width:'100%',height:'100%',objectFit:'contain'}} />
+        <img src={product.img} alt={product.title} style={{width:'100%',height:'100%',objectFit: product.imgFilled ? 'cover' : 'contain'}} />
         <FavBtn active={product.favActive} />
       </div>
       <div className="product-body">
         <div className="product-info">
-          <span className="badge-disc">{product.disc}</span>
-          <p className="price-old">{product.oldPrice}</p>
-          <div className="price-row"><p className="price-now">{product.price}</p></div>
-          <p className="installments">{product.install}</p>
-          <p className="shipping">{product.shipping || 'Envío Gratis'}</p>
           <p className="product-title">{product.title}</p>
+          <div className="price-and-discounts">
+            <p className="price-old">{product.oldPrice}</p>
+            <p className="price-now">{product.price}{product.withPoints && <span className="price-points-label"> con puntos</span>}</p>
+          </div>
+          {product.install && <p className="installments">{product.install}</p>}
+          {product.shipping && <p className="shipping">{product.shipping}</p>}
+          {product.badge && <span className="product-card-badge">{product.badge}</span>}
         </div>
-        <p className="product-seller">Vendido por <a href="#">{product.seller}</a></p>
-        <p className="product-notax">Precio sin impuestos nacionales $94.700</p>
       </div>
     </article>
   );
