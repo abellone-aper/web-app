@@ -1,0 +1,54 @@
+.chat-success-order {
+  background: var(--neutral-one);
+  border-radius: var(--radius-m);
+  border: 1px solid var(--neutral-four);
+  padding: var(--sp-4);
+  display: flex; flex-direction: column; gap: var(--sp-4);
+}
+
+.chat-success-order-header {
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
+  text-align: center;
+}
+
+.chat-success-order-icon {
+  font-size: 32px;
+  color: var(--information-primary);
+}
+
+.chat-success-order-title {
+  font-size: var(--text-base); font-weight: var(--font-weight-bold);
+  color: var(--neutral-nine); margin: 0;
+}
+
+.chat-success-order-subtitle {
+  font-size: var(--text-sm); font-weight: var(--font-weight-regular);
+  color: var(--neutral-seven); margin: 0;
+}
+
+.chat-success-order-product {
+  display: flex; gap: 9px; align-items: center;
+  border: 1px solid var(--neutral-four);
+  border-radius: var(--radius-s);
+  padding: 10px;
+}
+
+.chat-success-order-img {
+  width: 64px; height: 64px; object-fit: contain;
+  border-radius: var(--radius-xs); flex-shrink: 0;
+  mix-blend-mode: multiply;
+}
+
+.chat-success-order-info {
+  display: flex; flex-direction: column; gap: 4px; flex: 1;
+}
+
+.chat-success-order-name {
+  font-size: var(--text-sm); font-weight: var(--font-weight-regular);
+  color: var(--neutral-eight); margin: 0; line-height: 18px;
+}
+
+.chat-success-order-price {
+  font-size: var(--text-sm); font-weight: var(--font-weight-bold);
+  color: var(--neutral-eight); margin: 0;
+}

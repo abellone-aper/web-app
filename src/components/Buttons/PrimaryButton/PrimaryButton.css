@@ -17,3 +17,5 @@
   white-space: nowrap;
 }
 .primary-btn:hover { background: var(--action-primary-hover); }
+.primary-btn:disabled { background: var(--neutral-four); color: var(--neutral-six); cursor: default; }
+.primary-btn:disabled:hover { background: var(--neutral-four); }

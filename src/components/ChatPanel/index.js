@@ -8,6 +8,8 @@ import ChatOffer from './ChatOffer';
 import ChatSuggestions from './ChatSuggestions';
 import ChatMessage from './ChatMessage';
 import ChatProductDetails from './ChatProductDetails';
+import ChatSuccessfulOrder from './ChatSuccessfulOrder';
+import ChatCvvCard from './ChatCvvCard';
 import PrimaryButton from '../Buttons/PrimaryButton';
 
 
@@ -17,7 +19,7 @@ const STORE_OFFER = {
   confirmName: 'Termo Stanley Classic',
   price: '$26.525',
   discount: '15% de descuento',
-  cta: 'Comprar ahora (Puntos + 6 cuotas)',
+  cta: 'Comprar ahora',
 };
 
 
@@ -114,10 +116,15 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
   const isBankingVariant = activeVariant === 'banking';
   const isHotelVariant = activeVariant === 'hotel';
 
+  const specSheetSent = td.messages.some(m => m.type === 'spec-sheet');
+  const purchaseDone = td.messages.some(m => m.type === 'purchase-confirm' || m.type === 'reservation-confirm');
+  const buyDisabled = purchaseDone || td.awaitingCvv || faceIdOpen;
+
   function openCvvFlow(tabId) {
     const id = tabId || activeTabId;
     addMessageTo({ type: 'user', text: STORE_OFFER.cta }, id);
     addMessageTo({ type: 'bot', text: 'Para confirmar, ingresá el código de seguridad de tu tarjeta VISA terminada en 4567 (los 3 dígitos del dorso).' }, id);
+    addMessageTo({ type: 'cvv-card' }, id);
     setTabData(prev => ({ ...prev, [id]: { ...(prev[id] || {}), awaitingCvv: true } }));
   }
 
@@ -144,7 +151,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
     } else {
       addMessageTo({ type: 'purchase-confirm', product: STORE_OFFER }, id);
       addMessageTo({ type: 'bot', text: '¿Necesitás que te ayude en algo más?' }, id);
-      addMessageTo({ type: 'suggestions', items: ['Ver mis pedidos', 'Seguir comprando'] }, id);
+      addMessageTo({ type: 'suggestions', items: ['Ver productos similares', 'Ver más ofertas'] }, id);
     }
   }
 
@@ -195,11 +202,13 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
   const initialMessages = isHomeVariant ? (
     <>
       <ChatMessage label="Tienda">Hola Sol. El termo que tenés en el carrito entró hoy en una acción especial de Tienda Galicia. Bajó un 15% de precio y además te armé una combinación de pago exclusiva para vos</ChatMessage>
-      <ChatOffer variant="tienda" onBuy={handleBuyAction} />
-      <ChatSuggestions items={[
-        { label: 'Más información', onClick: () => setTd({ showMoreDetail: true }) },
-        { label: 'Ver ficha técnica del producto', onClick: handleSpecSheet },
-      ]} />
+      <ChatOffer variant="tienda" onBuy={handleBuyAction} buyDisabled={buyDisabled} moreDetailDisabled={td.showMoreDetail} onMoreDetail={() => setTd({ showMoreDetail: true })} />
+      {td.messages.length === 0 && !td.isTyping && !td.showMoreDetail && (
+        <ChatSuggestions items={[
+          { label: 'Más información', onClick: () => setTd({ showMoreDetail: true }) },
+          { label: 'Ver ficha técnica del producto', onClick: handleSpecSheet },
+        ]} />
+      )}
     </>
   ) : isBankingVariant ? (
     <>
@@ -209,7 +218,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
   ) : (
     <>
       <ChatMessage label="Tienda">Hola Sol. Reservá 7 noches en el Design Suites Bariloche y disfrutá de una experiencia única a orillas del Lago Nahuel Huapi.</ChatMessage>
-      <ChatOffer variant="hotel" onBuy={handleBuyAction} onMoreDetail={() => setTd({ showMoreDetail: true })} />
+      <ChatOffer variant="hotel" onBuy={handleBuyAction} onMoreDetail={() => setTd({ showMoreDetail: true })} buyDisabled={buyDisabled} moreDetailDisabled={td.showMoreDetail} />
     </>
   );
 
@@ -254,10 +263,12 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
             {td.showMoreDetail && isHomeVariant && (
               <div className="chat-more-detail" style={{ display: 'flex' }}>
                 <ChatMessage label="Tienda">Con el 15% de descuento, el termo queda en $26.525. Además, veo que tenés 1.525 Puntos Galicia disponibles en tu cuenta. Si los aplicás, el total baja a $25.000.<br /><br />Para ese monto tenés preaprobadas 3 cuotas sin interés de $8.334 con tu Visa Galicia. El envío es gratis a tu domicilio en Palermo.</ChatMessage>
-                <ChatSuggestions items={[
-                  { label: 'Comprar (Puntos + 3 cuotas sin interés)', onClick: handleBuyAction },
-                  { label: 'Ver ficha técnica del producto', onClick: handleSpecSheet },
-                ]} />
+                {td.messages.length === 0 && !td.isTyping && (
+                  <ChatSuggestions items={[
+                    { label: 'Comprar (Puntos + 3 cuotas sin interés)', onClick: handleBuyAction },
+                    { label: 'Ver ficha técnica del producto', onClick: handleSpecSheet },
+                  ]} />
+                )}
               </div>
             )}
             {td.showMoreDetail && isHotelVariant && (
@@ -269,10 +280,12 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
                   ✅ <strong>Cancelación gratuita</strong> hasta el 20 de junio<br /><br />
                   Podés pagarlo en <strong>12 cuotas sin interés de $199.560</strong> con tu tarjeta Galicia.
                 </ChatMessage>
-                <ChatSuggestions items={[
-                  { label: 'Confirmar reserva ahora', onClick: handleBuyAction },
-                  { label: 'Cambiar fechas' },
-                ]} />
+                {td.messages.length === 0 && !td.isTyping && (
+                  <ChatSuggestions items={[
+                    { label: 'Confirmar reserva ahora', onClick: handleBuyAction },
+                    { label: 'Cambiar fechas' },
+                  ]} />
+                )}
               </div>
             )}
             {td.messages.map((msg, i) => {
@@ -280,27 +293,21 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
               if (msg.type === 'bot') return (
                 <ChatMessage key={i} label="Tienda" animated>{msg.text}</ChatMessage>
               );
-              if (msg.type === 'suggestions') return (
-                <ChatSuggestions key={i} label={msg.label} items={msg.items} onChipClick={handleSuggestionClick} animated />
-              );
+              if (msg.type === 'suggestions') {
+                const isLatest = i === td.messages.length - 1 && !td.isTyping;
+                if (!isLatest) return null;
+                return (
+                  <ChatSuggestions key={i} label={msg.label} items={msg.items} onChipClick={handleSuggestionClick} animated />
+                );
+              }
+              if (msg.type === 'cvv-card') {
+                if (!td.awaitingCvv) return null;
+                return <ChatCvvCard key={i} cvvValue={td.inputVal} />;
+              }
               if (msg.type === 'purchase-confirm') return (
                 <div key={i}>
                   <p className="chat-confirm-label">Compraste {msg.product.confirmName}</p>
-                  <div className="chat-confirm-card">
-                    <div className="chat-confirm-header">
-                      <i className="ph-fill ph-check-circle" style={{fontSize:'32px',color:'#22c55e'}}></i>
-                      <p className="chat-confirm-title">Compra realizada con éxito</p>
-                      <p className="chat-confirm-card-sub">Tarjeta VISA terminada en 4567</p>
-                    </div>
-                    <div className="chat-confirm-product">
-                      <img className="chat-confirm-product-img" src={msg.product.img} alt={msg.product.name} />
-                      <div className="chat-confirm-product-info">
-                        <p className="chat-confirm-product-name">{msg.product.name}</p>
-                        <p className="chat-confirm-product-price">{msg.product.price}</p>
-                      </div>
-                    </div>
-                    <PrimaryButton style={{width:'100%'}}>Ir a mis compras</PrimaryButton>
-                  </div>
+                  <ChatSuccessfulOrder />
                 </div>
               );
               if (msg.type === 'reservation-confirm') {

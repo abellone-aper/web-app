@@ -17,3 +17,5 @@
   white-space: nowrap;
 }
 .secondary-btn:hover { background: #fff9f6; }
+.secondary-btn:disabled { border-color: var(--neutral-five); color: var(--neutral-five); cursor: default; }
+.secondary-btn:disabled:hover { background: transparent; }

@@ -11,7 +11,7 @@ const STORE_OFFER = {
   discount: '15% de descuento',
 };
 
-export default function ChatOffer({ variant, onBuy, onMoreDetail }) {
+export default function ChatOffer({ variant, onBuy, onMoreDetail, buyDisabled, moreDetailDisabled }) {
   if (variant === 'tienda') {
     return (
       <div className="chat-offer-card chat-offer-card--tienda">
@@ -26,8 +26,10 @@ export default function ChatOffer({ variant, onBuy, onMoreDetail }) {
             </div>
           </div>
           <div className="chat-offer-actions">
-            <PrimaryButton style={{ width: '100%' }} onClick={onBuy}>Comprar</PrimaryButton>
-            <SecondaryButton style={{ width: '100%' }} onClick={onMoreDetail}>Más información</SecondaryButton>
+            <PrimaryButton style={{ width: '100%' }} onClick={onBuy} disabled={buyDisabled}>Comprar</PrimaryButton>
+            {!moreDetailDisabled && (
+              <SecondaryButton style={{ width: '100%' }} onClick={onMoreDetail}>Más información</SecondaryButton>
+            )}
           </div>
         </div>
       </div>
@@ -69,8 +71,8 @@ export default function ChatOffer({ variant, onBuy, onMoreDetail }) {
             <p className="chat-offer-price">$1.200.500</p>
           </div>
         </div>
-        <PrimaryButton style={{ width: '100%' }} onClick={onBuy}>Confirmar reserva</PrimaryButton>
-        <LinkButton onClick={onMoreDetail}>Más información</LinkButton>
+        <PrimaryButton style={{ width: '100%' }} onClick={onBuy} disabled={buyDisabled}>Confirmar reserva</PrimaryButton>
+        {!moreDetailDisabled && <LinkButton onClick={onMoreDetail}>Más información</LinkButton>}
       </div>
     );
   }

@@ -16,3 +16,5 @@
   white-space: nowrap;
 }
 .link-btn:hover { opacity: 0.8; }
+.link-btn:disabled { opacity: 0.4; cursor: default; }
+.link-btn:disabled:hover { opacity: 0.4; }

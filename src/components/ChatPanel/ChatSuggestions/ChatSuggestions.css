@@ -32,6 +32,13 @@
   font-family: inherit; text-align: left; gap: 2px;
 }
 .chat-suggestion-chip:hover { background: var(--neutral-four); }
+.chat-suggestion-chip--disabled,
+.chat-suggestion-chip:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.chat-suggestion-chip--disabled:hover,
+.chat-suggestion-chip:disabled:hover { background: var(--neutral-three); }
 .chat-suggestion-chip-arrow {
   display: flex; flex-shrink: 0;
   color: var(--neutral-seven);

@@ -1,0 +1,131 @@
+.cvv-card {
+  background: linear-gradient(140deg, #c44d0f 0%, #F26522 55%, #f5874e 100%);
+  border-radius: 14px;
+  color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 20px rgba(242, 101, 34, 0.35);
+  overflow: hidden;
+}
+
+.cvv-card-top {
+  padding: 14px 16px 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 20px;
+}
+
+.cvv-card-chip {
+  width: 28px;
+  height: 20px;
+  background: linear-gradient(135deg, #d4a849 0%, #f0cc6e 50%, #c49030 100%);
+  border-radius: 4px;
+  opacity: 0.9;
+}
+
+.cvv-card-stripe {
+  background: rgba(0, 0, 0, 0.55);
+  height: 36px;
+  margin-top: 12px;
+  flex-shrink: 0;
+}
+
+.cvv-card-sig-area {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.cvv-card-sig-strip {
+  background: white;
+  border-radius: 3px;
+  padding: 7px 8px 7px 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cvv-card-sig-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cvv-card-sig-line {
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    #ccc 0px, #ccc 5px,
+    white 5px, white 9px
+  );
+  border-radius: 1px;
+}
+
+.cvv-card-cvv-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: 1.5px solid #bbb;
+  border-radius: 4px;
+  padding: 4px 10px 5px;
+  background: white;
+  flex-shrink: 0;
+}
+
+.cvv-card-cvv-label {
+  font-size: 8px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.cvv-card-cvv-digits {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.cvv-card-cvv-digit {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: #ddd;
+  line-height: 1;
+  width: 11px;
+  text-align: center;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.cvv-card-cvv-digit--filled {
+  color: #c44d0f;
+  transform: scale(1.15);
+}
+
+.cvv-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px 14px;
+}
+
+.cvv-card-number {
+  font-size: 11px;
+  opacity: 0.7;
+  letter-spacing: 2px;
+  font-family: 'Courier New', monospace;
+}
+
+.cvv-card-brand {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  font-style: italic;
+  opacity: 0.95;
+}
