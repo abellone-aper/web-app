@@ -12,7 +12,7 @@ import StatusCard from '../../components/StatusCard';
 
 const CTX_CAR_ICON = '/icons/vehículo.svg';
 
-const CURRENT_USER = { name: 'Sol García', initial: 'S', role: 'Cuenta Galicia', avatar: 'https://images.pexels.com/photos/7679591/pexels-photo-7679591.jpeg' };
+const CURRENT_USER = { name: 'Sol García', initial: 'S', role: 'Cuenta Galicia', avatar: getPublicUrl('Imagenes', 'avatar.jpeg') };
 
 const COUPONS = [
   { icon: '/icons/descuento tecnologia.svg', title: '15% Off en Tecnología', subtitle: 'Válido en toda sección', expires: 'Vence en 3 días' },
@@ -32,11 +32,11 @@ const CHIPS = [
 ];
 
 const TRIP_CARDS = [
-  { img: 'https://www.designsuites.com/images/bariloche/foto_33.jpg', cat: 'Hospedaje', name: 'Design Suites Bariloche', price: 'Desde $49.999 por 2 noches', favActive: false, to: '/hospedaje' },
-  { img: 'https://www.switchbacktravel.com/sites/default/files/image_fields/In-Depth%20Gear%20Reviews/Patagonia%20Tres%203-in-1%20Parka/Patagonia%20Tres%203-in-1%20Parka%20%28adjusting%20hood%29.jpg', cat: 'Indumentaria', name: 'Campera Patagonia', price: '$239.000 en 6 cuotas sin interés', favActive: true },
-  { img: 'https://media.staticontent.com/media/pictures/8faf882d-b4cd-4306-b0d8-ac5ab26fd85b/853x380?op=NONE&enlarge=false&gravity=ce_0_0&quality=80&dpr=1', cat: 'Actividad', name: 'Catamarán Isla Victoria', price: 'Desde $18.500 por persona' },
-  { img: 'https://upload.wikimedia.org/wikipedia/commons/6/66/Base_del_Cerro_Catedral_en_Bariloche._%28Patagonia_Argentina%29_20.JPG', cat: 'Actividad', name: 'Ski Cerro Catedral', price: 'Desde $32.000 por día' },
-  { img: 'https://images.pexels.com/photos/9292084/pexels-photo-9292084.jpeg?auto=compress&cs=tinysrgb&w=800', cat: 'Gastronomía', name: 'El Boliche de Alberto', price: 'Reservá tu mesa' },
+  { img: getPublicUrl('Imagenes', 'design-suites.jpg'), cat: 'Hospedaje', name: 'Design Suites Bariloche', price: 'Desde $49.999 por 2 noches', favActive: false, to: '/hospedaje' },
+  { img: getPublicUrl('Imagenes', 'campera-patagonia.png'), cat: 'Indumentaria', name: 'Campera Patagonia', price: '$239.000 en 6 cuotas sin interés', favActive: true },
+  { img: getPublicUrl('Imagenes', 'catamaran.jpg'), cat: 'Actividad', name: 'Catamarán Isla Victoria', price: 'Desde $18.500 por persona' },
+  { img: getPublicUrl('Imagenes', 'cerro-catedral.jpeg'), cat: 'Actividad', name: 'Ski Cerro Catedral', price: 'Desde $32.000 por día' },
+  { img: getPublicUrl('Imagenes', 'restaurante.png'), cat: 'Gastronomía', name: 'El Boliche de Alberto', price: 'Reservá tu mesa' },
 ];
 
 const TECH_PRODUCTS = [
