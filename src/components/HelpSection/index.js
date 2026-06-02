@@ -1,4 +1,5 @@
 import './HelpSection.css';
+import { getPublicUrl } from '../../lib/storage';
 
 const HELP_ITEMS = [
   { icon: '/icons/preguntas frecuentes.svg', label: 'Preguntas frecuentes' },
@@ -9,9 +10,9 @@ const HELP_ITEMS = [
   { icon: '/icons/reportar.svg',              label: 'Reportá un problema' },
 ];
 
-const LOGO_DATA_FISCAL = 'https://www.figma.com/api/mcp/asset/d40b218d-0c14-4cd9-915e-7dd766f8a351';
-const LOGO_SSN         = 'https://www.figma.com/api/mcp/asset/529e42dd-d184-4151-8e8d-69e9a97df69d';
-const LOGO_CACE        = 'https://www.figma.com/api/mcp/asset/96bdc94a-9115-4277-b3aa-76af114882f5';
+const LOGO_DATA_FISCAL = getPublicUrl('Imagenes', 'data fiscal.png');
+const LOGO_SSN         = getPublicUrl('Imagenes', 'SSN.png');
+const LOGO_CACE        = getPublicUrl('Imagenes', 'cace.png');
 
 export default function HelpSection() {
   return (

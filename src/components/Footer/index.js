@@ -1,11 +1,12 @@
 import './Footer.css';
+import { getPublicUrl } from '../../lib/storage';
 
 export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="site-footer__inner">
         <div className="site-footer__logo">
-          <img src="/img/logo.png" alt="Tienda Galicia" />
+          <img src={getPublicUrl('Imagenes', 'logo.png')} alt="Tienda Galicia" />
         </div>
 
         <div className="site-footer__info">

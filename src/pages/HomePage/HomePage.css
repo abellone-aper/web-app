@@ -1039,6 +1039,7 @@
     width: 40px; height: 36px;
     object-fit: contain; display: block;
     flex-shrink: 0;
+    filter: brightness(0) saturate(100%) invert(12%) sepia(6%) saturate(391%) hue-rotate(82deg) brightness(97%) contrast(93%);
   }
   .nmh-chip span {
     font-family: inherit;
@@ -1315,7 +1316,7 @@
     font-size: 12px; font-weight: 500; color: var(--neutral-nine);
     background: #fff;
   }
-  .dh-chip img { width: 18px; height: 18px; object-fit: contain; }
+  .dh-chip img { width: 18px; height: 18px; object-fit: contain; filter: brightness(0) opacity(0.89); }
 
   .dh-explore-bottom { display: flex; gap: 12px; }
   .dh-category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1; }
@@ -1367,7 +1368,9 @@
     background: transparent; border: none;
     border-radius: 0; padding: 24px 0; margin: 0;
   }
-  .section-header { padding: 0 0 18px; }
+  .section-header { padding: 0 0 18px; flex-wrap: wrap; gap: 8px; }
+  .section-title { white-space: normal; }
+  .section-title-group { flex-wrap: wrap; align-items: flex-start; gap: 6px 16px; }
 
   /* ─── Product carousels ─── */
   .carousel-wrap {
@@ -1386,13 +1389,13 @@
     align-items: center; justify-content: center;
     z-index: 2; flex: unset;
   }
-  .carousel-arrow:first-child { left: -44px; }
-  .carousel-arrow:last-child  { right: -44px; }
+  .carousel-arrow:first-child { left: -28px; }
+  .carousel-arrow:last-child  { right: -28px; }
   .carousel-arrow:hover { background: var(--action-secondary); border-color: var(--action-primary); color: var(--action-primary); }
   .carousel-track { overflow: hidden; width: 100%; }
   .product-row    { display: flex; gap: 14px; }
-  .product-card   { flex: 0 0 190px; width: 190px; background: #fff; border-color: var(--neutral-four); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  .product-image  { height: 180px; border-bottom: 1px solid var(--neutral-four); background: #fff; }
+  .product-card   { flex: 0 0 190px; width: 190px; }
+  .product-image  { width: 190px; height: 180px; }
 
   /* ─── Newsletter ─── */
   .newsletter { border-radius: var(--radius-l); margin: 0; }
@@ -1498,7 +1501,7 @@
     padding: 8px 12px; cursor: pointer;
     font-size: 14px; color: #2e312f;
   }
-  .dh-chip img { width: 24px; height: 24px; object-fit: contain; }
+  .dh-chip img { width: 24px; height: 24px; object-fit: contain; filter: brightness(0) saturate(100%) invert(12%) sepia(6%) saturate(391%) hue-rotate(82deg) brightness(97%) contrast(93%); }
 
   /* ── Credit + Coupons cards: col 3-4, rows 2-3 ── */
   .dh-credit-card {
@@ -1628,10 +1631,8 @@
   .product-row { display: flex; gap: 16px; }
   .product-card {
     flex: 0 0 220px; width: 220px;
-    background: #fff; border-color: var(--neutral-four);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
-  .product-image { height: 190px; border-bottom: 1px solid var(--neutral-four); background: #fff; }
+  .product-image { height: 190px; }
 
   /* ─── Categories ─── */
   .categories-row { grid-template-columns: repeat(8, 1fr); gap: 12px; }
@@ -1706,9 +1707,34 @@
 
   /* Narrower product cards to fit more per scroll */
   .product-card { flex: 0 0 160px; width: 160px; }
-  .product-image { height: 150px; }
+  .product-image { width: 160px; height: 150px; }
 
   /* Carousel arrows inset so they don't overflow */
-  .carousel-arrow:first-child { left: -20px; }
-  .carousel-arrow:last-child  { right: -20px; }
+  .carousel-arrow:first-child { left: -12px; }
+  .carousel-arrow:last-child  { right: -12px; }
+
+  /* Section header: título + badge en columna, "Mostrar todo" alineado */
+  .section-header { flex-wrap: wrap; gap: 8px; padding-bottom: 12px; }
+  .section-title  { font-size: 18px; white-space: normal; }
+  .section-title-group { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+  /* Status cards: scroll horizontal en lugar de apretarse */
+  .status-section {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex-wrap: nowrap;
+  }
+  .status-section::-webkit-scrollbar { display: none; }
+  .status-section .status-card { flex: 0 0 280px; }
+
+  /* Más accedidos: scroll horizontal con ancho fijo por tarjeta */
+  .mas-accedidos-grid {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex-wrap: nowrap;
+  }
+  .mas-accedidos-grid::-webkit-scrollbar { display: none; }
+  .mas-accedidos-card { flex: 0 0 130px; min-width: 0; height: 130px; }
 }

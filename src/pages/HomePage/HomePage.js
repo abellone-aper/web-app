@@ -20,15 +20,15 @@ const COUPONS = [
 ];
 
 const CHIPS = [
-  { icon: 'https://www.figma.com/api/mcp/asset/eb96a2ee-7550-4f9c-bd25-74800e1eba00', label: 'Compras recurrentes' },
-  { icon: 'https://www.figma.com/api/mcp/asset/f5afc4aa-2eed-4529-bcab-7f0648eb4d48', label: 'Ahorrar en el super' },
-  { icon: 'https://www.figma.com/api/mcp/asset/5206bc37-1a67-413b-88e7-ab0792213d99', label: 'Hasta 54.000 puntos' },
-  { icon: 'https://www.figma.com/api/mcp/asset/06e44271-3415-4b8a-96b9-e6e3cb9c1415', label: 'Computadoras' },
-  { icon: 'https://www.figma.com/api/mcp/asset/710a73b0-af30-478e-92fa-f0fc36efd5b3', label: 'Audio' },
-  { icon: 'https://www.figma.com/api/mcp/asset/32135fec-822a-4fe5-996a-e8d42073fbdf', label: 'Renovar mi Smartphone' },
-  { icon: 'https://www.figma.com/api/mcp/asset/5d63f7e5-420b-4608-b9a5-dd714c2dd319', label: 'Deporte' },
-  { icon: 'https://www.figma.com/api/mcp/asset/b6b8b462-ea24-415a-a053-30f405e69a52', label: 'Para tu vehículo' },
-  { icon: 'https://www.figma.com/api/mcp/asset/3611a8c0-0e4a-4034-9253-08daf5a8e302', label: 'Experiencias' },
+  { icon: '/icons/compras.svg',              label: 'Compras recurrentes' },
+  { icon: '/icons/super.svg',                label: 'Ahorrar en el super' },
+  { icon: '/icons/puntos.svg',               label: 'Hasta 54.000 puntos' },
+  { icon: '/icons/computadora.svg',          label: 'Computadoras' },
+  { icon: '/icons/audio.svg',                label: 'Audio' },
+  { icon: '/icons/smartphone.svg',           label: 'Renovar mi Smartphone' },
+  { icon: '/icons/deporte.svg',              label: 'Deporte' },
+  { icon: '/icons/vehículo.svg',             label: 'Para tu vehículo' },
+  { icon: '/icons/experiencia.svg',          label: 'Experiencias' },
 ];
 
 const TRIP_CARDS = [
@@ -40,21 +40,21 @@ const TRIP_CARDS = [
 ];
 
 const TECH_PRODUCTS = [
-  { id: 'tech-1', img: 'https://media.traveler.es/photos/6712429132de56225d8bb7ff/4:3/w_1776,h_1332,c_limit/GettyImages-1752719931.jpg', price: '$1.339.208', install: 'Mismo precio en 12 cuotas de $199.560', title: 'Vuelos desde Buenos Aires a Madrid ida y vuelta', badge: 'Oferta imperdible', withPoints: true, imgFilled: true },
-  { id: 'tech-2', img: 'https://www.figma.com/api/mcp/asset/f02e1145-950e-44a9-9a9c-e3fb5eba16eb', oldPrice: '$59.999', price: '$24.999', shipping: 'Envío Gratis', title: 'Escurridor Secaplatos Platos Cubiertos Acero Negro Cocina Organizador Vajilla Porta', favActive: true, withPoints: true },
-  { id: 'tech-3', img: 'https://www.figma.com/api/mcp/asset/849adfbe-111f-4c22-9dfb-cf68cd35d7c0', oldPrice: '$1.392.763', price: '$1.079.763', install: 'Mismo precio en 12 cuotas de $199.560', title: 'iPhone 14 Dual SIM 256 GB amarillo', withPoints: true },
-  { id: 'tech-4', img: 'https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg', oldPrice: '$2.670.000', price: '$2.124.000', install: 'Mismo precio en 12 cuotas de $199.560', title: '5 días y 4 noches en Petit Hotel Panambi', withPoints: true, imgFilled: true },
-  { id: 'tech-5', img: 'https://www.figma.com/api/mcp/asset/ef6c33cb-56af-4e94-b2b3-8dc071e70aa1', oldPrice: '$2.895.226', price: '$205.000', shipping: 'Envío Gratis', title: 'Bota Trekking Timberland Maddsen Peak Waterproof Dama', withPoints: true },
-  { id: 'tech-6', img: 'https://www.figma.com/api/mcp/asset/c85697e1-2aab-4b78-8d8b-c51c7f6bad44', oldPrice: '$2.895.226', price: '$2.895.226', shipping: 'Envío Gratis', title: 'Notebook Samsung Galaxy Book3 Pro 14 Intel Core I5 12 Núcleos 16gb Color Graphite', withPoints: true },
+  { id: 'tech-1', img: getPublicUrl('Imagenes', 'madrid.png'), price: '$1.339.208', install: 'Mismo precio en 12 cuotas de $199.560', title: 'Vuelos desde Buenos Aires a Madrid ida y vuelta', badge: 'Oferta imperdible', withPoints: true, imgFilled: true },
+  { id: 'tech-2', img: getPublicUrl('Imagenes', 'escurridor.png'), oldPrice: '$59.999', price: '$24.999', shipping: 'Envío Gratis', title: 'Escurridor Secaplatos Platos Cubiertos Acero Negro Cocina Organizador Vajilla Porta', favActive: true, withPoints: true },
+  { id: 'tech-3', img: getPublicUrl('Imagenes', 'iPhone.png'), oldPrice: '$1.392.763', price: '$1.079.763', install: 'Mismo precio en 12 cuotas de $199.560', title: 'iPhone 14 Dual SIM 256 GB amarillo', withPoints: true },
+  { id: 'tech-4', img: getPublicUrl('Imagenes', 'hotel.png'), oldPrice: '$2.670.000', price: '$2.124.000', install: 'Mismo precio en 12 cuotas de $199.560', title: '5 días y 4 noches en Petit Hotel Panambi', withPoints: true, imgFilled: true },
+  { id: 'tech-5', img: getPublicUrl('Imagenes', 'bota.png'), oldPrice: '$2.895.226', price: '$205.000', shipping: 'Envío Gratis', title: 'Bota Trekking Timberland Maddsen Peak Waterproof Dama', withPoints: true },
+  { id: 'tech-6', img: getPublicUrl('Imagenes', 'notebook.png'), oldPrice: '$2.895.226', price: '$2.895.226', shipping: 'Envío Gratis', title: 'Notebook Samsung Galaxy Book3 Pro 14 Intel Core I5 12 Núcleos 16gb Color Graphite', withPoints: true },
 ];
 
 const ELECTRO_PRODUCTS = [
-  { id: 'electro-1', img: 'https://www.figma.com/api/mcp/asset/c90e0eff-6988-43a6-8ce5-d448d1f9d96e', oldPrice: '$45.999', price: '$39.999', shipping: 'Envío Gratis', title: 'Cafetera Espresso Profesional' },
-  { id: 'electro-2', img: 'https://www.figma.com/api/mcp/asset/9d1b83ce-7eef-49e9-8d03-f054273be82d', oldPrice: '$18.499', price: '$16.999', shipping: 'Envío Gratis', title: 'Batidora de Mano Compacta y Potente', favActive: true },
-  { id: 'electro-3', img: 'https://www.figma.com/api/mcp/asset/e4a642d2-63a8-437f-b3e8-c35f42b69e3a', oldPrice: '$22.999', price: '$19.999', shipping: 'Envío Gratis', title: 'Olla de Cocción Lenta con Temporizador' },
-  { id: 'electro-4', img: 'https://www.figma.com/api/mcp/asset/be05f592-1b95-4539-9db4-eb0af9f25671', oldPrice: '$50.999', price: '$44.999', shipping: 'Envío Gratis', title: 'Freidora de Aire Saludable y Eficiente' },
-  { id: 'electro-5', img: 'https://www.figma.com/api/mcp/asset/cb196128-65fa-45bf-b1e3-423160e55554', oldPrice: '$35.499', price: '$32.499', shipping: 'Envío Gratis', title: 'Extractor de Jugo de Alta Velocidad' },
-  { id: 'electro-6', img: 'https://www.figma.com/api/mcp/asset/d385cf95-030f-4ea3-852d-1575f293b77f', oldPrice: '$15.999', price: '$13.999', shipping: 'Envío Gratis', title: 'Plancha de Vapor Vertical Portátil' },
+  { id: 'electro-1', img: getPublicUrl('Imagenes', 'cafetera.png'), oldPrice: '$45.999', price: '$39.999', shipping: 'Envío Gratis', title: 'Cafetera Espresso Profesional' },
+  { id: 'electro-2', img: getPublicUrl('Imagenes', 'batidora.png'), oldPrice: '$18.499', price: '$16.999', shipping: 'Envío Gratis', title: 'Batidora de Mano Compacta y Potente', favActive: true },
+  { id: 'electro-3', img: getPublicUrl('Imagenes', 'olla.png'), oldPrice: '$22.999', price: '$19.999', shipping: 'Envío Gratis', title: 'Olla de Cocción Lenta con Temporizador' },
+  { id: 'electro-4', img: getPublicUrl('Imagenes', 'freidora.png'), oldPrice: '$50.999', price: '$44.999', shipping: 'Envío Gratis', title: 'Freidora de Aire Saludable y Eficiente' },
+  { id: 'electro-5', img: getPublicUrl('Imagenes', 'extractor.png'), oldPrice: '$35.499', price: '$32.499', shipping: 'Envío Gratis', title: 'Extractor de Jugo de Alta Velocidad' },
+  { id: 'electro-6', img: getPublicUrl('Imagenes', 'plancha.png'), oldPrice: '$15.999', price: '$13.999', shipping: 'Envío Gratis', title: 'Plancha de Vapor Vertical Portátil' },
 ];
 
 
@@ -189,7 +189,7 @@ export default function HomePage() {
     <>
       <aside className="tienda-sidebar">
         <div className="ts-logo">
-          <img src="/img/logo.png" alt="Tienda Galicia" />
+          <img src={getPublicUrl('Imagenes', 'logo.png')} alt="Tienda Galicia" />
         </div>
         <nav className="ts-nav">
           <a href="#" className="ts-nav-item active"><i className="ph ph-house"></i><span>Inicio</span></a>
@@ -268,7 +268,7 @@ export default function HomePage() {
 
           <div className="nmh-insurance-card">
             <div className="nmh-insurance-img">
-              <img src="https://images.pexels.com/photos/8869247/pexels-photo-8869247.jpeg" alt="Seguro de viaje" />
+              <img src={getPublicUrl('Imagenes', 'cobertura.jpg')} alt="Seguro de viaje" />
             </div>
             <div className="nmh-insurance-body">
               <p className="nmh-insurance-sub">Recomendado para el viaje</p>
@@ -376,7 +376,7 @@ export default function HomePage() {
             </div>
 
             <div className="dh-insurance-card">
-              <img src="https://images.pexels.com/photos/8869247/pexels-photo-8869247.jpeg" alt="Seguro de viaje" className="dh-insurance-bg" />
+              <img src={getPublicUrl('Imagenes', 'cobertura.jpg')} alt="Seguro de viaje" className="dh-insurance-bg" />
               <div className="dh-insurance-overlay">
                 <p className="dh-insurance-sub">Recomendado para el viaje</p>
                 <p className="dh-insurance-title">Agregá un seguro de viaje y viajá más tranquila</p>

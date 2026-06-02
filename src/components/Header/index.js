@@ -1,6 +1,7 @@
 import './Header.css';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { getPublicUrl } from '../../lib/storage';
 
 export default function Header({
   variant = 'home',
@@ -45,12 +46,12 @@ export default function Header({
         <div className="header__mobile-home__icons">
           <button className="header__mobile-home__icon-btn" aria-label="Notificaciones">
             <span className="icon-wrap">
-              <i className="ph ph-bell"></i>
+              <img src="/icons/notificaciones.svg" alt="" className="header-icon-img" />
               <span className="notif-dot">1</span>
             </span>
           </button>
           <button className="header__mobile-home__icon-btn" aria-label="Favoritos">
-            <i className="ph ph-heart"></i>
+            <img src="/icons/favoritos.svg" alt="" className="header-icon-img" />
           </button>
         </div>
       </div>
@@ -81,35 +82,35 @@ export default function Header({
       <div className="header-top">
         <div className="header-left">
           <Link to="/" className="logo">
-            <img src="/img/logo.png" alt="Tienda Galicia" className="logo-img" />
+            <img src={getPublicUrl('Imagenes', 'logo.png')} alt="Tienda Galicia" className="logo-img" />
           </Link>
           <div className="search">
             <input type="text" placeholder="Buscar productos o marcas" />
-            <i className="ph ph-magnifying-glass search-icon"></i>
+            <img src="/icons/buscar.svg" alt="" className="search-icon header-icon-img" />
           </div>
         </div>
         <a href="#" className="header-cta">Ampliar el límite de tus tarjetas</a>
         <div className="header-icons">
           <a href="#" className="header-icon-btn header-search-btn" aria-label="Buscar">
-            <i className="ph ph-magnifying-glass" style={{ fontSize: '22px' }}></i>
+            <img src="/icons/buscar.svg" alt="" className="header-icon-img" />
           </a>
           <a href="#" className="header-icon-btn" aria-label="Notificaciones">
             <span className="icon-wrap">
-              <i className="ph ph-bell" style={{ fontSize: '22px' }}></i>
+              <img src="/icons/notificaciones.svg" alt="" className="header-icon-img" />
               <span className="notif-dot">1</span>
             </span>
           </a>
           <a href="#" className="header-icon-btn" aria-label="Favoritos">
-            <i className="ph ph-heart" style={{ fontSize: '22px' }}></i>
+            <img src="/icons/favoritos.svg" alt="" className="header-icon-img" />
           </a>
           <a href="#" className="header-icon-btn" aria-label="Carrito">
             <span className="icon-wrap">
-              <i className="ph ph-shopping-cart" style={{ fontSize: '22px' }}></i>
+              <img src="/icons/carrito.svg" alt="" className="header-icon-img" />
               <span className="notif-dot">1</span>
             </span>
           </a>
           <a href="#" className="header-icon-btn" aria-label="Menú">
-            <i className="ph ph-list" style={{ fontSize: '22px' }}></i>
+            <img src="/icons/menu.svg" alt="" className="header-icon-img" />
           </a>
         </div>
       </div>
@@ -139,19 +140,19 @@ export default function Header({
             </span>
           </a>
           <a className="user-nav-item" href="#">
-            <i className="ph ph-heart"></i>
+            <img src="/icons/favoritos.svg" alt="" className="header-icon-img" />
             <span>Favoritos</span>
           </a>
           <a className="user-nav-item" href="#">
             <span className="icon-wrap">
-              <i className="ph ph-bell"></i>
+              <img src="/icons/notificaciones.svg" alt="" className="header-icon-img" />
               <span className="notif-dot">1</span>
             </span>
             <span>Notificaciones</span>
           </a>
           <a className="user-nav-item" href="#">
             <span className="icon-wrap">
-              <i className="ph ph-shopping-cart"></i>
+              <img src="/icons/carrito.svg" alt="" className="header-icon-img" />
               <span className="notif-dot">1</span>
             </span>
             <span>Carrito</span>

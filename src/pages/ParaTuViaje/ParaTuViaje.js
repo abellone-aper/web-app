@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ParaTuViaje.css';
+import { getPublicUrl } from '../../lib/storage';
 import Header from '../../components/Header';
 import TripCard from '../../components/TripCard';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
@@ -128,7 +129,7 @@ export default function ParaTuViajePage() {
           {filter === 'todo' && (
             <div className="ptv-insurance">
               <div className="ptv-insurance-media">
-                <img src="https://images.pexels.com/photos/8869247/pexels-photo-8869247.jpeg" alt="Seguro de viaje" />
+                <img src={getPublicUrl('Imagenes', 'cobertura.jpg')} alt="Seguro de viaje" />
               </div>
               <div className="ptv-insurance-body">
                 <p className="ptv-insurance-sub">Recomendado para el viaje</p>
