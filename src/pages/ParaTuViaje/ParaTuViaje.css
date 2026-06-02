@@ -7,9 +7,6 @@
   display: none;
 }
 
-/* ─── Desktop breadcrumb ─────────────────────────────────────── */
-.ptv-breadcrumb { display: none; }
-
 /* ─── Page wrapper ───────────────────────────────────────────── */
 .ptv-page {
   background: var(--neutral-two);
@@ -249,7 +246,7 @@
 
   /* Context banner */
   .ptv-ctx-banner {
-    margin: 0 16px;
+    margin: 12px 16px;
   }
 
   /* Insurance card — more breathing room */
@@ -272,37 +269,6 @@
     margin: 0 auto;
     padding: 0 80px 60px;
     background: transparent;
-  }
-
-  /* Breadcrumb */
-  .ptv-breadcrumb {
-    display: block;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 20px 80px 0;
-  }
-
-  .ptv-breadcrumb-inner {
-    display: flex; align-items: center; gap: 8px;
-  }
-
-  .ptv-breadcrumb-back {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 16px; font-weight: 600;
-    color: var(--neutral-seven);
-    transition: color 0.15s;
-  }
-
-  .ptv-breadcrumb-back:hover { color: var(--action-primary); }
-  .ptv-breadcrumb-back i { font-size: 16px; }
-
-  .ptv-breadcrumb-sep {
-    font-size: 12px; color: var(--neutral-five);
-  }
-
-  .ptv-breadcrumb-current {
-    font-size: 16px; font-weight: 600;
-    color: var(--neutral-nine);
   }
 
   /* Page top: title + banner side by side */
@@ -456,34 +422,6 @@
     max-width: 100%;
     padding: 0 32px 48px;
     background: transparent;
-  }
-
-  /* Breadcrumb */
-  .ptv-breadcrumb {
-    display: block;
-    padding: 20px 32px 0;
-  }
-
-  .ptv-breadcrumb-inner {
-    display: flex; align-items: center; gap: 8px;
-  }
-
-  .ptv-breadcrumb-back {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 16px; font-weight: 600;
-    color: var(--neutral-seven);
-    transition: color 0.15s;
-  }
-
-  .ptv-breadcrumb-back:hover { color: var(--action-primary); }
-  .ptv-breadcrumb-back i { font-size: 16px; }
-
-  .ptv-breadcrumb-sep {
-    font-size: 12px; color: var(--neutral-five);
-  }
-
-  .ptv-breadcrumb-current {
-    font-size: 16px; font-weight: 600; color: var(--neutral-nine);
   }
 
   /* Page top: title + banner side by side */
@@ -654,14 +592,6 @@
   body.chat-open .ptv-breadcrumb {
     padding-left: 40px;
     padding-right: 40px;
-  }
-  body.chat-open .ptv-page-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-  body.chat-open .ptv-ctx-banner {
-    width: 100%;
   }
   body.chat-open .ptv-cards-track {
     grid-template-columns: repeat(3, 1fr);

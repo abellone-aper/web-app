@@ -150,6 +150,11 @@
   min-width: 0;
 }
 
+/* ── Chat open: match container padding reduction ── */
+@media (min-width: 1025px) {
+  body.chat-open .help-inner { padding: 0 40px 48px; }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    TABLET — 641px – 1024px
    ═══════════════════════════════════════════════════════════════ */

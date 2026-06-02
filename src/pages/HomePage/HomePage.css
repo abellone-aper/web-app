@@ -1067,14 +1067,15 @@
     position: absolute; bottom: 0; left: 0; right: 0;
     background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
     padding: 16px;
-    display: flex; flex-direction: column; gap: 12px;
+    display: flex; flex-direction: column; gap: 6px;
     border-radius: 0;
   }
   .nmh-insurance-sub {
-    margin: 0;
-    font-size: 17px; font-weight: 500;
-    color: #fff;
-    line-height: 22px;
+    display: inline-block; align-self: flex-start;
+    background: #1c1c1c; color: #fff;
+    font-size: 12px; font-weight: 700;
+    padding: 0 8px; border-radius: 8px; line-height: 16px;
+    margin: 0 0 2px;
   }
   .nmh-insurance-title {
     margin: 0;
@@ -1111,10 +1112,10 @@
   .nmh-insurance-body {
     position: absolute; bottom: 0; left: 0; right: 0;
     background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
-    padding: 16px; display: flex; flex-direction: column; gap: 12px;
+    padding: 16px; display: flex; flex-direction: column; gap: 6px;
     border-radius: 0;
   }
-  .nmh-insurance-sub   { margin: 0; font-size: 17px; font-weight: 500; color: #fff; line-height: 22px; }
+  .nmh-insurance-sub   { display: inline-block; align-self: flex-start; background: #1c1c1c; color: #fff; font-size: 12px; font-weight: 700; padding: 0 8px; border-radius: 8px; line-height: 16px; margin: 0; }
   .nmh-insurance-title { margin: 0; font-size: 21px; font-weight: 700; color: #fff; line-height: 1.35; }
 
   /* ── Credit card ── */
@@ -1241,6 +1242,19 @@
     padding-top: 20px;
   }
 
+  /* ── Chat open: colapsar a columna única ── */
+  body.chat-open .desktop-home {
+    grid-template-columns: 1fr;
+  }
+  body.chat-open .dh-trip-panel,
+  body.chat-open .dh-explore-chips-card,
+  body.chat-open .dh-credit-card,
+  body.chat-open .dh-coupons-card {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  body.chat-open .dh-insurance-card { display: none !important; }
+
   .dh-trip-panel {
     grid-column: 1; grid-row: 1 / 4;
     background: #fff; border: 1px solid var(--neutral-four);
@@ -1344,7 +1358,7 @@
     background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.2) 55%, transparent 100%);
     padding: 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; min-height: 200px;
   }
-  .dh-insurance-sub   { font-size: 10px; color: rgba(255,255,255,0.8); margin: 0; }
+  .dh-insurance-sub   { display: inline-block; align-self: flex-start; background: #1c1c1c; color: #fff; font-size: 12px; font-weight: 700; padding: 0 8px; border-radius: 8px; line-height: 16px; margin: 0; }
   .dh-insurance-title { font-size: 12px; font-weight: 600; color: #fff; margin: 0; line-height: 1.4; }
 
   /* ─── Section gaps: 48px ─── */
@@ -1553,10 +1567,10 @@
   .dh-insurance-overlay {
     position: relative; z-index: 1; height: 100%;
     background: linear-gradient(178.7deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.2) 72%);
-    padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; gap: 16px;
+    padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px;
     min-height: 300px;
   }
-  .dh-insurance-sub   { font-size: 14px; font-weight: 500; color: #fff; margin: 0; }
+  .dh-insurance-sub   { display: inline-block; align-self: flex-start; background: #1c1c1c; color: #fff; font-size: 12px; font-weight: 700; padding: 0 8px; border-radius: 8px; line-height: 16px; margin: 0; }
   .dh-insurance-title { font-size: 18px; font-weight: 700; color: #fff; margin: 0; line-height: 1.4; }
 
   /* ─── Featured section ─── */

@@ -65,7 +65,10 @@ function AppContent() {
         aria-label={chatOpen ? 'Cerrar chat' : 'Abrir chat'}
         onClick={() => setChatOpen(v => !v)}
       >
-        <i className={`ph ${chatOpen ? 'ph-x' : 'ph-sparkle'}`} style={{fontSize:'26px'}}></i>
+        {chatOpen
+          ? <i className="ph ph-x" style={{fontSize:'26px'}}></i>
+          : <span className="mnav-icon boti-fab-icon" style={{WebkitMaskImage:"url('/icons/chat.svg')", maskImage:"url('/icons/chat.svg')"}}></span>
+        }
         {!chatOpen && <span className="boti-fab-notif"></span>}
       </button>
 

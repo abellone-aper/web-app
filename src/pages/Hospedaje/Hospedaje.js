@@ -2,6 +2,7 @@ import { useState, useRef, useId, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Hospedaje.css';
 import Header from '../../components/Header';
+import Breadcrumb from '../../components/Breadcrumb';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SecondaryButton from '../../components/Buttons/SecondaryButton';
 import DateRangePicker from '../../components/DateRangePicker';
@@ -133,12 +134,12 @@ const REVIEWS = [
 ];
 
 const INCLUDES = [
-  { icon:'/img/icon-desayuno.svg', label:'Desayuno buffet' },
-  { icon:'/img/icon-wifi.svg', label:'WiFi gratuito' },
-  { icon:'/img/icon-estacionamiento.svg', label:'Estacionamiento' },
-  { icon:'/img/icon-piscina.svg', label:'Piscina' },
-  { icon:'/img/icon-spa.svg', label:'Spa' },
-  { icon:'/img/icon-restaurante.svg', label:'Restaurante' },
+  { icon:'ph ph-coffee', label:'Desayuno buffet' },
+  { icon:'ph ph-wifi-high', label:'WiFi gratuito' },
+  { icon:'ph ph-car', label:'Estacionamiento' },
+  { icon:'ph ph-waves', label:'Piscina' },
+  { icon:'ph ph-flower', label:'Spa' },
+  { icon:'ph ph-fork-knife', label:'Restaurante' },
 ];
 
 const AMENITIES = ['Aire acondicionado','TV pantalla plana','Caja de seguridad','Minibar','Servicio de habitaciones 24 hs','Terraza privada','Vista al lago','Concierge'];
@@ -207,7 +208,7 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
         <div className="hd-includes-grid">
           {INCLUDES.map(item => (
             <div key={item.label} className="hd-include-item">
-              <img src={item.icon} alt="" className="hd-include-icon" />
+              <i className={item.icon}></i>
               <span>{item.label}</span>
             </div>
           ))}
@@ -315,15 +316,11 @@ export default function DesignSuitesPage({ onChatOpen }) {
       <div className="hd-main">
         <Header variant="page" title="Hospedaje" />
 
-        <div className="hd-breadcrumb">
-          <div className="hd-breadcrumb-inner">
-            <Link to="/" className="hd-breadcrumb-link">Inicio</Link>
-            <i className="ph ph-caret-right"></i>
-            <Link to="/para-tu-viaje" className="hd-breadcrumb-link">Para tu viaje</Link>
-            <i className="ph ph-caret-right"></i>
-            <span className="hd-breadcrumb-current">Design Suites Bariloche</span>
-          </div>
-        </div>
+        <Breadcrumb items={[
+          { label: 'Inicio', to: '/' },
+          { label: 'Para tu viaje', to: '/para-tu-viaje' },
+          { label: 'Design Suites Bariloche' },
+        ]} />
 
         <div className="hd-page">
           {/* Mobile gallery */}
@@ -377,7 +374,7 @@ export default function DesignSuitesPage({ onChatOpen }) {
                 <div className="hd-includes-grid">
                   {INCLUDES.map(item => (
                     <div key={item.label} className="hd-include-item">
-                      <img src={item.icon} alt="" className="hd-include-icon" /><span>{item.label}</span>
+                      <i className={item.icon}></i><span>{item.label}</span>
                     </div>
                   ))}
                 </div>

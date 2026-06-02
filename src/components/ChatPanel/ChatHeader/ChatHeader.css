@@ -1,0 +1,223 @@
+/* ── Header bar ── */
+.chat-panel-header {
+  background: var(--neutral-one);
+  border-bottom: 1px solid var(--neutral-four);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── FAB / avatar ── */
+.chat-header-fab {
+  width: 48px;
+  height: 48px;
+  border-radius: 100px;
+  background: var(--action-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  cursor: default;
+}
+
+.chat-header-fab--back {
+  cursor: pointer;
+  color: var(--action-primary);
+  transition: background 0.15s;
+}
+.chat-header-fab--back:hover {
+  background: var(--action-secondary-hover);
+}
+
+.chat-header-fab-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ── Title / subtitle ── */
+.chat-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.chat-header-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--neutral-eight);
+  line-height: 24px;
+  letter-spacing: 0.032px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-header-sub {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--neutral-eight);
+  line-height: 16px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Right actions ── */
+.chat-header-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chat-header-icon-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--neutral-eight);
+  border-radius: 50%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.chat-header-icon-btn:hover {
+  background: var(--neutral-three);
+}
+
+.chat-header-close-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* ── Tabs ── */
+.chat-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  background: var(--neutral-one);
+  border-top: 1px solid var(--neutral-four);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.chat-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 4px 4px 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--neutral-eight);
+  background: var(--neutral-three);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.chat-tab--active {
+  background: var(--action-secondary-pressed);
+  color: var(--action-secondary-pressed-text);
+}
+
+.chat-tab-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  padding: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.chat-tab-close:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+.chat-tab--active .chat-tab-close:hover {
+  background: var(--action-secondary-hover);
+}
+
+.chat-tab-close-icon {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+/* ── Options menu ── */
+.chat-options-menu {
+  display: none;
+  position: absolute;
+  top: 64px;
+  right: 8px;
+  background: var(--neutral-one);
+  border: 1px solid var(--neutral-four);
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  min-width: 160px;
+  z-index: 210;
+  overflow: hidden;
+}
+.chat-options-menu.open {
+  display: block;
+}
+
+.chat-options-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--neutral-nine);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s;
+}
+.chat-options-item:hover {
+  background: var(--neutral-three);
+}
+.chat-options-item + .chat-options-item {
+  border-top: 1px solid var(--neutral-four);
+}
+
+@media (min-width: 1025px) {
+  .chat-panel-header { height: 68px; }
+}
+
+/* ── Mobile (panel full screen) ── */
+@media (max-width: 480px) {
+  .chat-panel:has(.chat-history-panel.open) .chat-panel-header {
+    display: none;
+  }
+  .chat-panel-header {
+    padding: 8px;
+    padding-top: calc(8px + env(safe-area-inset-top, 0px));
+    height: auto;
+    min-height: 64px;
+  }
+}

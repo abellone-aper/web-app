@@ -102,6 +102,24 @@
 .offer-toast-price strong { font-weight: 700; color: var(--neutral-nine); line-height: 16px; }
 .offer-price-disc { font-weight: 500; color: var(--information-primary); line-height: 16px; }
 
+/* ─── Custom SVG icon mask system ───────────────────────────── */
+.mnav-icon {
+  display: inline-block;
+  width: 22px; height: 22px; flex-shrink: 0;
+  background-color: var(--brand-on-secondary);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+.mobile-nav-item.active .mnav-icon { background-color: var(--action-primary); }
+.mobile-nav-chat-fab .mnav-icon {
+  background-color: var(--action-primary);
+  width: 24px; height: 24px;
+}
+
 /* ─── Mobile bottom nav chat FAB ─────────────────────────────── */
 .mobile-nav-chat-fab-wrap {
   position: relative;

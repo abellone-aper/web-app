@@ -16,9 +16,11 @@
   --neutral-nine:  #1c1c1c;
 
   /* ─── Action colors ─────────────────────────────────────────── */
-  --action-primary:       #F26522;
-  --action-primary-hover: #D9541A;
-  --action-secondary:     #FDECE3;
+  --action-primary:          #F26522;
+  --action-primary-hover:    #D9541A;
+  --action-secondary:        #FDECE3;
+  --action-secondary-pressed: #FEF9F6;
+  --action-secondary-pressed-text: var(--action-primary);
 
   /* ─── Semantic status ───────────────────────────────────────── */
   --information-primary:   #2e844a;

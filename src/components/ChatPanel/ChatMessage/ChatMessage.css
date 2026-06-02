@@ -1,0 +1,37 @@
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  width: 100%;
+}
+
+.chat-message-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chat-message-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+}
+
+.chat-message-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--neutral-seven);
+  line-height: 16px;
+  letter-spacing: 0.012px;
+}
+
+.chat-message-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--neutral-eight);
+  line-height: 18px;
+  letter-spacing: 0.028px;
+  margin: 0;
+}

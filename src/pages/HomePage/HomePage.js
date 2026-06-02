@@ -12,7 +12,7 @@ import StatusCard from '../../components/StatusCard';
 
 const CTX_CAR_ICON = '/icons/vehículo.svg';
 
-const CURRENT_USER = { name: 'Sol García', initial: 'S', role: 'Cuenta Galicia', avatar: getPublicUrl('Imagenes', 'avatar.jpeg') };
+const CURRENT_USER = { name: 'Sol García', initial: 'S', role: 'Cuenta Galicia', avatar: getPublicUrl('Imagenes', 'avatar.png') };
 
 const COUPONS = [
   { icon: '/icons/descuento tecnologia.svg', title: '15% Off en Tecnología', subtitle: 'Válido en toda sección', expires: 'Vence en 3 días' },
@@ -268,7 +268,7 @@ export default function HomePage() {
 
           <div className="nmh-insurance-card">
             <div className="nmh-insurance-img">
-              <img src={getPublicUrl('Imagenes', 'cobertura.jpg')} alt="Seguro de viaje" />
+              <img src={getPublicUrl('Imagenes', 'cobertura.png')} alt="Seguro de viaje" />
             </div>
             <div className="nmh-insurance-body">
               <p className="nmh-insurance-sub">Recomendado para el viaje</p>
@@ -376,7 +376,7 @@ export default function HomePage() {
             </div>
 
             <div className="dh-insurance-card">
-              <img src={getPublicUrl('Imagenes', 'cobertura.jpg')} alt="Seguro de viaje" className="dh-insurance-bg" />
+              <img src={getPublicUrl('Imagenes', 'cobertura.png')} alt="Seguro de viaje" className="dh-insurance-bg" />
               <div className="dh-insurance-overlay">
                 <p className="dh-insurance-sub">Recomendado para el viaje</p>
                 <p className="dh-insurance-title">Agregá un seguro de viaje y viajá más tranquila</p>

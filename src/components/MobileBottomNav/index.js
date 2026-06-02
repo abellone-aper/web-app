@@ -1,6 +1,11 @@
 import './MobileBottomNav.css';
 import { Link, useLocation } from 'react-router-dom';
 
+const maskStyle = (icon) => ({
+  WebkitMaskImage: `url('/icons/${icon}.svg')`,
+  maskImage: `url('/icons/${icon}.svg')`,
+});
+
 export default function MobileBottomNav({ onChatOpen, hidden }) {
   const location = useLocation();
 
@@ -11,13 +16,13 @@ export default function MobileBottomNav({ onChatOpen, hidden }) {
         <span className="mobile-nav-label">Home</span>
       </Link>
       <a href="#" className="mobile-nav-item">
-        <i className="ph ph-magnifying-glass" style={{fontSize:'22px'}}></i>
+        <span className="mnav-icon" style={maskStyle('buscar')}></span>
         <span className="mobile-nav-label">Buscar</span>
       </a>
       <a href="#" className="mobile-nav-item" onClick={e => { e.preventDefault(); onChatOpen?.(); }}>
         <span className="mobile-nav-chat-fab-wrap">
           <span className="mobile-nav-chat-fab">
-            <i className="ph ph-sparkle" style={{fontSize:'24px'}}></i>
+            <span className="mnav-icon" style={maskStyle('chat')}></span>
           </span>
           <span className="mobile-chat-notif-dot"></span>
         </span>
@@ -25,13 +30,13 @@ export default function MobileBottomNav({ onChatOpen, hidden }) {
       </a>
       <a href="#" className="mobile-nav-item">
         <span className="icon-wrap">
-          <i className="ph ph-shopping-cart" style={{fontSize:'22px'}}></i>
+          <span className="mnav-icon" style={maskStyle('carrito')}></span>
           <span className="notif-dot">1</span>
         </span>
         <span className="mobile-nav-label">Carrito</span>
       </a>
       <a href="#" className="mobile-nav-item">
-        <i className="ph ph-list" style={{fontSize:'22px'}}></i>
+        <span className="mnav-icon" style={maskStyle('menu')}></span>
         <span className="mobile-nav-label">Más</span>
       </a>
     </nav>

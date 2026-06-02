@@ -1,0 +1,38 @@
+.chat-suggestions {
+  background: var(--neutral-one);
+  border-radius: var(--radius-l);
+  padding: var(--sp-6);
+  display: flex; flex-direction: column; gap: var(--sp-4);
+}
+.chat-suggestions-header {
+  display: flex; align-items: center; gap: var(--sp-2);
+}
+.chat-suggestions-icon {
+  width: 24px; height: 24px; flex-shrink: 0;
+}
+.chat-suggestions-header-text {
+  display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0;
+}
+.chat-suggestions-title {
+  font-size: 14px; font-weight: 700; color: var(--neutral-eight); line-height: 16px;
+}
+.chat-suggestions-subtitle {
+  font-size: 12px; font-weight: 400; color: var(--neutral-seven); line-height: 16px;
+}
+.chat-suggestions-list {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.chat-suggestion-chip {
+  display: flex; align-items: center;
+  background: var(--neutral-three);
+  border-radius: var(--radius-pill);
+  padding: 8px 4px 8px 12px;
+  border: none; cursor: pointer; width: 100%;
+  font-size: 14px; font-weight: 700; color: var(--neutral-eight);
+  font-family: inherit; text-align: left; gap: 2px;
+}
+.chat-suggestion-chip:hover { background: var(--neutral-four); }
+.chat-suggestion-chip-arrow {
+  display: flex; flex-shrink: 0;
+  color: var(--neutral-seven);
+}
