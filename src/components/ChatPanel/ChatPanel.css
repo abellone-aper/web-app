@@ -42,17 +42,6 @@
   display: flex; flex-direction: column; gap: 12px;
 }
 
-/* ── Message types ── */
-.chat-user-bubble {
-  align-self: flex-end;
-  background: var(--action-secondary);
-  border-radius: var(--radius-m);
-  padding: var(--sp-2) var(--sp-3);
-  max-width: 85%;
-  font-size: var(--text-base); color: var(--neutral-nine);
-  line-height: 20px;
-}
-
 /* ── Typing indicator ── */
 .chat-typing {
   display: flex; align-items: center; gap: 5px;
@@ -200,12 +189,12 @@
 }
 
 /* ── Breakpoints ── */
-@media (min-width: 391px) {
+@media (min-width: 481px) {
   .boti-fab { display: flex; }
 }
 
-/* ── Mobile (≤390px): chat fullscreen ── */
-@media (max-width: 390px) {
+/* ── Mobile (≤480px): chat fullscreen ── */
+@media (max-width: 480px) {
   .boti-fab { display: none !important; }
   .boti-fab--show-mobile { display: flex !important; bottom: 24px; right: 16px; }
   .boti-fab--show-mobile {
@@ -230,7 +219,7 @@
 }
 
 /* ── Tablet (391–1024px): overlay side panel + backdrop ── */
-@media (min-width: 391px) and (max-width: 1024px) {
+@media (min-width: 481px) and (max-width: 1024px) {
   .chat-panel {
     position: fixed;
     top: 0; right: 0; bottom: 0;

@@ -201,7 +201,7 @@
 }
 
 /* ── Mobile (panel full screen) ── */
-@media (max-width: 390px) {
+@media (max-width: 480px) {
   .chat-panel:has(.chat-history-panel.open) .chat-panel-header {
     display: none;
   }

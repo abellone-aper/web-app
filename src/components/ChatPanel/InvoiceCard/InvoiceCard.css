@@ -1,0 +1,44 @@
+.invoice-card-wrap { display: flex; flex-direction: column; gap: 4px; }
+.invoice-card {
+  background: #fff;
+  border: 1px solid var(--neutral-four);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+}
+.invoice-card-hd {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--neutral-four);
+  background: var(--neutral-two);
+}
+.invoice-card-icon-wrap {
+  width: 36px; height: 36px;
+  background: var(--action-secondary);
+  border-radius: var(--radius-s);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.invoice-card-titles { display: flex; flex-direction: column; gap: 2px; }
+.invoice-card-title { font-size: 13px; font-weight: 700; color: var(--neutral-nine); margin: 0; }
+.invoice-card-sub { font-size: 11px; color: var(--neutral-six); margin: 0; }
+.invoice-card-rows { display: flex; flex-direction: column; }
+.invoice-card-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--neutral-three);
+}
+.invoice-card-row:last-child { border-bottom: none; }
+.invoice-card-row--total { background: var(--neutral-two); }
+.invoice-card-key { font-size: 12px; color: var(--neutral-seven); }
+.invoice-card-val { font-size: 12px; font-weight: 600; color: var(--neutral-nine); }
+.invoice-card-val--muted { color: var(--neutral-six); font-weight: 400; }
+.invoice-card-val--total { font-size: 14px; color: var(--action-primary); font-weight: 700; }
+.invoice-card-download {
+  width: 100%; padding: 10px 14px;
+  background: none; border: none; border-top: 1px solid var(--neutral-four);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-size: 13px; font-weight: 600; color: var(--action-primary);
+  font-family: inherit; cursor: pointer;
+  transition: background 0.15s;
+}
+.invoice-card-download:hover { background: var(--action-secondary); }

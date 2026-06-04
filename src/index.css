@@ -173,7 +173,7 @@ img { max-width: 100%; display: block; }
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 480px) {
   :root {
     --container-px: 16px;
     --text-xs:   14px;

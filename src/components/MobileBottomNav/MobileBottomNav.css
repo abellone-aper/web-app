@@ -229,7 +229,7 @@
 }
 
 /* ─── Show on mobile ─────────────────────────────────────────── */
-@media (max-width: 390px) {
+@media (max-width: 480px) {
   .mobile-bottom-nav { display: flex; }
   .offer-toast { display: flex; }
   .mobile-scroll-sugg { display: block; }
@@ -289,7 +289,7 @@
 }
 
 /* ─── Hide on tablet/desktop ─────────────────────────────────── */
-@media (min-width: 391px) and (max-width: 1024px) {
+@media (min-width: 481px) and (max-width: 1024px) {
   .mobile-bottom-nav  { display: none !important; }
   .offer-toast        { display: none !important; }
 }

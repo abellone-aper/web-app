@@ -11,6 +11,7 @@ import ChatProductDetails from './ChatProductDetails';
 import ChatSuccessfulOrder from './ChatSuccessfulOrder';
 import ChatCvvCard from './ChatCvvCard';
 import PrimaryButton from '../Buttons/PrimaryButton';
+import ChatUserBubble from './ChatUserBubble';
 
 
 const STORE_OFFER = {
@@ -58,8 +59,8 @@ function TypingIndicator() {
   );
 }
 
-const initOfferTab = () => ({ messages: [], inputVal: '', awaitingCvv: false, cvvError: false, showMoreDetail: false, isTyping: false, responseIdx: 0 });
-const initHotelTab = () => ({ messages: [], inputVal: '', showMoreDetail: false, isTyping: false, responseIdx: 0 });
+const initOfferTab = () => ({ messages: [], inputVal: '', awaitingCvv: false, cvvError: false, showMoreDetail: false, moreDetailTyping: false, isTyping: false, responseIdx: 0 });
+const initHotelTab = () => ({ messages: [], inputVal: '', showMoreDetail: false, moreDetailTyping: false, isTyping: false, responseIdx: 0 });
 
 export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabOpen = false, onCloseHotelTab = () => {} }) {
   const [activeTabId, setActiveTabId] = useState('offer');
@@ -111,7 +112,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
     return () => clearTimeout(t);
   }, [currentMessages, currentIsTyping, activeTabId]);
 
-  const isDesktop = () => window.innerWidth > 390;
+  const isDesktop = () => window.innerWidth > 480;
 
   const activeVariant = activeTabId === 'hotel' ? 'hotel' : variant;
   const isHomeVariant = activeVariant === 'tienda';
@@ -125,9 +126,13 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
   function openCvvFlow(tabId) {
     const id = tabId || activeTabId;
     addMessageTo({ type: 'user', text: STORE_OFFER.cta }, id);
-    addMessageTo({ type: 'bot', text: 'Para confirmar, ingresá el código de seguridad de tu tarjeta VISA terminada en 4567 (los 3 dígitos del dorso).' }, id);
-    addMessageTo({ type: 'cvv-card' }, id);
-    setTabData(prev => ({ ...prev, [id]: { ...(prev[id] || {}), awaitingCvv: true } }));
+    setTabData(prev => ({ ...prev, [id]: { ...(prev[id] || {}), isTyping: true } }));
+    setTimeout(() => {
+      setTabData(prev => ({ ...prev, [id]: { ...prev[id], isTyping: false } }));
+      addMessageTo({ type: 'bot', text: 'Para confirmar, ingresá el código de seguridad de tu tarjeta VISA terminada en 4567 (los 3 dígitos del dorso).' }, id);
+      addMessageTo({ type: 'cvv-card' }, id);
+      setTabData(prev => ({ ...prev, [id]: { ...(prev[id] || {}), awaitingCvv: true } }));
+    }, 750);
   }
 
   function submitCvv() {
@@ -146,15 +151,19 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
 
   function showPurchaseConfirmation(tabId) {
     const id = tabId || activeTabId;
-    if (id === 'hotel') {
-      addMessageTo({ type: 'reservation-confirm', reservation: HOTEL_RESERVATION }, id);
-      addMessageTo({ type: 'bot', text: '¿Necesitás que te ayude en algo más?' }, id);
-      addMessageTo({ type: 'suggestions', items: ['Ver mis reservas', 'Agregar servicios al hospedaje'] }, id);
-    } else {
-      addMessageTo({ type: 'purchase-confirm', product: STORE_OFFER }, id);
-      addMessageTo({ type: 'bot', text: '¿Necesitás que te ayude en algo más?' }, id);
-      addMessageTo({ type: 'suggestions', items: ['Ver productos similares', 'Ver más ofertas'] }, id);
-    }
+    setTabData(prev => ({ ...prev, [id]: { ...(prev[id] || {}), isTyping: true } }));
+    setTimeout(() => {
+      setTabData(prev => ({ ...prev, [id]: { ...prev[id], isTyping: false } }));
+      if (id === 'hotel') {
+        addMessageTo({ type: 'reservation-confirm', reservation: HOTEL_RESERVATION }, id);
+        addMessageTo({ type: 'bot', text: '¿Necesitás que te ayude en algo más?' }, id);
+        addMessageTo({ type: 'suggestions', items: ['Ver mis reservas', 'Agregar servicios al hospedaje'] }, id);
+      } else {
+        addMessageTo({ type: 'purchase-confirm', product: STORE_OFFER }, id);
+        addMessageTo({ type: 'bot', text: '¿Necesitás que te ayude en algo más?' }, id);
+        addMessageTo({ type: 'suggestions', items: ['Ver productos similares', 'Ver más ofertas'] }, id);
+      }
+    }, 750);
   }
 
   function handleBuyAction() {
@@ -167,16 +176,13 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
     }
   }
 
-  function handleSend() {
-    if (td.awaitingCvv) { submitCvv(); return; }
-    const text = td.inputVal.trim();
-    if (!text) return;
+  function sendTextAsMessage(text) {
     const tabId = activeTabId;
-    const idx = td.responseIdx;
+    const idx = tabData[tabId]?.responseIdx ?? 0;
     addMessageTo({ type: 'user', text }, tabId);
     setTabData(prev => ({
       ...prev,
-      [tabId]: { ...(prev[tabId] || {}), inputVal: '', isTyping: true, responseIdx: idx + 1 }
+      [tabId]: { ...(prev[tabId] || {}), isTyping: true, responseIdx: idx + 1 }
     }));
     setTimeout(() => {
       setTabData(prev => ({ ...prev, [tabId]: { ...prev[tabId], isTyping: false } }));
@@ -185,8 +191,17 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
     }, 750);
   }
 
+  function handleSend() {
+    if (td.awaitingCvv) { submitCvv(); return; }
+    const text = td.inputVal.trim();
+    if (!text) return;
+    setTd({ inputVal: '' });
+    sendTextAsMessage(text);
+  }
+
   function handleSuggestionClick(text) {
-    if (text.startsWith('Comprar ahora')) { handleBuyAction(); return; }
+    if (text.startsWith('Comprar ahora') || text === 'Confirmar reserva ahora') { handleBuyAction(); return; }
+    sendTextAsMessage(text);
   }
 
   function handleSpecSheet() {
@@ -204,10 +219,10 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
   const initialMessages = isHomeVariant ? (
     <>
       <ChatMessage label="Tienda">Hola Sol. El termo que tenés en el carrito entró hoy en una acción especial de Tienda Galicia. Bajó un 15% de precio y además te armé una combinación de pago exclusiva para vos</ChatMessage>
-      <ChatOffer variant="tienda" onBuy={handleBuyAction} buyDisabled={buyDisabled} moreDetailDisabled={td.showMoreDetail} onMoreDetail={() => setTd({ showMoreDetail: true })} />
-      {td.messages.length === 0 && !td.isTyping && !td.showMoreDetail && (
+      <ChatOffer variant="tienda" onBuy={handleBuyAction} buyDisabled={buyDisabled} moreDetailDisabled={td.showMoreDetail || td.moreDetailTyping} onMoreDetail={() => { setTd({ moreDetailTyping: true }); setTimeout(() => setTd({ moreDetailTyping: false, showMoreDetail: true }), 750); }} />
+      {td.messages.length === 0 && !td.isTyping && !td.showMoreDetail && !td.moreDetailTyping && (
         <ChatSuggestions items={[
-          { label: 'Más información', onClick: () => setTd({ showMoreDetail: true }) },
+          { label: 'Más información', onClick: () => { setTd({ moreDetailTyping: true }); setTimeout(() => setTd({ moreDetailTyping: false, showMoreDetail: true }), 750); } },
           { label: 'Ver ficha técnica del producto', onClick: handleSpecSheet },
         ]} />
       )}
@@ -220,7 +235,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
   ) : (
     <>
       <ChatMessage label="Tienda">Hola Sol. Reservá 7 noches en el Design Suites Bariloche y disfrutá de una experiencia única a orillas del Lago Nahuel Huapi.</ChatMessage>
-      <ChatOffer variant="hotel" onBuy={handleBuyAction} onMoreDetail={() => setTd({ showMoreDetail: true })} buyDisabled={buyDisabled} moreDetailDisabled={td.showMoreDetail} />
+      <ChatOffer variant="hotel" onBuy={handleBuyAction} onMoreDetail={() => { setTd({ moreDetailTyping: true }); setTimeout(() => setTd({ moreDetailTyping: false, showMoreDetail: true }), 750); }} buyDisabled={buyDisabled} moreDetailDisabled={td.showMoreDetail || td.moreDetailTyping} />
     </>
   );
 
@@ -263,10 +278,12 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
           <div className={`chat-messages${histOpen ? ' chat-messages--hidden' : ''}`} ref={messagesRef}>
             <div className="chat-messages-spacer" />
             {initialMessages}
+            {(td.showMoreDetail || td.moreDetailTyping) && isHomeVariant && <ChatUserBubble>Más información</ChatUserBubble>}
+            {td.moreDetailTyping && isHomeVariant && <TypingIndicator />}
             {td.showMoreDetail && isHomeVariant && (
               <div className="chat-more-detail" style={{ display: 'flex' }}>
                 <ChatMessage label="Tienda">Con el 15% de descuento, el termo queda en $26.525. Además, veo que tenés 1.525 Puntos Galicia disponibles en tu cuenta. Si los aplicás, el total baja a $25.000.<br /><br />Para ese monto tenés preaprobadas 3 cuotas sin interés de $8.334 con tu Visa Galicia. El envío es gratis a tu domicilio en Palermo.</ChatMessage>
-                {td.messages.length === 0 && !td.isTyping && (
+                {td.messages.every(m => m.type === 'user') && !td.isTyping && (
                   <ChatSuggestions items={[
                     { label: 'Comprar (Puntos + 3 cuotas sin interés)', onClick: handleBuyAction },
                     { label: 'Ver ficha técnica del producto', onClick: handleSpecSheet },
@@ -274,6 +291,8 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
                 )}
               </div>
             )}
+            {(td.showMoreDetail || td.moreDetailTyping) && isHotelVariant && <ChatUserBubble>Más información</ChatUserBubble>}
+            {td.moreDetailTyping && isHotelVariant && <TypingIndicator />}
             {td.showMoreDetail && isHotelVariant && (
               <div className="chat-more-detail" style={{ display: 'flex' }}>
                 <ChatMessage label="Tienda">Acá van los detalles de tu reserva:<br /><br />
@@ -283,8 +302,8 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
                   ✅ <strong>Cancelación gratuita</strong> hasta el 20 de junio<br /><br />
                   Podés pagarlo en <strong>12 cuotas sin interés de $199.560</strong> con tu tarjeta Galicia.
                 </ChatMessage>
-                {td.messages.length === 0 && !td.isTyping && (
-                  <ChatSuggestions items={[
+                {td.messages.every(m => m.type === 'user') && !td.isTyping && (
+                  <ChatSuggestions onChipClick={handleSuggestionClick} items={[
                     { label: 'Confirmar reserva ahora', onClick: handleBuyAction },
                     { label: 'Cambiar fechas' },
                   ]} />
@@ -292,7 +311,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
               </div>
             )}
             {td.messages.map((msg, i) => {
-              if (msg.type === 'user') return <div key={i} className="chat-user-bubble">{msg.text}</div>;
+              if (msg.type === 'user') return <ChatUserBubble key={i}>{msg.text}</ChatUserBubble>;
               if (msg.type === 'bot') return (
                 <ChatMessage key={i} label="Tienda" animated>{msg.text}</ChatMessage>
               );

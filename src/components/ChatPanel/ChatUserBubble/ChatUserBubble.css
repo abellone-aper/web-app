@@ -1,0 +1,14 @@
+.chat-user-bubble {
+  align-self: flex-end;
+  background: var(--neutral-four);
+  border-radius: 10px;
+  padding: 14px 16px;
+  max-width: 268px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--neutral-eight);
+  line-height: 18px;
+  word-break: break-word;
+  letter-spacing: 0.028px;
+}

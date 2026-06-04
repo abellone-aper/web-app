@@ -4,7 +4,7 @@
 
 .breadcrumb { display: none; }
 
-@media (min-width: 391px) and (max-width: 1024px) {
+@media (min-width: 481px) and (max-width: 1024px) {
   .breadcrumb {
     display: block;
     padding: 20px 32px 0;

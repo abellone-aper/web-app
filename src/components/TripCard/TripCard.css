@@ -99,7 +99,7 @@
 .ptv-card-rating i    { font-size: 13px; color: var(--action-primary); }
 .ptv-card-rating span { font-size: 13px; font-weight: 500; color: var(--neutral-seven); }
 
-@media (min-width: 391px) and (max-width: 1024px) {
+@media (min-width: 481px) and (max-width: 1024px) {
   .ptv-card {
     width: auto;
     border-radius: var(--radius-l);
@@ -128,7 +128,7 @@
 
 /* ── variant: mobile (nmh-*) ──────────────────────────────────── */
 
-@media (max-width: 390px) {
+@media (max-width: 480px) {
   .nmh-trip-card {
     flex: 0 0 calc(50% - 20px);
     display: flex; flex-direction: column;
@@ -192,7 +192,7 @@
 
 /* ── variant: desktop (dh-*) ─────────────────────────────────── */
 
-@media (min-width: 391px) and (max-width: 1024px) {
+@media (min-width: 481px) and (max-width: 1024px) {
   .dh-trip-card {
     flex: 0 0 calc(50% - 20px); min-width: 0;
     border: 1px solid var(--neutral-four);

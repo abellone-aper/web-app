@@ -30,7 +30,7 @@
 }
 .chat-mic-btn:hover { background: var(--action-primary-hover); }
 
-@media (max-width: 390px) {
+@media (max-width: 480px) {
   .chat-input { font-size: 16px; }
   .chat-input-bar {
     padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));

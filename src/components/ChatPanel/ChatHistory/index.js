@@ -1,5 +1,7 @@
 import './ChatHistory.css';
 import { useState, useRef, useEffect } from 'react';
+import InvoiceCard from '../InvoiceCard';
+import ChatUserBubble from '../ChatUserBubble';
 
 const HIST_TAB_CHATS = [
   { group: 'Recientes', items: [
@@ -295,7 +297,7 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
 
             {(orderActions[activeOrder] || []).map((action, i) => {
               if (action.type === 'user') {
-                return <div key={i} className="hist-user-bubble">{action.text}</div>;
+                return <ChatUserBubble key={i}>{action.text}</ChatUserBubble>;
               }
               if (action.type === 'tracking') {
                 const t = action.order.tracking;
@@ -350,29 +352,7 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
                 );
               }
               if (action.type === 'invoice') {
-                const o = action.order;
-                return (
-                  <div key={i} className="hist-invoice-wrap">
-                    <div className="hist-invoice-card">
-                      <div className="hist-invoice-hd">
-                        <div className="hist-invoice-logo-wrap"><i className="ph ph-receipt" style={{fontSize:'22px',color:'var(--action-primary)'}}></i></div>
-                        <div className="hist-invoice-titles">
-                          <p className="hist-invoice-title">Factura electrónica</p>
-                          <p className="hist-invoice-sub">Galicia Tienda S.A. · CUIT 30-71234567-9</p>
-                        </div>
-                      </div>
-                      <div className="hist-invoice-rows">
-                        <div className="hist-invoice-row"><span className="hist-invoice-key">N° de factura</span><span className="hist-invoice-val">0001-00042813</span></div>
-                        <div className="hist-invoice-row"><span className="hist-invoice-key">Fecha de emisión</span><span className="hist-invoice-val">26/05/2026</span></div>
-                        <div className="hist-invoice-row"><span className="hist-invoice-key">Producto</span><span className="hist-invoice-val">{o.name}</span></div>
-                        <div className="hist-invoice-row"><span className="hist-invoice-key">Subtotal</span><span className="hist-invoice-val">{o.price}</span></div>
-                        <div className="hist-invoice-row"><span className="hist-invoice-key">IVA (21%)</span><span className="hist-invoice-val hist-invoice-val--muted">Incluido</span></div>
-                        <div className="hist-invoice-row hist-invoice-row--total"><span className="hist-invoice-key">Total</span><span className="hist-invoice-val hist-invoice-val--total">{o.price}</span></div>
-                      </div>
-                      <button className="hist-invoice-download"><i className="ph ph-download-simple" style={{fontSize:'15px'}}></i> Descargar PDF</button>
-                    </div>
-                  </div>
-                );
+                return <InvoiceCard key={i} orderName={action.order.name} price={action.order.price} />;
               }
               if (action.type === 'cancel-confirm') {
                 const o = orders[action.orderId];

@@ -93,9 +93,9 @@
 
 
 /* ═══════════════════════════════════════════════════════════════
-   MOBILE — max-width: 390px
+   MOBILE — max-width: 480px
    ═══════════════════════════════════════════════════════════════ */
-@media (max-width: 390px) {
+@media (max-width: 480px) {
 
   /* Hide shared Header component — ptv-mobile-bar handles mobile nav */
   .ptv-main .header { display: none !important; }
@@ -292,9 +292,9 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TABLET — 391px – 1024px
+   TABLET — 481px – 1024px
    ═══════════════════════════════════════════════════════════════ */
-@media (min-width: 391px) and (max-width: 1024px) {
+@media (min-width: 481px) and (max-width: 1024px) {
 
   /* Mobile bar: always hidden */
   .ptv-mobile-bar { display: none !important; }
@@ -397,7 +397,7 @@
    El banner de 520px fijo deja muy poco espacio para el título
    por debajo de ~750px
    ═══════════════════════════════════════════════════════════════ */
-@media (min-width: 391px) and (max-width: 750px) {
+@media (min-width: 481px) and (max-width: 750px) {
   .ptv-page-top {
     flex-direction: column;
     align-items: flex-start;
@@ -409,9 +409,9 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SMALL TABLET — 391px – 640px
+   SMALL TABLET — 481px – 640px
    ═══════════════════════════════════════════════════════════════ */
-@media (min-width: 391px) and (max-width: 640px) {
+@media (min-width: 481px) and (max-width: 640px) {
 
   /* Tighter page padding */
   .ptv-page       { padding: 0 16px 48px; }

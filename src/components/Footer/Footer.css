@@ -64,12 +64,12 @@
   .footer-col:last-child  { grid-column: 1 / -1; }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 480px) {
   .footer-inner { display: flex; flex-direction: column; gap: 28px; padding: 32px 16px 88px; }
   .footer-col:last-child { grid-column: auto; }
 }
 
-@media (min-width: 391px) and (max-width: 1024px) {
+@media (min-width: 481px) and (max-width: 1024px) {
   .footer-inner { padding: 40px 32px; grid-template-columns: repeat(3, 1fr); }
   .footer-col:first-child { grid-column: 1 / -1; }
   .footer-col:last-child  { grid-column: 1 / -1; }
