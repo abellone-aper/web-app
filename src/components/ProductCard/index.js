@@ -1,21 +1,12 @@
-import { useState } from 'react';
+import FavButton from '../Buttons/FavButton';
 import './ProductCard.css';
-
-function FavBtn({ active: initialActive }) {
-  const [active, setActive] = useState(initialActive || false);
-  return (
-    <button className={`fav-btn${active ? ' active' : ''}`} aria-label="Favorito" onClick={e => { e.preventDefault(); setActive(v => !v); }}>
-      <i className={active ? 'ph-fill ph-heart' : 'ph ph-heart'}></i>
-    </button>
-  );
-}
 
 export default function ProductCard({ product }) {
   return (
     <article className="product-card">
       <div className="product-image">
         <img src={product.img} alt={product.title} style={{width:'100%',height:'100%',objectFit: product.imgFilled ? 'cover' : 'contain'}} />
-        <FavBtn active={product.favActive} />
+        <FavButton active={product.favActive} />
       </div>
       <div className="product-body">
         <div className="product-info">

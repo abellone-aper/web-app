@@ -104,9 +104,11 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
   const currentIsTyping = tabData[activeTabId]?.isTyping;
 
   useEffect(() => {
-    if (messagesRef.current) {
-      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-    }
+    const el = messagesRef.current;
+    if (!el) return;
+    el.scrollTop = el.scrollHeight;
+    const t = setTimeout(() => { el.scrollTop = el.scrollHeight; }, 50);
+    return () => clearTimeout(t);
   }, [currentMessages, currentIsTyping, activeTabId]);
 
   const isDesktop = () => window.innerWidth > 480;
@@ -356,7 +358,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
             inputRef={inputRef}
             onChange={e => setTd({ inputVal: e.target.value })}
             onSend={handleSend}
-            hidden={histOpen && !histDetailTitle}
+            hidden={histOpen}
           />
         </>
       </div>

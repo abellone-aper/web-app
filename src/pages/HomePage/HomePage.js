@@ -9,6 +9,10 @@ import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SecondaryButton from '../../components/Buttons/SecondaryButton';
 import LinkButton from '../../components/Buttons/LinkButton';
 import StatusCard from '../../components/StatusCard';
+import ContextBanner from '../../components/ContextBanner';
+import CreditCard from '../../components/CreditCard';
+import CouponCard from '../../components/CouponCard';
+import InsuranceCard from '../../components/InsuranceCard';
 
 const CTX_CAR_ICON = '/icons/vehículo.svg';
 
@@ -157,7 +161,7 @@ function HeroSlider() {
               <div className="hero-slide-inner">
                 <p className="hero-slide-eyebrow">{s.eyebrow}</p>
                 <h2 className="hero-slide-title">{s.title.split('\n').map((l, j) => <span key={j}>{l}{j === 0 && <br />}</span>)}</h2>
-                <a href="#" className="btn-primary">{s.cta}</a>
+                <PrimaryButton as="a" href="#">{s.cta}</PrimaryButton>
               </div>
             </div>
           ))}
@@ -228,16 +232,12 @@ export default function HomePage() {
 
         {/* ── Mobile home ── */}
         <div className="new-mobile-home">
-          <div className="nmh-ctx-card">
-            <div className="nmh-ctx-icon">
-              <img src={CTX_CAR_ICON} alt="" width={24} height={24} />
-            </div>
-            <div className="nmh-ctx-body">
-              <p className="nmh-ctx-sub">El viaje se acerca</p>
-              <p className="nmh-ctx-title">Reservá un transfer o alquilá un auto y evitá sorpresas al llegar.</p>
-              <a href="#" className="nmh-ctx-link">Ver opciones de transporte</a>
-            </div>
-          </div>
+          <ContextBanner
+            icon={CTX_CAR_ICON}
+            sub="El viaje se acerca"
+            title="Reservá un transfer o alquilá un auto y evitá sorpresas al llegar."
+            linkText="Ver opciones de transporte"
+          />
 
           <section className="nmh-trip-section">
             <div className="nmh-section-header">
@@ -266,45 +266,15 @@ export default function HomePage() {
             </div>
           </section>
 
-          <div className="nmh-insurance-card">
-            <div className="nmh-insurance-img">
-              <img src={getPublicUrl('Imagenes', 'cobertura.png')} alt="Seguro de viaje" />
-            </div>
-            <div className="nmh-insurance-body">
-              <p className="nmh-insurance-sub">Recomendado para el viaje</p>
-              <p className="nmh-insurance-title">Agregá un seguro de viaje y viajá más tranquila</p>
-              <PrimaryButton style={{alignSelf:'flex-start'}}>Contratar cobertura</PrimaryButton>
-            </div>
-          </div>
+          <InsuranceCard variant="overlay" imgSrc={getPublicUrl('Imagenes', 'cobertura.png')} />
 
-          <div className="nmh-credit-card">
-            <div className="nmh-credit-info">
-              <p className="nmh-credit-label">Crédito disponible</p>
-              <p className="nmh-credit-amount">$450.000</p>
-              <p className="nmh-credit-sub">Podés solicitarlo ahora sin trámites</p>
-            </div>
-            <button className="nmh-credit-btn">Solicitar crédito</button>
-          </div>
+          <CreditCard
+            label="Crédito disponible"
+            amount="$450.000"
+            sub="Podés solicitarlo ahora sin trámites"
+          />
 
-          <div className="nmh-coupons-card">
-            <div className="nmh-coupons-header">
-              <span className="nmh-coupons-title">Cupones a vencer</span>
-              <a href="#" className="nmh-coupons-link">Ver todos</a>
-            </div>
-            <div className="nmh-coupons-list">
-              {COUPONS.map((c, i) => (
-                <div key={c.title} className="nmh-coupon-item">
-                  <div className="nmh-coupon-icon"><img src={c.icon} alt="" style={{width:'20px',height:'20px'}} /></div>
-                  <div className="nmh-coupon-info">
-                    <p className="nmh-coupon-name">{c.title}</p>
-                    <p className="nmh-coupon-sub">{c.subtitle}</p>
-                    <span className="nmh-coupon-badge">{c.expires}</span>
-                  </div>
-                  <button className={`coupon-toggle${couponToggles[i] ? '' : ' off'}`} onClick={() => toggleCoupon(i)} aria-label="Activar cupón" />
-                </div>
-              ))}
-            </div>
-          </div>
+          <CouponCard coupons={COUPONS} toggles={couponToggles} onToggle={toggleCoupon} />
         </div>
 
         <HeroSlider />
@@ -320,14 +290,12 @@ export default function HomePage() {
               <div className="dh-trip-cards">
                 {TRIP_CARDS.slice(0, 3).map(c => <TripCard key={c.name} card={c} variant="desktop" />)}
               </div>
-              <div className="dh-ctx-card">
-                <div className="dh-ctx-icon"><img src={CTX_CAR_ICON} alt="" width={24} height={24} /></div>
-                <div className="dh-ctx-body">
-                  <p className="dh-ctx-sub">El viaje se acerca</p>
-                  <p className="dh-ctx-title">Reservá un transfer o alquilá un auto y evitá sorpresas al llegar.</p>
-                  <a href="#" className="dh-ctx-link">Ver opciones de transporte</a>
-                </div>
-              </div>
+              <ContextBanner
+                icon={CTX_CAR_ICON}
+                sub="El viaje se acerca"
+                title="Reservá un transfer o alquilá un auto y evitá sorpresas al llegar."
+                linkText="Ver opciones de transporte"
+              />
               <SecondaryButton as={Link} to="/para-tu-viaje" style={{width:'100%'}}>Ver todo</SecondaryButton>
             </div>
 
@@ -346,43 +314,15 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="dh-credit-card">
-              <div className="dh-credit-info">
-                <p className="dh-credit-label">Crédito disponible</p>
-                <p className="dh-credit-amount">$450.000</p>
-                <p className="dh-credit-sub">Podés solicitarlo ahora sin trámites</p>
-              </div>
-              <button className="dh-credit-btn">Solicitar crédito</button>
-            </div>
+            <CreditCard
+              label="Crédito disponible"
+              amount="$450.000"
+              sub="Podés solicitarlo ahora sin trámites"
+            />
 
-            <div className="dh-coupons-card">
-              <div className="dh-coupons-header">
-                <span className="dh-coupons-title">Cupones a vencer</span>
-                <a href="#" className="dh-coupons-link">Ver todos</a>
-              </div>
-              <div className="dh-coupons-list">
-                {COUPONS.map((c, i) => (
-                  <div key={c.title} className="dh-coupon-item">
-                    <div className="dh-coupon-icon"><img src={c.icon} alt="" style={{width:'18px',height:'18px'}} /></div>
-                    <div className="dh-coupon-info">
-                      <p className="dh-coupon-name">{c.title}</p>
-                      <p className="dh-coupon-sub">{c.subtitle}</p>
-                      <span className="dh-coupon-badge">{c.expires}</span>
-                    </div>
-                    <button className={`coupon-toggle${couponToggles[i] ? '' : ' off'}`} onClick={() => toggleCoupon(i)} aria-label="Activar cupón" />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <CouponCard coupons={COUPONS} toggles={couponToggles} onToggle={toggleCoupon} />
 
-            <div className="dh-insurance-card">
-              <img src={getPublicUrl('Imagenes', 'cobertura.png')} alt="Seguro de viaje" className="dh-insurance-bg" />
-              <div className="dh-insurance-overlay">
-                <p className="dh-insurance-sub">Recomendado para el viaje</p>
-                <p className="dh-insurance-title">Agregá un seguro de viaje y viajá más tranquila</p>
-                <PrimaryButton style={{alignSelf:'flex-start'}}>Contratar cobertura</PrimaryButton>
-              </div>
-            </div>
+            <InsuranceCard variant="overlay" imgSrc={getPublicUrl('Imagenes', 'cobertura.png')} />
           </div>
 
           <div className="feature-strip">
@@ -401,14 +341,6 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="desktop-ctx-banner">
-            <div className="desktop-ctx-icon"><img src={CTX_CAR_ICON} alt="" width={22} height={22} /></div>
-            <div className="desktop-ctx-body">
-              <p className="desktop-ctx-sub">El viaje se acerca</p>
-              <p className="desktop-ctx-title">Reservá un transfer o alquilá un auto y evitá sorpresas al llegar.</p>
-            </div>
-            <a href="#" className="desktop-ctx-link">Ver opciones de transporte <i className="ph ph-arrow-right" style={{fontSize:'14px',verticalAlign:'middle'}}></i></a>
-          </div>
 
           <section className="status-section">
             {STATUS_CARDS.map(card => (

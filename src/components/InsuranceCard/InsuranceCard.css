@@ -1,0 +1,114 @@
+/* ── variant: overlay (image + gradient text) ── */
+.insurance-card--overlay {
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+}
+
+.insurance-card--overlay .insurance-bg {
+  grid-area: 1 / 1;
+  display: block;
+  width: 100%; height: 280px;
+  object-fit: cover; object-position: center top;
+}
+
+.insurance-card--overlay .insurance-body {
+  grid-area: 1 / 1;
+  align-self: end;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+
+.insurance-card--overlay .insurance-sub {
+  display: inline-block; align-self: flex-start;
+  background: #1c1c1c; color: #fff;
+  font-size: 12px; font-weight: 700;
+  padding: 0 8px; border-radius: 8px; line-height: 16px; margin: 0;
+}
+
+.insurance-card--overlay .insurance-title {
+  font-size: 21px; font-weight: 700; color: #fff; margin: 0; line-height: 1.35;
+}
+
+/* ── variant: card (image top + text below) ── */
+.insurance-card--card {
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  background: var(--neutral-three);
+  position: relative;
+}
+
+.insurance-card--card .insurance-media {
+  height: 160px; overflow: hidden; position: relative;
+}
+
+.insurance-card--card .insurance-media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.insurance-card--card .insurance-body {
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 0;
+}
+
+.insurance-card--card .insurance-sub {
+  font-size: 15px; font-weight: 500;
+  color: var(--neutral-seven); margin: 0 0 6px;
+}
+
+.insurance-card--card .insurance-title {
+  font-size: 18px; font-weight: 700;
+  color: var(--neutral-nine); margin: 0 0 12px; line-height: 1.35;
+}
+
+.insurance-features {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-bottom: 16px;
+}
+
+.insurance-features span {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 15px; color: var(--neutral-eight);
+}
+
+.insurance-features i {
+  font-size: 16px; color: var(--information-primary); flex-shrink: 0;
+}
+
+/* ── Overlay: imagen llena el grid-area en desktop ── */
+@media (min-width: 1025px) {
+  .insurance-card--overlay .insurance-bg {
+    height: 100%;
+    min-height: 280px;
+  }
+}
+
+/* ── Responsive: card variant on tablet/desktop ── */
+@media (min-width: 641px) {
+  .insurance-card--card .insurance-media { height: 200px; }
+  .insurance-card--card .insurance-body  { padding: 20px; }
+  .insurance-card--card .insurance-sub   { font-size: 16px; }
+  .insurance-card--card .insurance-title { font-size: 24px; margin-bottom: 16px; }
+  .insurance-features span               { font-size: 16px; }
+}
+
+@media (min-width: 1025px) {
+  .insurance-card--card {
+    display: flex; align-items: stretch;
+    border: 1px solid var(--neutral-four);
+  }
+  .insurance-card--card .insurance-media {
+    width: 360px; height: auto; flex-shrink: 0;
+  }
+  .insurance-card--card .insurance-media img { height: 100%; }
+  .insurance-card--card .insurance-body {
+    flex: 1;
+    flex-direction: column; justify-content: center;
+    padding: 32px 40px;
+  }
+  .insurance-features {
+    flex-direction: row; flex-wrap: wrap; gap: 10px 24px;
+    margin-bottom: 24px;
+  }
+}

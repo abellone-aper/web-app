@@ -12,47 +12,6 @@
   background: var(--neutral-two);
 }
 
-/* ─── Context banner ─────────────────────────────────────────── */
-.ptv-ctx-banner {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  background: #323232;
-  border-radius: 16px;
-  padding: 16px;
-}
-
-.ptv-ctx-icon {
-  width: 38px; height: 38px; flex-shrink: 0;
-  background: #000;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  color: #fff;
-}
-
-.ptv-ctx-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
-
-.ptv-ctx-sub {
-  font-size: 12px; font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0; line-height: normal;
-}
-
-.ptv-ctx-title {
-  font-size: 15px; font-weight: 700;
-  color: #fff; margin: 0; line-height: normal;
-}
-
-.ptv-ctx-cta {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 14px; font-weight: 700;
-  color: #ffb795;
-  letter-spacing: 0.028px;
-  line-height: 18px;
-}
-
-.ptv-ctx-cta i { font-size: 14px; }
 
 /* ─── Page title (desktop only) ──────────────────────────────── */
 .ptv-page-header { display: none; }
@@ -131,50 +90,6 @@
   padding: 0 var(--page-px) 20px;
 }
 
-/* ─── Insurance card ─────────────────────────────────────────── */
-.ptv-insurance {
-  margin: 4px 16px 16px;
-  border-radius: var(--radius-l);
-  overflow: hidden;
-  background: var(--neutral-three);
-  position: relative;
-}
-
-.ptv-insurance-media {
-  height: 160px; overflow: hidden; position: relative;
-}
-
-.ptv-insurance-media img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-}
-
-.ptv-insurance-body {
-  padding: 16px;
-}
-
-.ptv-insurance-sub {
-  font-size: 15px; font-weight: 500;
-  color: var(--neutral-seven); margin: 0 0 6px;
-}
-
-.ptv-insurance-title {
-  font-size: 18px; font-weight: 700;
-  color: var(--neutral-nine); margin: 0 0 12px; line-height: 1.35;
-}
-
-.ptv-insurance-features {
-  display: flex; flex-direction: column; gap: 6px;
-  margin-bottom: 16px;
-}
-
-.ptv-insurance-features span {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 15px; color: var(--neutral-eight);
-}
-
-.ptv-insurance-features i {
-  font-size: 16px; color: var(--information-primary); flex-shrink: 0;
-}
 
 
 /* ═══════════════════════════════════════════════════════════════
@@ -245,12 +160,12 @@
   }
 
   /* Context banner */
-  .ptv-ctx-banner {
+  .ptv-page .ctx-banner {
     margin: 12px 16px;
   }
 
   /* Insurance card — more breathing room */
-  .ptv-insurance {
+  .insurance-card--card {
     margin: 8px 16px 8px;
   }
 }
@@ -301,7 +216,7 @@
   }
 
   /* Context banner */
-  .ptv-ctx-banner {
+  .ptv-page .ctx-banner {
     width: 620px;
     flex-shrink: 0;
   }
@@ -365,41 +280,8 @@
     overflow: visible;
   }
 
-  /* Insurance: horizontal layout */
-  .ptv-insurance {
-    display: flex;
-    align-items: stretch;
-    margin: 32px 0 0;
-    border-radius: var(--radius-l);
-    overflow: hidden;
-    background: var(--neutral-three);
-    border: 1px solid var(--neutral-four);
-  }
-
-  .ptv-insurance-media {
-    width: 360px; height: auto;
-    flex-shrink: 0;
-  }
-
-  .ptv-insurance-media img {
-    width: 100%; height: 100%; object-fit: cover;
-  }
-
-  .ptv-insurance-body {
-    flex: 1;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 32px 40px;
-  }
-
-  .ptv-insurance-sub { font-size: 16px; }
-  .ptv-insurance-title { font-size: 24px; margin-bottom: 16px; }
-
-  .ptv-insurance-features {
-    flex-direction: row; flex-wrap: wrap; gap: 10px 24px;
-    margin-bottom: 24px;
-  }
-
-  .ptv-insurance-features span { font-size: 16px; }
+  /* Insurance: margin reset at desktop */
+  .insurance-card--card { margin: 32px 0 0; }
 }
 
 /* ─── Mid breakpoint: 2 columns ──────────────────────────────── */
@@ -451,7 +333,7 @@
   }
 
   /* Context banner */
-  .ptv-ctx-banner {
+  .ptv-page .ctx-banner {
     width: 520px;
     flex-shrink: 0;
   }
@@ -506,36 +388,8 @@
     overflow: visible;
   }
 
-  /* Insurance: horizontal layout */
-  .ptv-insurance {
-    display: flex;
-    align-items: stretch;
-    margin: 28px 0 0;
-    border-radius: var(--radius-l);
-    overflow: hidden;
-    background: var(--neutral-three);
-    border: 1px solid var(--neutral-four);
-  }
-
-  .ptv-insurance-media {
-    width: 280px; height: auto;
-    flex-shrink: 0;
-  }
-
-  .ptv-insurance-media img {
-    width: 100%; height: 100%; object-fit: cover;
-  }
-
-  .ptv-insurance-body {
-    flex: 1;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 24px 32px;
-  }
-
-  .ptv-insurance-features {
-    flex-direction: column; gap: 8px;
-    margin-bottom: 20px;
-  }
+  /* Insurance: margin reset */
+  .insurance-card--card { margin: 28px 0 0; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -549,7 +403,7 @@
     align-items: flex-start;
     gap: 16px;
   }
-  .ptv-ctx-banner {
+  .ptv-page .ctx-banner {
     width: 100%;
   }
 }
@@ -572,8 +426,17 @@
   .ptv-section-header { padding: 0 0 12px; }
 }
 
-/* ─── Chat push (desktop) ─────────────────────────────────────── */
-@media (min-width: 481px) {
+/* ─── Chat push ────────────────────────────────────────────────── */
+@media (min-width: 641px) and (max-width: 1024px) {
+  body.chat-open .ptv-main {
+    padding-right: 380px;
+    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  body:not(.chat-open) .ptv-main {
+    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+@media (min-width: 1280px) {
   body.chat-open .ptv-main {
     padding-right: 420px;
     transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
@@ -583,8 +446,8 @@
   }
 }
 
-/* ─── Chat-open: layout adjustments ─────────────────────────── */
-@media (min-width: 1025px) {
+/* ─── Chat-open: layout adjustments (solo cuando chat es sidebar ≥1280px) ── */
+@media (min-width: 1280px) {
   body.chat-open .ptv-page {
     padding-left: 40px;
     padding-right: 40px;

@@ -1,0 +1,45 @@
+.credit-card {
+  background: #fef9f6;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.credit-info {
+  display: flex; flex-direction: column; gap: 4px; flex: 1;
+}
+
+.credit-label {
+  font-size: 16px; font-weight: 700; color: #242226; margin: 0; line-height: 20px;
+}
+
+.credit-amount {
+  font-size: 30px; font-weight: 600; color: #0a0a0a; margin: 0; line-height: 36px;
+}
+
+.credit-sub {
+  font-size: 13px; color: #4a5565; margin: 0; line-height: 20px;
+}
+
+.credit-btn {
+  border: 1.5px solid var(--action-primary);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--action-primary);
+  font-size: 14px; font-weight: 700; font-family: inherit;
+  padding: 10px 20px; cursor: pointer; white-space: nowrap;
+  transition: background var(--transition-fast);
+}
+
+.credit-btn:hover { background: rgba(188,75,0,0.06); }
+
+@media (min-width: 1025px) {
+  .credit-card  { padding: 20px; }
+  .credit-label  { font-size: 14px; }
+  .credit-amount { font-size: 26px; line-height: 1.2; }
+  .credit-sub    { font-size: 11px; }
+  .credit-btn    { font-size: 13px; padding: 8px 16px; }
+}

@@ -5,7 +5,8 @@ import { getPublicUrl } from '../../lib/storage';
 import Header from '../../components/Header';
 import Breadcrumb from '../../components/Breadcrumb';
 import TripCard from '../../components/TripCard';
-import PrimaryButton from '../../components/Buttons/PrimaryButton';
+import ContextBanner from '../../components/ContextBanner';
+import InsuranceCard from '../../components/InsuranceCard';
 
 const FILTERS = ['todo','alojamiento','moda','actividades','seguros'];
 const FILTER_LABELS = { todo:'Todo', alojamiento:'Alojamiento', moda:'Moda', actividades:'Actividades', seguros:'Seguros' };
@@ -102,14 +103,12 @@ export default function ParaTuViajePage() {
               <h1 className="ptv-page-title">Para tu viaje</h1>
               <p className="ptv-page-subtitle">Seleccionamos lo mejor para que disfrutes Bariloche al máximo</p>
             </div>
-            <div className="ptv-ctx-banner">
-              <div className="ptv-ctx-icon"><img src="/icons/vehículo.svg" alt="" width={24} height={24} /></div>
-              <div className="ptv-ctx-body">
-                <p className="ptv-ctx-sub">El viaje se acerca</p>
-                <p className="ptv-ctx-title">Reservá un transfer o alquilá un auto y evitá sorpresas al llegar.</p>
-                <a href="#" className="ptv-ctx-cta">Ver opciones de transporte</a>
-              </div>
-            </div>
+            <ContextBanner
+              icon="/icons/vehículo.svg"
+              sub="El viaje se acerca"
+              title="Reservá un transfer o alquilá un auto y evitá sorpresas al llegar."
+              linkText="Ver opciones de transporte"
+            />
           </div>
 
           <div className={`ptv-filters-wrap${barHidden ? ' ptv-filters-wrap--bar-hidden' : ''}`}>
@@ -125,21 +124,14 @@ export default function ParaTuViajePage() {
           <PtvSection title="Alojamiento en Bariloche" items={ALOJAMIENTOS} category="alojamiento" visible={show('alojamiento')} />
 
           {filter === 'todo' && (
-            <div className="ptv-insurance">
-              <div className="ptv-insurance-media">
-                <img src={getPublicUrl('Imagenes', 'cobertura.png')} alt="Seguro de viaje" />
-              </div>
-              <div className="ptv-insurance-body">
-                <p className="ptv-insurance-sub">Recomendado para el viaje</p>
-                <p className="ptv-insurance-title">Agregá un seguro de viaje y viajá más tranquila</p>
-                <div className="ptv-insurance-features">
-                  <span><i className="ph-fill ph-check-circle"></i> Asistencia médica internacional</span>
-                  <span><i className="ph-fill ph-check-circle"></i> Cancelación de vuelos y paquetes</span>
-                  <span><i className="ph-fill ph-check-circle"></i> Cobertura por pérdida de equipaje</span>
-                </div>
-                <PrimaryButton style={{alignSelf:'flex-start'}}>Contratar cobertura</PrimaryButton>
-              </div>
-            </div>
+            <InsuranceCard
+              imgSrc={getPublicUrl('Imagenes', 'cobertura.png')}
+              features={[
+                'Asistencia médica internacional',
+                'Cancelación de vuelos y paquetes',
+                'Cobertura por pérdida de equipaje',
+              ]}
+            />
           )}
 
           <PtvSection title="Seguros de viaje" items={SEGUROS} category="seguros" visible={show('seguros')} />

@@ -48,7 +48,7 @@ export default function ChatHeader({
       <div className="chat-panel-header">
         <div className="chat-header-left">
           {histOpen ? (
-            <button className="chat-header-fab chat-header-fab--back" aria-label="Volver" onClick={onBack}>
+            <button className="chat-header-icon-btn" aria-label="Volver" onClick={onBack}>
               <i className="ph ph-arrow-left" style={{ fontSize: '20px' }}></i>
             </button>
           ) : (

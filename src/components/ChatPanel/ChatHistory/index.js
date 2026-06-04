@@ -69,6 +69,12 @@ const FILTER_MAP = {
   entregado: 'hist-badge--delivered', cancelado: 'hist-badge--cancelled',
 };
 
+const ORDER_DETAIL_RESPONSES = [
+  '¡Claro! Estoy aquí para ayudarte con lo que necesites sobre este pedido.',
+  'Entendido. Si tenés alguna duda sobre tu compra, con gusto te ayudo.',
+  'Por supuesto, estoy para ayudarte con cualquier consulta sobre tu pedido.',
+];
+
 export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeave, backToListSignal }) {
   const [histTab, setHistTab] = useState('chats');
   const [histFilter, setHistFilter] = useState('todos');
@@ -76,7 +82,10 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
   const [view, setView] = useState('main');
   const [orders, setOrders] = useState(ORDERS_INIT);
   const [orderActions, setOrderActions] = useState({});
+  const [detailInput, setDetailInput] = useState('');
+  const [detailTyping, setDetailTyping] = useState(false);
   const messagesRef = useRef(null);
+  const detailInputRef = useRef(null);
 
   useEffect(() => {
     if (!open) {
@@ -94,10 +103,24 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
   }, [backToListSignal]);
 
   useEffect(() => {
+    setDetailInput('');
+    setDetailTyping(false);
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = 0;
+    }
+  }, [activeOrder]);
+
+  useEffect(() => {
     if (messagesRef.current) {
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     }
-  }, [orderActions, activeOrder]);
+  }, [detailTyping]);
+
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [orderActions]);
 
   function handleOrderAction(action, orderId) {
     const existing = orderActions[orderId] || [];
@@ -138,6 +161,28 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
         a => a.type !== 'cancel-confirm' && !(a.type === 'user' && a.text === 'Cancelar compra')
       ),
     }));
+  }
+
+  function handleDetailSend() {
+    const text = detailInput.trim();
+    if (!text || !activeOrder) return;
+    const orderId = activeOrder;
+    setDetailInput('');
+    setDetailTyping(true);
+    setOrderActions(prev => ({
+      ...prev,
+      [orderId]: [...(prev[orderId] || []), { type: 'user', text }],
+    }));
+    setTimeout(() => {
+      setDetailTyping(false);
+      setOrderActions(prev => {
+        const responseIdx = (prev[orderId] || []).filter(a => a.type === 'bot-detail').length;
+        return {
+          ...prev,
+          [orderId]: [...(prev[orderId] || []), { type: 'bot-detail', text: ORDER_DETAIL_RESPONSES[responseIdx % ORDER_DETAIL_RESPONSES.length] }],
+        };
+      });
+    }, 750);
   }
 
   return (
@@ -368,6 +413,14 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
                   </div>
                 );
               }
+              if (action.type === 'bot-detail') {
+                return (
+                  <div key={i} className="hist-bot-msg">
+                    <div className="hist-boti-label"><i className="ph ph-sparkle" style={{fontSize:'14px'}}></i> Hablemos</div>
+                    <p className="hist-boti-text">{action.text}</p>
+                  </div>
+                );
+              }
               return null;
             })}
 
@@ -406,6 +459,31 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
                 </div>
               );
             })()}
+
+            {detailTyping && (
+              <div className="hist-detail-typing">
+                <span className="chat-typing-dot"></span>
+                <span className="chat-typing-dot"></span>
+                <span className="chat-typing-dot"></span>
+              </div>
+            )}
+          </div>
+
+          <div className="hist-order-detail-input-bar">
+            <input
+              ref={detailInputRef}
+              className="hist-detail-input"
+              placeholder="¿En qué te ayudo?"
+              value={detailInput}
+              onChange={e => setDetailInput(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') handleDetailSend(); }}
+            />
+            <button className="hist-detail-send-btn" onClick={handleDetailSend}>
+              <i
+                className={`ph ${detailInput.trim() ? 'ph-paper-plane-right' : 'ph-microphone'}`}
+                style={{fontSize: '20px'}}
+              ></i>
+            </button>
           </div>
         </div>
       )}

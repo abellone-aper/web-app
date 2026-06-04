@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import Breadcrumb from '../../components/Breadcrumb';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SecondaryButton from '../../components/Buttons/SecondaryButton';
+import FavButton from '../../components/Buttons/FavButton';
 import DateRangePicker from '../../components/DateRangePicker';
 
 const GALLERY_IMGS = [
@@ -156,8 +157,6 @@ function Stars({ count = 5 }) {
 }
 
 function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
-  const [fav, setFav] = useState(false);
-
   return (
     <div className="hd-info">
       <div className="hd-gallery-desktop">
@@ -274,7 +273,6 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
 
 export default function DesignSuitesPage({ onChatOpen }) {
   const [galleryIdx, setGalleryIdx] = useState(0);
-  const [fav, setFav] = useState(false);
   const [barHidden, setBarHidden] = useState(false);
   const trackRef = useRef(null);
 
@@ -350,9 +348,7 @@ export default function DesignSuitesPage({ onChatOpen }) {
           <div className="hd-mobile-detail">
             <div className="hd-mobile-title-row">
               <h1 className="hd-hotel-name-mobile">Design Suites Bariloche</h1>
-              <button className="hd-fav-btn hd-fav-toggle" aria-label="Favorito" onClick={() => setFav(v => !v)}>
-                <i className={fav ? 'ph-fill ph-heart' : 'ph ph-heart'}></i>
-              </button>
+              <FavButton className="hd-fav-btn hd-fav-toggle" />
             </div>
             <p className="hd-vendor-mobile">Vendido por <a href="#" className="hd-vendor-link">Radisson</a></p>
             <div className="hd-meta-row-mobile">

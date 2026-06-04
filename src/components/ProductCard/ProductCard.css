@@ -23,7 +23,10 @@
   width: 32px; height: 32px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   color: var(--action-primary);
+  background: transparent;
+  transition: background 0.15s;
 }
+.fav-btn:hover { background: rgba(242, 101, 34, 0.12); }
 .fav-btn i { font-size: 24px; }
 .fav-btn.active { color: var(--action-primary); }
 

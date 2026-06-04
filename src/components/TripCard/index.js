@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import FavButton from '../Buttons/FavButton';
 import './TripCard.css';
 
 const CLASSES = {
@@ -38,7 +38,6 @@ const CLASSES = {
 };
 
 export default function TripCard({ card, variant = 'mobile' }) {
-  const [fav, setFav] = useState(card.favActive || false);
   const cls = CLASSES[variant];
 
   const inner = (
@@ -46,13 +45,7 @@ export default function TripCard({ card, variant = 'mobile' }) {
       <div className={cls.img}>
         <img src={card.img} alt={card.name} />
         {card.badge && <span className={cls.badge}>{card.badge}</span>}
-        <button
-          className={`${cls.fav}${fav ? ' active' : ''}`}
-          aria-label="Favorito"
-          onClick={e => { e.preventDefault(); e.stopPropagation(); setFav(v => !v); }}
-        >
-          <i className={fav ? 'ph-fill ph-heart' : 'ph ph-heart'}></i>
-        </button>
+        <FavButton active={card.favActive} className={cls.fav} />
       </div>
       <div className={cls.body}>
         <span className={cls.cat}>{card.cat}</span>

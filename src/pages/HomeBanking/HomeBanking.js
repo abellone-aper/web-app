@@ -1,6 +1,7 @@
 import './HomeBanking.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import LinkButton from '../../components/Buttons/LinkButton';
 
 const TRANSACTIONS = [
   { icon: 'purchase', iconClass: 'ph-fill ph-shopping-cart', name: 'Tienda Galicia', meta: 'Hoy · 10:23 hs · Tarjeta ••4821', amount: '-$26.525', neg: true },
@@ -112,7 +113,7 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
             <div className="panel">
               <div className="panel-header">
                 <div className="panel-title">Últimos movimientos</div>
-                <a className="panel-link" href="#">Ver todos</a>
+                <LinkButton as="a" href="#">Ver todos</LinkButton>
               </div>
               <div className="filter-tabs">
                 {['Todos','Ingresos','Egresos','Tarjeta'].map(t => (
@@ -135,7 +136,7 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
               <div className="panel">
                 <div className="panel-header">
                   <div className="panel-title">Vencimientos</div>
-                  <a className="panel-link" href="#">Ver todos</a>
+                  <LinkButton as="a" href="#">Ver todos</LinkButton>
                 </div>
                 {VENCIMIENTOS.map((v, i) => (
                   <div key={i} className="venc-item">

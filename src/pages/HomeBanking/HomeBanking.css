@@ -245,8 +245,6 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
   display: flex; align-items: center; justify-content: space-between;
 }
 .panel-title { font-size: var(--text-base); font-weight: 700; color: var(--neutral-nine); }
-.panel-link { font-size: var(--text-sm); font-weight: 600; color: var(--action-primary); cursor: pointer; }
-.panel-link:hover { color: var(--action-primary-hover); }
 
 .filter-tabs {
   display: flex;

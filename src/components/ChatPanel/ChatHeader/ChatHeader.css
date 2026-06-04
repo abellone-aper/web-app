@@ -32,15 +32,6 @@
   cursor: default;
 }
 
-.chat-header-fab--back {
-  cursor: pointer;
-  color: var(--action-primary);
-  transition: background 0.15s;
-}
-.chat-header-fab--back:hover {
-  background: var(--action-secondary-hover);
-}
-
 .chat-header-fab-icon {
   width: 24px;
   height: 24px;

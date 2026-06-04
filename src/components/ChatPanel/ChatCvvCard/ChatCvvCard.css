@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 6px 20px rgba(242, 101, 34, 0.35);
-  overflow: hidden;
 }
 
 .cvv-card-top {
@@ -26,10 +25,11 @@
 }
 
 .cvv-card-stripe {
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.5);
   height: 36px;
   margin-top: 12px;
   flex-shrink: 0;
+  border-radius: 0;
 }
 
 .cvv-card-sig-area {

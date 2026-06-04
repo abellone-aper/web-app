@@ -255,6 +255,22 @@
   body.chat-open .boti-fab { display: none !important; }
 }
 
+/* ── Tablet chico (481–640px): el chat ocupa todo el espacio ── */
+@media (min-width: 481px) and (max-width: 640px) {
+  body.chat-open .chat-panel {
+    width: 100% !important;
+    border-left: none !important;
+    box-shadow: none !important;
+  }
+  body.chat-open .tienda-main,
+  body.chat-open .ptv-main,
+  body.chat-open .help-section {
+    padding-right: 0 !important;
+    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  body.chat-open .boti-fab { display: none !important; }
+}
+
 @media (min-width: 1025px) {
   .chat-panel {
     position: fixed;
@@ -299,4 +315,20 @@
   body.chat-open .boti-fab {
     display: none !important;
   }
+}
+
+/* ── Desktop estrecho (1025–1279px): el chat ocupa todo el espacio ── */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  body.chat-open .chat-panel {
+    width: 100% !important;
+    border-left: none !important;
+    box-shadow: none !important;
+  }
+  body.chat-open .tienda-main,
+  body.chat-open .ptv-main,
+  body.chat-open .help-section {
+    padding-right: 0 !important;
+    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  body.chat-open .boti-fab { display: none !important; }
 }
