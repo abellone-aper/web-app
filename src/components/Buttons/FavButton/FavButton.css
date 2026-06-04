@@ -6,6 +6,15 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.45);
   color: var(--action-primary);
+}
+
+/* variant: card — mismo fondo que default, ícono SVG propio */
+.fav-btn--card {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.fav-btn--card:hover {
+  background: rgba(242, 101, 34, 0.20);
 }

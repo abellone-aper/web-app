@@ -58,6 +58,33 @@
   .hero-slide-title { font-size: 28px; }
 }
 
+/* ── TripScrollWrap ── */
+.trip-scroll-wrap { position: relative; }
+
+.trip-arrow {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  z-index: 10;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid #dadada;
+  background: #fff;
+  box-shadow: 0px 8px 8px -4px rgba(46,49,47,0.15);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: #242226;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.trip-scroll-wrap:hover .trip-arrow { opacity: 1; }
+.trip-arrow--left  { left: -12px; }
+.trip-arrow--right { right: -12px; }
+
+.trip-scroll-wrap--compact .trip-arrow--left  { left: 4px; }
+.trip-scroll-wrap--compact .trip-arrow--right { right: 4px; }
+
 .hero-bg-circle {
   position: absolute; right: -120px; top: 50%; transform: translateY(-50%);
   width: 700px; height: 700px;

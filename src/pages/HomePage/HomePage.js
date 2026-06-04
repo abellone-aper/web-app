@@ -16,7 +16,7 @@ import InsuranceCard from '../../components/InsuranceCard';
 
 const CTX_CAR_ICON = '/icons/vehículo.svg';
 
-const CURRENT_USER = { name: 'Sol García', initial: 'S', role: 'Cuenta Galicia', avatar: getPublicUrl('Imagenes', 'avatar.png') };
+const CURRENT_USER = { name: 'Sol Gonzalez', initial: 'S', role: 'Cuenta Galicia', avatar: getPublicUrl('Imagenes', 'avatar.png') };
 
 const COUPONS = [
   { icon: '/icons/descuento tecnologia.svg', title: '15% Off en Tecnología', subtitle: 'Válido en toda sección', expires: 'Vence en 3 días' },
@@ -99,6 +99,49 @@ const HERO_SLIDES = [
   { cls: 'hero-slide--electro', eyebrow: 'Hasta 35% de descuento', title: 'Electrodomésticos\npara tu hogar', cta: 'Ver descuentos' },
 ];
 
+
+function TripScrollWrap({ children, innerClass, compact = false }) {
+  const trackRef = useRef(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(true);
+
+  function checkScroll() {
+    const t = trackRef.current;
+    if (!t) return;
+    setCanLeft(t.scrollLeft > 0);
+    setCanRight(t.scrollLeft < t.scrollWidth - t.clientWidth - 1);
+  }
+
+  useEffect(() => {
+    const t = trackRef.current;
+    if (!t) return;
+    checkScroll();
+    t.addEventListener('scroll', checkScroll, { passive: true });
+    return () => t.removeEventListener('scroll', checkScroll);
+  }, []);
+
+  function scroll(dir) {
+    const t = trackRef.current;
+    if (!t) return;
+    t.scrollBy({ left: dir * (t.clientWidth * 0.8), behavior: 'smooth' });
+  }
+
+  return (
+    <div className={`trip-scroll-wrap${compact ? ' trip-scroll-wrap--compact' : ''}`}>
+      {canLeft && (
+        <button className="trip-arrow trip-arrow--left" onClick={() => scroll(-1)} aria-label="Anterior">
+          <i className="ph ph-caret-left"></i>
+        </button>
+      )}
+      <div className={innerClass} ref={trackRef}>{children}</div>
+      {canRight && (
+        <button className="trip-arrow trip-arrow--right" onClick={() => scroll(1)} aria-label="Siguiente">
+          <i className="ph ph-caret-right"></i>
+        </button>
+      )}
+    </div>
+  );
+}
 
 function ProductCarousel({ title, badge, products }) {
   const trackRef = useRef(null);
@@ -236,17 +279,6 @@ export default function HomePage() {
       <div className="tienda-main">
         <Header variant="home" user={CURRENT_USER} />
 
-        <div className="desktop-greeting">
-          <div className="desktop-greeting-left">
-            <div className="desktop-greeting-avatar">
-            {CURRENT_USER.avatar
-              ? <img src={CURRENT_USER.avatar} alt={CURRENT_USER.name} />
-              : CURRENT_USER.initial}
-          </div>
-            <span className="desktop-greeting-name">Hola, {CURRENT_USER.name.split(' ')[0]}</span>
-          </div>
-        </div>
-
         {/* ── Mobile home ── */}
         <div className="new-mobile-home">
           <ContextBanner
@@ -261,11 +293,9 @@ export default function HomePage() {
               <h2 className="nmh-section-title">Para tu viaje</h2>
               <LinkButton as={Link} to="/para-tu-viaje">Mostrar todo</LinkButton>
             </div>
-            <div className="nmh-trip-cards-wrap">
-              <div className="nmh-trip-cards" id="nmh-trip-cards-scroll">
-                {TRIP_CARDS.map(c => <TripCard key={c.name} card={c} />)}
-              </div>
-            </div>
+            <TripScrollWrap innerClass="nmh-trip-cards">
+              {TRIP_CARDS.map(c => <TripCard key={c.name} card={c} />)}
+            </TripScrollWrap>
           </section>
 
           <section className="nmh-explore-section">
@@ -304,9 +334,9 @@ export default function HomePage() {
                 <p className="dh-ctx-sub">El viaje se acerca</p>
                 <p className="dh-ctx-title">Ya tenés el vuelo. Armamos todo lo que necesitas para el viaje.</p>
               </div>
-              <div className="dh-trip-cards">
-                {TRIP_CARDS.slice(0, 3).map(c => <TripCard key={c.name} card={c} variant="desktop" />)}
-              </div>
+              <TripScrollWrap innerClass="dh-trip-cards" compact>
+                {TRIP_CARDS.map(c => <TripCard key={c.name} card={c} variant="desktop" />)}
+              </TripScrollWrap>
               <ContextBanner
                 icon={CTX_CAR_ICON}
                 sub="El viaje se acerca"

@@ -45,7 +45,7 @@ export default function TripCard({ card, variant = 'mobile' }) {
       <div className={cls.img}>
         <img src={card.img} alt={card.name} />
         {card.badge && <span className={cls.badge}>{card.badge}</span>}
-        <FavButton active={card.favActive} className={cls.fav} />
+        <FavButton active={card.favActive} variant="card" className={cls.fav} />
       </div>
       <div className={cls.body}>
         <span className={cls.cat}>{card.cat}</span>

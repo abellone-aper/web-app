@@ -52,11 +52,10 @@
   border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   font-size: 14px;
-  transition: color 0.15s, background 0.15s;
+  transition: background 0.15s;
 }
 
-.ptv-fav-btn.active { color: var(--action-primary); }
-.ptv-fav-btn:hover  { background: rgba(242, 101, 34, 0.12); }
+.ptv-fav-btn:hover { background: rgba(242, 101, 34, 0.12); }
 
 .ptv-card-badge {
   position: absolute; top: 8px; left: 8px;
@@ -159,12 +158,10 @@
     width: 24px; height: 24px; border-radius: 50%;
     background: none; border: none; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 18px;
-    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.35));
+    font-size: 18px;
     transition: background 0.15s;
   }
-  .nmh-fav-btn:hover { background: rgba(242, 101, 34, 0.12); filter: none; }
-  .nmh-fav-btn.active { color: var(--action-primary); filter: none; }
+  .nmh-fav-btn:hover { background: rgba(242, 101, 34, 0.12); }
   .nmh-trip-card-body {
     padding: 12px;
     display: flex; flex-direction: column; gap: 5px;
@@ -210,7 +207,7 @@
     width: 24px; height: 24px; border-radius: 50%;
     background: transparent;
     display: flex; align-items: center; justify-content: center;
-    color: var(--action-primary); font-size: 13px;
+    font-size: 13px;
     border: none; cursor: pointer;
     transition: background 0.15s;
   }
@@ -245,12 +242,11 @@
     width: 24px; height: 24px; border-radius: 50%;
     background: transparent;
     display: flex; align-items: center; justify-content: center;
-    color: var(--action-primary); font-size: 14px;
+    font-size: 14px;
     border: none; cursor: pointer;
     transition: background 0.15s;
   }
   .dh-fav-btn:hover { background: rgba(242, 101, 34, 0.12); }
-  .dh-fav-btn.active { color: var(--action-primary); }
   .dh-trip-card-body { padding: 12px; display: flex; flex-direction: column; gap: 2px; }
   .dh-card-cat  { font-size: 12px; color: var(--neutral-seven); }
   .dh-card-name { font-size: 12px; color: var(--neutral-nine); }
