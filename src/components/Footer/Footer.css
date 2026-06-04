@@ -64,12 +64,12 @@
   .footer-col:last-child  { grid-column: 1 / -1; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 390px) {
   .footer-inner { display: flex; flex-direction: column; gap: 28px; padding: 32px 16px 88px; }
   .footer-col:last-child { grid-column: auto; }
 }
 
-@media (min-width: 481px) and (max-width: 1024px) {
+@media (min-width: 391px) and (max-width: 1024px) {
   .footer-inner { padding: 40px 32px; grid-template-columns: repeat(3, 1fr); }
   .footer-col:first-child { grid-column: 1 / -1; }
   .footer-col:last-child  { grid-column: 1 / -1; }
@@ -218,17 +218,7 @@
   }
 }
 
-/* ── Chat panel push ── */
-@media (min-width: 481px) and (max-width: 1024px) {
-  body.chat-open .site-footer {
-    padding-right: 380px;
-    transition: padding-right var(--transition-panel);
-  }
-  body:not(.chat-open) .site-footer {
-    transition: padding-right var(--transition-panel);
-  }
-}
-
+/* ── Chat panel push (solo desktop) ── */
 @media (min-width: 1025px) {
   body.chat-open .site-footer {
     padding-right: 420px;
@@ -237,4 +227,9 @@
   body:not(.chat-open) .site-footer {
     transition: padding-right var(--transition-panel);
   }
+}
+
+body.is-banking.chat-open .site-footer {
+  padding-right: 0 !important;
+  transition: none !important;
 }

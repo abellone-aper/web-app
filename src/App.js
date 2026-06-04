@@ -44,6 +44,11 @@ function AppContent() {
     return () => document.body.classList.remove('chat-open');
   }, [chatOpen]);
 
+  useEffect(() => {
+    document.body.classList.toggle('is-banking', isBanking);
+    return () => document.body.classList.remove('is-banking');
+  }, [isBanking]);
+
   function handleHotelReserve() {
     setHotelTabOpen(true);
     setChatOpen(true);
@@ -58,7 +63,7 @@ function AppContent() {
         <Route path="/hospedaje" element={<Layout><Hospedaje onChatOpen={handleHotelReserve} /></Layout>} />
       </Routes>
 
-      <MobileBottomNav onChatOpen={() => setChatOpen(true)} hidden={navHidden} />
+      {!isBanking && <MobileBottomNav onChatOpen={() => setChatOpen(true)} hidden={navHidden} />}
 
       <button
         className={`boti-fab${chatOpen ? ' is-open' : ''}`}

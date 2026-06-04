@@ -111,7 +111,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
     return () => clearTimeout(t);
   }, [currentMessages, currentIsTyping, activeTabId]);
 
-  const isDesktop = () => window.innerWidth > 480;
+  const isDesktop = () => window.innerWidth > 390;
 
   const activeVariant = activeTabId === 'hotel' ? 'hotel' : variant;
   const isHomeVariant = activeVariant === 'tienda';
@@ -226,6 +226,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
 
   return (
     <>
+      {open && <div className="chat-backdrop" onClick={onClose} />}
       <div className={`chat-panel${open ? ' open' : ''}`}>
           <ChatHeader
           histOpen={histOpen}

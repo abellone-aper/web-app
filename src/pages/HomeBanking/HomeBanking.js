@@ -40,7 +40,7 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
       {/* ── Desktop Sidebar ── */}
       <aside className="hb-sidebar">
         <div className="sidebar-logo">
-          <img src="/img/logo.png" alt="Galicia" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Logo_Banco_Galicia.svg/3840px-Logo_Banco_Galicia.svg.png" alt="Galicia" />
         </div>
         <nav className="sidebar-nav">
           <div className="nav-label">Principal</div>

@@ -102,6 +102,23 @@ const HERO_SLIDES = [
 
 function ProductCarousel({ title, badge, products }) {
   const trackRef = useRef(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(true);
+
+  function checkScroll() {
+    const t = trackRef.current;
+    if (!t) return;
+    setCanLeft(t.scrollLeft > 0);
+    setCanRight(t.scrollLeft < t.scrollWidth - t.clientWidth - 1);
+  }
+
+  useEffect(() => {
+    const t = trackRef.current;
+    if (!t) return;
+    checkScroll();
+    t.addEventListener('scroll', checkScroll, { passive: true });
+    return () => t.removeEventListener('scroll', checkScroll);
+  }, []);
 
   function scroll(dir) {
     const track = trackRef.current;
@@ -121,13 +138,13 @@ function ProductCarousel({ title, badge, products }) {
         <LinkButton as="a" href="#">Mostrar todo</LinkButton>
       </div>
       <div className="carousel-wrap">
-        <button className="carousel-arrow" aria-label="Anterior" onClick={() => scroll(-1)}><i className="ph ph-caret-left"></i></button>
+        <button className={`carousel-arrow${!canLeft ? ' carousel-arrow--hidden' : ''}`} aria-label="Anterior" onClick={() => scroll(-1)}><i className="ph ph-caret-left"></i></button>
         <div className="carousel-track" ref={trackRef}>
           <div className="product-row">
             {products.map(p => <ProductCard key={p.id} product={p} />)}
           </div>
         </div>
-        <button className="carousel-arrow" aria-label="Siguiente" onClick={() => scroll(1)}><i className="ph ph-caret-right"></i></button>
+        <button className={`carousel-arrow${!canRight ? ' carousel-arrow--hidden' : ''}`} aria-label="Siguiente" onClick={() => scroll(1)}><i className="ph ph-caret-right"></i></button>
       </div>
     </section>
   );

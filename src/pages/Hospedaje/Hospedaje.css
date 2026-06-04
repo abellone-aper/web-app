@@ -559,9 +559,9 @@
 .hd-review-text { font-size: 16px; color: var(--neutral-eight); line-height: 1.55; margin: 0; }
 
 /* ═══════════════════════════════════════════════════════════════
-   MOBILE — max-width: 480px
+   MOBILE — max-width: 390px
    ═══════════════════════════════════════════════════════════════ */
-@media (max-width: 480px) {
+@media (max-width: 390px) {
 
   /* Hide shared Header component — hd-mobile-bar handles mobile nav */
   .hd-main .header { display: none !important; }
@@ -806,9 +806,9 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TABLET — 481px – 1024px
+   TABLET — 391px – 1024px
    ═══════════════════════════════════════════════════════════════ */
-@media (min-width: 481px) and (max-width: 1024px) {
+@media (min-width: 391px) and (max-width: 1024px) {
 
   /* Hide mobile-only elements */
   .hd-mobile-bar { display: none !important; }
@@ -934,10 +934,10 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SMALL TABLET — 481px – 680px
+   SMALL TABLET — 391px – 680px
    Fixes hd-layout (1fr 320px) that leaves only ~92px for content
    ═══════════════════════════════════════════════════════════════ */
-@media (min-width: 481px) and (max-width: 680px) {
+@media (min-width: 391px) and (max-width: 680px) {
 
   /* Tighter page padding */
   .hd-page       { padding: 16px 16px 60px; }

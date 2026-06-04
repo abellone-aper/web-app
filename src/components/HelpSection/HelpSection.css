@@ -176,9 +176,9 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SMALL TABLET — 481px – 640px
+   SMALL TABLET — 391px – 640px
    ═══════════════════════════════════════════════════════════════ */
-@media (min-width: 481px) and (max-width: 640px) {
+@media (min-width: 391px) and (max-width: 640px) {
   .help-inner { padding: 0 16px 32px; gap: 12px; }
   .help-grid  { grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .help-item-card { height: 130px; padding: 16px; }
@@ -205,9 +205,9 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MOBILE — ≤ 480px
+   MOBILE — ≤ 390px
    ═══════════════════════════════════════════════════════════════ */
-@media (max-width: 480px) {
+@media (max-width: 390px) {
   .help-section { padding: 24px 0 0; }
   .help-inner   { padding: 0 16px 24px; gap: 10px; }
 

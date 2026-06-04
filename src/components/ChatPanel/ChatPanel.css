@@ -184,12 +184,28 @@
   transform: rotate(180deg);
 }
 
+/* ── Backdrop ── */
+.chat-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 199;
+  cursor: pointer;
+}
+
+@keyframes chatOpenPanel {
+  from { opacity: 0; transform: translateX(48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
 /* ── Breakpoints ── */
-@media (min-width: 481px) {
+@media (min-width: 391px) {
   .boti-fab { display: flex; }
 }
 
-@media (max-width: 480px) {
+/* ── Mobile (≤390px): chat fullscreen ── */
+@media (max-width: 390px) {
   .boti-fab { display: none !important; }
   .boti-fab--show-mobile { display: flex !important; bottom: 24px; right: 16px; }
   .boti-fab--show-mobile {
@@ -213,7 +229,8 @@
   }
 }
 
-@media (min-width: 481px) and (max-width: 1024px) {
+/* ── Tablet (391–1024px): overlay side panel + backdrop ── */
+@media (min-width: 391px) and (max-width: 1024px) {
   .chat-panel {
     position: fixed;
     top: 0; right: 0; bottom: 0;
@@ -227,56 +244,15 @@
   .chat-panel.open {
     animation: chatOpenPanel 0.26s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
-  body.chat-open .tienda-main {
-    padding-right: 380px;
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  body:not(.chat-open) .tienda-main {
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  body.chat-open .help-section {
-    padding-right: 380px;
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  body:not(.chat-open) .help-section {
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  body.chat-open .help-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  body.chat-open .help-item-card { height: 116px; padding: 16px; border-radius: 12px; }
-  body.chat-open .help-item-label { font-size: 13px; }
-  body.chat-open .help-bottom { flex-direction: column; gap: 8px; }
-  body.chat-open .help-arrepentimiento { flex-direction: column; align-items: flex-start; gap: 14px; }
-  body.chat-open .help-arrepentimiento-title { font-size: 16px; }
-  body.chat-open .help-arrepentimiento-btn { width: 100%; }
-  body.chat-open .help-protegidas { flex-direction: column; align-items: flex-start; gap: 12px; }
-  body.chat-open .help-protegidas-text { width: auto; font-size: 14px; }
+  body.chat-open .chat-backdrop { display: block; }
   body.chat-open .boti-fab { display: none !important; }
 }
 
-/* ── Tablet chico (481–640px): el chat ocupa todo el espacio ── */
-@media (min-width: 481px) and (max-width: 640px) {
-  body.chat-open .chat-panel {
-    width: 100% !important;
-    border-left: none !important;
-    box-shadow: none !important;
-  }
-  body.chat-open .tienda-main,
-  body.chat-open .ptv-main,
-  body.chat-open .help-section {
-    padding-right: 0 !important;
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  body.chat-open .boti-fab { display: none !important; }
-}
-
+/* ── Desktop (≥1025px): side panel que comprime el contenido ── */
 @media (min-width: 1025px) {
   .chat-panel {
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    top: 0; right: 0; bottom: 0;
     width: 420px !important;
     height: 100vh !important;
     border-radius: 0 !important;
@@ -287,10 +263,6 @@
   }
   .chat-panel.open {
     animation: chatOpenPanel 0.26s cubic-bezier(0.4, 0, 0.2, 1) both;
-  }
-  @keyframes chatOpenPanel {
-    from { opacity: 0; transform: translateX(48px); }
-    to   { opacity: 1; transform: translateX(0); }
   }
   body.chat-open .tienda-main {
     padding-right: 420px;
@@ -312,23 +284,13 @@
   body.chat-open .help-arrepentimiento-title { font-size: 18px; }
   body.chat-open .help-protegidas { flex-direction: column; align-items: flex-start; gap: 16px; }
   body.chat-open .help-protegidas-text { width: auto; }
-  body.chat-open .boti-fab {
-    display: none !important;
-  }
-}
-
-/* ── Desktop estrecho (1025–1279px): el chat ocupa todo el espacio ── */
-@media (min-width: 1025px) and (max-width: 1279px) {
-  body.chat-open .chat-panel {
-    width: 100% !important;
-    border-left: none !important;
-    box-shadow: none !important;
-  }
-  body.chat-open .tienda-main,
-  body.chat-open .ptv-main,
-  body.chat-open .help-section {
-    padding-right: 0 !important;
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
-  }
   body.chat-open .boti-fab { display: none !important; }
 }
+
+/* ── HomeBanking: siempre overlay en desktop (nunca comprime) ── */
+body.is-banking.chat-open .tienda-main,
+body.is-banking.chat-open .help-section {
+  padding-right: 0 !important;
+  transition: none !important;
+}
+body.is-banking.chat-open .chat-backdrop { display: block; }

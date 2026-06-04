@@ -183,7 +183,7 @@
   line-height: 20px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 390px) {
   .status-section {
     overflow-x: auto;
     scrollbar-width: none;
@@ -268,6 +268,7 @@
   color: var(--neutral-eight);
 }
 .carousel-arrow:hover { background: var(--neutral-two); }
+.carousel-arrow--hidden { visibility: hidden; pointer-events: none; }
 .carousel-track {
   flex: 1; min-width: 0; overflow: hidden;
 }
@@ -638,7 +639,7 @@
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE — 480px (mobile)
    ═══════════════════════════════════════════════════════════════ */
-@media (max-width: 480px) {
+@media (max-width: 390px) {
   /* Show mobile header */
   .header { display: none !important; }
   .mobile-header { display: flex; }
@@ -1026,9 +1027,9 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TABLET LAYOUT — 481px – 1024px
+   TABLET LAYOUT — 391px – 1024px
    ═══════════════════════════════════════════════════════════════ */
-@media (min-width: 481px) and (max-width: 1024px) {
+@media (min-width: 391px) and (max-width: 1024px) {
   /* Sidebar: hidden */
   .tienda-sidebar { display: none !important; }
 
@@ -1381,15 +1382,16 @@
   body.chat-open .desktop-greeting { padding: 20px 40px 0; }
   body.chat-open .container        { padding: 0 40px; }
   body.chat-open .search           { max-width: 350px; }
-  body.chat-open .carousel-arrow:first-child { left: -36px; }
-  body.chat-open .carousel-arrow:last-child  { right: -36px; }
+  body.chat-open .carousel-arrow {
+    z-index: 10;
+    background: var(--neutral-one);
+    border-color: var(--neutral-five);
+  }
+  body.chat-open .carousel-arrow:first-child { left: 8px; }
+  body.chat-open .carousel-arrow:last-child  { right: 8px; }
 }
 
-/* ── Desktop ≥1280px con chat abierto: adaptar el grid de 6 columnas ── */
-@media (min-width: 1280px) {
-  body.chat-open .credit-card  { grid-column: 3 / span 4; grid-row: 2; }
-  body.chat-open .coupon-card  { grid-column: 3 / span 4; grid-row: 3; }
-}
+/* ── Desktop ≥1280px con chat abierto: el grid 1fr se ajusta solo ── */
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   .desktop-greeting  { padding: 20px 48px 0; }
@@ -1403,10 +1405,10 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SMALL TABLET — 481px – 640px
+   SMALL TABLET — 391px – 640px
    Fixes the 3-col grid (220px 1fr 1fr) that breaks below ~640px
    ═══════════════════════════════════════════════════════════════ */
-@media (min-width: 481px) and (max-width: 640px) {
+@media (min-width: 391px) and (max-width: 640px) {
 
   /* Tighter container and greeting bar */
   .container        { padding: 0 16px; }

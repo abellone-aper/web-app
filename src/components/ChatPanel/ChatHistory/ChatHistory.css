@@ -19,7 +19,7 @@
   border-bottom: 1px solid var(--neutral-four);
   flex-shrink: 0;
 }
-@media (min-width: 481px) {
+@media (min-width: 391px) {
   .chat-history-hd { display: none; }
 }
 .chat-history-back-btn {
@@ -268,7 +268,7 @@
   border-bottom: 1px solid var(--neutral-four);
   flex-shrink: 0;
 }
-@media (min-width: 481px) {
+@media (min-width: 391px) {
   .hist-order-detail-hd { display: none; }
 }
 .hist-order-detail-back {
@@ -660,7 +660,7 @@
   transition: background 0.15s;
 }
 .hist-detail-send-btn:hover { background: var(--action-primary-hover); }
-@media (max-width: 480px) {
+@media (max-width: 390px) {
   .hist-order-detail-input-bar {
     padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
   }
