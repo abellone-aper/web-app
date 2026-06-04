@@ -1,0 +1,132 @@
+.chat-cancel-order {
+  background: var(--neutral-one);
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+}
+
+/* ── Confirmation state ──────────────────────────────────── */
+
+.chat-cancel-order-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+  background: #fff7f7;
+  border-bottom: 1px solid #fecaca;
+}
+
+.chat-cancel-order-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  background: #fee2e2;
+  border-radius: 50%;
+  color: #dc2626;
+  font-size: 18px;
+}
+
+.chat-cancel-order-titles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.chat-cancel-order-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--neutral-nine);
+  margin: 0;
+}
+
+.chat-cancel-order-subtitle {
+  font-size: var(--text-xs);
+  color: var(--neutral-seven);
+  margin: 0;
+}
+
+.chat-cancel-order-product {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--neutral-four);
+}
+
+.chat-cancel-order-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: var(--radius-s);
+  flex-shrink: 0;
+  background: var(--neutral-two);
+  mix-blend-mode: multiply;
+}
+
+.chat-cancel-order-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  min-width: 0;
+}
+
+.chat-cancel-order-name {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--neutral-nine);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-cancel-order-price {
+  font-size: var(--text-xs);
+  color: var(--neutral-seven);
+  margin: 0;
+}
+
+.chat-cancel-order-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+}
+
+/* ── Cancelled state ─────────────────────────────────────── */
+
+.chat-cancel-order--done {
+  border-color: var(--neutral-four);
+}
+
+.chat-cancel-done-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-5) var(--sp-4) var(--sp-4);
+  background: #fff7f7;
+  text-align: center;
+}
+
+.chat-cancel-done-icon {
+  font-size: 32px;
+  color: #dc2626;
+}
+
+.chat-cancel-done-title {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--neutral-nine);
+  margin: 0;
+}
+
+.chat-cancel-done-subtitle {
+  font-size: var(--text-sm);
+  color: var(--neutral-seven);
+  margin: 0;
+}
+

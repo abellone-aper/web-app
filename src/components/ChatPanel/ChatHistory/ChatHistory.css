@@ -108,6 +108,7 @@
   flex: 1; overflow-y: auto;
   overscroll-behavior: contain;
   padding-top: 0;
+  padding-bottom: 32px;
 }
 #histComprasPane { padding-top: 10px; }
 
@@ -142,16 +143,22 @@
 .hist-filter-row {
   display: flex; align-items: center; gap: 8px;
   padding: 12px 16px;
-  overflow-x: auto;
-  scrollbar-width: none; -ms-overflow-style: none;
+  flex-wrap: wrap;
   flex-shrink: 0;
   border-bottom: 1px solid var(--neutral-four);
 }
-.hist-filter-row::-webkit-scrollbar { display: none; }
+@media (max-width: 480px) {
+  .hist-filter-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .hist-filter-row::-webkit-scrollbar { display: none; }
+}
 
 .hist-filter-chip {
   flex-shrink: 0;
-  display: inline-flex; align-items: center; justify-content: center;
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
   height: 30px; padding: 0 13px;
   background: var(--neutral-three);
   border: 1.5px solid transparent;
@@ -168,6 +175,12 @@
   background: var(--brand-primary); color: #fff;
   border-color: var(--brand-primary);
 }
+.hist-filter-chip--filtrar {
+  border-color: transparent;
+  background: transparent;
+  margin-left: auto;
+}
+.hist-filter-chip--filtrar:hover { background: transparent; }
 
 /* ── Order cards ────────────────────────────────────────────── */
 .hist-order-card {
@@ -288,7 +301,7 @@
 .hist-order-detail-msgs {
   flex: 1; min-height: 0; overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 16px 16px 8px;
+  padding: 16px 16px 32px;
   display: flex; flex-direction: column; gap: 16px;
 }
 .hist-order-detail-msgs > * {
@@ -355,119 +368,7 @@
 .hist-action-chip--cancel { color: #dc2626; }
 .hist-cancel-chip-inner { display: flex; align-items: center; gap: 7px; }
 
-/* ── Cancel confirm flow ────────────────────────────────────── */
-.hist-cancel-confirm {
-  display: flex; flex-direction: column; gap: 8px;
-}
-.hist-cancel-card {
-  background: #fff;
-  border: 1px solid #fecaca;
-  border-radius: var(--radius-l);
-  overflow: hidden;
-}
-.hist-cancel-card-hd {
-  display: flex; align-items: center; gap: 10px;
-  padding: 14px 14px 12px;
-  background: #fff7f7;
-  border-bottom: 1px solid #fecaca;
-}
-.hist-cancel-warn-wrap {
-  display: flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px;
-  background: #fee2e2;
-  border-radius: 50%;
-  flex-shrink: 0;
-  color: #dc2626;
-}
-.hist-cancel-card-titles {
-  display: flex; flex-direction: column; gap: 2px;
-}
-.hist-cancel-card-title {
-  font-size: 13px; font-weight: 700; color: var(--neutral-nine);
-  margin: 0;
-}
-.hist-cancel-card-sub {
-  font-size: 11px; color: var(--neutral-seven);
-  margin: 0;
-}
-.hist-cancel-prod-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 14px;
-  border-bottom: 1px solid #fecaca;
-}
-.hist-cancel-prod-img {
-  width: 44px; height: 44px;
-  object-fit: contain;
-  border-radius: 6px;
-  flex-shrink: 0;
-  background: var(--neutral-two);
-}
-.hist-cancel-prod-info {
-  display: flex; flex-direction: column; gap: 2px;
-  min-width: 0;
-}
-.hist-cancel-prod-name {
-  font-size: 12px; font-weight: 600; color: var(--neutral-nine);
-  margin: 0;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.hist-cancel-prod-price {
-  font-size: 11px; color: var(--neutral-seven);
-  margin: 0;
-}
-.hist-cancel-buttons {
-  display: flex; flex-direction: column;
-}
-.hist-cancel-btn-yes {
-  background: #dc2626; color: #fff;
-  border: none; cursor: pointer;
-  padding: 13px 24px;
-  font-family: var(--font-body);
-  font-size: 13px; font-weight: 700;
-  transition: background 0.15s;
-  border-bottom: 1px solid #fecaca;
-  width: 100%; text-align: center;
-}
-.hist-cancel-btn-yes:hover { background: #b91c1c; }
-.hist-cancel-btn-no {
-  background: transparent; color: var(--neutral-nine);
-  border: none; cursor: pointer;
-  padding: 13px 24px;
-  font-family: var(--font-body);
-  font-size: 13px; font-weight: 600;
-  transition: background 0.15s;
-  width: 100%; text-align: center;
-}
-.hist-cancel-btn-no:hover { background: var(--neutral-two); }
 
-/* ── Post-cancel done card ──────────────────────────────────── */
-.hist-cancel-done-card {
-  background: #fff;
-  border: 1px solid #fecaca;
-  border-radius: var(--radius-l);
-  overflow: hidden;
-}
-.hist-cancel-done-hd {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 6px;
-  padding: 20px 16px 16px;
-  background: #fff7f7;
-  border-bottom: 1px solid #fecaca;
-  text-align: center;
-}
-.hist-cancel-done-title {
-  font-size: 14px; font-weight: 700; color: var(--neutral-nine);
-  margin: 0;
-}
-.hist-cancel-done-sub {
-  font-size: 11px; color: var(--neutral-seven);
-  margin: 0;
-}
-.hist-cancel-done-msg {
-  font-size: 13px; color: var(--neutral-nine);
-  margin: 0;
-  padding: 12px 14px;
-}
 
 /* ── Tracking card ──────────────────────────────────────────── */
 .hist-tracking-wrap { display: flex; flex-direction: column; gap: 4px; }
@@ -494,7 +395,7 @@
 .hist-tracking-labels {
   display: flex;
   justify-content: space-between;
-  padding: 14px 14px 0;
+  padding: 14px 14px 12px;
 }
 .hist-tl-step {
   font-size: 11px;
@@ -511,7 +412,7 @@
   color: var(--action-primary);
 }
 .hist-tracking-bar-row {
-  padding: 10px 14px 14px;
+  padding: 20px 14px 16px;
 }
 .hist-tracking-bar {
   position: relative;

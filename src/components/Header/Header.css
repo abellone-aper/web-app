@@ -29,7 +29,7 @@
   border: 1px solid var(--neutral-six);
   border-radius: var(--radius-s);
   display: flex; align-items: center; gap: 8px;
-  padding: 0 16px;
+  padding: 0 12px;
   background: var(--neutral-one);
 }
 .search input {
@@ -38,7 +38,17 @@
   background: transparent;
 }
 .search input::placeholder { color: var(--neutral-seven); }
-.search .search-icon { color: var(--neutral-seven); }
+.search .search-icon { flex-shrink: 0; }
+.search-clear {
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--neutral-six);
+  color: var(--neutral-eight);
+  border: none; cursor: pointer; padding: 0;
+}
+.search-clear i { font-size: 12px; line-height: 1; }
 
 .header-cta {
   color: var(--action-primary); font-weight: 600; font-size: 16px;
@@ -140,7 +150,7 @@
     width: auto;         /* reset del max-width:768px que pone 100% */
   }
   .header-left .logo { display: flex; }
-  .search { width: auto; flex: 1; max-width: 480px; height: 44px; }
+  .search { flex-shrink: 0; width: 360px; height: 44px; }
   .header-cta  { display: none; }
   .header-bottom { display: none; }
 
@@ -158,6 +168,7 @@
   .header-icon-btn:hover { background: var(--neutral-three); }
   .header-icon-btn .icon-wrap { width: 24px; height: 24px; }
   .header-icon-btn .icon-wrap i { font-size: 24px; }
+  .header-icon-btn i { font-size: 24px; }
 }
 
 @media (min-width: 1025px) {
@@ -173,7 +184,7 @@
   }
   .header-left { gap: 24px; flex: 1; min-width: 0; display: flex; align-items: center; }
   .header-left .logo { display: flex; }
-  .search { width: auto; flex: 1; max-width: 560px; height: 44px; }
+  .search { flex-shrink: 0; width: 480px; height: 44px; }
   .header-cta { display: none; }
   .header-bottom { display: none; }
 
@@ -191,24 +202,20 @@
   .header-icon-btn:hover { background: var(--neutral-three); }
   .header-icon-btn .icon-wrap { width: 24px; height: 24px; }
   .header-icon-btn .icon-wrap i { font-size: 24px; }
+  .header-icon-btn i { font-size: 24px; }
 
   body.chat-open .header-top { padding: 0 40px; }
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   .header-top { padding: 0 48px; }
-  .search     { max-width: 400px; }
+  .search     { width: 380px; }
 }
 
-/* ─── header-search-btn: oculto por defecto, visible solo en pequeño ── */
-.header-search-btn { display: none; }
-
-/* ─── Small tablet: search → ícono lupa, logo intacto ── */
+/* ─── Small tablet ── */
 @media (min-width: 481px) and (max-width: 640px) {
-  .header-top        { padding: 0 16px; gap: 8px; }
-  .search            { display: none; }
-  .header-search-btn { display: flex; }
-  .logo              { flex-shrink: 0; }
+  .header-top { padding: 0 16px; gap: 8px; }
+  .logo       { flex-shrink: 0; }
 }
 
 /* Mobile variants hidden by default */

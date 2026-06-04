@@ -2,21 +2,57 @@ import './ChatHistory.css';
 import { useState, useRef, useEffect } from 'react';
 import InvoiceCard from '../InvoiceCard';
 import ChatUserBubble from '../ChatUserBubble';
+import ChatCancelOrder from '../ChatCancelOrder';
+
+const CHAT_FILTERS = [
+  { key: 'hoy', label: 'Hoy' },
+  { key: 'ayer', label: 'Ayer' },
+  { key: 'esta-semana', label: 'Esta semana' },
+];
 
 const HIST_TAB_CHATS = [
-  { group: 'Recientes', items: [
-    'Descuentos utilizando mi tarjeta mastercard',
-    'Termo Stanley Classic Legendary',
-    '¿Tienen promociones de pasajes aéreos con Galicia?',
-    '¿Cuántos puntos tengo que usar y cuánto me descuentan?',
-    'Mi compra fue cancelada. Necesito urgente que me ayuden',
-  ]},
-  { group: 'Abril 2026', items: [
-    'Zapatillas de deporte negras',
-    'Campera Patagonia talle M color verde oliva',
-    'Seguimiento de envío Samsung Galaxy Buds2',
-  ]},
+  // Hoy — 4 jun
+  { period: 'hoy', text: 'Descuentos utilizando mi tarjeta mastercard' },
+  { period: 'hoy', text: 'Termo Stanley Classic Legendary' },
+  { period: 'hoy', text: '¿Cuál es el plazo de entrega para Córdoba?' },
+  { period: 'hoy', text: 'No me llegó la confirmación del pedido por email' },
+  { period: 'hoy', text: 'iPhone 15 Pro Max 256gb color negro' },
+  { period: 'hoy', text: '¿Cómo cargo saldo en mi cuenta?' },
+  // Ayer — 3 jun
+  { period: 'ayer', text: '¿Tienen promociones de pasajes aéreos con Galicia?' },
+  { period: 'ayer', text: '¿Cuántos puntos tengo que usar y cuánto me descuentan?' },
+  { period: 'ayer', text: 'Cambio de domicilio para envío urgente' },
+  { period: 'ayer', text: 'Error al procesar el pago con tarjeta de débito' },
+  { period: 'ayer', text: 'Seguimiento del pedido #571204' },
+  { period: 'ayer', text: 'Notebook Lenovo IdeaPad 5 16" disponibilidad' },
+  { period: 'ayer', text: '¿Puedo pagar en cuotas con tarjeta de crédito Visa?' },
+  // Esta semana — agrupado por día
+  { period: 'esta-semana', text: 'Mi compra fue cancelada. Necesito urgente que me ayuden', dateLabel: 'Martes 3 de junio' },
+  { period: 'esta-semana', text: '¿Puedo devolver un producto sin la caja original?', dateLabel: 'Martes 3 de junio' },
+  { period: 'esta-semana', text: 'Reembolso por producto dañado en el envío', dateLabel: 'Martes 3 de junio' },
+  { period: 'esta-semana', text: 'Método de pago en cuotas sin interés', dateLabel: 'Lunes 2 de junio' },
+  { period: 'esta-semana', text: 'Garantía extendida para Smart TV Samsung 55"', dateLabel: 'Lunes 2 de junio' },
+  { period: 'esta-semana', text: 'Auriculares Sony WH-1000XM5 precio y stock', dateLabel: 'Lunes 2 de junio' },
+  { period: 'esta-semana', text: 'Cómo usar mis puntos Galicia en la próxima compra', dateLabel: 'Domingo 1 de junio' },
+  { period: 'esta-semana', text: '¿Tienen servicio de instalación para aires acondicionados?', dateLabel: 'Domingo 1 de junio' },
+  { period: 'esta-semana', text: 'Promociones en electrodomésticos de cocina', dateLabel: 'Sábado 31 de mayo' },
+  { period: 'esta-semana', text: 'Zapatillas de deporte negras talle 42', dateLabel: 'Sábado 31 de mayo' },
+  { period: 'esta-semana', text: 'Campera Patagonia talle M color verde oliva', dateLabel: 'Viernes 30 de mayo' },
+  { period: 'esta-semana', text: '¿Cómo aplico un código de descuento?', dateLabel: 'Viernes 30 de mayo' },
 ];
+
+function groupChatsByDate(items) {
+  const groups = [];
+  let currentLabel = null;
+  items.forEach(item => {
+    if (item.dateLabel !== currentLabel) {
+      currentLabel = item.dateLabel;
+      groups.push({ label: item.dateLabel, items: [] });
+    }
+    groups[groups.length - 1].items.push(item);
+  });
+  return groups;
+}
 
 const ORDERS_INIT = {
   'stanley-prep': {
@@ -79,6 +115,7 @@ const ORDER_DETAIL_RESPONSES = [
 
 export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeave, backToListSignal }) {
   const [histTab, setHistTab] = useState('chats');
+  const [chatFilter, setChatFilter] = useState('hoy');
   const [histFilter, setHistFilter] = useState('todos');
   const [activeOrder, setActiveOrder] = useState(null);
   const [view, setView] = useState('main');
@@ -128,7 +165,7 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
     const existing = orderActions[orderId] || [];
     if (action === 'envio' && existing.some(a => a.type === 'tracking')) return;
     if (action === 'factura' && existing.some(a => a.type === 'invoice')) return;
-    if (action === 'cancelar' && existing.some(a => a.type === 'cancel-confirm' || a.type === 'cancel-done')) return;
+    if (action === 'cancelar' && existing.some(a => a.type === 'cancel-confirm')) return;
     const orderInfo = orders[orderId] || {};
     setOrderActions(prev => ({
       ...prev,
@@ -149,10 +186,6 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
     setOrders(prev => ({
       ...prev,
       [orderId]: { ...prev[orderId], badge: 'Cancelado', badgeClass: 'hist-badge--cancelled', cancellable: false },
-    }));
-    setOrderActions(prev => ({
-      ...prev,
-      [orderId]: (prev[orderId] || []).map(a => a.type === 'cancel-confirm' ? { type: 'cancel-done' } : a),
     }));
   }
 
@@ -209,23 +242,21 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
 
       {view !== 'orderDetail' && (
         <>
-          {/* Chats tab */}
-          <div className="hist-tab-pane" style={{display: histTab === 'chats' ? '' : 'none'}}>
-            {HIST_TAB_CHATS.map(group => (
-              <div key={group.group}>
-                <div className="hist-section-label">{group.group}</div>
-                {group.items.map(item => (
-                  <button key={item} className="hist-chat-item">
-                    <span className="hist-chat-text">{item}</span>
-                    <i className="ph ph-caret-right hist-chat-arrow"></i>
-                  </button>
-                ))}
-              </div>
-            ))}
-          </div>
-
-          {/* Compras tab */}
-          <div className="hist-tab-pane" style={{display: histTab === 'compras' ? '' : 'none'}}>
+          {/* Secondary filter rows — outside scrollable pane so they stay fixed */}
+          {histTab === 'chats' && (
+            <div className="hist-filter-row">
+              {CHAT_FILTERS.map(f => (
+                <button key={f.key} className={`hist-filter-chip${chatFilter === f.key ? ' active' : ''}`} onClick={() => setChatFilter(f.key)}>
+                  {f.label}
+                </button>
+              ))}
+              <button className="hist-filter-chip hist-filter-chip--filtrar">
+                <i className="ph ph-calendar-blank"></i>
+                Elegir fecha
+              </button>
+            </div>
+          )}
+          {histTab === 'compras' && (
             <div className="hist-filter-row">
               {Object.keys(FILTER_MAP).map(f => (
                 <button key={f} className={`hist-filter-chip${histFilter === f ? ' active' : ''}`} onClick={() => setHistFilter(f)}>
@@ -233,6 +264,34 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
                 </button>
               ))}
             </div>
+          )}
+
+          {/* Chats tab */}
+          <div className="hist-tab-pane" style={{display: histTab === 'chats' ? '' : 'none'}}>
+            {['esta-semana', 'semana-pasada'].includes(chatFilter)
+              ? groupChatsByDate(HIST_TAB_CHATS.filter(item => item.period === chatFilter)).map(group => (
+                  <div key={group.label}>
+                    <div className="hist-section-label">{group.label}</div>
+                    {group.items.map(item => (
+                      <button key={item.text} className="hist-chat-item">
+                        <span className="hist-chat-text">{item.text}</span>
+                        <i className="ph ph-caret-right hist-chat-arrow"></i>
+                      </button>
+                    ))}
+                  </div>
+                ))
+              : HIST_TAB_CHATS.filter(item => item.period === chatFilter).map(item => (
+                  <button key={item.text} className="hist-chat-item">
+                    <span className="hist-chat-text">{item.text}</span>
+                    <i className="ph ph-caret-right hist-chat-arrow"></i>
+                  </button>
+                ))
+            }
+          </div>
+
+          {/* Compras tab */}
+          <div className="hist-tab-pane" style={{display: histTab === 'compras' ? '' : 'none'}}>
+
             {HIST_ORDERS.map(({ id }) => {
               const o = orders[id];
               const targetClass = FILTER_MAP[histFilter];
@@ -313,7 +372,7 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
                 );
                 const step = t.step || 1;
                 const stepPercent = Math.round((step - 1) / 3 * 100);
-                const stepLabels = ['Realizado','Despachado','En camino','Entregado'];
+                const stepLabels = ['En preparación','Despachado','En camino','Entregado'];
                 return (
                   <div key={i} className="hist-tracking-wrap">
                     <div className="hist-tracking-card">
@@ -357,40 +416,12 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
               if (action.type === 'cancel-confirm') {
                 const o = orders[action.orderId];
                 return (
-                  <div key={i} className="hist-cancel-confirm">
-                    <div className="hist-cancel-card">
-                      <div className="hist-cancel-card-hd">
-                        <div className="hist-cancel-warn-wrap"><i className="ph ph-warning" style={{fontSize:'18px'}}></i></div>
-                        <div className="hist-cancel-card-titles">
-                          <p className="hist-cancel-card-title">¿Cancelar esta compra?</p>
-                          <p className="hist-cancel-card-sub">Esta acción no se puede deshacer</p>
-                        </div>
-                      </div>
-                      <div className="hist-cancel-prod-row">
-                        <img className="hist-cancel-prod-img" src={o.img} alt="" />
-                        <div className="hist-cancel-prod-info">
-                          <p className="hist-cancel-prod-name">{o.name}</p>
-                          <p className="hist-cancel-prod-price">{o.price}</p>
-                        </div>
-                      </div>
-                      <div className="hist-cancel-buttons">
-                        <button className="hist-cancel-btn-yes" onClick={() => confirmCancel(action.orderId)}>Cancelar compra</button>
-                        <button className="hist-cancel-btn-no" onClick={() => denyCancel(action.orderId)}>No, volver al pedido</button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-              if (action.type === 'cancel-done') {
-                return (
-                  <div key={i} className="hist-cancel-done-card">
-                    <div className="hist-cancel-done-hd">
-                      <div><i className="ph ph-x-circle" style={{fontSize:'28px',color:'#dc2626'}}></i></div>
-                      <p className="hist-cancel-done-title">Compra cancelada</p>
-                      <p className="hist-cancel-done-sub">El reintegro se acreditará en 3 a 5 días hábiles</p>
-                    </div>
-                    <p className="hist-cancel-done-msg">¿Hay algo más en lo que pueda ayudarte?</p>
-                  </div>
+                  <ChatCancelOrder
+                    key={i}
+                    product={{ img: o.img, name: o.name, price: o.price }}
+                    onConfirm={() => confirmCancel(action.orderId)}
+                    onCancel={() => denyCancel(action.orderId)}
+                  />
                 );
               }
               if (action.type === 'bot-detail') {

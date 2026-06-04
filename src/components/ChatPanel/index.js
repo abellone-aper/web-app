@@ -59,8 +59,8 @@ function TypingIndicator() {
   );
 }
 
-const initOfferTab = () => ({ messages: [], inputVal: '', awaitingCvv: false, cvvError: false, showMoreDetail: false, moreDetailTyping: false, isTyping: false, responseIdx: 0 });
-const initHotelTab = () => ({ messages: [], inputVal: '', showMoreDetail: false, moreDetailTyping: false, isTyping: false, responseIdx: 0 });
+const initOfferTab = () => ({ messages: [], inputVal: '', awaitingCvv: false, cvvError: false, isTyping: false, responseIdx: 0 });
+const initHotelTab = () => ({ messages: [], inputVal: '', isTyping: false, responseIdx: 0 });
 
 export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabOpen = false, onCloseHotelTab = () => {} }) {
   const [activeTabId, setActiveTabId] = useState('offer');
@@ -121,6 +121,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
 
   const specSheetSent = td.messages.some(m => m.type === 'spec-sheet');
   const purchaseDone = td.messages.some(m => m.type === 'purchase-confirm' || m.type === 'reservation-confirm');
+  const moreDetailDone = td.messages.some(m => m.type === 'more-detail' || m.type === 'more-detail-hotel');
   const buyDisabled = purchaseDone || td.awaitingCvv || faceIdOpen;
 
   function openCvvFlow(tabId) {
@@ -204,6 +205,17 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
     sendTextAsMessage(text);
   }
 
+  function handleMoreDetail() {
+    const tabId = activeTabId;
+    const type = tabId === 'hotel' ? 'more-detail-hotel' : 'more-detail';
+    addMessageTo({ type: 'user', text: 'Más información' }, tabId);
+    setTabData(prev => ({ ...prev, [tabId]: { ...prev[tabId], isTyping: true } }));
+    setTimeout(() => {
+      setTabData(prev => ({ ...prev, [tabId]: { ...prev[tabId], isTyping: false } }));
+      addMessageTo({ type }, tabId);
+    }, 750);
+  }
+
   function handleSpecSheet() {
     const tabId = activeTabId;
     addMessageTo({ type: 'user', text: 'Ver ficha técnica del producto' }, tabId);
@@ -219,10 +231,10 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
   const initialMessages = isHomeVariant ? (
     <>
       <ChatMessage label="Tienda">Hola Sol. El termo que tenés en el carrito entró hoy en una acción especial de Tienda Galicia. Bajó un 15% de precio y además te armé una combinación de pago exclusiva para vos</ChatMessage>
-      <ChatOffer variant="tienda" onBuy={handleBuyAction} buyDisabled={buyDisabled} moreDetailDisabled={td.showMoreDetail || td.moreDetailTyping} onMoreDetail={() => { setTd({ moreDetailTyping: true }); setTimeout(() => setTd({ moreDetailTyping: false, showMoreDetail: true }), 750); }} />
-      {td.messages.length === 0 && !td.isTyping && !td.showMoreDetail && !td.moreDetailTyping && (
+      <ChatOffer variant="tienda" onBuy={handleBuyAction} buyDisabled={buyDisabled} moreDetailDisabled={moreDetailDone || td.isTyping} onMoreDetail={handleMoreDetail} />
+      {td.messages.length === 0 && !td.isTyping && (
         <ChatSuggestions items={[
-          { label: 'Más información', onClick: () => { setTd({ moreDetailTyping: true }); setTimeout(() => setTd({ moreDetailTyping: false, showMoreDetail: true }), 750); } },
+          { label: 'Más información', onClick: handleMoreDetail },
           { label: 'Ver ficha técnica del producto', onClick: handleSpecSheet },
         ]} />
       )}
@@ -235,7 +247,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
   ) : (
     <>
       <ChatMessage label="Tienda">Hola Sol. Reservá 7 noches en el Design Suites Bariloche y disfrutá de una experiencia única a orillas del Lago Nahuel Huapi.</ChatMessage>
-      <ChatOffer variant="hotel" onBuy={handleBuyAction} onMoreDetail={() => { setTd({ moreDetailTyping: true }); setTimeout(() => setTd({ moreDetailTyping: false, showMoreDetail: true }), 750); }} buyDisabled={buyDisabled} moreDetailDisabled={td.showMoreDetail || td.moreDetailTyping} />
+      <ChatOffer variant="hotel" onBuy={handleBuyAction} onMoreDetail={handleMoreDetail} buyDisabled={buyDisabled} moreDetailDisabled={moreDetailDone || td.isTyping} />
     </>
   );
 
@@ -278,38 +290,6 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
           <div className={`chat-messages${histOpen ? ' chat-messages--hidden' : ''}`} ref={messagesRef}>
             <div className="chat-messages-spacer" />
             {initialMessages}
-            {(td.showMoreDetail || td.moreDetailTyping) && isHomeVariant && <ChatUserBubble>Más información</ChatUserBubble>}
-            {td.moreDetailTyping && isHomeVariant && <TypingIndicator />}
-            {td.showMoreDetail && isHomeVariant && (
-              <div className="chat-more-detail" style={{ display: 'flex' }}>
-                <ChatMessage label="Tienda">Con el 15% de descuento, el termo queda en $26.525. Además, veo que tenés 1.525 Puntos Galicia disponibles en tu cuenta. Si los aplicás, el total baja a $25.000.<br /><br />Para ese monto tenés preaprobadas 3 cuotas sin interés de $8.334 con tu Visa Galicia. El envío es gratis a tu domicilio en Palermo.</ChatMessage>
-                {td.messages.every(m => m.type === 'user') && !td.isTyping && (
-                  <ChatSuggestions items={[
-                    { label: 'Comprar (Puntos + 3 cuotas sin interés)', onClick: handleBuyAction },
-                    { label: 'Ver ficha técnica del producto', onClick: handleSpecSheet },
-                  ]} />
-                )}
-              </div>
-            )}
-            {(td.showMoreDetail || td.moreDetailTyping) && isHotelVariant && <ChatUserBubble>Más información</ChatUserBubble>}
-            {td.moreDetailTyping && isHotelVariant && <TypingIndicator />}
-            {td.showMoreDetail && isHotelVariant && (
-              <div className="chat-more-detail" style={{ display: 'flex' }}>
-                <ChatMessage label="Tienda">Acá van los detalles de tu reserva:<br /><br />
-                  📅 <strong>Fechas:</strong> 26 jun – 2 jul (7 noches)<br />
-                  👤 <strong>Huéspedes:</strong> 1 adulto<br />
-                  🍳 <strong>Incluye:</strong> desayuno buffet, WiFi, estacionamiento<br />
-                  ✅ <strong>Cancelación gratuita</strong> hasta el 20 de junio<br /><br />
-                  Podés pagarlo en <strong>12 cuotas sin interés de $199.560</strong> con tu tarjeta Galicia.
-                </ChatMessage>
-                {td.messages.every(m => m.type === 'user') && !td.isTyping && (
-                  <ChatSuggestions onChipClick={handleSuggestionClick} items={[
-                    { label: 'Confirmar reserva ahora', onClick: handleBuyAction },
-                    { label: 'Cambiar fechas' },
-                  ]} />
-                )}
-              </div>
-            )}
             {td.messages.map((msg, i) => {
               if (msg.type === 'user') return <ChatUserBubble key={i}>{msg.text}</ChatUserBubble>;
               if (msg.type === 'bot') return (
@@ -320,6 +300,40 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
                 if (!isLatest) return null;
                 return (
                   <ChatSuggestions key={i} label={msg.label} items={msg.items} onChipClick={handleSuggestionClick} animated />
+                );
+              }
+              if (msg.type === 'more-detail') {
+                const isLatest = i === td.messages.length - 1 && !td.isTyping;
+                return (
+                  <div key={i} className="chat-more-detail" style={{ display: 'flex' }}>
+                    <ChatMessage label="Tienda" animated>Con el 15% de descuento, el termo queda en $26.525. Además, veo que tenés 1.525 Puntos Galicia disponibles en tu cuenta. Si los aplicás, el total baja a $25.000.<br /><br />Para ese monto tenés preaprobadas 3 cuotas sin interés de $8.334 con tu Visa Galicia. El envío es gratis a tu domicilio en Palermo.</ChatMessage>
+                    {isLatest && (
+                      <ChatSuggestions items={[
+                        { label: 'Comprar (Puntos + 3 cuotas sin interés)', onClick: handleBuyAction },
+                        { label: 'Ver ficha técnica del producto', onClick: handleSpecSheet },
+                      ]} animated />
+                    )}
+                  </div>
+                );
+              }
+              if (msg.type === 'more-detail-hotel') {
+                const isLatest = i === td.messages.length - 1 && !td.isTyping;
+                return (
+                  <div key={i} className="chat-more-detail" style={{ display: 'flex' }}>
+                    <ChatMessage label="Tienda" animated>Acá van los detalles de tu reserva:<br /><br />
+                      📅 <strong>Fechas:</strong> 26 jun – 2 jul (7 noches)<br />
+                      👤 <strong>Huéspedes:</strong> 1 adulto<br />
+                      🍳 <strong>Incluye:</strong> desayuno buffet, WiFi, estacionamiento<br />
+                      ✅ <strong>Cancelación gratuita</strong> hasta el 20 de junio<br /><br />
+                      Podés pagarlo en <strong>12 cuotas sin interés de $199.560</strong> con tu tarjeta Galicia.
+                    </ChatMessage>
+                    {isLatest && (
+                      <ChatSuggestions onChipClick={handleSuggestionClick} items={[
+                        { label: 'Confirmar reserva ahora', onClick: handleBuyAction },
+                        { label: 'Cambiar fechas' },
+                      ]} animated />
+                    )}
+                  </div>
                 );
               }
               if (msg.type === 'cvv-card') {

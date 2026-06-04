@@ -24,6 +24,8 @@ export default function Header({
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const isViajes = location.pathname === '/para-tu-viaje' || location.pathname.startsWith('/hospedaje');
 
   const handleBack = onBack || (() => navigate(-1));
@@ -84,16 +86,31 @@ export default function Header({
           <Link to="/" className="logo">
             <img src={getPublicUrl('Imagenes', 'logo.png')} alt="Tienda Galicia" className="logo-img" />
           </Link>
-          <div className="search">
-            <input type="text" placeholder="Buscar productos o marcas" />
-            <img src="/icons/buscar.svg" alt="" className="search-icon header-icon-img" />
-          </div>
         </div>
         <a href="#" className="header-cta">Ampliar el límite de tus tarjetas</a>
+        {searchOpen && (
+          <div className="search">
+            <img src="/icons/buscar.svg" alt="" className="search-icon header-icon-img" />
+            <input
+              type="text"
+              placeholder="Buscar productos o marcas"
+              autoFocus
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button className="search-clear" onClick={() => setSearchQuery('')} aria-label="Borrar búsqueda">
+                <i className="ph ph-x"></i>
+              </button>
+            )}
+          </div>
+        )}
         <div className="header-icons">
-          <a href="#" className="header-icon-btn header-search-btn" aria-label="Buscar">
-            <img src="/icons/buscar.svg" alt="" className="header-icon-img" />
-          </a>
+          {!searchOpen && (
+            <button className="header-icon-btn" onClick={() => setSearchOpen(true)} aria-label="Buscar">
+              <img src="/icons/buscar.svg" alt="" className="header-icon-img" />
+            </button>
+          )}
           <a href="#" className="header-icon-btn" aria-label="Notificaciones">
             <span className="icon-wrap">
               <img src="/icons/notificaciones.svg" alt="" className="header-icon-img" />
