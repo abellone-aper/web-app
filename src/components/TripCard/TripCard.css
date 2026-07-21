@@ -28,7 +28,10 @@
 .ptv-card-img img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
+  transition: transform 0.3s ease;
 }
+
+.ptv-card-img:hover img { transform: scale(1.06); }
 
 .ptv-card-img--hotel      { background: linear-gradient(145deg, #5b7ba8 0%, #2e4d7a 100%); }
 .ptv-card-img--boots      { background: linear-gradient(145deg, #4a7c59 0%, #2d5a3d 100%); }
@@ -144,7 +147,9 @@
   .nmh-trip-card-img img {
     width: 100%; height: 100%;
     object-fit: cover; display: block;
+    transition: transform 0.3s ease;
   }
+  .nmh-trip-card-img:hover img { transform: scale(1.06); }
   .nmh-trip-card-badge {
     position: absolute; top: 6px; left: 8px;
     background: #f4effa;
@@ -196,7 +201,8 @@
     border-radius: var(--radius-m); overflow: hidden;
   }
   .dh-trip-card-img { width: 100%; aspect-ratio: 4/3; position: relative; overflow: hidden; }
-  .dh-trip-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dh-trip-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+  .dh-trip-card-img:hover img { transform: scale(1.06); }
   .dh-trip-badge {
     position: absolute; top: 6px; left: 6px;
     background: #fff; color: var(--neutral-nine);
@@ -230,7 +236,8 @@
     width: 100%; height: 148px;
     position: relative; overflow: hidden;
   }
-  .dh-trip-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dh-trip-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+  .dh-trip-card-img:hover img { transform: scale(1.06); }
   .dh-trip-badge {
     position: absolute; top: 6px; left: 8px;
     background: var(--promotion-secondary); color: var(--promotion-tertiary);
