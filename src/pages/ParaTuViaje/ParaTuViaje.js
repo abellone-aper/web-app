@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ParaTuViaje.css';
 import { getPublicUrl } from '../../lib/storage';
+import { CURRENT_USER } from '../../lib/currentUser';
 import Header from '../../components/Header';
 import Breadcrumb from '../../components/Breadcrumb';
 import TripCard from '../../components/TripCard';
@@ -96,7 +97,7 @@ export default function ParaTuViajePage() {
       </div>
 
       <div className="ptv-main">
-        <Header variant="page" title="Para tu viaje" />
+        <Header variant="page" title="Para tu viaje" user={CURRENT_USER} />
 
         <Breadcrumb items={[
           { label: 'Inicio', to: brand.path('/') },

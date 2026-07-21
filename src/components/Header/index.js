@@ -2,6 +2,7 @@ import './Header.css';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useBrand } from '../../brands/BrandContext';
+import { CURRENT_USER } from '../../lib/currentUser';
 import BrandLogo from '../BrandLogo';
 
 export default function Header({
@@ -9,7 +10,7 @@ export default function Header({
   title,
   onBack,
   actions,
-  user = { name: 'Sol Gonzalez', initial: 'S' },
+  user = CURRENT_USER,
 }) {
   const location = useLocation();
   const navigate = useNavigate();

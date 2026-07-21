@@ -1,6 +1,7 @@
 import { useState, useRef, useId, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Hospedaje.css';
+import { CURRENT_USER } from '../../lib/currentUser';
 import Header from '../../components/Header';
 import Breadcrumb from '../../components/Breadcrumb';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
@@ -314,7 +315,7 @@ export default function DesignSuitesPage({ onChatOpen }) {
       </div>
 
       <div className="hd-main">
-        <Header variant="page" title="Hospedaje" />
+        <Header variant="page" title="Hospedaje" user={CURRENT_USER} />
 
         <Breadcrumb items={[
           { label: 'Inicio', to: brand.path('/') },

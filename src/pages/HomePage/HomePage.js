@@ -2,6 +2,7 @@ import './HomePage.css';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getPublicUrl } from '../../lib/storage';
+import { CURRENT_USER } from '../../lib/currentUser';
 import Header from '../../components/Header';
 import ProductCard from '../../components/ProductCard';
 import TripCard from '../../components/TripCard';
@@ -17,8 +18,6 @@ import { useBrand } from '../../brands/BrandContext';
 import BrandLogo from '../../components/BrandLogo';
 
 const CTX_CAR_ICON = '/icons/vehículo.svg';
-
-const CURRENT_USER_BASE = { name: 'Sol Gonzalez', initial: 'S', avatar: getPublicUrl('Imagenes', 'avatar.png') };
 
 const COUPONS = [
   { icon: '/icons/descuento tecnologia.svg', title: '15% Off en Tecnología', subtitle: 'Válido en toda sección', expires: 'Vence en 3 días' },
@@ -247,7 +246,7 @@ function HeroSlider() {
 
 export default function HomePage() {
   const brand = useBrand();
-  const currentUser = { ...CURRENT_USER_BASE, role: `Cuenta ${brand.bankName}` };
+  const currentUser = { ...CURRENT_USER, role: `Cuenta ${brand.bankName}` };
   const tripCards = TRIP_CARDS.map(c => c.to ? { ...c, to: brand.path(c.to) } : c);
   const [couponToggles, setCouponToggles] = useState(COUPONS.map((_, i) => i === 0));
   function toggleCoupon(i) {
