@@ -1,6 +1,8 @@
+@import './fonts/ICBC/gustanlp.css';
+
 :root {
-  --brand-primary:      #4c4f5d;
-  --brand-secondary:    #6d7288;
+  --brand-primary:      #0176D3;
+  --brand-secondary:    #1B96FF;
   --brand-on-primary:   #ffffff;
   --brand-on-secondary: #4c4f5d;
 
@@ -16,10 +18,12 @@
   --neutral-nine:  #1c1c1c;
 
   /* ─── Action colors ─────────────────────────────────────────── */
-  --action-primary:          #F26522;
-  --action-primary-hover:    #D9541A;
-  --action-secondary:        #FDECE3;
-  --action-secondary-pressed: #FEF9F6;
+  --action-primary:          #0176D3;
+  --action-primary-hover:    #1B96FF;
+  --action-primary-light:    #EDF4FF;
+  --action-primary-rgb:      1, 118, 211;
+  --action-secondary:        #EDF4FF;
+  --action-secondary-pressed: #F7FAFF;
   --action-secondary-pressed-text: var(--action-primary);
 
   /* ─── Semantic status ───────────────────────────────────────── */
@@ -75,8 +79,8 @@
   --shadow-3: 0 8px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
 
   /* ─── Font families ─────────────────────────────────────────── */
-  --font-body:    'Nunito', sans-serif;
-  --font-display: 'Outfit', sans-serif;
+  --font-body:    'Montserrat', sans-serif;
+  --font-display: 'Montserrat', sans-serif;
   --font-accent:  'Montserrat', sans-serif;
   --font-system:  -apple-system, BlinkMacSystemFont, var(--font-body);
 
@@ -124,9 +128,58 @@
   --color-border-strong: var(--neutral-six);
 
   /* ─── Component-level tokens ────────────────────────────────── */
-  --action-secondary-hover: #f9d9c7;
+  --action-secondary-hover: #D6EAFF;
   --badge-discount-bg:      var(--action-secondary);
-  --badge-discount-text:    #c33f00;
+  --badge-discount-text:    var(--action-primary);
+
+  /* ─── Puntito de notificación del chat (fijo, no cambia por marca) ── */
+  --chat-fab-color: #E4002B;
+}
+
+/* ─── Brand overrides ────────────────────────────────────────────
+   Tokens pisados por marca. El atributo data-brand se setea en
+   <html> desde BrandProvider (src/brands/BrandContext.js) según la ruta activa.
+   El default (sin data-brand / marca "aper") vive arriba en :root. */
+:root[data-brand='galicia'] {
+  --font-body:    'Nunito', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-accent:  'Montserrat', sans-serif;
+
+  --brand-primary:      #4c4f5d;
+  --brand-secondary:    #6d7288;
+
+  --action-primary:                #F26522;
+  --action-primary-hover:          #D9541A;
+  --action-primary-light:          #FFB795;
+  --action-primary-rgb:            242, 101, 34;
+  --action-secondary:              #FDECE3;
+  --action-secondary-pressed:      #FEF9F6;
+  --action-secondary-hover:        #f9d9c7;
+  --action-secondary-pressed-text: var(--action-primary);
+
+  --badge-discount-bg:   var(--action-secondary);
+  --badge-discount-text: #c33f00;
+}
+
+:root[data-brand='icbc'] {
+  --font-body:    'Gustanlp', sans-serif;
+  --font-display: 'Gustanlp', sans-serif;
+  --font-accent:  'Gustanlp', sans-serif;
+
+  --brand-primary:      #C4161C;
+  --brand-secondary:    #9E0B0F;
+
+  --action-primary:                #C4161C;
+  --action-primary-hover:          #9E0B0F;
+  --action-primary-light:          #FF8A8E;
+  --action-primary-rgb:            196, 22, 28;
+  --action-secondary:              #FBE1E4;
+  --action-secondary-pressed:      #FDF2F3;
+  --action-secondary-hover:        #F6C7CD;
+  --action-secondary-pressed-text: var(--action-primary);
+
+  --badge-discount-bg:   var(--action-secondary);
+  --badge-discount-text: #9E0B0F;
 }
 
 /* ─── Reset / Base ───────────────────────────────────────────── */

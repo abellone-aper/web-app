@@ -2,24 +2,29 @@ import './HomeBanking.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LinkButton from '../../components/Buttons/LinkButton';
+import { useBrand } from '../../brands/BrandContext';
 
-const TRANSACTIONS = [
-  { icon: 'purchase', iconClass: 'ph-fill ph-shopping-cart', name: 'Tienda Galicia', meta: 'Hoy · 10:23 hs · Tarjeta ••4821', amount: '-$26.525', neg: true },
-  { icon: 'income', iconClass: 'ph ph-arrow-down', name: 'Transferencia recibida', meta: 'Hoy · 08:45 hs · Javier M.', amount: '+$50.000,00', neg: false },
-  { icon: 'service', iconClass: 'ph ph-lightning', name: 'Pago Edesur', meta: 'Ayer · 18:32 hs · Débito automático', amount: '-$12.890', neg: true },
-  { icon: 'purchase', iconClass: 'ph-fill ph-storefront', name: 'Supermercado Coto', meta: 'Ayer · 15:10 hs · Tarjeta ••2934', amount: '-$38.200', neg: true },
-  { icon: 'outcome', iconClass: 'ph ph-arrow-up', name: 'Transferencia enviada', meta: '19 may · 12:05 hs · Lucía P.', amount: '-$25.000', neg: true },
-  { icon: 'atm', iconClass: 'ph ph-bank', name: 'Extracción ATM Galicia', meta: '19 may · 09:30 hs · Cajero #3421', amount: '-$20.000', neg: true },
-  { icon: 'income', iconClass: 'ph-fill ph-money', name: 'Acreditación sueldo', meta: '18 may · 07:00 hs · APER SA', amount: '+$980.000,00', neg: false },
-];
+function getTransactions(brand) {
+  return [
+    { icon: 'purchase', iconClass: 'ph-fill ph-shopping-cart', name: brand.storeName, meta: 'Hoy · 10:23 hs · Tarjeta ••4821', amount: '-$26.525', neg: true },
+    { icon: 'income', iconClass: 'ph ph-arrow-down', name: 'Transferencia recibida', meta: 'Hoy · 08:45 hs · Javier M.', amount: '+$50.000,00', neg: false },
+    { icon: 'service', iconClass: 'ph ph-lightning', name: 'Pago Edesur', meta: 'Ayer · 18:32 hs · Débito automático', amount: '-$12.890', neg: true },
+    { icon: 'purchase', iconClass: 'ph-fill ph-storefront', name: 'Supermercado Coto', meta: 'Ayer · 15:10 hs · Tarjeta ••2934', amount: '-$38.200', neg: true },
+    { icon: 'outcome', iconClass: 'ph ph-arrow-up', name: 'Transferencia enviada', meta: '19 may · 12:05 hs · Lucía P.', amount: '-$25.000', neg: true },
+    { icon: 'atm', iconClass: 'ph ph-bank', name: `Extracción ATM ${brand.bankName}`, meta: '19 may · 09:30 hs · Cajero #3421', amount: '-$20.000', neg: true },
+    { icon: 'income', iconClass: 'ph-fill ph-money', name: 'Acreditación sueldo', meta: '18 may · 07:00 hs · APER SA', amount: '+$980.000,00', neg: false },
+  ];
+}
 
-const MOB_TRANSACTIONS = [
-  ...TRANSACTIONS,
-  { icon: 'service', iconClass: 'ph ph-wifi-high', name: 'Personal Flow', meta: '17 may · 08:00 hs', amount: '-$9.800', neg: true },
-  { icon: 'purchase', iconClass: 'ph-fill ph-fork-knife', name: 'PedidosYa', meta: '16 may · 21:15 hs', amount: '-$7.450', neg: true },
-  { icon: 'outcome', iconClass: 'ph ph-arrow-down', name: 'Transferencia enviada', meta: '15 may · 11:20 hs', amount: '-$15.000', neg: true },
-  { icon: 'service', iconClass: 'ph ph-drop', name: 'Aysa — Agua', meta: '14 may · 10:05 hs', amount: '-$5.320', neg: true },
-];
+function getMobTransactions(brand) {
+  return [
+    ...getTransactions(brand),
+    { icon: 'service', iconClass: 'ph ph-wifi-high', name: 'Personal Flow', meta: '17 may · 08:00 hs', amount: '-$9.800', neg: true },
+    { icon: 'purchase', iconClass: 'ph-fill ph-fork-knife', name: 'PedidosYa', meta: '16 may · 21:15 hs', amount: '-$7.450', neg: true },
+    { icon: 'outcome', iconClass: 'ph ph-arrow-down', name: 'Transferencia enviada', meta: '15 may · 11:20 hs', amount: '-$15.000', neg: true },
+    { icon: 'service', iconClass: 'ph ph-drop', name: 'Aysa — Agua', meta: '14 may · 10:05 hs', amount: '-$5.320', neg: true },
+  ];
+}
 
 const VENCIMIENTOS = [
   { badge: '3', badgeStyle: {}, day: 'Hoy', desc: '3 servicios pendientes', amount: '$1.549.564' },
@@ -28,6 +33,9 @@ const VENCIMIENTOS = [
 ];
 
 export default function HomeBankingPage({ chatOpen, onChatOpen }) {
+  const brand = useBrand();
+  const TRANSACTIONS = getTransactions(brand);
+  const MOB_TRANSACTIONS = getMobTransactions(brand);
   const [filterTab, setFilterTab] = useState('Todos');
 
   function openChat(e) {
@@ -40,7 +48,9 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
       {/* ── Desktop Sidebar ── */}
       <aside className="hb-sidebar">
         <div className="sidebar-logo">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Logo_Banco_Galicia.svg/3840px-Logo_Banco_Galicia.svg.png" alt="Galicia" />
+          {brand.bankLogoUrl
+            ? <img src={brand.bankLogoUrl} alt={brand.bankName} />
+            : <span className="brand-text-logo">{brand.bankName}</span>}
         </div>
         <nav className="sidebar-nav">
           <div className="nav-label">Principal</div>
@@ -55,7 +65,7 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
           <div className="nav-label" style={{marginTop:'8px'}}>Servicios</div>
           <a className="nav-link" href="#"><i className="ph ph-trend-up"></i> Inversiones</a>
           <a className="nav-link" href="#"><i className="ph ph-shield-check"></i> Seguros</a>
-          <Link className="nav-link" to="/"><i className="ph ph-storefront"></i> Tienda Galicia</Link>
+          <Link className="nav-link" to={brand.path('/')}><i className="ph ph-storefront"></i> {brand.storeName}</Link>
           <a className="nav-link" href="#"><i className="ph ph-dots-three-outline"></i> Más servicios</a>
         </nav>
         <div className="sidebar-user">
@@ -98,7 +108,7 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
                 </div>
                 <div className="bm-item">
                   <div className="bm-label">Alias</div>
-                  <div className="bm-value">SOL.GALICIA.ARS</div>
+                  <div className="bm-value">{brand.aliasHandle}</div>
                 </div>
               </div>
             </div>
@@ -162,7 +172,7 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
                   <div className="hb-promo-title">Design Suites Bariloche</div>
                   <div className="hb-promo-sub">Desde $49.999 por 2 noches</div>
                   <div className="hb-promo-rating">
-                    <i className="ph-fill ph-star" style={{color:'#f26522',fontSize:'13px'}}></i>
+                    <i className="ph-fill ph-star" style={{color:'var(--action-primary)',fontSize:'13px'}}></i>
                     <span>5.0</span>
                   </div>
                   <button className="hb-promo-cta" onClick={openChat}>
@@ -220,7 +230,7 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
                 <div className="mob-promo-title">Design Suites Bariloche</div>
                 <div className="mob-promo-sub">Desde $49.999 por 2 noches</div>
                 <div className="mob-promo-rating">
-                  <i className="ph-fill ph-star" style={{color:'#f26522',fontSize:'12px'}}></i>
+                  <i className="ph-fill ph-star" style={{color:'var(--action-primary)',fontSize:'12px'}}></i>
                   <span>5.0</span>
                 </div>
               </div>

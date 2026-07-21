@@ -1,6 +1,8 @@
 import './InvoiceCard.css';
+import { useBrand } from '../../../brands/BrandContext';
 
 export default function InvoiceCard({ orderName, price }) {
+  const brand = useBrand();
   return (
     <div className="invoice-card-wrap">
       <div className="invoice-card">
@@ -10,7 +12,7 @@ export default function InvoiceCard({ orderName, price }) {
           </div>
           <div className="invoice-card-titles">
             <p className="invoice-card-title">Factura electrónica</p>
-            <p className="invoice-card-sub">Galicia Tienda S.A. · CUIT 30-71234567-9</p>
+            <p className="invoice-card-sub">{brand.legalName} · {brand.cuit}</p>
           </div>
         </div>
         <div className="invoice-card-rows">

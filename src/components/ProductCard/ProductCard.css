@@ -26,7 +26,7 @@
   background: rgba(255, 255, 255, 0.45);
   transition: background 0.15s;
 }
-.fav-btn:hover { background: rgba(242, 101, 34, 0.20); }
+.fav-btn:hover { background: rgba(var(--action-primary-rgb), 0.20); }
 .fav-btn i { font-size: 24px; }
 .fav-btn.active { color: var(--action-primary); }
 

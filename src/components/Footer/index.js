@@ -1,28 +1,30 @@
 import './Footer.css';
-import { getPublicUrl } from '../../lib/storage';
+import { useBrand } from '../../brands/BrandContext';
+import BrandLogo from '../BrandLogo';
 
 export default function Footer() {
+  const brand = useBrand();
   return (
     <footer className="site-footer">
       <div className="site-footer__inner">
         <div className="site-footer__logo">
-          <img src={getPublicUrl('Imagenes', 'logo.png')} alt="Tienda Galicia" />
+          <BrandLogo />
         </div>
 
         <div className="site-footer__info">
           <p className="site-footer__address">Av. Caseros 3039, Piso 2, CP 1264, Parque Patricios, CABA</p>
-          <p className="site-footer__copy">© 2019 Tienda Galicia. All Rights Reserved.</p>
+          <p className="site-footer__copy">© 2019 {brand.storeName}. All Rights Reserved.</p>
         </div>
 
         <div className="site-footer__social">
           <a href="#" className="site-footer__social-btn" aria-label="Facebook">
-            <img src="/icons/facebook.svg" alt="Facebook" />
+            <span className="mnav-icon site-footer__social-icon" style={{ WebkitMaskImage: "url('/icons/facebook.svg')", maskImage: "url('/icons/facebook.svg')" }}></span>
           </a>
           <a href="#" className="site-footer__social-btn" aria-label="Instagram">
-            <img src="/icons/instagram.svg" alt="Instagram" />
+            <span className="mnav-icon site-footer__social-icon" style={{ WebkitMaskImage: "url('/icons/instagram.svg')", maskImage: "url('/icons/instagram.svg')" }}></span>
           </a>
           <a href="#" className="site-footer__social-btn" aria-label="WhatsApp">
-            <img src="/icons/whatsapp.svg" alt="WhatsApp" />
+            <span className="mnav-icon site-footer__social-icon" style={{ WebkitMaskImage: "url('/icons/whatsapp.svg')", maskImage: "url('/icons/whatsapp.svg')" }}></span>
           </a>
         </div>
       </div>

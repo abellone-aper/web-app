@@ -174,7 +174,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
    BALANCE HERO
    ═══════════════════════════════════════════════════════════════ */
 .balance-hero {
-  background: linear-gradient(135deg, #F26522 0%, #c84e0c 100%);
+  background: linear-gradient(135deg, var(--action-primary) 0%, var(--action-primary-hover) 100%);
   border-radius: var(--radius-l);
   padding: 28px 32px;
   color: #fff;
@@ -770,7 +770,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
     border: none; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     color: #fff; font-size: 26px;
-    box-shadow: 0 4px 14px rgba(242,101,34,0.5);
+    box-shadow: 0 4px 14px rgba(var(--action-primary-rgb), 0.5);
     transform: translateY(-10px);
     transition: background 0.15s, transform 0.15s;
   }

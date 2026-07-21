@@ -21,7 +21,7 @@
 .social-list { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
 .social-icon {
   width: 36px; height: 36px; border-radius: 24px;
-  background: #fdece3;
+  background: var(--action-secondary);
   display: flex; align-items: center; justify-content: center;
 }
 .social-icon i { font-size: 18px; color: var(--action-primary); }
@@ -108,6 +108,12 @@
   width: auto;
   display: block;
 }
+:root[data-brand='icbc'] .site-footer__logo img {
+  height: 30px;
+}
+:root[data-brand='aper'] .site-footer__logo img {
+  height: 28px;
+}
 
 /* Text */
 .site-footer__info {
@@ -157,10 +163,10 @@
   background: var(--action-secondary-hover);
 }
 
-.site-footer__social-btn img {
+.site-footer__social-icon.mnav-icon {
   width: 20px;
   height: 20px;
-  display: block;
+  background-color: var(--action-primary);
 }
 
 /* ── Responsive ── */

@@ -13,10 +13,12 @@ import ContextBanner from '../../components/ContextBanner';
 import CreditCard from '../../components/CreditCard';
 import CouponCard from '../../components/CouponCard';
 import InsuranceCard from '../../components/InsuranceCard';
+import { useBrand } from '../../brands/BrandContext';
+import BrandLogo from '../../components/BrandLogo';
 
 const CTX_CAR_ICON = '/icons/vehículo.svg';
 
-const CURRENT_USER = { name: 'Sol Gonzalez', initial: 'S', role: 'Cuenta Galicia', avatar: getPublicUrl('Imagenes', 'avatar.png') };
+const CURRENT_USER_BASE = { name: 'Sol Gonzalez', initial: 'S', avatar: getPublicUrl('Imagenes', 'avatar.png') };
 
 const COUPONS = [
   { icon: '/icons/descuento tecnologia.svg', title: '15% Off en Tecnología', subtitle: 'Válido en toda sección', expires: 'Vence en 3 días' },
@@ -244,6 +246,9 @@ function HeroSlider() {
 
 
 export default function HomePage() {
+  const brand = useBrand();
+  const currentUser = { ...CURRENT_USER_BASE, role: `Cuenta ${brand.bankName}` };
+  const tripCards = TRIP_CARDS.map(c => c.to ? { ...c, to: brand.path(c.to) } : c);
   const [couponToggles, setCouponToggles] = useState(COUPONS.map((_, i) => i === 0));
   function toggleCoupon(i) {
     setCouponToggles(prev => prev.map((v, j) => j === i ? !v : v));
@@ -253,7 +258,7 @@ export default function HomePage() {
     <>
       <aside className="tienda-sidebar">
         <div className="ts-logo">
-          <img src={getPublicUrl('Imagenes', 'logo.png')} alt="Tienda Galicia" />
+          <BrandLogo />
         </div>
         <nav className="ts-nav">
           <a href="#" className="ts-nav-item active"><i className="ph ph-house"></i><span>Inicio</span></a>
@@ -268,16 +273,16 @@ export default function HomePage() {
           <a href="#" className="ts-nav-item"><i className="ph ph-storefront"></i><span>Tiendas Oficiales</span></a>
         </nav>
         <div className="ts-user">
-          <div className="ts-user-avatar">{CURRENT_USER.initial}</div>
+          <div className="ts-user-avatar">{currentUser.initial}</div>
           <div className="ts-user-info">
-            <span className="ts-user-name">{CURRENT_USER.name}</span>
-            <span className="ts-user-role">{CURRENT_USER.role}</span>
+            <span className="ts-user-name">{currentUser.name}</span>
+            <span className="ts-user-role">{currentUser.role}</span>
           </div>
         </div>
       </aside>
 
       <div className="tienda-main">
-        <Header variant="home" user={CURRENT_USER} />
+        <Header variant="home" user={currentUser} />
 
         {/* ── Mobile home ── */}
         <div className="new-mobile-home">
@@ -291,10 +296,10 @@ export default function HomePage() {
           <section className="nmh-trip-section">
             <div className="nmh-section-header">
               <h2 className="nmh-section-title">Para tu viaje</h2>
-              <LinkButton as={Link} to="/para-tu-viaje">Mostrar todo</LinkButton>
+              <LinkButton as={Link} to={brand.path('/para-tu-viaje')}>Mostrar todo</LinkButton>
             </div>
             <TripScrollWrap innerClass="nmh-trip-cards">
-              {TRIP_CARDS.map(c => <TripCard key={c.name} card={c} />)}
+              {tripCards.map(c => <TripCard key={c.name} card={c} />)}
             </TripScrollWrap>
           </section>
 
@@ -335,7 +340,7 @@ export default function HomePage() {
                 <p className="dh-ctx-title">Ya tenés el vuelo. Armamos todo lo que necesitas para el viaje.</p>
               </div>
               <TripScrollWrap innerClass="dh-trip-cards" compact>
-                {TRIP_CARDS.map(c => <TripCard key={c.name} card={c} variant="desktop" />)}
+                {tripCards.map(c => <TripCard key={c.name} card={c} variant="desktop" />)}
               </TripScrollWrap>
               <ContextBanner
                 icon={CTX_CAR_ICON}
@@ -343,7 +348,7 @@ export default function HomePage() {
                 title="Reservá un transfer o alquilá un auto y evitá sorpresas al llegar."
                 linkText="Ver opciones de transporte"
               />
-              <SecondaryButton as={Link} to="/para-tu-viaje" style={{width:'100%'}}>Ver todo</SecondaryButton>
+              <SecondaryButton as={Link} to={brand.path('/para-tu-viaje')} style={{width:'100%'}}>Ver todo</SecondaryButton>
             </div>
 
             <div className="dh-explore-chips-card">

@@ -16,6 +16,6 @@
   transition: background 0.15s, color 0.15s;
   white-space: nowrap;
 }
-.secondary-btn:hover { background: #fff9f6; }
+.secondary-btn:hover { background: var(--action-secondary-pressed); }
 .secondary-btn:disabled { border-color: var(--neutral-five); color: var(--neutral-five); cursor: default; }
 .secondary-btn:disabled:hover { background: transparent; }

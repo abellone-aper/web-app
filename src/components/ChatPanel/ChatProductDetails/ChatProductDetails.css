@@ -43,7 +43,7 @@
   flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
   padding: 8px 6px; border-radius: var(--radius-s);
 }
-.chat-spec-temp-badge.hot  { background: #fff5ee; color: #c84e0c; }
+.chat-spec-temp-badge.hot  { background: var(--action-secondary); color: var(--action-primary-hover); }
 .chat-spec-temp-badge.cold { background: var(--neutral-three); color: var(--brand-primary); }
 .chat-spec-temp-badge.ice  { background: var(--neutral-four); color: var(--brand-primary); }
 .chat-spec-temp-badge i { font-size: 18px; flex-shrink: 0; }

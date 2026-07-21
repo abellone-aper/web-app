@@ -183,7 +183,7 @@
 .mas-accedidos-grid::-webkit-scrollbar { display: none; }
 .mas-accedidos-card {
   flex: 0 0 140px;
-  background: #fff9f6;
+  background: var(--action-secondary-pressed);
   border-radius: 16px;
   padding: 20px;
   height: 140px;
@@ -460,12 +460,12 @@
 .newsletter-info { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
 .newsletter-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: #fdece3;
+  background: var(--action-secondary);
   border-radius: 8px;
   padding: 5px 12px;
 }
-.newsletter-badge i { font-size: 24px; color: #c33f00; }
-.newsletter-badge span { font-size: 15px; font-weight: 700; color: #c33f00; }
+.newsletter-badge i { font-size: 24px; color: var(--badge-discount-text); }
+.newsletter-badge span { font-size: 15px; font-weight: 700; color: var(--badge-discount-text); }
 .newsletter-title {
   font-size: 24px; font-weight: 500; color: black;
   line-height: 28px; margin: 0;
@@ -818,7 +818,7 @@
     color: var(--neutral-nine);
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
   }
-  .newsletter-input:focus { border-color: var(--action-primary); outline: none; box-shadow: 0 0 0 3px rgba(242,101,34,0.12); }
+  .newsletter-input:focus { border-color: var(--action-primary); outline: none; box-shadow: 0 0 0 3px rgba(var(--action-primary-rgb), 0.12); }
   .newsletter-input::placeholder { color: var(--neutral-six); }
   .newsletter-submit {
     width: 100%;

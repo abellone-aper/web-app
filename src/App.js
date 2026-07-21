@@ -8,6 +8,8 @@ import Footer from './components/Footer';
 import HelpSection from './components/HelpSection';
 import ChatPanel from './components/ChatPanel';
 import MobileBottomNav from './components/MobileBottomNav';
+import { BrandProvider } from './brands/BrandContext';
+import { resolveBrandId, BRANDS } from './brands/brands';
 
 function Layout({ children }) {
   return (
@@ -24,7 +26,9 @@ function AppContent() {
   const [hotelTabOpen, setHotelTabOpen] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
   const location = useLocation();
-  const isBanking = location.pathname === '/homebanking';
+  const brandId = resolveBrandId(location.pathname);
+  const brandPrefix = BRANDS[brandId].prefix;
+  const isBanking = location.pathname === `${brandPrefix}/homebanking`;
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -54,13 +58,28 @@ function AppContent() {
     setChatOpen(true);
   }
 
+  const homeBankingPage = (
+    <HomeBanking chatOpen={chatOpen} onChatOpen={() => setChatOpen(true)} onChatClose={() => setChatOpen(false)} />
+  );
+  const hospedajePage = <Hospedaje onChatOpen={handleHotelReserve} />;
+
   return (
-    <>
+    <BrandProvider brand={brandId}>
       <Routes>
         <Route path="/" element={<Layout><HomePage /></Layout>} />
         <Route path="/para-tu-viaje" element={<Layout><ParaTuViaje /></Layout>} />
-        <Route path="/homebanking" element={<Layout><HomeBanking chatOpen={chatOpen} onChatOpen={() => setChatOpen(true)} onChatClose={() => setChatOpen(false)} /></Layout>} />
-        <Route path="/hospedaje" element={<Layout><Hospedaje onChatOpen={handleHotelReserve} /></Layout>} />
+        <Route path="/homebanking" element={<Layout>{homeBankingPage}</Layout>} />
+        <Route path="/hospedaje" element={<Layout>{hospedajePage}</Layout>} />
+
+        <Route path="/icbc" element={<Layout><HomePage /></Layout>} />
+        <Route path="/icbc/para-tu-viaje" element={<Layout><ParaTuViaje /></Layout>} />
+        <Route path="/icbc/homebanking" element={<Layout>{homeBankingPage}</Layout>} />
+        <Route path="/icbc/hospedaje" element={<Layout>{hospedajePage}</Layout>} />
+
+        <Route path="/galicia" element={<Layout><HomePage /></Layout>} />
+        <Route path="/galicia/para-tu-viaje" element={<Layout><ParaTuViaje /></Layout>} />
+        <Route path="/galicia/homebanking" element={<Layout>{homeBankingPage}</Layout>} />
+        <Route path="/galicia/hospedaje" element={<Layout>{hospedajePage}</Layout>} />
       </Routes>
 
       {!isBanking && <MobileBottomNav onChatOpen={() => setChatOpen(true)} hidden={navHidden} />}
@@ -84,7 +103,7 @@ function AppContent() {
         hotelTabOpen={hotelTabOpen}
         onCloseHotelTab={() => setHotelTabOpen(false)}
       />
-    </>
+    </BrandProvider>
   );
 }
 

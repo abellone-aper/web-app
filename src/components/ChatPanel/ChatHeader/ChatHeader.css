@@ -35,8 +35,7 @@
 .chat-header-fab-icon {
   width: 24px;
   height: 24px;
-  display: block;
-  object-fit: contain;
+  background-color: var(--action-primary);
   flex-shrink: 0;
 }
 

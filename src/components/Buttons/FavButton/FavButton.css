@@ -16,5 +16,5 @@
 }
 
 .fav-btn--card:hover {
-  background: rgba(242, 101, 34, 0.20);
+  background: rgba(var(--action-primary-rgb), 0.20);
 }

@@ -1,4 +1,5 @@
 import './ChatHeader.css';
+import { useBrand } from '../../../brands/BrandContext';
 
 
 const MASK_CERRAR_NEUTRAL = {
@@ -43,6 +44,7 @@ export default function ChatHeader({
   onCloseOfferTab,
   onCloseHotelTab,
 }) {
+  const brand = useBrand();
   return (
     <>
       <div className="chat-panel-header">
@@ -53,14 +55,17 @@ export default function ChatHeader({
             </button>
           ) : (
             <div className="chat-header-fab">
-              <img src="/icons/chat.svg" alt="" className="chat-header-fab-icon" />
+              <span
+                className="mnav-icon chat-header-fab-icon"
+                style={{ WebkitMaskImage: "url('/icons/chat.svg')", maskImage: "url('/icons/chat.svg')" }}
+              ></span>
             </div>
           )}
           <div className="chat-header-info">
             <span className="chat-header-name">
               {histOpen ? (histDetailTitle || 'Historial') : 'Hablemos'}
             </span>
-            {!histOpen && <span className="chat-header-sub">Tienda Galicia</span>}
+            {!histOpen && <span className="chat-header-sub">{brand.storeName}</span>}
           </div>
         </div>
 

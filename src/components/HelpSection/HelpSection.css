@@ -93,10 +93,10 @@
 }
 
 .help-arrepentimiento-btn {
-  border: 1px solid #bc4b00;
+  border: 1px solid var(--action-primary-hover);
   border-radius: 8px;
   background: transparent;
-  color: #bc4b00;
+  color: var(--action-primary-hover);
   font-size: 16px;
   font-weight: 700;
   font-family: inherit;
@@ -107,7 +107,7 @@
   transition: background 0.15s;
   flex-shrink: 0;
 }
-.help-arrepentimiento-btn:hover { background: rgba(188, 75, 0, 0.06); }
+.help-arrepentimiento-btn:hover { background: rgba(var(--action-primary-rgb), 0.06); }
 
 /* ── Bottom right: compras protegidas ── */
 .help-protegidas {

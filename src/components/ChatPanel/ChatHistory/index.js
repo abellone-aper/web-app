@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import InvoiceCard from '../InvoiceCard';
 import ChatUserBubble from '../ChatUserBubble';
 import ChatCancelOrder from '../ChatCancelOrder';
+import { useBrand } from '../../../brands/BrandContext';
 
 const CHAT_FILTERS = [
   { key: 'hoy', label: 'Hoy' },
@@ -10,36 +11,38 @@ const CHAT_FILTERS = [
   { key: 'esta-semana', label: 'Esta semana' },
 ];
 
-const HIST_TAB_CHATS = [
-  // Hoy — 4 jun
-  { period: 'hoy', text: 'Descuentos utilizando mi tarjeta mastercard' },
-  { period: 'hoy', text: 'Termo Stanley Classic Legendary' },
-  { period: 'hoy', text: '¿Cuál es el plazo de entrega para Córdoba?' },
-  { period: 'hoy', text: 'No me llegó la confirmación del pedido por email' },
-  { period: 'hoy', text: 'iPhone 15 Pro Max 256gb color negro' },
-  { period: 'hoy', text: '¿Cómo cargo saldo en mi cuenta?' },
-  // Ayer — 3 jun
-  { period: 'ayer', text: '¿Tienen promociones de pasajes aéreos con Galicia?' },
-  { period: 'ayer', text: '¿Cuántos puntos tengo que usar y cuánto me descuentan?' },
-  { period: 'ayer', text: 'Cambio de domicilio para envío urgente' },
-  { period: 'ayer', text: 'Error al procesar el pago con tarjeta de débito' },
-  { period: 'ayer', text: 'Seguimiento del pedido #571204' },
-  { period: 'ayer', text: 'Notebook Lenovo IdeaPad 5 16" disponibilidad' },
-  { period: 'ayer', text: '¿Puedo pagar en cuotas con tarjeta de crédito Visa?' },
-  // Esta semana — agrupado por día
-  { period: 'esta-semana', text: 'Mi compra fue cancelada. Necesito urgente que me ayuden', dateLabel: 'Martes 3 de junio' },
-  { period: 'esta-semana', text: '¿Puedo devolver un producto sin la caja original?', dateLabel: 'Martes 3 de junio' },
-  { period: 'esta-semana', text: 'Reembolso por producto dañado en el envío', dateLabel: 'Martes 3 de junio' },
-  { period: 'esta-semana', text: 'Método de pago en cuotas sin interés', dateLabel: 'Lunes 2 de junio' },
-  { period: 'esta-semana', text: 'Garantía extendida para Smart TV Samsung 55"', dateLabel: 'Lunes 2 de junio' },
-  { period: 'esta-semana', text: 'Auriculares Sony WH-1000XM5 precio y stock', dateLabel: 'Lunes 2 de junio' },
-  { period: 'esta-semana', text: 'Cómo usar mis puntos Galicia en la próxima compra', dateLabel: 'Domingo 1 de junio' },
-  { period: 'esta-semana', text: '¿Tienen servicio de instalación para aires acondicionados?', dateLabel: 'Domingo 1 de junio' },
-  { period: 'esta-semana', text: 'Promociones en electrodomésticos de cocina', dateLabel: 'Sábado 31 de mayo' },
-  { period: 'esta-semana', text: 'Zapatillas de deporte negras talle 42', dateLabel: 'Sábado 31 de mayo' },
-  { period: 'esta-semana', text: 'Campera Patagonia talle M color verde oliva', dateLabel: 'Viernes 30 de mayo' },
-  { period: 'esta-semana', text: '¿Cómo aplico un código de descuento?', dateLabel: 'Viernes 30 de mayo' },
-];
+function getHistTabChats(brand) {
+  return [
+    // Hoy — 4 jun
+    { period: 'hoy', text: 'Descuentos utilizando mi tarjeta mastercard' },
+    { period: 'hoy', text: 'Termo Stanley Classic Legendary' },
+    { period: 'hoy', text: '¿Cuál es el plazo de entrega para Córdoba?' },
+    { period: 'hoy', text: 'No me llegó la confirmación del pedido por email' },
+    { period: 'hoy', text: 'iPhone 15 Pro Max 256gb color negro' },
+    { period: 'hoy', text: '¿Cómo cargo saldo en mi cuenta?' },
+    // Ayer — 3 jun
+    { period: 'ayer', text: `¿Tienen promociones de pasajes aéreos con ${brand.bankName}?` },
+    { period: 'ayer', text: '¿Cuántos puntos tengo que usar y cuánto me descuentan?' },
+    { period: 'ayer', text: 'Cambio de domicilio para envío urgente' },
+    { period: 'ayer', text: 'Error al procesar el pago con tarjeta de débito' },
+    { period: 'ayer', text: 'Seguimiento del pedido #571204' },
+    { period: 'ayer', text: 'Notebook Lenovo IdeaPad 5 16" disponibilidad' },
+    { period: 'ayer', text: '¿Puedo pagar en cuotas con tarjeta de crédito Visa?' },
+    // Esta semana — agrupado por día
+    { period: 'esta-semana', text: 'Mi compra fue cancelada. Necesito urgente que me ayuden', dateLabel: 'Martes 3 de junio' },
+    { period: 'esta-semana', text: '¿Puedo devolver un producto sin la caja original?', dateLabel: 'Martes 3 de junio' },
+    { period: 'esta-semana', text: 'Reembolso por producto dañado en el envío', dateLabel: 'Martes 3 de junio' },
+    { period: 'esta-semana', text: 'Método de pago en cuotas sin interés', dateLabel: 'Lunes 2 de junio' },
+    { period: 'esta-semana', text: 'Garantía extendida para Smart TV Samsung 55"', dateLabel: 'Lunes 2 de junio' },
+    { period: 'esta-semana', text: 'Auriculares Sony WH-1000XM5 precio y stock', dateLabel: 'Lunes 2 de junio' },
+    { period: 'esta-semana', text: `Cómo usar mis ${brand.pointsName} en la próxima compra`, dateLabel: 'Domingo 1 de junio' },
+    { period: 'esta-semana', text: '¿Tienen servicio de instalación para aires acondicionados?', dateLabel: 'Domingo 1 de junio' },
+    { period: 'esta-semana', text: 'Promociones en electrodomésticos de cocina', dateLabel: 'Sábado 31 de mayo' },
+    { period: 'esta-semana', text: 'Zapatillas de deporte negras talle 42', dateLabel: 'Sábado 31 de mayo' },
+    { period: 'esta-semana', text: 'Campera Patagonia talle M color verde oliva', dateLabel: 'Viernes 30 de mayo' },
+    { period: 'esta-semana', text: '¿Cómo aplico un código de descuento?', dateLabel: 'Viernes 30 de mayo' },
+  ];
+}
 
 function groupChatsByDate(items) {
   const groups = [];
@@ -114,6 +117,8 @@ const ORDER_DETAIL_RESPONSES = [
 ];
 
 export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeave, backToListSignal }) {
+  const brand = useBrand();
+  const histTabChats = getHistTabChats(brand);
   const [histTab, setHistTab] = useState('chats');
   const [chatFilter, setChatFilter] = useState('hoy');
   const [histFilter, setHistFilter] = useState('todos');
@@ -269,7 +274,7 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
           {/* Chats tab */}
           <div className="hist-tab-pane" style={{display: histTab === 'chats' ? '' : 'none'}}>
             {['esta-semana', 'semana-pasada'].includes(chatFilter)
-              ? groupChatsByDate(HIST_TAB_CHATS.filter(item => item.period === chatFilter)).map(group => (
+              ? groupChatsByDate(histTabChats.filter(item => item.period === chatFilter)).map(group => (
                   <div key={group.label}>
                     <div className="hist-section-label">{group.label}</div>
                     {group.items.map(item => (
@@ -280,7 +285,7 @@ export default function ChatHistory({ open, onClose, onDetailEnter, onDetailLeav
                     ))}
                   </div>
                 ))
-              : HIST_TAB_CHATS.filter(item => item.period === chatFilter).map(item => (
+              : histTabChats.filter(item => item.period === chatFilter).map(item => (
                   <button key={item.text} className="hist-chat-item">
                     <span className="hist-chat-text">{item.text}</span>
                     <i className="ph ph-caret-right hist-chat-arrow"></i>

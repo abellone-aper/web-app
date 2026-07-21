@@ -132,7 +132,7 @@
   position: absolute;
   top: 2px; right: 2px;
   width: 10px; height: 10px;
-  background: #ef4444;
+  background: var(--chat-fab-color);
   border-radius: 50%;
   border: 2px solid var(--neutral-one);
 }
@@ -278,7 +278,7 @@
     color: var(--action-primary);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 2px 12px rgba(242, 101, 34, 0.18);
+    box-shadow: 0 2px 12px rgba(var(--action-primary-rgb), 0.18);
   }
   .mobile-chat-notif-dot {
     top: -38px; right: -12px;

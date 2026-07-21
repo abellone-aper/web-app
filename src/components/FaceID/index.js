@@ -1,7 +1,9 @@
 import './FaceID.css';
 import { useState } from 'react';
+import { useBrand } from '../../brands/BrandContext';
 
 export default function FaceID({ open, onDeny, onSuccess }) {
+  const brand = useBrand();
   const [phase, setPhase] = useState('alert'); // 'alert' | 'scan' | 'success'
 
   function handleAllow() {
@@ -39,7 +41,7 @@ export default function FaceID({ open, onDeny, onSuccess }) {
             </svg>
           </div>
           <div className="faceid-alert-body">
-            <p className="faceid-alert-title">¿Querés permitir que Tienda Galicia use Face ID?</p>
+            <p className="faceid-alert-title">¿Querés permitir que {brand.storeName} use Face ID?</p>
             <p className="faceid-alert-desc">Necesitamos validar tu identidad por motivos de seguridad para avanzar con la transacción.</p>
           </div>
           <div className="faceid-alert-buttons">

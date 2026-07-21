@@ -42,7 +42,7 @@
 
 .ctx-banner-link {
   font-size: 14px; font-weight: 700;
-  color: #ffb795;
+  color: var(--action-primary-light);
   letter-spacing: 0.028px; line-height: 18px;
   overflow-wrap: break-word;
   word-break: break-word;

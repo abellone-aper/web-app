@@ -1,5 +1,5 @@
 .credit-card {
-  background: #fef9f6;
+  background: var(--action-secondary-pressed);
   border-radius: 16px;
   padding: 24px;
   display: flex;
@@ -34,7 +34,7 @@
   transition: background var(--transition-fast);
 }
 
-.credit-btn:hover { background: rgba(188,75,0,0.06); }
+.credit-btn:hover { background: rgba(var(--action-primary-rgb), 0.06); }
 
 @media (min-width: 1025px) {
   .credit-card  { padding: 20px; }

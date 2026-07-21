@@ -55,7 +55,7 @@
   transition: background 0.15s;
 }
 
-.ptv-fav-btn:hover { background: rgba(242, 101, 34, 0.12); }
+.ptv-fav-btn:hover { background: rgba(var(--action-primary-rgb), 0.12); }
 
 .ptv-card-badge {
   position: absolute; top: 8px; left: 8px;
@@ -161,7 +161,7 @@
     font-size: 18px;
     transition: background 0.15s;
   }
-  .nmh-fav-btn:hover { background: rgba(242, 101, 34, 0.12); }
+  .nmh-fav-btn:hover { background: rgba(var(--action-primary-rgb), 0.12); }
   .nmh-trip-card-body {
     padding: 12px;
     display: flex; flex-direction: column; gap: 5px;
@@ -211,7 +211,7 @@
     border: none; cursor: pointer;
     transition: background 0.15s;
   }
-  .dh-fav-btn:hover { background: rgba(242, 101, 34, 0.12); }
+  .dh-fav-btn:hover { background: rgba(var(--action-primary-rgb), 0.12); }
   .dh-trip-card-body { padding: 8px; display: flex; flex-direction: column; gap: 2px; }
   .dh-card-cat  { font-size: 9px; color: var(--neutral-six); text-transform: uppercase; letter-spacing: 0.04em; }
   .dh-card-name {
@@ -246,7 +246,7 @@
     border: none; cursor: pointer;
     transition: background 0.15s;
   }
-  .dh-fav-btn:hover { background: rgba(242, 101, 34, 0.12); }
+  .dh-fav-btn:hover { background: rgba(var(--action-primary-rgb), 0.12); }
   .dh-trip-card-body { padding: 12px; display: flex; flex-direction: column; gap: 2px; }
   .dh-card-cat  { font-size: 12px; color: var(--neutral-seven); }
   .dh-card-name { font-size: 12px; color: var(--neutral-nine); }

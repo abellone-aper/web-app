@@ -439,7 +439,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(242,101,34,.35);
+  box-shadow: 0 2px 8px rgba(var(--action-primary-rgb), .35);
   z-index: 1;
 }
 .hist-tracking-delivered {

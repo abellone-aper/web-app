@@ -1,7 +1,8 @@
 import './Header.css';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { getPublicUrl } from '../../lib/storage';
+import { useBrand } from '../../brands/BrandContext';
+import BrandLogo from '../BrandLogo';
 
 export default function Header({
   variant = 'home',
@@ -12,6 +13,7 @@ export default function Header({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const brand = useBrand();
   const [scrollHidden, setScrollHidden] = useState(false);
   const [scrolledDown, setScrolledDown] = useState(false);
 
@@ -30,7 +32,7 @@ export default function Header({
   }, []);
   const [searchMode, setSearchMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const isViajes = location.pathname === '/para-tu-viaje' || location.pathname.startsWith('/hospedaje');
+  const isViajes = location.pathname === brand.path('/para-tu-viaje') || location.pathname.startsWith(brand.path('/hospedaje'));
 
   function openSearch() { setSearchMode(true); }
   function closeSearch() { setSearchMode(false); setSearchQuery(''); }
@@ -202,8 +204,8 @@ export default function Header({
         ) : scrolledDown && variant === 'home' ? (
           <>
             <div className="header-left">
-              <Link to="/" className="logo">
-                <img src={getPublicUrl('Imagenes', 'logo.png')} alt="Tienda Galicia" className="logo-img" />
+              <Link to={brand.path('/')} className="logo">
+                <BrandLogo className="logo-img" />
               </Link>
             </div>
             <div className="search header-search--scrolled">
@@ -255,8 +257,8 @@ export default function Header({
         ) : (
           <>
             <div className="header-left">
-              <Link to="/" className="logo">
-                <img src={getPublicUrl('Imagenes', 'logo.png')} alt="Tienda Galicia" className="logo-img" />
+              <Link to={brand.path('/')} className="logo">
+                <BrandLogo className="logo-img" />
               </Link>
             </div>
             <a href="#" className="header-cta">Ampliar el límite de tus tarjetas</a>
@@ -301,7 +303,7 @@ export default function Header({
             <i className="ph ph-caret-down" style={{ fontSize: '16px' }}></i>
           </div>
           <nav className="nav-list">
-            <Link className={`nav-item${isViajes ? ' active' : ''}`} to="/para-tu-viaje">
+            <Link className={`nav-item${isViajes ? ' active' : ''}`} to={brand.path('/para-tu-viaje')}>
               {!isViajes && <span className="badge-new">¡Nuevo!</span>}
               Viajes
             </Link>

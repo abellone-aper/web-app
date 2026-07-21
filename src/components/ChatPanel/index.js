@@ -12,6 +12,7 @@ import ChatSuccessfulOrder from './ChatSuccessfulOrder';
 import ChatCvvCard from './ChatCvvCard';
 import PrimaryButton from '../Buttons/PrimaryButton';
 import ChatUserBubble from './ChatUserBubble';
+import { useBrand } from '../../brands/BrandContext';
 
 
 const STORE_OFFER = {
@@ -43,11 +44,13 @@ const GENERIC_RESPONSES = [
   'Eso se escapa un poco de lo mío. Si buscás un producto o querés aprovechar alguna promo, estoy para eso.',
 ];
 
-const SUGGESTION_SETS = [
-  ['Ver ofertas del día', 'Novedades en tecnología', 'Recomendaciones para vos'],
-  ['Ver ofertas del día', 'Promos con tu tarjeta Galicia', 'Productos más vendidos'],
-  ['Ver ofertas del día', 'Smartphones con descuento', 'Cuotas sin interés'],
-];
+function getSuggestionSets(brand) {
+  return [
+    ['Ver ofertas del día', 'Novedades en tecnología', 'Recomendaciones para vos'],
+    ['Ver ofertas del día', `Promos con tu tarjeta ${brand.bankName}`, 'Productos más vendidos'],
+    ['Ver ofertas del día', 'Smartphones con descuento', 'Cuotas sin interés'],
+  ];
+}
 
 function TypingIndicator() {
   return (
@@ -63,6 +66,8 @@ const initOfferTab = () => ({ messages: [], inputVal: '', awaitingCvv: false, cv
 const initHotelTab = () => ({ messages: [], inputVal: '', isTyping: false, responseIdx: 0 });
 
 export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabOpen = false, onCloseHotelTab = () => {} }) {
+  const brand = useBrand();
+  const suggestionSets = getSuggestionSets(brand);
   const [activeTabId, setActiveTabId] = useState('offer');
   const [tabData, setTabData] = useState({ offer: initOfferTab() });
   const [offerTabClosed, setOfferTabClosed] = useState(false);
@@ -188,7 +193,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
     setTimeout(() => {
       setTabData(prev => ({ ...prev, [tabId]: { ...prev[tabId], isTyping: false } }));
       addMessageTo({ type: 'bot', text: GENERIC_RESPONSES[idx % GENERIC_RESPONSES.length] }, tabId);
-      addMessageTo({ type: 'suggestions', label: 'Tal vez te interesa', items: SUGGESTION_SETS[idx % SUGGESTION_SETS.length] }, tabId);
+      addMessageTo({ type: 'suggestions', label: 'Tal vez te interesa', items: suggestionSets[idx % suggestionSets.length] }, tabId);
     }, 750);
   }
 
@@ -230,7 +235,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
 
   const initialMessages = isHomeVariant ? (
     <>
-      <ChatMessage label="Tienda">Hola Sol. El termo que tenés en el carrito entró hoy en una acción especial de Tienda Galicia. Bajó un 15% de precio y además te armé una combinación de pago exclusiva para vos</ChatMessage>
+      <ChatMessage label="Tienda">Hola Sol. El termo que tenés en el carrito entró hoy en una acción especial de {brand.storeName}. Bajó un 15% de precio y además te armé una combinación de pago exclusiva para vos</ChatMessage>
       <ChatOffer variant="tienda" onBuy={handleBuyAction} buyDisabled={buyDisabled} moreDetailDisabled={moreDetailDone || td.isTyping} onMoreDetail={handleMoreDetail} />
       {td.messages.length === 0 && !td.isTyping && (
         <ChatSuggestions items={[
@@ -306,7 +311,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
                 const isLatest = i === td.messages.length - 1 && !td.isTyping;
                 return (
                   <div key={i} className="chat-more-detail" style={{ display: 'flex' }}>
-                    <ChatMessage label="Tienda" animated>Con el 15% de descuento, el termo queda en $26.525. Además, veo que tenés 1.525 Puntos Galicia disponibles en tu cuenta. Si los aplicás, el total baja a $25.000.<br /><br />Para ese monto tenés preaprobadas 3 cuotas sin interés de $8.334 con tu Visa Galicia. El envío es gratis a tu domicilio en Palermo.</ChatMessage>
+                    <ChatMessage label="Tienda" animated>Con el 15% de descuento, el termo queda en $26.525. Además, veo que tenés 1.525 {brand.pointsName} disponibles en tu cuenta. Si los aplicás, el total baja a $25.000.<br /><br />Para ese monto tenés preaprobadas 3 cuotas sin interés de $8.334 con tu {brand.cardName}. El envío es gratis a tu domicilio en Palermo.</ChatMessage>
                     {isLatest && (
                       <ChatSuggestions items={[
                         { label: 'Comprar (Puntos + 3 cuotas sin interés)', onClick: handleBuyAction },
@@ -325,7 +330,7 @@ export default function ChatPanel({ open, onClose, variant = 'tienda', hotelTabO
                       👤 <strong>Huéspedes:</strong> 1 adulto<br />
                       🍳 <strong>Incluye:</strong> desayuno buffet, WiFi, estacionamiento<br />
                       ✅ <strong>Cancelación gratuita</strong> hasta el 20 de junio<br /><br />
-                      Podés pagarlo en <strong>12 cuotas sin interés de $199.560</strong> con tu tarjeta Galicia.
+                      Podés pagarlo en <strong>12 cuotas sin interés de $199.560</strong> con tu tarjeta {brand.bankName}.
                     </ChatMessage>
                     {isLatest && (
                       <ChatSuggestions onChipClick={handleSuggestionClick} items={[

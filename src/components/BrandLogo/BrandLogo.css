@@ -1,0 +1,6 @@
+.brand-text-logo {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  color: var(--action-primary);
+  white-space: nowrap;
+}

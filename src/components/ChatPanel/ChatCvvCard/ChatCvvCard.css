@@ -1,11 +1,11 @@
 .cvv-card {
-  background: linear-gradient(140deg, #c44d0f 0%, #F26522 55%, #f5874e 100%);
+  background: linear-gradient(140deg, var(--action-primary-hover) 0%, var(--action-primary) 55%, var(--action-primary-light) 100%);
   border-radius: 14px;
   color: white;
   width: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 6px 20px rgba(242, 101, 34, 0.35);
+  box-shadow: 0 6px 20px rgba(var(--action-primary-rgb), 0.35);
 }
 
 .cvv-card-top {
@@ -104,7 +104,7 @@
 }
 
 .cvv-card-cvv-digit--filled {
-  color: #c44d0f;
+  color: var(--action-primary-hover);
   transform: scale(1.15);
 }
 

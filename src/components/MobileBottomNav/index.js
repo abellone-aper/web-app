@@ -1,5 +1,6 @@
 import './MobileBottomNav.css';
 import { Link, useLocation } from 'react-router-dom';
+import { useBrand } from '../../brands/BrandContext';
 
 const maskStyle = (icon) => ({
   WebkitMaskImage: `url('/icons/${icon}.svg')`,
@@ -8,11 +9,13 @@ const maskStyle = (icon) => ({
 
 export default function MobileBottomNav({ onChatOpen, hidden }) {
   const location = useLocation();
+  const brand = useBrand();
+  const isHome = location.pathname === brand.path('/');
 
   return (
     <nav className={`mobile-bottom-nav${hidden ? ' mobile-bottom-nav--hidden' : ''}`}>
-      <Link to="/" className={`mobile-nav-item${location.pathname === '/' ? ' active' : ''}`}>
-        <i className={`ph${location.pathname === '/' ? '-fill' : ''} ph-house`} style={{fontSize:'22px'}}></i>
+      <Link to={brand.path('/')} className={`mobile-nav-item${isHome ? ' active' : ''}`}>
+        <i className={`ph${isHome ? '-fill' : ''} ph-house`} style={{fontSize:'22px'}}></i>
         <span className="mobile-nav-label">Home</span>
       </Link>
       <a href="#" className="mobile-nav-item">

@@ -288,7 +288,7 @@
 }
 
 .hd-dropdown:hover { border-color: var(--neutral-six); }
-.hd-dropdown:focus { outline: none; border-color: var(--action-primary); box-shadow: 0 0 0 3px rgba(242,101,34,0.12); }
+.hd-dropdown:focus { outline: none; border-color: var(--action-primary); box-shadow: 0 0 0 3px rgba(var(--action-primary-rgb), 0.12); }
 .hd-dropdown i { font-size: 18px; color: var(--neutral-seven); flex-shrink: 0; }
 
 /* ─── Guest stepper ──────────────────────────────────────────── */

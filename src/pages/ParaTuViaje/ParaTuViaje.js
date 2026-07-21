@@ -7,6 +7,7 @@ import Breadcrumb from '../../components/Breadcrumb';
 import TripCard from '../../components/TripCard';
 import ContextBanner from '../../components/ContextBanner';
 import InsuranceCard from '../../components/InsuranceCard';
+import { useBrand } from '../../brands/BrandContext';
 
 const FILTERS = ['todo','alojamiento','moda','actividades','seguros'];
 const FILTER_LABELS = { todo:'Todo', alojamiento:'Alojamiento', moda:'Moda', actividades:'Actividades', seguros:'Seguros' };
@@ -23,7 +24,7 @@ const ALOJAMIENTOS = [
 const SEGUROS = [
   { img: 'https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg', cat:'Seguro de viaje', name:'Assist Card Viajero', price:'Desde $4.900 por persona', rating:'4.7' },
   { img: 'https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg', cat:'Seguro de viaje', name:'Assist Card Total Plus', price:'Desde $9.200 por persona', rating:'4.8', badge:'Más elegido' },
-  { img: 'https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg', cat:'Seguro de viaje', name:'Galicia Viajero', price:'Desde $6.800 por persona', rating:'4.9', badge:'Exclusivo Galicia' },
+  { img: 'https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg', cat:'Seguro de viaje', price:'Desde $6.800 por persona', rating:'4.9', brandProduct: true },
   { img: 'https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg', cat:'Seguro de viaje', name:'Allianz Travel Care', price:'Desde $14.500 por persona', rating:'4.6' },
   { img: 'https://images.pexels.com/photos/8730281/pexels-photo-8730281.jpeg?auto=compress&cs=tinysrgb&w=800', cat:'Seguro de viaje', name:'Mapfre Travel Asistencia', price:'Desde $5.800 por persona', rating:'4.5' },
   { img: 'https://images.pexels.com/photos/7009489/pexels-photo-7009489.jpeg?auto=compress&cs=tinysrgb&w=800', cat:'Seguro de viaje', name:'Wenance Travel Integral', price:'Desde $7.200 por persona', rating:'4.4', badge:'Nuevo' },
@@ -62,6 +63,11 @@ function PtvSection({ title, items, category, visible }) {
 }
 
 export default function ParaTuViajePage() {
+  const brand = useBrand();
+  const alojamientos = ALOJAMIENTOS.map(c => c.to ? { ...c, to: brand.path(c.to) } : c);
+  const seguros = SEGUROS.map(c => c.brandProduct
+    ? { ...c, name: brand.insuranceProduct.name, badge: brand.insuranceProduct.badge }
+    : c);
   const [filter, setFilter] = useState('todo');
   const [barHidden, setBarHidden] = useState(false);
 
@@ -82,7 +88,7 @@ export default function ParaTuViajePage() {
   return (
     <>
       <div className={`ptv-mobile-bar${barHidden ? ' ptv-mobile-bar--hidden' : ''}`}>
-        <Link to="/" className="ptv-back-btn" aria-label="Volver">
+        <Link to={brand.path('/')} className="ptv-back-btn" aria-label="Volver">
           <i className="ph ph-arrow-left"></i>
         </Link>
         <span className="ptv-bar-title">Para tu viaje</span>
@@ -93,7 +99,7 @@ export default function ParaTuViajePage() {
         <Header variant="page" title="Para tu viaje" />
 
         <Breadcrumb items={[
-          { label: 'Inicio', to: '/' },
+          { label: 'Inicio', to: brand.path('/') },
           { label: 'Para tu viaje' },
         ]} />
 
@@ -121,7 +127,7 @@ export default function ParaTuViajePage() {
             </div>
           </div>
 
-          <PtvSection title="Alojamiento en Bariloche" items={ALOJAMIENTOS} category="alojamiento" visible={show('alojamiento')} />
+          <PtvSection title="Alojamiento en Bariloche" items={alojamientos} category="alojamiento" visible={show('alojamiento')} />
 
           {filter === 'todo' && (
             <InsuranceCard
@@ -134,7 +140,7 @@ export default function ParaTuViajePage() {
             />
           )}
 
-          <PtvSection title="Seguros de viaje" items={SEGUROS} category="seguros" visible={show('seguros')} />
+          <PtvSection title="Seguros de viaje" items={seguros} category="seguros" visible={show('seguros')} />
           <PtvSection title="Moda para el frío" items={MODA} category="moda" visible={show('moda')} />
           <PtvSection title="Actividades en Bariloche" items={ACTIVIDADES} category="actividades" visible={show('actividades')} />
         </div>

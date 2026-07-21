@@ -147,7 +147,7 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(242,101,34,0.2), 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(var(--action-primary-rgb),0.2), 0 2px 6px rgba(0,0,0,0.08);
   transition: background var(--transition-fast);
 }
 .boti-fab:hover {
@@ -165,7 +165,7 @@
   position: absolute;
   top: 6px; right: 6px;
   width: 11px; height: 11px;
-  background: #ef4444;
+  background: var(--chat-fab-color);
   border-radius: 50%;
   border: 2px solid var(--action-secondary);
 }
@@ -200,12 +200,12 @@
   .boti-fab--show-mobile {
     background: var(--action-secondary);
     color: var(--action-primary);
-    box-shadow: 0 2px 12px rgba(242,101,34,0.18), 0 1px 4px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px rgba(var(--action-primary-rgb), 0.18), 0 1px 4px rgba(0,0,0,0.08);
     width: 56px;
     height: 56px;
   }
   .boti-fab--show-mobile:hover {
-    box-shadow: 0 4px 16px rgba(242,101,34,0.25), 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 16px rgba(var(--action-primary-rgb), 0.25), 0 2px 8px rgba(0,0,0,0.1);
   }
 
   .chat-panel {

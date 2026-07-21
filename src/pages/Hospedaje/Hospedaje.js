@@ -7,6 +7,7 @@ import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SecondaryButton from '../../components/Buttons/SecondaryButton';
 import FavButton from '../../components/Buttons/FavButton';
 import DateRangePicker from '../../components/DateRangePicker';
+import { useBrand } from '../../brands/BrandContext';
 
 const GALLERY_IMGS = [
   { src: 'https://www.designsuites.com/images/bariloche/habitacion_junior_suite_9.jpg', alt: 'Habitación' },
@@ -272,6 +273,7 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
 }
 
 export default function DesignSuitesPage({ onChatOpen }) {
+  const brand = useBrand();
   const [galleryIdx, setGalleryIdx] = useState(0);
   const [barHidden, setBarHidden] = useState(false);
   const trackRef = useRef(null);
@@ -302,7 +304,7 @@ export default function DesignSuitesPage({ onChatOpen }) {
   return (
     <>
       <div className={`hd-mobile-bar${barHidden ? ' hd-mobile-bar--hidden' : ''}`}>
-        <Link to="/para-tu-viaje" className="hd-back-btn" aria-label="Volver">
+        <Link to={brand.path('/para-tu-viaje')} className="hd-back-btn" aria-label="Volver">
           <i className="ph ph-arrow-left"></i>
         </Link>
         <span className="hd-bar-title">Hospedaje</span>
@@ -315,8 +317,8 @@ export default function DesignSuitesPage({ onChatOpen }) {
         <Header variant="page" title="Hospedaje" />
 
         <Breadcrumb items={[
-          { label: 'Inicio', to: '/' },
-          { label: 'Para tu viaje', to: '/para-tu-viaje' },
+          { label: 'Inicio', to: brand.path('/') },
+          { label: 'Para tu viaje', to: brand.path('/para-tu-viaje') },
           { label: 'Design Suites Bariloche' },
         ]} />
 
