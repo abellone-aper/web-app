@@ -1,0 +1,138 @@
+.reco-section.section {
+  padding: 32px 0 0;
+}
+@media (min-width: 481px) and (max-width: 1024px) {
+  .reco-section.section { padding: 48px 0 0; }
+}
+@media (min-width: 1025px) {
+  .reco-section.section { padding: 48px 0 0; }
+}
+@media (max-width: 480px) {
+  .reco-section.section { padding: 20px 0 0; }
+}
+
+.reco-row {
+  display: flex;
+  gap: var(--sp-6);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.reco-row::-webkit-scrollbar { display: none; }
+
+.reco-card {
+  flex: 0 0 220px;
+  width: 220px;
+  border: 1px solid var(--neutral-four);
+  border-radius: var(--radius-s);
+  padding: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  background: var(--color-bg-surface);
+}
+
+.reco-card-label {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--neutral-nine);
+  line-height: 24px;
+}
+
+.reco-card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--neutral-two);
+  border-radius: var(--radius-l);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.reco-card-image img {
+  max-width: 82%;
+  max-height: 82%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+.reco-card-image:hover img { transform: scale(1.06); }
+
+.reco-card-image--fill img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+}
+
+.reco-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.reco-card-title {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--neutral-nine);
+  line-height: 18px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.reco-card-price-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reco-card-price-old {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--neutral-seven);
+  text-decoration: line-through;
+}
+
+.reco-card-price {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-medium);
+  color: var(--neutral-nine);
+  line-height: 28px;
+}
+
+.reco-card-points {
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--neutral-eight);
+}
+
+.reco-card-badge {
+  align-self: flex-start;
+  background: var(--information-secondary);
+  color: var(--information-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  padding: 2px 4px;
+  border-radius: 2px;
+  line-height: 16px;
+}
+
+.reco-card-shipping {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--information-primary);
+}
+
+@media (min-width: 481px) {
+  .reco-card { flex: 1 1 0; width: auto; min-width: 0; }
+}
+
+@media (max-width: 480px) {
+  .reco-row { gap: var(--sp-3); padding-left: var(--page-px); padding-right: var(--page-px); }
+  .reco-card { flex: 0 0 200px; width: 200px; padding: var(--sp-4); gap: var(--sp-3); }
+}

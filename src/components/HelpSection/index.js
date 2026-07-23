@@ -25,6 +25,7 @@ export default function HelpSection() {
             <a key={item.label} href="#" className="help-item-card">
               <img src={item.icon} alt="" className="help-item-icon" />
               <span className="help-item-label">{item.label}</span>
+              <img src="/icons/flecha derecha.svg" alt="" className="help-item-chevron" />
             </a>
           ))}
         </div>

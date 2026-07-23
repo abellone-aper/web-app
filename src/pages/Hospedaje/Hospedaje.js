@@ -273,7 +273,7 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
   );
 }
 
-export default function DesignSuitesPage({ onChatOpen }) {
+export default function DesignSuitesPage({ onChatOpen, onOpenAssistant }) {
   const brand = useBrand();
   const [galleryIdx, setGalleryIdx] = useState(0);
   const [barHidden, setBarHidden] = useState(false);
@@ -315,7 +315,7 @@ export default function DesignSuitesPage({ onChatOpen }) {
       </div>
 
       <div className="hd-main">
-        <Header variant="page" title="Hospedaje" user={CURRENT_USER} />
+        <Header variant="page" title="Hospedaje" user={CURRENT_USER} onOpenAssistant={onOpenAssistant} />
 
         <Breadcrumb items={[
           { label: 'Inicio', to: brand.path('/') },

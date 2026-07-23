@@ -9,7 +9,7 @@
   background: transparent;
   color: var(--action-primary);
   border: 1px solid var(--action-primary);
-  border-radius: var(--radius-s);
+  border-radius: var(--radius-pill);
   height: 40px;
   padding: 0 24px;
   text-decoration: none;

@@ -212,7 +212,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
   display: flex; flex-direction: column; align-items: center; gap: 6px;
   background: rgba(255,255,255,0.15);
   border: 1px solid rgba(255,255,255,0.25);
-  border-radius: var(--radius-m);
+  border-radius: var(--radius-pill);
   padding: 14px 18px;
   color: #fff;
   cursor: pointer;
@@ -371,7 +371,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
   background: var(--action-primary);
   color: #fff;
   padding: 6px 8px;
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-pill);
   font-size: 11px; font-weight: 700;
   cursor: pointer; border: none;
   transition: background 0.15s;
@@ -699,7 +699,7 @@ body:has(div.hb-page) { overflow: hidden; background: var(--neutral-three); }
     display: inline-flex; align-items: center; gap: 6px;
     background: var(--action-primary); color: #fff;
     padding: 10px 16px;
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-pill);
     font-size: 14px; font-weight: 700;
     border: none; cursor: pointer;
     width: fit-content;

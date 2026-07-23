@@ -58,26 +58,30 @@ function AppContent() {
     setChatOpen(true);
   }
 
+  const openAssistant = () => setChatOpen(true);
+
   const homeBankingPage = (
     <HomeBanking chatOpen={chatOpen} onChatOpen={() => setChatOpen(true)} onChatClose={() => setChatOpen(false)} />
   );
-  const hospedajePage = <Hospedaje onChatOpen={handleHotelReserve} />;
+  const hospedajePage = <Hospedaje onChatOpen={handleHotelReserve} onOpenAssistant={openAssistant} />;
+  const homePage = <HomePage onOpenAssistant={openAssistant} />;
+  const paraTuViajePage = <ParaTuViaje onOpenAssistant={openAssistant} />;
 
   return (
     <BrandProvider brand={brandId}>
       <Routes>
-        <Route path="/" element={<Layout><HomePage /></Layout>} />
-        <Route path="/para-tu-viaje" element={<Layout><ParaTuViaje /></Layout>} />
+        <Route path="/" element={<Layout>{homePage}</Layout>} />
+        <Route path="/para-tu-viaje" element={<Layout>{paraTuViajePage}</Layout>} />
         <Route path="/homebanking" element={<Layout>{homeBankingPage}</Layout>} />
         <Route path="/hospedaje" element={<Layout>{hospedajePage}</Layout>} />
 
-        <Route path="/icbc" element={<Layout><HomePage /></Layout>} />
-        <Route path="/icbc/para-tu-viaje" element={<Layout><ParaTuViaje /></Layout>} />
+        <Route path="/icbc" element={<Layout>{homePage}</Layout>} />
+        <Route path="/icbc/para-tu-viaje" element={<Layout>{paraTuViajePage}</Layout>} />
         <Route path="/icbc/homebanking" element={<Layout>{homeBankingPage}</Layout>} />
         <Route path="/icbc/hospedaje" element={<Layout>{hospedajePage}</Layout>} />
 
-        <Route path="/galicia" element={<Layout><HomePage /></Layout>} />
-        <Route path="/galicia/para-tu-viaje" element={<Layout><ParaTuViaje /></Layout>} />
+        <Route path="/galicia" element={<Layout>{homePage}</Layout>} />
+        <Route path="/galicia/para-tu-viaje" element={<Layout>{paraTuViajePage}</Layout>} />
         <Route path="/galicia/homebanking" element={<Layout>{homeBankingPage}</Layout>} />
         <Route path="/galicia/hospedaje" element={<Layout>{hospedajePage}</Layout>} />
       </Routes>

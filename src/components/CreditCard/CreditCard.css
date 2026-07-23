@@ -26,7 +26,7 @@
 
 .credit-btn {
   border: 1.5px solid var(--action-primary);
-  border-radius: 8px;
+  border-radius: var(--radius-pill);
   background: transparent;
   color: var(--action-primary);
   font-size: 14px; font-weight: 700; font-family: inherit;

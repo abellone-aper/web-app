@@ -1,0 +1,118 @@
+/* ═══════════════════════════════════════════════════════════════
+   SEARCH SUGGESTIONS PANEL
+   ═══════════════════════════════════════════════════════════════ */
+
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 60;
+  background: var(--neutral-one);
+  border: 1px solid var(--neutral-five);
+  border-radius: var(--radius-s);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+.search-suggestions__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search-suggestions__chip {
+  background: var(--neutral-three);
+  color: var(--neutral-eight);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-fast);
+}
+.search-suggestions__chip:hover { background: var(--neutral-four); }
+
+.search-suggestions__section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--neutral-eight);
+  margin: 0 0 12px;
+}
+
+.search-suggestions__cards-wrap {
+  overflow: hidden;
+}
+
+.search-suggestions__cards {
+  display: flex;
+  gap: 16px;
+}
+
+.search-suggestions__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 123px;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.search-suggestions__card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--neutral-two);
+  border-radius: var(--radius-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.search-suggestions__card-image img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+.search-suggestions__card-image:hover img { transform: scale(1.06); }
+
+.search-suggestions__card-title {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--neutral-eight);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.search-suggestions__card-price {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--neutral-eight);
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .search-suggestions {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 65px;
+    z-index: 90;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    max-height: none;
+  }
+}

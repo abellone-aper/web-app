@@ -1,0 +1,151 @@
+/* ═══════════════════════════════════════════════════════════════
+   ACCOUNT PANEL — side menu opened from the header user name
+   ═══════════════════════════════════════════════════════════════ */
+
+.account-panel-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 300;
+  cursor: pointer;
+}
+.account-panel-backdrop.open { display: block; }
+
+/* body.chat-open would otherwise leave the chat FAB floating above this panel */
+body.account-panel-open .boti-fab,
+body.account-panel-open .mobile-nav-chat-fab-wrap { display: none !important; }
+
+.account-panel {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 360px;
+  max-width: 100vw;
+  background: var(--neutral-one);
+  z-index: 301;
+  overflow-y: auto;
+  box-shadow: -4px 0 32px rgba(0, 0, 0, 0.12);
+  transform: translateX(100%);
+  transition: transform var(--transition-panel);
+}
+.account-panel.open { transform: translateX(0); }
+
+/* ── Icon mask (recolor any /icons/*.svg via mask-image) ── */
+.account-panel-icon {
+  display: inline-block;
+  width: 24px; height: 24px; flex-shrink: 0;
+  background-color: var(--neutral-eight);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+.account-panel-item-icon {
+  width: 24px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 24px; color: var(--neutral-eight);
+}
+
+/* ── Header row ── */
+.account-panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--sp-2);
+  height: 64px;
+  padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-4);
+}
+.account-panel-user { display: flex; align-items: center; gap: var(--sp-2); min-width: 0; }
+.account-panel-avatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0;
+  background: var(--action-secondary); color: var(--action-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+}
+.account-panel-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.account-panel-greeting {
+  font-size: var(--text-md); font-weight: 500; line-height: 24px;
+  color: var(--neutral-eight);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.account-panel-close {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; flex-shrink: 0;
+  border-radius: 50%; border: none; background: none; cursor: pointer;
+  color: var(--neutral-eight);
+  transition: background var(--transition-fast);
+}
+.account-panel-close:hover { background: var(--neutral-three); }
+.account-panel-close i { font-size: 22px; }
+
+/* ── Body ── */
+.account-panel-body {
+  display: flex; flex-direction: column; gap: var(--sp-6);
+  padding: 0 var(--sp-4) var(--sp-6);
+}
+
+/* ── Assistant card ── */
+.account-panel-assistant {
+  display: flex; align-items: center; gap: var(--sp-4);
+  width: 100%;
+  height: 64px;
+  padding: var(--sp-2);
+  background: var(--neutral-one);
+  border: 1px solid var(--neutral-four);
+  border-radius: var(--radius-s);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.account-panel-assistant:hover {
+  background: var(--neutral-two);
+}
+.account-panel-assistant-icon {
+  width: 24px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 24px; color: var(--action-primary);
+}
+.account-panel-assistant-text {
+  display: flex; flex-direction: column; flex: 1; min-width: 0;
+}
+.account-panel-assistant-title {
+  font-size: var(--text-base); line-height: 20px; color: var(--neutral-eight);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.account-panel-assistant-sub {
+  font-size: var(--text-xs); line-height: 16px; color: var(--neutral-seven);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* ── Item list ── */
+.account-panel-list { display: flex; flex-direction: column; }
+.account-panel-item {
+  display: flex; align-items: center; gap: var(--sp-2);
+  width: 100%;
+  padding: var(--sp-3) 0;
+  font-size: var(--text-base); line-height: 20px; color: var(--neutral-eight);
+  background: none; border: none; text-align: left; cursor: pointer;
+  font-family: inherit;
+}
+.account-panel-item > span:last-child { flex: 1; min-width: 0; }
+.account-panel-item--reverse { width: auto; }
+.account-panel-item--reverse > span:last-child { flex: none; }
+.account-panel-item-icon-wrap { position: relative; width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.account-panel-notif-dot {
+  position: absolute; top: -4px; right: -6px;
+  background: var(--action-primary); color: var(--neutral-one);
+  font-size: 10px; font-weight: 600;
+  width: 16px; height: 16px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1.5px solid var(--neutral-one);
+}
+
+.account-panel-divider { height: 1px; background: var(--neutral-four); }
+
+.account-panel-logout { width: 100%; }
+
+@media (max-width: 480px) {
+  .account-panel { width: 100vw; }
+}

@@ -32,7 +32,7 @@
   cursor: default;
 }
 
-.chat-header-fab-icon {
+.chat-header-fab .chat-header-fab-icon {
   width: 24px;
   height: 24px;
   background-color: var(--action-primary);

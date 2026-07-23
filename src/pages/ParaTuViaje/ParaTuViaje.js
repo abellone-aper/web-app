@@ -63,7 +63,7 @@ function PtvSection({ title, items, category, visible }) {
   );
 }
 
-export default function ParaTuViajePage() {
+export default function ParaTuViajePage({ onOpenAssistant }) {
   const brand = useBrand();
   const alojamientos = ALOJAMIENTOS.map(c => c.to ? { ...c, to: brand.path(c.to) } : c);
   const seguros = SEGUROS.map(c => c.brandProduct
@@ -97,7 +97,7 @@ export default function ParaTuViajePage() {
       </div>
 
       <div className="ptv-main">
-        <Header variant="page" title="Para tu viaje" user={CURRENT_USER} />
+        <Header variant="page" title="Para tu viaje" user={CURRENT_USER} onOpenAssistant={onOpenAssistant} />
 
         <Breadcrumb items={[
           { label: 'Inicio', to: brand.path('/') },

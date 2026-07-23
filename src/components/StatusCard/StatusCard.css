@@ -10,6 +10,10 @@
   border-radius: var(--radius-l);
   text-decoration: none;
   cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.status-card:hover {
+  background: var(--neutral-three);
 }
 
 .status-card-image {

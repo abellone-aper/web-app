@@ -31,6 +31,7 @@
 }
 
 .search {
+  position: relative;
   width: 640px; height: 48px;
   border: 1px solid var(--neutral-six);
   border-radius: var(--radius-s);
@@ -58,7 +59,7 @@
 
 .header-cta {
   color: var(--action-primary); font-weight: 600; font-size: 16px;
-  padding: 8px; border-radius: var(--radius-s);
+  padding: 8px; border-radius: var(--radius-pill);
 }
 
 .header-bottom {
@@ -91,6 +92,7 @@
   display: flex; align-items: center; gap: 8px;
   font-size: 16px; color: var(--brand-on-secondary);
   position: relative;
+  background: none; border: none; font-family: inherit; cursor: pointer; padding: 0;
 }
 .icon-wrap { position: relative; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; }
 .icon-wrap i { font-size: 24px; color: var(--brand-on-secondary); }
@@ -266,22 +268,6 @@
   .header-search--scrolled { width: 480px; }
 }
 
-/* Search filter elements (shared across breakpoints) */
-.search-filter-divider {
-  width: 1px; height: 20px;
-  background: var(--neutral-five);
-  flex-shrink: 0;
-}
-.search-filter-btn {
-  display: flex; align-items: center; gap: 4px;
-  flex-shrink: 0;
-  font-size: 14px; font-weight: 500; color: var(--neutral-eight);
-  background: none; border: none; cursor: pointer; padding: 0 4px;
-  white-space: nowrap;
-}
-.search-filter-btn i { font-size: 14px; }
-.search-filter-btn:hover { color: var(--neutral-nine); }
-
 /* Desktop / tablet search mode */
 .header--search-open .header-top {
   position: relative;
@@ -325,9 +311,10 @@
 .header-user-btn {
   display: flex; align-items: center; gap: 8px;
   padding: 4px 4px 4px 12px;
-  border-radius: 20px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--neutral-five);
   color: var(--neutral-nine);
+  background: none; font: inherit; cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
   flex-shrink: 0;
 }
@@ -401,26 +388,18 @@
 
 /* ─── Mobile search ───────────────────────────────────────── */
 .header__mobile-search {
-  position: relative;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
   padding: 0 12px;
   height: 56px;
   background: var(--neutral-one);
   border-bottom: 1px solid var(--neutral-four);
 }
 
-.header__mobile-search__left {
-  position: absolute;
-  left: 4px;
-  display: flex;
-  align-items: center;
-}
-
-.header__mobile-search__title {
-  font-size: 16px; font-weight: 700;
-  color: var(--neutral-nine);
-  white-space: nowrap;
+.header__mobile-search .header__mobile-search__bar {
+  flex: 1;
+  min-width: 0;
+  width: auto;
 }
 
 .header__mobile-search__bar {
@@ -441,20 +420,6 @@
 }
 .header__mobile-search__bar input::placeholder { color: var(--neutral-seven); }
 
-.header__mobile-search__divider {
-  width: 1px; height: 18px;
-  background: var(--neutral-five);
-  flex-shrink: 0;
-}
-
-.header__mobile-search__filter-btn {
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  background: none; border: none; cursor: pointer; padding: 0;
-  color: var(--neutral-eight);
-}
-.header__mobile-search__filter-btn i { font-size: 16px; }
-
 /* ─── Mobile home ─────────────────────────────────────────── */
 .header__mobile-home {
   align-items: center;
@@ -467,6 +432,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  background: none; border: none; font-family: inherit; cursor: pointer; padding: 0;
+  text-align: left;
 }
 
 .header__mobile-home__avatar {
