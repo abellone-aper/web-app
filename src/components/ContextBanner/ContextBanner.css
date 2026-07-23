@@ -1,6 +1,8 @@
 .ctx-banner {
-  background: #323232;
-  border-radius: 16px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--neutral-four);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  border-radius: var(--radius-l);
   padding: 16px;
   display: flex;
   gap: 14px;
@@ -14,10 +16,21 @@
 
 .ctx-banner-icon {
   width: 38px; height: 38px; flex-shrink: 0;
-  background: #000;
+  background: var(--action-secondary);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  color: #fff;
+}
+
+.ctx-banner-icon-mask {
+  display: inline-block;
+  width: 24px; height: 24px;
+  background-color: var(--action-primary);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
 }
 
 .ctx-banner-body {
@@ -27,22 +40,27 @@
   overflow: hidden;
 }
 
+.ctx-banner-text {
+  display: flex; flex-direction: column; gap: 4px;
+  width: 100%;
+}
+
 .ctx-banner-sub {
   font-size: 12px; font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0; line-height: normal;
+  color: var(--neutral-eight);
+  margin: 0; line-height: 16px;
 }
 
 .ctx-banner-title {
-  font-size: 15px; font-weight: 700;
-  color: #fff; margin: 0; line-height: normal;
+  font-size: 16px; font-weight: 700;
+  color: var(--neutral-nine); margin: 0; line-height: 20px;
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
 .ctx-banner-link {
   font-size: 14px; font-weight: 700;
-  color: var(--action-primary-light);
+  color: var(--action-primary);
   letter-spacing: 0.028px; line-height: 18px;
   overflow-wrap: break-word;
   word-break: break-word;
