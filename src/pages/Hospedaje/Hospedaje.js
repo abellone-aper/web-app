@@ -2,6 +2,7 @@ import { useState, useRef, useId, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Hospedaje.css';
 import { CURRENT_USER } from '../../lib/currentUser';
+import { getPublicUrl } from '../../lib/storage';
 import Header from '../../components/Header';
 import Breadcrumb from '../../components/Breadcrumb';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
@@ -11,11 +12,11 @@ import DateRangePicker from '../../components/DateRangePicker';
 import { useBrand } from '../../brands/BrandContext';
 
 const GALLERY_IMGS = [
-  { src: 'https://www.designsuites.com/images/bariloche/habitacion_junior_suite_9.jpg', alt: 'Habitación' },
-  { src: 'https://www.designsuites.com/images/bariloche/foto_33.jpg', alt: 'Vista lago' },
-  { src: 'https://www.designsuites.com/images/bariloche/foto_4.jpg', alt: 'Vista' },
-  { src: 'https://www.designsuites.com/images/bariloche/foto_1.jpg', alt: 'Vista' },
-  { src: 'https://www.designsuites.com/images/bariloche/foto_13.jpg', alt: 'Vista' },
+  { src: getPublicUrl('Imagenes', 'Hospedaje/1.jpg'), alt: 'Habitación' },
+  { src: getPublicUrl('Imagenes', 'Hospedaje/2.jpg'), alt: 'Vista lago' },
+  { src: getPublicUrl('Imagenes', 'Hospedaje/3.jpg'), alt: 'Vista' },
+  { src: getPublicUrl('Imagenes', 'Hospedaje/4.jpg'), alt: 'Vista' },
+  { src: getPublicUrl('Imagenes', 'Hospedaje/5.jpg'), alt: 'Vista' },
 ];
 
 const MONTHS_SHORT = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];

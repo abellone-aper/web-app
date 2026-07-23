@@ -1,4 +1,4 @@
-/* ── variant: overlay (image + gradient text) ── */
+/* ── variant: overlay (image fills card, text sits on top, no shadow box) ── */
 .insurance-card--overlay {
   border-radius: 16px;
   overflow: hidden;
@@ -12,23 +12,28 @@
   object-fit: cover; object-position: center top;
 }
 
+@media (max-width: 640px) {
+  .insurance-card--overlay .insurance-bg {
+    height: 360px;
+  }
+}
+
 .insurance-card--overlay .insurance-body {
   grid-area: 1 / 1;
   align-self: end;
-  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
   padding: 16px;
   display: flex; flex-direction: column; gap: 6px;
 }
 
 .insurance-card--overlay .insurance-sub {
   display: inline-block; align-self: flex-start;
-  background: #1c1c1c; color: #fff;
+  background: var(--neutral-three); color: var(--neutral-eight);
   font-size: 12px; font-weight: 700;
-  padding: 0 8px; border-radius: 8px; line-height: 16px; margin: 0;
+  padding: 4px 8px; border-radius: var(--radius-pill); line-height: 16px; margin: 0;
 }
 
 .insurance-card--overlay .insurance-title {
-  font-size: 21px; font-weight: 700; color: #fff; margin: 0; line-height: 1.35;
+  font-size: 21px; font-weight: 700; color: var(--neutral-eight); margin: 0; line-height: 1.35;
 }
 
 /* ── variant: card (image top + text below) ── */

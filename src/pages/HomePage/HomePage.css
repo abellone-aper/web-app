@@ -335,6 +335,7 @@
   .status-section {
     flex-direction: column;
     gap: 12px;
+    padding: 20px 0 4px;
   }
   .status-section .status-card {
     flex: none;
@@ -1018,20 +1019,20 @@
   .section-header { padding: 0 var(--page-px) 14px; }
 
   /* Add flex gap between product sections */
-  .dashboard-main { display: flex; flex-direction: column; gap: 16px; }
+  .dashboard-main { display: flex; flex-direction: column; gap: 0; }
 
   /* Show new home, hide old desktop content */
   .new-mobile-home {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 8px 16px 32px;
+    padding: 20px 16px 4px;
     background: #fff;
   }
   .hero-wrap        { display: none !important; }
   .feature-strip    { display: none !important; }
   .dashboard-aside  { display: none !important; }
-  main.container    { padding-top: 20px; padding-bottom: 8px; }
+  main.container    { padding-top: 0; padding-bottom: 8px; }
 
   body { background: #fff; padding-bottom: 0; }
 
@@ -1397,6 +1398,7 @@
     grid-row: 1 / span 3;
     background: #f3f3f3; border-radius: 24px; padding: 24px;
     display: flex; flex-direction: column; gap: 24px;
+    justify-content: space-between;
     min-width: 0;
     overflow: hidden;
   }

@@ -53,6 +53,6 @@
 @media (max-width: 480px) {
   .banner-carousel { padding: var(--sp-4) 0 0; }
   .banner-carousel-scroll { gap: 8px; }
-  .banner-carousel-item { flex-basis: 160px; border-radius: var(--radius-m); }
+  .banner-carousel-item { flex-basis: 190px; border-radius: var(--radius-m); }
   .banner-carousel-arrow { display: none; }
 }

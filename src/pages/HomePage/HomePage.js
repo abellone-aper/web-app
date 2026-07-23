@@ -28,7 +28,7 @@ const COUPONS = [
 ];
 
 const TRIP_CARDS = [
-  { img: getPublicUrl('Imagenes', 'design-suites.jpg'), cat: 'Hospedaje', name: 'Design Suites Bariloche', price: 'Desde $49.999 por 2 noches', favActive: false, to: '/hospedaje' },
+  { img: getPublicUrl('Imagenes', 'Hospedaje/1.jpg'), cat: 'Hospedaje', name: 'Design Suites Bariloche', price: 'Desde $49.999 por 2 noches', favActive: false, to: '/hospedaje' },
   { img: getPublicUrl('Imagenes', 'campera-patagonia.png'), cat: 'Indumentaria', name: 'Campera Patagonia', price: '$239.000 en 6 cuotas sin interés', favActive: true },
   { img: getPublicUrl('Imagenes', 'catamaran.jpg'), cat: 'Actividad', name: 'Catamarán Isla Victoria', price: 'Desde $18.500 por persona' },
   { img: getPublicUrl('Imagenes', 'cerro-catedral.jpeg'), cat: 'Actividad', name: 'Ski Cerro Catedral', price: 'Desde $32.000 por día' },

@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage/HomePage';
 import ParaTuViaje from './pages/ParaTuViaje/ParaTuViaje';
 import HomeBanking from './pages/HomeBanking/HomeBanking';
 import Hospedaje from './pages/Hospedaje/Hospedaje';
+import Mochila from './pages/Mochila/Mochila';
 import Footer from './components/Footer';
 import HelpSection from './components/HelpSection';
 import ChatPanel from './components/ChatPanel';
@@ -64,6 +65,7 @@ function AppContent() {
     <HomeBanking chatOpen={chatOpen} onChatOpen={() => setChatOpen(true)} onChatClose={() => setChatOpen(false)} />
   );
   const hospedajePage = <Hospedaje onChatOpen={handleHotelReserve} onOpenAssistant={openAssistant} />;
+  const mochilaPage = <Mochila onOpenAssistant={openAssistant} onChatOpen={openAssistant} />;
   const homePage = <HomePage onOpenAssistant={openAssistant} />;
   const paraTuViajePage = <ParaTuViaje onOpenAssistant={openAssistant} />;
 
@@ -74,16 +76,19 @@ function AppContent() {
         <Route path="/para-tu-viaje" element={<Layout>{paraTuViajePage}</Layout>} />
         <Route path="/homebanking" element={<Layout>{homeBankingPage}</Layout>} />
         <Route path="/hospedaje" element={<Layout>{hospedajePage}</Layout>} />
+        <Route path="/mochila" element={<Layout>{mochilaPage}</Layout>} />
 
         <Route path="/icbc" element={<Layout>{homePage}</Layout>} />
         <Route path="/icbc/para-tu-viaje" element={<Layout>{paraTuViajePage}</Layout>} />
         <Route path="/icbc/homebanking" element={<Layout>{homeBankingPage}</Layout>} />
         <Route path="/icbc/hospedaje" element={<Layout>{hospedajePage}</Layout>} />
+        <Route path="/icbc/mochila" element={<Layout>{mochilaPage}</Layout>} />
 
         <Route path="/galicia" element={<Layout>{homePage}</Layout>} />
         <Route path="/galicia/para-tu-viaje" element={<Layout>{paraTuViajePage}</Layout>} />
         <Route path="/galicia/homebanking" element={<Layout>{homeBankingPage}</Layout>} />
         <Route path="/galicia/hospedaje" element={<Layout>{hospedajePage}</Layout>} />
+        <Route path="/galicia/mochila" element={<Layout>{mochilaPage}</Layout>} />
       </Routes>
 
       {!isBanking && <MobileBottomNav onChatOpen={() => setChatOpen(true)} hidden={navHidden} />}

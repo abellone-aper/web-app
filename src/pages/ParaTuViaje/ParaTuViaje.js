@@ -14,7 +14,7 @@ const FILTERS = ['todo','alojamiento','moda','actividades','seguros'];
 const FILTER_LABELS = { todo:'Todo', alojamiento:'Alojamiento', moda:'Moda', actividades:'Actividades', seguros:'Seguros' };
 
 const ALOJAMIENTOS = [
-  { img: 'https://www.designsuites.com/images/bariloche/foto_33.jpg', cat:'Hospedaje', name:'Design Suites Bariloche', price:'Desde $49.999 por 2 noches', rating:'5.0', favActive:true, badge:null, to:'/hospedaje' },
+  { img: getPublicUrl('Imagenes', 'Hospedaje/1.jpg'), cat:'Hospedaje', name:'Design Suites Bariloche', price:'Desde $49.999 por 2 noches', rating:'5.0', favActive:true, badge:null, to:'/hospedaje' },
   { img: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/809139678.jpg?k=9add8787963a1ef0f56b77484ab35cd8c598aa580f8d668a0a49b6246859bc65&o=', cat:'Hospedaje', name:'Radisson Blu Bariloche', price:'Desde $62.000 por 2 noches', rating:'4.8' },
   { img: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Llao_llao.jpg', cat:'Hospedaje', name:'Llao Llao Hotel & Resort', price:'Desde $195.000 por 2 noches', rating:'4.9', badge:'Premium' },
   { img: 'https://nh-bariloche-edelweiss.hotelesenpatagonia.com/data/Images/OriginalPhoto/16561/1656178/1656178889/image-san-carlos-de-bariloche-nh-bariloche-edelweiss-53.JPEG', cat:'Hospedaje', name:'Hotel Edelweiss Bariloche', price:'Desde $38.500 por 2 noches', rating:'4.6' },
@@ -34,7 +34,7 @@ const SEGUROS = [
 const MODA = [
   { img: 'https://www.switchbacktravel.com/sites/default/files/image_fields/In-Depth%20Gear%20Reviews/Patagonia%20Tres%203-in-1%20Parka/Patagonia%20Tres%203-in-1%20Parka%20%28adjusting%20hood%29.jpg', cat:'Indumentaria', name:'Campera Patagonia Tres-in-One', price:'$239.000 en 6 cuotas sin interés', rating:'4.9', favActive:true },
   { img: 'https://http2.mlstatic.com/D_NQ_NP_708648-MLA109086872908_042026-O.webp', cat:'Calzado', name:'Botas Columbia Waterproof', price:'$89.900 en 3 cuotas', rating:'4.7' },
-  { img: 'https://www.deuter.com/media/f8/2d/fa/1770654012/hiking-futurapro-sideshot-19-lukaskusstatscher.webp', cat:'Accesorios', name:'Mochila Deuter Futura 60L', price:'$74.500 en 3 cuotas', rating:'4.8' },
+  { img: getPublicUrl('Imagenes', 'Mochila/card.jpeg'), cat:'Accesorios', name:'Mochila Tomtoc, equipaje de mano', price:'$74.500 en 3 cuotas', rating:'4.8', to:'/mochila' },
   { img: 'https://www.underarmour.com.ar/on/demandware.static/-/Sites-underarmour_staging/default/dwe44c34b4/new_images/1365459/1365459-1.jpeg', cat:'Indumentaria', name:'Set Térmico Under Armour', price:'$45.800', rating:'4.5' },
   { img: 'https://images.pexels.com/photos/6263508/pexels-photo-6263508.jpeg?auto=compress&cs=tinysrgb&w=800', cat:'Accesorios', name:'Guantes Columbia Omni-Heat', price:'$28.500 en 3 cuotas', rating:'4.7' },
   { img: 'https://images.pexels.com/photos/20372474/pexels-photo-20372474.jpeg?auto=compress&cs=tinysrgb&w=800', cat:'Accesorios', name:'Gorro y Braga Patagonia', price:'$19.900', rating:'4.6' },
@@ -69,6 +69,8 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
   const seguros = SEGUROS.map(c => c.brandProduct
     ? { ...c, name: brand.insuranceProduct.name, badge: brand.insuranceProduct.badge }
     : c);
+  const moda = MODA.map(c => c.to ? { ...c, to: brand.path(c.to) } : c);
+  const populares = [alojamientos[0], moda[2], seguros[1], moda[0], ACTIVIDADES[0], ACTIVIDADES[3]];
   const [filter, setFilter] = useState('todo');
   const [barHidden, setBarHidden] = useState(false);
 
@@ -128,6 +130,8 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
             </div>
           </div>
 
+          <PtvSection title="Populares" items={populares} category="populares" visible={filter === 'todo'} />
+
           <PtvSection title="Alojamiento en Bariloche" items={alojamientos} category="alojamiento" visible={show('alojamiento')} />
 
           {filter === 'todo' && (
@@ -142,7 +146,7 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
           )}
 
           <PtvSection title="Seguros de viaje" items={seguros} category="seguros" visible={show('seguros')} />
-          <PtvSection title="Moda para el frío" items={MODA} category="moda" visible={show('moda')} />
+          <PtvSection title="Moda para el frío" items={moda} category="moda" visible={show('moda')} />
           <PtvSection title="Actividades en Bariloche" items={ACTIVIDADES} category="actividades" visible={show('actividades')} />
         </div>
       </div>
