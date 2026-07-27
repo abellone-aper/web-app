@@ -79,9 +79,9 @@
   --shadow-3: 0 8px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
 
   /* ─── Font families ─────────────────────────────────────────── */
-  --font-body:    'Montserrat', sans-serif;
-  --font-display: 'Montserrat', sans-serif;
-  --font-accent:  'Montserrat', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-display: 'Inter', sans-serif;
+  --font-accent:  'Inter', sans-serif;
   --font-system:  -apple-system, BlinkMacSystemFont, var(--font-body);
 
   /* ─── Font weights ──────────────────────────────────────────── */

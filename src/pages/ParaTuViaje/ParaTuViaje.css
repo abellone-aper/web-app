@@ -9,7 +9,7 @@
 
 /* ─── Page wrapper ───────────────────────────────────────────── */
 .ptv-page {
-  background: var(--neutral-two);
+  background: var(--color-bg-surface);
 }
 
 
@@ -275,6 +275,308 @@
   padding: 0 var(--page-px) 20px;
 }
 
+/* ─── Promo banners (Ofertas para tu próximo viaje) ──────────── */
+.ptv-promos {
+  padding: 4px 0 20px;
+}
+
+.ptv-promos-track {
+  display: flex;
+  gap: 12px;
+  padding: 0 var(--page-px);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.ptv-promos-track::-webkit-scrollbar { display: none; }
+
+.ptv-promo-banner {
+  flex: 0 0 190px;
+  min-width: 0;
+  max-width: 190px;
+  width: 190px;
+  aspect-ratio: 364 / 420;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--neutral-three);
+}
+
+.ptv-promo-banner-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.ptv-promo-banner:hover .ptv-promo-banner-img { transform: scale(1.06); }
+
+.ptv-promo-banner:first-child {
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-surface);
+}
+
+/* ─── Transport cards (Moverte por Bariloche) ────────────────── */
+.ptv-transport-track {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 var(--page-px) 28px;
+}
+
+.ptv-transport-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--neutral-three);
+  border-radius: var(--radius-l);
+  padding: 16px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.ptv-transport-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--neutral-one);
+  flex-shrink: 0;
+}
+
+.ptv-transport-icon i {
+  font-size: 22px;
+  color: var(--neutral-eight);
+}
+
+.ptv-transport-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ptv-transport-badge {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  height: 18px;
+  padding: 0 8px;
+  border-radius: var(--radius-xs);
+  background: var(--neutral-eight);
+  color: var(--color-text-on-brand);
+  font-size: 12px; font-weight: 700;
+  white-space: nowrap;
+}
+
+.ptv-transport-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ptv-transport-title {
+  font-size: 14px; font-weight: 700;
+  color: var(--neutral-nine);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.ptv-transport-sub {
+  font-size: 12px;
+  color: var(--neutral-seven);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.ptv-transport-sub strong {
+  font-weight: 700;
+  color: var(--neutral-nine);
+}
+
+.ptv-transport-link {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 700;
+  color: var(--action-primary);
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.ptv-transport-link:hover {
+  text-decoration: underline;
+}
+
+/* ─── Galicia pricing cards (Sugeridos premium Galicia) ──────── */
+.ptv-galicia-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 var(--page-px) 14px;
+}
+
+.ptv-galicia-title {
+  font-size: 18px; font-weight: 700;
+  color: var(--neutral-nine);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.ptv-galicia-subtitle {
+  font-size: 14px;
+  color: var(--neutral-seven);
+  margin: 0;
+}
+
+.ptv-galicia-track {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: 0 var(--page-px) 28px;
+}
+
+.ptv-galicia-promo {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background: var(--brand-primary);
+  border-radius: var(--radius-l);
+  padding: 24px;
+  min-height: 220px;
+}
+
+.ptv-galicia-promo-title {
+  position: relative;
+  z-index: 1;
+  font-size: 26px; font-weight: 700;
+  color: var(--color-text-on-brand);
+  margin: 0;
+  line-height: 1.3;
+  max-width: 220px;
+}
+
+.ptv-galicia-promo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  pointer-events: none;
+}
+
+.ptv-galicia-plan {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-l);
+  padding: 24px;
+}
+
+.ptv-galicia-plan-top {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ptv-galicia-plan-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ptv-galicia-plan-title {
+  font-size: 18px; font-weight: 700;
+  color: var(--neutral-nine);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.ptv-galicia-plan-sub {
+  font-size: 14px;
+  color: var(--neutral-seven);
+  margin: 0;
+}
+
+.ptv-galicia-plan-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ptv-galicia-plan-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--neutral-eight);
+  line-height: 1.3;
+}
+
+.ptv-galicia-plan-features i {
+  font-size: 18px;
+  color: var(--information-primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.ptv-galicia-plan-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.ptv-galicia-plan-price {
+  font-size: 24px; font-weight: 700;
+  color: var(--neutral-nine);
+  margin: 0;
+}
+
+.ptv-galicia-plan-price span {
+  font-size: 14px; font-weight: 400;
+  color: var(--neutral-seven);
+}
+
+.ptv-galicia-plan-installments {
+  font-size: 13px;
+  color: var(--information-primary);
+  margin: 0 0 8px;
+}
+
+.ptv-galicia-plan-cta {
+  align-self: flex-start;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--action-primary);
+  background: var(--action-secondary);
+  color: var(--action-primary);
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.ptv-galicia-plan-cta:hover {
+  background: var(--action-secondary-hover);
+}
+
 
 
 /* ═══════════════════════════════════════════════════════════════
@@ -347,6 +649,11 @@
   /* Insurance card — more breathing room */
   .insurance-card--card {
     margin: 8px 16px 8px;
+  }
+
+  /* Galicia promo card: taller so the photo isn't cropped tight */
+  .ptv-galicia-promo {
+    min-height: 320px;
   }
 
   /* ProductCarousel sections (Populares, Actividades): the shared
@@ -505,6 +812,37 @@
 
   /* Insurance: margin reset at desktop */
   .insurance-card--card { margin: 32px 0 0; }
+
+  /* Transport cards: row layout */
+  .ptv-transport-track {
+    flex-direction: row;
+    gap: 16px;
+    padding: 0 0 40px;
+  }
+
+  /* Galicia pricing cards: 4-column grid */
+  .ptv-galicia-track {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 0 0 40px;
+  }
+
+  /* Promo banners: equal 5-column row, no scroll */
+  .ptv-promos {
+    padding: 12px 0 0;
+  }
+
+  .ptv-promos-track {
+    padding: 0;
+    overflow: visible;
+  }
+
+  .ptv-promo-banner {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    width: auto;
+  }
 }
 
 /* ─── Mid breakpoint: 2 columns ──────────────────────────────── */
@@ -643,6 +981,20 @@
 
   /* Insurance: margin reset */
   .insurance-card--card { margin: 28px 0 0; }
+
+  /* Transport cards: row layout */
+  .ptv-transport-track {
+    flex-direction: row;
+    gap: 16px;
+    padding: 0 0 36px;
+  }
+
+  /* Galicia pricing cards: 2-column grid */
+  .ptv-galicia-track {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 0 36px;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
