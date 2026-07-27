@@ -199,7 +199,7 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
 
           <div className="ptv-section ptv-galicia">
             <div className="ptv-galicia-header">
-              <h2 className="ptv-galicia-title">Sugeridos premium Galicia</h2>
+              <h2 className="ptv-galicia-title">Sugeridos premium {brand.bankName}</h2>
               <p className="ptv-galicia-subtitle">Seleccionamos lo mejor para que disfrutes Bariloche al máximo</p>
             </div>
             <div className="ptv-galicia-track">
