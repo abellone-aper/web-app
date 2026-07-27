@@ -42,12 +42,57 @@
   display: flex; flex-direction: column; gap: 8px;
 }
 
+.product-info-text {
+  display: flex; flex-direction: column; gap: 2px;
+  width: 100%;
+}
+
 .product-title {
   font-size: 14px; font-weight: 400;
   color: var(--neutral-nine, black);
   line-height: 18px;
   margin: 0;
   letter-spacing: 0.028px;
+}
+
+.product-seller {
+  display: flex; align-items: center; gap: 4px;
+}
+
+.product-seller-name {
+  font-size: 12px; font-weight: 400; line-height: 16px;
+  color: var(--neutral-seven, #6f6f6f);
+  white-space: nowrap;
+}
+
+.product-seller-verified {
+  font-size: 14px;
+  color: var(--action-primary);
+}
+
+.product-rating {
+  display: flex; align-items: center; gap: 6px;
+}
+
+.product-rating-star {
+  font-size: 11px;
+  color: var(--action-primary);
+}
+
+.product-rating-score {
+  font-size: 12px; font-weight: 500; line-height: 16px;
+  color: var(--neutral-seven, #6f6f6f);
+}
+
+.product-rating-sep {
+  font-size: 12px;
+  color: var(--neutral-seven, #6f6f6f);
+}
+
+.product-rating-reviews {
+  font-size: 12px; font-weight: 400; line-height: 16px;
+  color: var(--neutral-seven, #6f6f6f);
+  white-space: nowrap;
 }
 
 .price-and-discounts {
@@ -94,6 +139,7 @@
 
 .product-card-badge {
   display: inline-flex; align-items: center; justify-content: center;
+  align-self: flex-start;
   background: #e8f7ee;
   color: #22683e;
   font-size: 14px; font-weight: 700; line-height: 16px;
@@ -117,4 +163,9 @@
   .installments { font-size: 15px; line-height: 20px; }
   .shipping { font-size: 15px; line-height: 20px; }
   .product-card-badge { font-size: 13px; }
+}
+
+.product-card--link {
+  text-decoration: none;
+  color: inherit;
 }

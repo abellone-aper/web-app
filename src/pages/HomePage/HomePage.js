@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getPublicUrl } from '../../lib/storage';
 import { CURRENT_USER } from '../../lib/currentUser';
 import Header from '../../components/Header';
-import ProductCard from '../../components/ProductCard';
+import ProductCarousel from '../../components/ProductCarousel';
 import TripCard from '../../components/TripCard';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SecondaryButton from '../../components/Buttons/SecondaryButton';
@@ -118,56 +118,6 @@ function TripScrollWrap({ children, innerClass, compact = false }) {
   );
 }
 
-function ProductCarousel({ title, badge, products }) {
-  const trackRef = useRef(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(true);
-
-  function checkScroll() {
-    const t = trackRef.current;
-    if (!t) return;
-    setCanLeft(t.scrollLeft > 0);
-    setCanRight(t.scrollLeft < t.scrollWidth - t.clientWidth - 1);
-  }
-
-  useEffect(() => {
-    const t = trackRef.current;
-    if (!t) return;
-    checkScroll();
-    t.addEventListener('scroll', checkScroll, { passive: true });
-    return () => t.removeEventListener('scroll', checkScroll);
-  }, []);
-
-  function scroll(dir) {
-    const track = trackRef.current;
-    if (!track) return;
-    const card = track.querySelector('.product-card');
-    const amount = card ? (card.offsetWidth + 24) * 2 : 300;
-    track.scrollBy({ left: dir * amount, behavior: 'smooth' });
-  }
-
-  return (
-    <section className="section">
-      <div className="section-header">
-        <div className="section-title-group">
-          <h2 className="section-title">{title}</h2>
-          {badge && <span className="section-title-badge">{badge}</span>}
-        </div>
-        <LinkButton as="a" href="#">Mostrar todo</LinkButton>
-      </div>
-      <div className="carousel-wrap">
-        <button className={`carousel-arrow${!canLeft ? ' carousel-arrow--hidden' : ''}`} aria-label="Anterior" onClick={() => scroll(-1)}><i className="ph ph-caret-left"></i></button>
-        <div className="carousel-track" ref={trackRef}>
-          <div className="product-row">
-            {products.map(p => <ProductCard key={p.id} product={p} />)}
-          </div>
-        </div>
-        <button className={`carousel-arrow${!canRight ? ' carousel-arrow--hidden' : ''}`} aria-label="Siguiente" onClick={() => scroll(1)}><i className="ph ph-caret-right"></i></button>
-      </div>
-    </section>
-  );
-}
-
 function HeroSlider() {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef(null);
@@ -261,21 +211,21 @@ export default function HomePage({ onOpenAssistant }) {
 
         {/* ── Mobile home ── */}
         <div className="new-mobile-home">
-          <ContextBanner
-            icon={CTX_CAR_ICON}
-            sub="El viaje se acerca"
-            title="Reservá un transfer o alquilá un auto y evitá sorpresas al llegar."
-            linkText="Ver opciones de transporte"
-          />
-
           <section className="nmh-trip-section">
-            <div className="nmh-section-header">
-              <h2 className="nmh-section-title">Para tu viaje</h2>
-              <LinkButton as={Link} to={brand.path('/para-tu-viaje')}>Mostrar todo</LinkButton>
+            <div className="nmh-trip-header-text">
+              <p className="nmh-trip-eyebrow">El viaje se acerca</p>
+              <p className="nmh-trip-heading">Ya tenés el vuelo. Armamos todo lo que necesitas para el viaje.</p>
             </div>
             <TripScrollWrap innerClass="nmh-trip-cards">
               {tripCards.map(c => <TripCard key={c.name} card={c} />)}
             </TripScrollWrap>
+            <ContextBanner
+              icon={CTX_CAR_ICON}
+              sub="El viaje se acerca"
+              title="Reservá un transfer o alquilá un auto y evitá sorpresas al llegar."
+              linkText="Ver opciones de transporte"
+            />
+            <SecondaryButton as={Link} to={brand.path('/para-tu-viaje')} style={{width:'100%'}}>Ver todo</SecondaryButton>
           </section>
 
           <section className="nmh-explore-section">

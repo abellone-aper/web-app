@@ -110,8 +110,14 @@
   color: var(--neutral-eight);
 }
 
-.reco-card-badge {
+.reco-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
   align-self: flex-start;
+}
+
+.reco-card-badge {
   background: var(--information-secondary);
   color: var(--information-primary);
   font-size: var(--text-sm);

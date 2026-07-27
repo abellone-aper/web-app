@@ -40,7 +40,7 @@ const RECOMMENDATIONS = [
     img: getPublicUrl('Imagenes', 'abastecimiento.png'),
     title: 'Abastecimiento de 1 tanque de combustible',
     price: 'Desde $90.000',
-    badge: '$30.000 cashback con VISA',
+    badge: ['$30.000 cashback', 'con VISA'],
   },
 ];
 
@@ -63,7 +63,13 @@ export default function RecommendationsCarousel() {
                   {item.withPoints && <span className="reco-card-points"> con puntos</span>}
                 </p>
               </div>
-              {item.badge && <span className="reco-card-badge">{item.badge}</span>}
+              {item.badge && (
+                <div className="reco-card-badges">
+                  {(Array.isArray(item.badge) ? item.badge : [item.badge]).map((b, i) => (
+                    <span key={i} className="reco-card-badge">{b}</span>
+                  ))}
+                </div>
+              )}
               {item.shipping && <p className="reco-card-shipping">{item.shipping}</p>}
             </div>
           </article>

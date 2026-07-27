@@ -134,7 +134,7 @@
   .nmh-trip-card {
     flex: 0 0 calc(50% - 20px);
     display: flex; flex-direction: column;
-    border-radius: 16px;
+    border-radius: 8px;
     overflow: hidden;
     background: #fff;
   }
@@ -169,26 +169,26 @@
   .nmh-fav-btn:hover { background: rgba(var(--action-primary-rgb), 0.12); }
   .nmh-trip-card-body {
     padding: 12px;
-    display: flex; flex-direction: column; gap: 5px;
+    display: flex; flex-direction: column; gap: 2px;
     background: #fff;
     border-radius: 0 0 8px 8px;
     flex: 1;
   }
   .nmh-card-category {
     display: block;
-    font-size: 15px; color: var(--neutral-seven);
-    line-height: 20px;
+    font-size: 12px; color: var(--neutral-seven);
+    line-height: 16px;
   }
   .nmh-card-name {
     display: block;
-    font-size: 15px; font-weight: 600; color: #1c1c1c;
-    line-height: 20px;
+    font-size: 12px; font-weight: 400; color: #1c1c1c;
+    line-height: 16px;
   }
   .nmh-card-price {
     display: block;
-    font-size: 15px; font-weight: 600;
+    font-size: 13px; font-weight: 700;
     color: #1c1c1c;
-    line-height: 20px;
+    line-height: 16px;
   }
 }
 
