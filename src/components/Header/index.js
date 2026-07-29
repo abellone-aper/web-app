@@ -140,6 +140,9 @@ export default function Header({
               <i className="ph ph-x"></i>
             </button>
           )}
+          <button className="search-close" onClick={closeSearch} aria-label="Minimizar búsqueda">
+            <i className="ph ph-arrows-in-line-horizontal"></i>
+          </button>
         </div>
         {suggestionsOpen && <SearchSuggestions onChipClick={setSearchQuery} />}
       </div>
@@ -171,10 +174,9 @@ export default function Header({
         {searchMode ? (
           <>
             <div className="header-search-left">
-              <button className="header-search-back" onClick={closeSearch} aria-label="Volver">
-                <i className="ph ph-arrow-left"></i>
-              </button>
-              <span className="header-search-title">Buscar</span>
+              <Link to={brand.path('/')} className="logo">
+                <BrandLogo className="logo-img" />
+              </Link>
             </div>
             <div className="search search--expanded" ref={desktopSearchRef}>
               <img src="/icons/buscar.svg" alt="" className="search-icon header-icon-img" />
@@ -191,6 +193,9 @@ export default function Header({
                   <i className="ph ph-x"></i>
                 </button>
               )}
+              <button className="search-close" onClick={closeSearch} aria-label="Minimizar búsqueda">
+                <i className="ph ph-arrows-in-line-horizontal"></i>
+              </button>
               {suggestionsOpen && <SearchSuggestions onChipClick={setSearchQuery} />}
             </div>
             <div className="header-search-right header-icons">
@@ -231,8 +236,8 @@ export default function Header({
                 placeholder="Buscar productos o marcas"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                onFocus={() => setSuggestionsOpen(true)}
-                onClick={() => setSuggestionsOpen(true)}
+                onFocus={openSearch}
+                onClick={openSearch}
               />
               {searchQuery && (
                 <button className="search-clear" onClick={() => setSearchQuery('')} aria-label="Borrar búsqueda">

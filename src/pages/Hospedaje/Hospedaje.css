@@ -661,10 +661,10 @@
   .hd-gallery-mobile { display: none; }
   .hd-mobile-detail { display: none; }
 
-  /* Page wrapper */
+  /* Page wrapper — 40px side padding matches HomePage's .container */
   .hd-page {
     max-width: 1440px; margin: 0 auto;
-    padding: 24px 80px 60px;
+    padding: 24px 40px 60px;
     background: transparent;
   }
 
@@ -939,6 +939,9 @@
 @media (min-width: 1025px) and (max-width: 1280px) {
   .hd-info { grid-template-columns: 1fr 360px; }
   .hd-gallery-main { height: 340px; }
+
+  /* Matches HomePage's .container padding at this same breakpoint */
+  .hd-page { padding: 24px 48px 60px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════

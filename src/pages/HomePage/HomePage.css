@@ -424,9 +424,38 @@
   color: var(--neutral-eight);
 }
 .carousel-arrow:hover { background: var(--neutral-two); }
+/* Arrows stay invisible until the row is hovered, then fade in —
+   .carousel-arrow--hidden (no more content in that direction) always
+   wins over hover, via the :not() below. */
+.carousel-arrow {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, background 0.15s, border-color 0.15s, color 0.15s;
+}
+.carousel-wrap:hover .carousel-arrow:not(.carousel-arrow--hidden),
+.carousel-arrow:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
 .carousel-arrow--hidden { visibility: hidden; pointer-events: none; }
+/* .carousel-viewport fills the available space and is only used to
+   measure it (ProductCarousel reads its width to compute how many
+   217px cards fit). .carousel-track gets that exact pixel width set
+   inline on desktop, so it always holds a whole number of cards —
+   never a partial one cropped at the edge — and is the positioning
+   frame for the arrows, so they hug the last visible card instead of
+   the section's outer edge. The actual scrolling/clipping happens on
+   the nested .carousel-track-scroll. */
+.carousel-viewport {
+  flex: 1; min-width: 0;
+}
 .carousel-track {
-  flex: 1; min-width: 0; overflow: hidden;
+  position: relative;
+  max-width: 100%;
+}
+.carousel-track-scroll {
+  overflow: hidden;
+  width: 100%;
 }
 .product-row {
   display: flex; gap: 24px;
@@ -852,14 +881,14 @@
 
   .carousel-arrow { display: none; }
   .carousel-wrap { padding: 0 0 20px; }
-  .carousel-track {
+  .carousel-track-scroll {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
     margin-right: 0;
   }
-  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-track-scroll::-webkit-scrollbar { display: none; }
   .product-row {
     gap: 10px;
     padding-left: var(--page-px);
@@ -1296,8 +1325,8 @@
   .status-section { padding-top: 48px; padding-bottom: 0; }
   .mas-accedidos-section { gap: 20px; padding: 48px 0 0; }
   .mas-accedidos-title { font-size: 22px; }
-  .mas-accedidos-grid { gap: 12px; overflow-x: visible; }
-  .mas-accedidos-card { flex: 1; min-width: 0; height: 144px; }
+  .mas-accedidos-grid { gap: 14px; overflow-x: visible; flex-wrap: wrap; }
+  .mas-accedidos-card { flex: 0 0 190px; width: 190px; height: 144px; }
 
   /* ─── Dashboard grid ─── */
   .dashboard-grid {
@@ -1336,10 +1365,14 @@
   .carousel-arrow:first-child { left: -28px; }
   .carousel-arrow:last-child  { right: -28px; }
   .carousel-arrow:hover { background: var(--action-secondary); border-color: var(--action-primary); color: var(--action-primary); }
-  .carousel-track { overflow: hidden; width: 100%; }
+  .carousel-track-scroll { overflow: hidden; width: 100%; }
   .product-row    { display: flex; gap: 14px; }
   .product-card   { flex: 0 0 190px; width: 190px; }
   .product-image  { width: 190px; height: 180px; }
+
+  /* ─── Promo banners: la columna de texto no tiene lugar para 36px fijos ─── */
+  .promo-item--gradient { padding: 28px 24px; }
+  .promo-banner-title { max-width: none; font-size: 29px; line-height: 34px; }
 
   /* ─── Newsletter ─── */
   .newsletter { border-radius: var(--radius-l); margin: 0; }
@@ -1364,7 +1397,7 @@
   .desktop-greeting {
     display: flex; align-items: center;
     max-width: 1440px; margin: 0 auto;
-    padding: 24px 80px 0;
+    padding: 24px 40px 0;
   }
   .desktop-greeting-left { display: flex; align-items: center; gap: 8px; }
   .desktop-greeting-avatar {
@@ -1384,7 +1417,9 @@
   /* ─── Container ─── */
   .container {
     max-width: 1440px; margin: 0 auto;
-    padding: 0 80px;
+    /* Trimmed from 80px so the product carousels below have enough
+       room to fit one extra 217px card at wide desktop widths. */
+    padding: 0 40px;
   }
 
   /* ─── Desktop home: 6-column grid ─── */
@@ -1467,8 +1502,8 @@
     padding: 48px 0 0;
   }
   .mas-accedidos-title { font-size: 24px; font-weight: 500; }
-  .mas-accedidos-grid { gap: 16px; overflow-x: visible; }
-  .mas-accedidos-card { flex: 1; min-width: 0; height: 154px; padding: 24px; }
+  .mas-accedidos-grid { gap: 10px; overflow-x: visible; flex-wrap: wrap; }
+  .mas-accedidos-card { flex: 0 0 217px; width: 217px; height: 154px; padding: 24px; }
   .mas-accedidos-icon { width: 54px; height: 54px; }
   .mas-accedidos-icon i { font-size: 32px; }
   .mas-accedidos-label { font-size: 16px; }
@@ -1514,12 +1549,12 @@
   .carousel-arrow:first-child { left: -48px; }
   .carousel-arrow:last-child  { right: -48px; }
   .carousel-arrow:hover { background: var(--action-secondary); border-color: var(--action-primary); color: var(--action-primary); }
-  .carousel-track { overflow: hidden; width: 100%; }
-  .product-row { display: flex; gap: 16px; }
+  .carousel-track-scroll { overflow: hidden; width: 100%; }
+  .product-row { display: flex; gap: 10px; }
   .product-card {
-    flex: 0 0 220px; width: 220px;
+    flex: 0 0 217px; width: 217px;
   }
-  .product-image { height: 190px; }
+  .product-image { width: 217px; height: 190px; }
 
   /* ─── Categories ─── */
   .categories-row { grid-template-columns: repeat(8, 1fr); gap: 12px; }
@@ -1546,6 +1581,10 @@
   }
   body.chat-open .carousel-arrow:first-child { left: 8px; }
   body.chat-open .carousel-arrow:last-child  { right: 8px; }
+
+  /* El panel de chat (420px) angosta la columna de texto del banner de promos */
+  body.chat-open .promo-item--gradient { padding: 24px 20px; }
+  body.chat-open .promo-banner-title { max-width: none; font-size: 22px; line-height: 27px; }
 }
 
 /* ── Desktop ≥1280px con chat abierto: el grid 1fr se ajusta solo ── */
@@ -1555,7 +1594,6 @@
   .container         { padding: 0 48px; }
   .search            { max-width: 400px; }
   .categories-row    { grid-template-columns: repeat(4, 1fr); }
-  .product-card      { flex: 0 0 190px; width: 190px; }
   .carousel-arrow:first-child { left: -36px; }
   .carousel-arrow:last-child  { right: -36px; }
   .featured-section  { gap: 16px; }
@@ -1630,5 +1668,5 @@
     flex-wrap: nowrap;
   }
   .mas-accedidos-grid::-webkit-scrollbar { display: none; }
-  .mas-accedidos-card { flex: 0 0 130px; min-width: 0; height: 130px; }
+  .mas-accedidos-card { flex: 0 0 160px; min-width: 0; height: 130px; }
 }

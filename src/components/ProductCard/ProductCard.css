@@ -1,5 +1,5 @@
 .product-card {
-  flex: 0 0 216px; width: 216px;
+  flex: 0 0 217px; width: 217px;
   background: var(--color-bg-surface);
   border-radius: var(--radius-s);
   overflow: visible;
@@ -8,7 +8,7 @@
 }
 
 .product-image {
-  width: 216px; height: 216px;
+  width: 217px; height: 217px;
   display: flex; align-items: center; justify-content: center;
   background: var(--neutral-two, #f8f8f8);
   border-radius: 16px;

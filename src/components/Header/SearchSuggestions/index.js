@@ -1,9 +1,10 @@
 import './SearchSuggestions.css';
 import { useEffect, useRef, useState } from 'react';
-import { CHIPS, TECH_PRODUCTS, ELECTRO_PRODUCTS } from '../../../data/homeProducts';
+import { Link } from 'react-router-dom';
+import { CHIPS, TECH_PRODUCTS, ELECTRO_PRODUCTS, MOCHILA_PRODUCT } from '../../../data/homeProducts';
 
 const SUGGESTED_CHIPS = CHIPS.map(c => c.label);
-const CONTINUE_SHOPPING = [...TECH_PRODUCTS, ...ELECTRO_PRODUCTS].slice(0, 5);
+const CONTINUE_SHOPPING = [MOCHILA_PRODUCT, ...TECH_PRODUCTS, ...ELECTRO_PRODUCTS].slice(0, 5);
 
 const CARD_WIDTH = 123;
 const CARD_GAP = 16;
@@ -45,15 +46,19 @@ export default function SearchSuggestions({ onChipClick }) {
         <p className="search-suggestions__section-title">Continuar comprando</p>
         <div className="search-suggestions__cards-wrap" ref={wrapRef}>
           <div className="search-suggestions__cards">
-            {CONTINUE_SHOPPING.slice(0, visibleCount).map(p => (
-              <a href="#" key={p.id} className="search-suggestions__card">
-                <div className="search-suggestions__card-image">
-                  <img src={p.img} alt={p.title} style={{ objectFit: p.imgFilled ? 'cover' : 'contain' }} />
-                </div>
-                <p className="search-suggestions__card-title">{p.title}</p>
-                <p className="search-suggestions__card-price">{p.price}</p>
-              </a>
-            ))}
+            {CONTINUE_SHOPPING.slice(0, visibleCount).map(p => {
+              const CardTag = p.to ? Link : 'a';
+              const cardProps = p.to ? { to: p.to } : { href: '#' };
+              return (
+                <CardTag key={p.id} className="search-suggestions__card" {...cardProps}>
+                  <div className="search-suggestions__card-image">
+                    <img src={p.img} alt={p.title} style={{ objectFit: p.imgFilled ? 'cover' : 'contain' }} />
+                  </div>
+                  <p className="search-suggestions__card-title">{p.title}</p>
+                  <p className="search-suggestions__card-price">{p.price}</p>
+                </CardTag>
+              );
+            })}
           </div>
         </div>
       </div>

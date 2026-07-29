@@ -439,7 +439,8 @@
   .mo-gallery-mobile { display: none; }
   .mo-mobile-detail { display: none; }
 
-  .mo-page { max-width: 1440px; margin: 0 auto; padding: 24px 80px 60px; background: transparent; }
+  /* 40px side padding matches HomePage's .container */
+  .mo-page { max-width: 1440px; margin: 0 auto; padding: 24px 40px 60px; background: transparent; }
 
   .mo-layout { display: block; }
   .mo-col-main { display: block; }
@@ -497,6 +498,9 @@
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   .mo-gallery-main { height: 400px; }
+
+  /* Matches HomePage's .container padding at this same breakpoint */
+  .mo-page { padding: 24px 48px 60px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════

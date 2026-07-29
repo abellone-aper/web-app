@@ -12,6 +12,8 @@ export const CHIPS = [
   { icon: '/icons/experiencia.svg',          label: 'Experiencias' },
 ];
 
+export const MOCHILA_PRODUCT = { id: 'mochila-1', img: getPublicUrl('Imagenes', 'Mochila/1.png'), price: '$74.500', title: 'Mochila Tomtoc, equipaje de mano', to: '/mochila' };
+
 export const TECH_PRODUCTS = [
   { id: 'tech-1', img: getPublicUrl('Imagenes', 'madrid.png'), price: '$1.339.208', install: 'Mismo precio en 12 cuotas de $199.560', title: 'Vuelos desde Buenos Aires a Madrid ida y vuelta', badge: 'Oferta imperdible', withPoints: true, imgFilled: true },
   { id: 'tech-2', img: getPublicUrl('Imagenes', 'escurridor.png'), oldPrice: '$59.999', price: '$24.999', shipping: 'Envío Gratis', title: 'Escurridor Secaplatos Platos Cubiertos Acero Negro Cocina Organizador Vajilla Porta', favActive: true, withPoints: true },

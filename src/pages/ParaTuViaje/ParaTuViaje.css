@@ -716,11 +716,12 @@
   /* Mobile bar: hidden */
   .ptv-mobile-bar { display: none !important; }
 
-  /* Page layout */
+  /* Page layout — 40px side padding matches HomePage's .container
+     (trimmed from 80px so carousels fit the same 6 cards per row as home) */
   .ptv-page {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 80px 60px;
+    padding: 0 40px 60px;
     background: transparent;
   }
 
@@ -894,6 +895,11 @@
 @media (min-width: 1025px) and (max-width: 1280px) {
   .ptv-cards-track {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Matches HomePage's .container padding at this same breakpoint */
+  .ptv-page {
+    padding: 0 48px 60px;
   }
 }
 

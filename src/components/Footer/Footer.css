@@ -76,7 +76,7 @@
 }
 
 @media (min-width: 1025px) {
-  .footer-inner { padding: 40px 80px; }
+  .footer-inner { padding: 40px 40px; }
   body.chat-open .footer-inner { padding: 40px 40px; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   body.chat-open .footer-col:first-child { grid-column: 1 / -1; }
   body.chat-open .footer-col:last-child  { grid-column: 1 / -1; }
