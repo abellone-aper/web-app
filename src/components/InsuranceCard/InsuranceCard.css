@@ -21,7 +21,7 @@
 .insurance-card--overlay .insurance-body {
   grid-area: 1 / 1;
   align-self: end;
-  padding: 16px;
+  padding: 24px;
   display: flex; flex-direction: column; gap: 6px;
 }
 
@@ -87,6 +87,11 @@
     height: 100%;
     min-height: 280px;
   }
+
+  /* Chat abierto: la columna se achica, bajamos un escalón más */
+  body.chat-open .insurance-card--overlay .insurance-body  { padding: 20px; gap: 8px; }
+  body.chat-open .insurance-card--overlay .insurance-sub   { font-size: 11px; padding: 3px 7px; }
+  body.chat-open .insurance-card--overlay .insurance-title { font-size: 17px; }
 }
 
 /* ── Responsive: card variant on tablet/desktop ── */

@@ -1,5 +1,6 @@
 import './HomePage.css';
 import { useState, useEffect, useRef } from 'react';
+import useCarouselNav from '../../hooks/useCarouselNav';
 import { Link } from 'react-router-dom';
 import { getPublicUrl } from '../../lib/storage';
 import { CURRENT_USER } from '../../lib/currentUser';
@@ -176,6 +177,7 @@ export default function HomePage({ onOpenAssistant }) {
   function toggleCoupon(i) {
     setCouponToggles(prev => prev.map((v, j) => j === i ? !v : v));
   }
+  const masAccedidosNav = useCarouselNav('.mas-accedidos-card');
 
   return (
     <>
@@ -329,15 +331,32 @@ export default function HomePage({ onOpenAssistant }) {
 
           <section className="mas-accedidos-section">
             <h2 className="mas-accedidos-title">Más accedidos</h2>
-            <div className="mas-accedidos-grid">
-              {MAS_ACCEDIDOS.map(item => (
-                <a href="#" key={item.label} className="mas-accedidos-card">
-                  <div className="mas-accedidos-icon">
-                    <img src={item.icon} alt="" />
-                  </div>
-                  <span className="mas-accedidos-label">{item.label}</span>
-                </a>
-              ))}
+            <div className="carousel-track">
+              <button
+                className={`carousel-arrow${!masAccedidosNav.canLeft ? ' carousel-arrow--hidden' : ''}${masAccedidosNav.edgeHover === 'left' ? ' carousel-arrow--edge-hover' : ''}`}
+                aria-label="Anterior"
+                onClick={() => masAccedidosNav.scroll(-1)}
+              ><i className="ph ph-caret-left"></i></button>
+              <div
+                className="mas-accedidos-grid"
+                ref={masAccedidosNav.trackRef}
+                onMouseOver={masAccedidosNav.handleCardHover}
+                onMouseLeave={masAccedidosNav.handleRowLeave}
+              >
+                {MAS_ACCEDIDOS.map(item => (
+                  <a href="#" key={item.label} className="mas-accedidos-card">
+                    <div className="mas-accedidos-icon">
+                      <img src={item.icon} alt="" />
+                    </div>
+                    <span className="mas-accedidos-label">{item.label}</span>
+                  </a>
+                ))}
+              </div>
+              <button
+                className={`carousel-arrow${!masAccedidosNav.canRight ? ' carousel-arrow--hidden' : ''}${masAccedidosNav.edgeHover === 'right' ? ' carousel-arrow--edge-hover' : ''}`}
+                aria-label="Siguiente"
+                onClick={() => masAccedidosNav.scroll(1)}
+              ><i className="ph ph-caret-right"></i></button>
             </div>
           </section>
 

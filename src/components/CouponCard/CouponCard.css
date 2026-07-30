@@ -28,7 +28,7 @@
   background: var(--action-secondary-pressed);
   border-radius: 16px;
   padding: 24px;
-  display: flex; flex-direction: column; gap: 16px;
+  display: flex; flex-direction: column; justify-content: center; gap: 16px;
 }
 
 .coupon-card-header {
@@ -80,4 +80,15 @@
   .coupon-name        { font-size: 13px; line-height: 18px; }
   .coupon-sub         { font-size: 11px; }
   .coupon-badge       { font-size: 11px; padding: 1px 7px; border-radius: 7px; line-height: 15px; margin-top: 3px; }
+
+  /* Chat abierto: la columna se achica, bajamos un escalón más */
+  body.chat-open .coupon-card        { padding: 14px; gap: 10px; }
+  body.chat-open .coupon-card-title  { font-size: 13px; }
+  body.chat-open .coupon-card-link   { font-size: 12px; }
+  body.chat-open .coupon-item        { gap: 8px; padding: 8px 0; }
+  body.chat-open .coupon-icon        { width: 18px; height: 18px; }
+  body.chat-open .coupon-icon i      { font-size: 15px; }
+  body.chat-open .coupon-icon img    { width: 15px; height: 15px; }
+  body.chat-open .coupon-name        { font-size: 12px; line-height: 16px; }
+  body.chat-open .coupon-sub         { font-size: 10px; }
 }

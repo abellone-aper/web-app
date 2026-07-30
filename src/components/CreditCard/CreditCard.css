@@ -42,4 +42,11 @@
   .credit-amount { font-size: 26px; line-height: 1.2; }
   .credit-sub    { font-size: 11px; }
   .credit-btn    { font-size: 13px; padding: 8px 16px; }
+
+  /* Chat abierto: la columna se achica, bajamos un escalón más */
+  body.chat-open .credit-card  { padding: 14px; gap: 12px; }
+  body.chat-open .credit-label  { font-size: 12px; }
+  body.chat-open .credit-amount { font-size: 20px; }
+  body.chat-open .credit-sub    { font-size: 10px; }
+  body.chat-open .credit-btn    { font-size: 12px; padding: 6px 12px; }
 }

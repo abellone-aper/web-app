@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import Breadcrumb from '../../components/Breadcrumb';
 import ProductCarousel from '../../components/ProductCarousel';
 import { useBrand } from '../../brands/BrandContext';
+import useCarouselNav from '../../hooks/useCarouselNav';
 
 const FILTERS = ['todo','alojamiento','moda','transporte','actividades','seguros'];
 const FILTER_LABELS = { todo:'Todo', alojamiento:'Alojamiento', moda:'Moda', transporte:'Transporte', actividades:'Experiencias', seguros:'Seguros' };
@@ -64,6 +65,7 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
   const populares = POPULARES.map(c => c.to ? { ...c, to: brand.path(c.to) } : c);
   const [filter] = useState('todo');
   const [barHidden, setBarHidden] = useState(false);
+  const promosNav = useCarouselNav('.ptv-promo-banner');
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -157,16 +159,33 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
           )}
 
           <div className="ptv-promos">
-            <div className="ptv-promos-track">
-              {PROMO_BANNERS.map((banner, i) => (
-                <div key={i} className="ptv-promo-banner">
-                  <img
-                    className="ptv-promo-banner-img"
-                    src={getPublicUrl('Imagenes', `Para-tu-viaje/Banners/${brand.faviconDir}/${i + 1}.png`)}
-                    alt={banner.alt}
-                  />
-                </div>
-              ))}
+            <div className="carousel-track">
+              <button
+                className={`carousel-arrow${!promosNav.canLeft ? ' carousel-arrow--hidden' : ''}${promosNav.edgeHover === 'left' ? ' carousel-arrow--edge-hover' : ''}`}
+                aria-label="Anterior"
+                onClick={() => promosNav.scroll(-1)}
+              ><i className="ph ph-caret-left"></i></button>
+              <div
+                className="ptv-promos-track"
+                ref={promosNav.trackRef}
+                onMouseOver={promosNav.handleCardHover}
+                onMouseLeave={promosNav.handleRowLeave}
+              >
+                {PROMO_BANNERS.map((banner, i) => (
+                  <div key={i} className="ptv-promo-banner">
+                    <img
+                      className="ptv-promo-banner-img"
+                      src={getPublicUrl('Imagenes', `Para-tu-viaje/Banners/${brand.faviconDir}/${i + 1}.png`)}
+                      alt={banner.alt}
+                    />
+                  </div>
+                ))}
+              </div>
+              <button
+                className={`carousel-arrow${!promosNav.canRight ? ' carousel-arrow--hidden' : ''}${promosNav.edgeHover === 'right' ? ' carousel-arrow--edge-hover' : ''}`}
+                aria-label="Siguiente"
+                onClick={() => promosNav.scroll(1)}
+              ><i className="ph ph-caret-right"></i></button>
             </div>
           </div>
 

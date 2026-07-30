@@ -1,6 +1,7 @@
-import { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import { useRef, useState, useLayoutEffect } from 'react';
 import ProductCard from '../ProductCard';
 import LinkButton from '../Buttons/LinkButton';
+import useCarouselNav from '../../hooks/useCarouselNav';
 
 // Below this width the carousel switches to native touch scrolling
 // (see the max-width: 1024px rules in HomePage.css) and cards are
@@ -8,39 +9,21 @@ import LinkButton from '../Buttons/LinkButton';
 const DESKTOP_MIN_WIDTH = 1025;
 
 export default function ProductCarousel({ title, subtitle, badge, products, showAllHref = '#' }) {
-  const trackRef = useRef(null);
+  const { trackRef, canLeft, canRight, edgeHover, scroll, handleCardHover, handleRowLeave } = useCarouselNav('.product-card');
   const viewportRef = useRef(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(true);
-  const [trackWidth, setTrackWidth] = useState(null);
+  const [repeatList, setRepeatList] = useState(false);
 
-  function checkScroll() {
-    const t = trackRef.current;
-    if (!t) return;
-    setCanLeft(t.scrollLeft > 0);
-    setCanRight(t.scrollLeft < t.scrollWidth - t.clientWidth - 1);
-  }
-
-  useEffect(() => {
-    const t = trackRef.current;
-    if (!t) return;
-    checkScroll();
-    t.addEventListener('scroll', checkScroll, { passive: true });
-    return () => t.removeEventListener('scroll', checkScroll);
-  }, [trackWidth]);
-
-  // Desktop carousels are windowed (overflow: hidden + arrows), so the
-  // number of cards per view must land exactly on the available width —
-  // a fixed card count/width can't guarantee that at every viewport, and
-  // any leftover space shows up as a cropped card at the edge. Instead,
-  // measure the real card width + gap and size the track to fit a whole
-  // number of them, so it's always a clean cut, never a partial card.
+  // .carousel-track fills the section's full width by itself (see its
+  // CSS) — the last card lands wherever it lands, cropped by
+  // .carousel-track-scroll's overflow:hidden, same as "Mostrar todo"
+  // above it. We only need to know whether every product already fits
+  // without cropping: if so there'd be nothing left to scroll to, so we
+  // repeat the list instead of leaving the arrow permanently dead.
   useLayoutEffect(() => {
     function recompute() {
       const viewport = viewportRef.current;
-      if (!viewport) return;
-      if (window.innerWidth < DESKTOP_MIN_WIDTH) {
-        setTrackWidth(null);
+      if (!viewport || window.innerWidth < DESKTOP_MIN_WIDTH) {
+        setRepeatList(false);
         return;
       }
       const row = viewport.querySelector('.product-row');
@@ -50,8 +33,8 @@ export default function ProductCarousel({ title, subtitle, badge, products, show
       const cardWidth = card.getBoundingClientRect().width;
       const gap = parseFloat(getComputedStyle(row).columnGap) || 0;
       if (!available || !cardWidth) return;
-      const count = Math.max(1, Math.floor((available + gap) / (cardWidth + gap)));
-      setTrackWidth(count * cardWidth + (count - 1) * gap);
+      const count = Math.floor((available + gap) / (cardWidth + gap));
+      setRepeatList(count >= products.length && products.length > 1);
     }
 
     recompute();
@@ -62,16 +45,7 @@ export default function ProductCarousel({ title, subtitle, badge, products, show
     return () => observer.disconnect();
   }, [products]);
 
-  function scroll(dir) {
-    const track = trackRef.current;
-    if (!track) return;
-    const row = track.querySelector('.product-row');
-    const card = row && row.querySelector('.product-card');
-    if (!card) { track.scrollBy({ left: dir * 300, behavior: 'smooth' }); return; }
-    const gap = parseFloat(getComputedStyle(row).columnGap) || 0;
-    const amount = (card.getBoundingClientRect().width + gap) * 2;
-    track.scrollBy({ left: dir * amount, behavior: 'smooth' });
-  }
+  const displayProducts = repeatList ? [...products, ...products] : products;
 
   return (
     <section className="section">
@@ -87,18 +61,14 @@ export default function ProductCarousel({ title, subtitle, badge, products, show
       </div>
       <div className="carousel-wrap">
         <div className="carousel-viewport" ref={viewportRef}>
-          {/* .carousel-track is sized to fit a whole number of cards (see
-              the effect above) and is the positioning frame for the arrows,
-              so they always hug the last visible card instead of the
-              section's outer edge. */}
-          <div className="carousel-track" style={trackWidth ? { width: trackWidth } : undefined}>
-            <button className={`carousel-arrow${!canLeft ? ' carousel-arrow--hidden' : ''}`} aria-label="Anterior" onClick={() => scroll(-1)}><i className="ph ph-caret-left"></i></button>
-            <div className="carousel-track-scroll" ref={trackRef}>
+          <div className="carousel-track carousel-track--product">
+            <button className={`carousel-arrow${!canLeft ? ' carousel-arrow--hidden' : ''}${edgeHover === 'left' ? ' carousel-arrow--edge-hover' : ''}`} aria-label="Anterior" onClick={() => scroll(-1)}><i className="ph ph-caret-left"></i></button>
+            <div className="carousel-track-scroll" ref={trackRef} onMouseOver={handleCardHover} onMouseLeave={handleRowLeave}>
               <div className="product-row">
-                {products.map((p, i) => <ProductCard key={p.id ?? p.title ?? i} product={p} />)}
+                {displayProducts.map((p, i) => <ProductCard key={i < products.length ? (p.id ?? p.title ?? i) : `repeat-${i}-${p.id ?? p.title ?? i}`} product={p} />)}
               </div>
             </div>
-            <button className={`carousel-arrow${!canRight ? ' carousel-arrow--hidden' : ''}`} aria-label="Siguiente" onClick={() => scroll(1)}><i className="ph ph-caret-right"></i></button>
+            <button className={`carousel-arrow${!canRight ? ' carousel-arrow--hidden' : ''}${edgeHover === 'right' ? ' carousel-arrow--edge-hover' : ''}`} aria-label="Siguiente" onClick={() => scroll(1)}><i className="ph ph-caret-right"></i></button>
           </div>
         </div>
       </div>

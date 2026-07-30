@@ -424,15 +424,17 @@
   color: var(--neutral-eight);
 }
 .carousel-arrow:hover { background: var(--neutral-two); }
-/* Arrows stay invisible until the row is hovered, then fade in —
-   .carousel-arrow--hidden (no more content in that direction) always
-   wins over hover, via the :not() below. */
+/* Arrows stay invisible until the card flush against that side of the
+   track is hovered (.carousel-arrow--edge-hover, set in JS via
+   useCarouselNav), then fade in — .carousel-arrow--hidden (no more
+   content in that direction) always wins, via the :not() below. */
 .carousel-arrow {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.15s ease, background 0.15s, border-color 0.15s, color 0.15s;
 }
-.carousel-wrap:hover .carousel-arrow:not(.carousel-arrow--hidden),
+.carousel-arrow.carousel-arrow--edge-hover:not(.carousel-arrow--hidden),
+.carousel-arrow:hover:not(.carousel-arrow--hidden),
 .carousel-arrow:focus-visible {
   opacity: 1;
   pointer-events: auto;
@@ -1325,7 +1327,7 @@
   .status-section { padding-top: 48px; padding-bottom: 0; }
   .mas-accedidos-section { gap: 20px; padding: 48px 0 0; }
   .mas-accedidos-title { font-size: 22px; }
-  .mas-accedidos-grid { gap: 14px; overflow-x: visible; flex-wrap: wrap; }
+  .mas-accedidos-grid { gap: 14px; overflow-x: auto; flex-wrap: nowrap; }
   .mas-accedidos-card { flex: 0 0 190px; width: 190px; height: 144px; }
 
   /* ─── Dashboard grid ─── */
@@ -1353,7 +1355,7 @@
   }
   .carousel-arrow {
     position: absolute;
-    top: calc(4px + 90px);
+    top: 50%;
     transform: translateY(-50%);
     display: flex; width: 36px; height: 36px;
     border-radius: 50%;
@@ -1365,14 +1367,25 @@
   .carousel-arrow:first-child { left: -28px; }
   .carousel-arrow:last-child  { right: -28px; }
   .carousel-arrow:hover { background: var(--action-secondary); border-color: var(--action-primary); color: var(--action-primary); }
+  /* Product carousel arrows sit on top of the card itself (over the
+     image, not floating in the outer gutter) and higher up, roughly
+     centered on the image rather than the whole card+text height. */
+  .carousel-track--product .carousel-arrow { top: 90px; }
+  .carousel-track--product .carousel-arrow:first-child { left: 8px; }
+  .carousel-track--product .carousel-arrow:last-child  { right: 8px; }
   .carousel-track-scroll { overflow: hidden; width: 100%; }
   .product-row    { display: flex; gap: 14px; }
   .product-card   { flex: 0 0 190px; width: 190px; }
   .product-image  { width: 190px; height: 180px; }
 
-  /* ─── Promo banners: la columna de texto no tiene lugar para 36px fijos ─── */
-  .promo-item--gradient { padding: 28px 24px; }
+  /* ─── Promo banners: a este ancho las 2 imágenes cuadradas fijas no
+     dejan lugar para el texto (se rompe en una columna de 1 letra) —
+     apilamos igual que en mobile: banner de texto arriba a ancho
+     completo, imágenes abajo compartiendo el ancho. ─── */
+  .promo-banners-grid { flex-wrap: wrap; height: auto; gap: 12px; }
+  .promo-item--gradient { flex: 1 1 100%; height: auto; padding: 28px 24px; }
   .promo-banner-title { max-width: none; font-size: 29px; line-height: 34px; }
+  .promo-item--image { flex: 1 1 0; height: auto; }
 
   /* ─── Newsletter ─── */
   .newsletter { border-radius: var(--radius-l); margin: 0; }
@@ -1430,6 +1443,28 @@
     gap: 16px;
     padding-top: 24px;
   }
+
+  /* ── Chat open: mismo grid de 6 columnas — el padding-right de 420px
+     en .tienda-main lo achica, así que compensamos con menos gap y
+     paddings/tipografía más chicos en vez de romper la estructura ── */
+  body.chat-open .desktop-home { gap: 10px; }
+  body.chat-open .dh-trip-panel,
+  body.chat-open .dh-explore-chips-card {
+    padding: 16px;
+  }
+  body.chat-open .dh-trip-panel { gap: 16px; }
+  body.chat-open .dh-ctx-text .dh-ctx-title { font-size: 14px; }
+  body.chat-open .dh-explore-header { gap: 10px; }
+  body.chat-open .dh-explore-title { font-size: 14px; }
+  body.chat-open .dh-chips-row { gap: 8px; }
+  body.chat-open .dh-chip { padding: 6px 10px; font-size: 12px; }
+  body.chat-open .dh-chip img { width: 18px; height: 18px; }
+  /* Trip cards are 50%-of-panel wide by default — with the panel itself
+     squeezed by the chat's 420px, that percentage shrinks the cards
+     into a cramped sliver. Hold them at a fixed, readable width and
+     let the row scroll instead. */
+  body.chat-open .dh-trip-card { flex: 0 0 140px; width: 140px; min-width: 140px; }
+  body.chat-open .dh-trip-card-img { height: 130px; }
 
   /* ── Left panel: col 1-2, row 1-3 ── */
   .dh-trip-panel {
@@ -1502,7 +1537,7 @@
     padding: 48px 0 0;
   }
   .mas-accedidos-title { font-size: 24px; font-weight: 500; }
-  .mas-accedidos-grid { gap: 10px; overflow-x: visible; flex-wrap: wrap; }
+  .mas-accedidos-grid { gap: 10px; overflow-x: auto; flex-wrap: nowrap; }
   .mas-accedidos-card { flex: 0 0 217px; width: 217px; height: 154px; padding: 24px; }
   .mas-accedidos-icon { width: 54px; height: 54px; }
   .mas-accedidos-icon i { font-size: 32px; }
@@ -1535,7 +1570,7 @@
   }
   .carousel-arrow {
     position: absolute;
-    top: calc(4px + 95px);
+    top: 50%;
     transform: translateY(-50%);
     display: flex; width: 36px; height: 36px;
     border-radius: 50%;
@@ -1546,8 +1581,17 @@
     z-index: 2;
     flex: unset;
   }
-  .carousel-arrow:first-child { left: -48px; }
-  .carousel-arrow:last-child  { right: -48px; }
+  /* -36px (no -48px): a -48px se sale del padding de 40px del .container
+     y body { overflow-x: hidden } recorta la punta de la flecha, rompiendo
+     el hover justo en el borde que hace falta poder tocar. */
+  .carousel-arrow:first-child { left: -36px; }
+  .carousel-arrow:last-child  { right: -36px; }
+  /* Product carousel arrows sit on top of the card itself (over the
+     image, not floating in the outer gutter) and higher up, roughly
+     centered on the image rather than the whole card+text height. */
+  .carousel-track--product .carousel-arrow { top: 95px; }
+  .carousel-track--product .carousel-arrow:first-child { left: 8px; }
+  .carousel-track--product .carousel-arrow:last-child  { right: 8px; }
   .carousel-arrow:hover { background: var(--action-secondary); border-color: var(--action-primary); color: var(--action-primary); }
   .carousel-track-scroll { overflow: hidden; width: 100%; }
   .product-row { display: flex; gap: 10px; }
@@ -1587,15 +1631,14 @@
   body.chat-open .promo-banner-title { max-width: none; font-size: 22px; line-height: 27px; }
 }
 
-/* ── Desktop ≥1280px con chat abierto: el grid 1fr se ajusta solo ── */
+/* ── Desktop estándar (1025-1280px): container más angosto que en
+   desktop grande, así que necesita su propio padding/tamaños ── */
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   .desktop-greeting  { padding: 20px 48px 0; }
   .container         { padding: 0 48px; }
   .search            { max-width: 400px; }
   .categories-row    { grid-template-columns: repeat(4, 1fr); }
-  .carousel-arrow:first-child { left: -36px; }
-  .carousel-arrow:last-child  { right: -36px; }
   .featured-section  { gap: 16px; }
 }
 
