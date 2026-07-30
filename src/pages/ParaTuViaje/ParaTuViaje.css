@@ -166,7 +166,7 @@
 }
 
 .ptv-package-title {
-  font-size: 20px; font-weight: 700;
+  font-size: 17px; font-weight: 700;
   color: var(--neutral-nine);
   margin: 0;
   line-height: 1.25;
@@ -217,7 +217,7 @@
 }
 
 .ptv-package-price-new {
-  font-size: 28px; font-weight: 700;
+  font-size: 20px; font-weight: 700;
   color: var(--neutral-eight);
   line-height: 1.2;
 }
@@ -818,7 +818,7 @@
   }
 
   .ptv-package-tags { gap: 26px; }
-  .ptv-package-title { font-size: 32px; }
+  .ptv-package-title { font-size: 22px; }
 
   .ptv-package-right {
     align-items: flex-end;
@@ -826,7 +826,7 @@
   }
 
   .ptv-package-price-group { align-items: flex-end; }
-  .ptv-package-price-new { font-size: 36px; }
+  .ptv-package-price-new { font-size: 26px; }
 
   /* Sections */
   .ptv-section {
@@ -1005,7 +1005,7 @@
     padding: 24px;
   }
 
-  .ptv-package-title { font-size: 24px; }
+  .ptv-package-title { font-size: 18px; }
 
   .ptv-package-right {
     align-items: flex-end;
@@ -1013,7 +1013,7 @@
   }
 
   .ptv-package-price-group { align-items: flex-end; }
-  .ptv-package-price-new { font-size: 32px; }
+  .ptv-package-price-new { font-size: 22px; }
 
   /* Sections */
   .ptv-section { padding: 28px 0 0; }
@@ -1084,6 +1084,19 @@
   }
   body:not(.chat-open) .ptv-main {
     transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* ─── Chat-open: stack title/tabs and benefit banner (no space for the
+   side-by-side row once the chat panel narrows the page) ────────── */
+@media (min-width: 1025px) {
+  body.chat-open .ptv-page-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  body.chat-open .ptv-benefit-banner {
+    flex: none;
+    max-width: none;
   }
 }
 
