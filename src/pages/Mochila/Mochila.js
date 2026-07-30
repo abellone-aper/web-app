@@ -7,7 +7,7 @@ import Header from '../../components/Header';
 import Breadcrumb from '../../components/Breadcrumb';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SecondaryButton from '../../components/Buttons/SecondaryButton';
-import FavButton from '../../components/Buttons/FavButton';
+import GalleryActions from '../../components/GalleryActions';
 import TripCard from '../../components/TripCard';
 import { useBrand } from '../../brands/BrandContext';
 
@@ -318,7 +318,7 @@ function QASection() {
   );
 }
 
-function PriceBox({ brand, onBuy, hideTitle = false }) {
+function PriceBox({ brand, hideTitle = false }) {
   const [color, setColor] = useState(COLORS[0].name);
   const [size, setSize] = useState('40 L');
   const [qty, setQty] = useState(1);
@@ -429,7 +429,7 @@ function PriceBox({ brand, onBuy, hideTitle = false }) {
       </div>
 
       <div className="mo-price-actions">
-        <PrimaryButton style={{ width: '100%' }} type="button" onClick={onBuy}>Comprar ahora</PrimaryButton>
+        <PrimaryButton style={{ width: '100%' }} type="button">Comprar ahora</PrimaryButton>
         <SecondaryButton style={{ width: '100%' }} type="button">Agregar al carrito</SecondaryButton>
       </div>
 
@@ -442,7 +442,7 @@ function PriceBox({ brand, onBuy, hideTitle = false }) {
   );
 }
 
-export default function MochilaPage({ onOpenAssistant, onChatOpen }) {
+export default function MochilaPage({ onOpenAssistant }) {
   const brand = useBrand();
   const [galleryIdx, setGalleryIdx] = useState(0);
   const [barHidden, setBarHidden] = useState(false);
@@ -458,10 +458,6 @@ export default function MochilaPage({ onOpenAssistant, onChatOpen }) {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  function handleBuy() {
-    onChatOpen?.();
-  }
 
   return (
     <>
@@ -500,10 +496,7 @@ export default function MochilaPage({ onOpenAssistant, onChatOpen }) {
               ))}
             </div>
             <div className="mo-gallery-counter">{galleryIdx + 1} / {GALLERY_IMGS.length}</div>
-            <div className="mo-gallery-actions">
-              <FavButton className="mo-gallery-fav" />
-              <button className="mo-gallery-share" aria-label="Compartir"><i className="ph ph-share-network"></i></button>
-            </div>
+            <GalleryActions />
           </div>
 
           <div className="mo-layout">
@@ -518,10 +511,7 @@ export default function MochilaPage({ onOpenAssistant, onChatOpen }) {
                 </div>
                 <div className="mo-gallery-main">
                   <img src={GALLERY_IMGS[galleryIdx].src} alt={GALLERY_IMGS[galleryIdx].alt} />
-                  <div className="mo-gallery-actions">
-                    <FavButton className="mo-gallery-fav" />
-                    <button className="mo-gallery-share" aria-label="Compartir"><i className="ph ph-share-network"></i></button>
-                  </div>
+                  <GalleryActions />
                 </div>
               </div>
 
@@ -542,7 +532,7 @@ export default function MochilaPage({ onOpenAssistant, onChatOpen }) {
             </div>
 
             <div className="mo-col-aside">
-              <PriceBox brand={brand} onBuy={handleBuy} />
+              <PriceBox brand={brand} />
             </div>
           </div>
 
@@ -551,7 +541,7 @@ export default function MochilaPage({ onOpenAssistant, onChatOpen }) {
             <h1 className="mo-title-mobile-sr">Mochila de viaje Tomtoc, equipaje de mano aprobado para vuelos, moderna, minimalista</h1>
 
             <div className="mo-price-box-mobile">
-              <PriceBox brand={brand} onBuy={handleBuy} />
+              <PriceBox brand={brand} />
             </div>
 
             <AiBanner brand={brand} />

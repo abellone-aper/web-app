@@ -2,6 +2,7 @@ import './SearchSuggestions.css';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CHIPS, TECH_PRODUCTS, ELECTRO_PRODUCTS, MOCHILA_PRODUCT } from '../../../data/homeProducts';
+import { useBrand } from '../../../brands/BrandContext';
 
 const SUGGESTED_CHIPS = CHIPS.map(c => c.label);
 const CONTINUE_SHOPPING = [MOCHILA_PRODUCT, ...TECH_PRODUCTS, ...ELECTRO_PRODUCTS].slice(0, 5);
@@ -10,6 +11,7 @@ const CARD_WIDTH = 123;
 const CARD_GAP = 16;
 
 export default function SearchSuggestions({ onChipClick }) {
+  const brand = useBrand();
   const wrapRef = useRef(null);
   const [visibleCount, setVisibleCount] = useState(CONTINUE_SHOPPING.length);
 
@@ -48,7 +50,7 @@ export default function SearchSuggestions({ onChipClick }) {
           <div className="search-suggestions__cards">
             {CONTINUE_SHOPPING.slice(0, visibleCount).map(p => {
               const CardTag = p.to ? Link : 'a';
-              const cardProps = p.to ? { to: p.to } : { href: '#' };
+              const cardProps = p.to ? { to: brand.path(p.to) } : { href: '#' };
               return (
                 <CardTag key={p.id} className="search-suggestions__card" {...cardProps}>
                   <div className="search-suggestions__card-image">

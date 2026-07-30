@@ -8,6 +8,7 @@ import Breadcrumb from '../../components/Breadcrumb';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SecondaryButton from '../../components/Buttons/SecondaryButton';
 import FavButton from '../../components/Buttons/FavButton';
+import GalleryActions from '../../components/GalleryActions';
 import DateRangePicker from '../../components/DateRangePicker';
 import { useBrand } from '../../brands/BrandContext';
 
@@ -166,10 +167,7 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
         <div className="hd-gallery-main">
           <img src={GALLERY_IMGS[galleryIdx].src} alt={GALLERY_IMGS[galleryIdx].alt} id="desktopMainImg" />
           <span className="hd-gallery-badge">{galleryIdx + 1} / {GALLERY_IMGS.length}</span>
-          <div className="hd-gallery-actions">
-            <FavButton className="hd-gallery-fav" />
-            <button className="hd-gallery-share" aria-label="Compartir"><i className="ph ph-share-network"></i></button>
-          </div>
+          <GalleryActions />
         </div>
         <div className="hd-gallery-thumbs">
           {GALLERY_IMGS.map((img, i) => (
@@ -344,10 +342,7 @@ export default function DesignSuitesPage({ onChatOpen, onOpenAssistant }) {
               ))}
             </div>
             <div className="hd-gallery-counter">{galleryIdx + 1} / {GALLERY_IMGS.length}</div>
-            <div className="hd-gallery-actions">
-              <FavButton className="hd-gallery-fav" />
-              <button className="hd-gallery-share" aria-label="Compartir"><i className="ph ph-share-network"></i></button>
-            </div>
+            <GalleryActions />
           </div>
 
           <div className="hd-layout">

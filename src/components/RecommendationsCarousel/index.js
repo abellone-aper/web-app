@@ -1,6 +1,8 @@
 import './RecommendationsCarousel.css';
+import { Link } from 'react-router-dom';
 import { getPublicUrl } from '../../lib/storage';
 import useCarouselNav from '../../hooks/useCarouselNav';
+import { useBrand } from '../../brands/BrandContext';
 
 const RECOMMENDATIONS = [
   {
@@ -22,6 +24,7 @@ const RECOMMENDATIONS = [
   },
   {
     label: 'Retomar tu carrito',
+    to: '/mochila',
     img: getPublicUrl('Imagenes', 'mochila.png'),
     title: 'Mochila Tomtoc Navigator, Capacidad 40l, Con Correa, Verde',
     price: '$238.197',
@@ -47,6 +50,7 @@ const RECOMMENDATIONS = [
 ];
 
 export default function RecommendationsCarousel() {
+  const brand = useBrand();
   const { trackRef, canLeft, canRight, edgeHover, scroll, handleCardHover, handleRowLeave } = useCarouselNav('.reco-card');
 
   return (
@@ -54,8 +58,11 @@ export default function RecommendationsCarousel() {
       <div className="carousel-track">
         <button className={`carousel-arrow${!canLeft ? ' carousel-arrow--hidden' : ''}${edgeHover === 'left' ? ' carousel-arrow--edge-hover' : ''}`} aria-label="Anterior" onClick={() => scroll(-1)}><i className="ph ph-caret-left"></i></button>
         <div className="reco-row" ref={trackRef} onMouseOver={handleCardHover} onMouseLeave={handleRowLeave}>
-          {RECOMMENDATIONS.map(item => (
-            <article key={item.label} className="reco-card">
+          {RECOMMENDATIONS.map(item => {
+            const CardTag = item.to ? Link : 'article';
+            const cardProps = item.to ? { to: brand.path(item.to) } : {};
+            return (
+            <CardTag key={item.label} className="reco-card" {...cardProps}>
               <p className="reco-card-label">{item.label}</p>
               <div className={`reco-card-image${item.imgFill ? ' reco-card-image--fill' : ''}`}>
                 <img src={item.img} alt={item.title} />
@@ -78,8 +85,9 @@ export default function RecommendationsCarousel() {
                 )}
                 {item.shipping && <p className="reco-card-shipping">{item.shipping}</p>}
               </div>
-            </article>
-          ))}
+            </CardTag>
+            );
+          })}
         </div>
         <button className={`carousel-arrow${!canRight ? ' carousel-arrow--hidden' : ''}${edgeHover === 'right' ? ' carousel-arrow--edge-hover' : ''}`} aria-label="Siguiente" onClick={() => scroll(1)}><i className="ph ph-caret-right"></i></button>
       </div>

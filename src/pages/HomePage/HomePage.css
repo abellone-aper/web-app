@@ -1625,10 +1625,6 @@
   }
   body.chat-open .carousel-arrow:first-child { left: 8px; }
   body.chat-open .carousel-arrow:last-child  { right: 8px; }
-
-  /* El panel de chat (420px) angosta la columna de texto del banner de promos */
-  body.chat-open .promo-item--gradient { padding: 24px 20px; }
-  body.chat-open .promo-banner-title { max-width: none; font-size: 22px; line-height: 27px; }
 }
 
 /* ── Desktop estándar (1025-1280px): container más angosto que en
@@ -1640,6 +1636,29 @@
   .search            { max-width: 400px; }
   .categories-row    { grid-template-columns: repeat(4, 1fr); }
   .featured-section  { gap: 16px; }
+
+  /* Las 2 imágenes cuadradas fijas le dejan poco ancho a la card de texto
+     a este tamaño de pantalla: el título de 36px envuelve en demasiadas
+     líneas y desborda la altura fija de 292px del banner. */
+  .promo-item--gradient { padding: 24px 28px; }
+  .promo-banner-title { max-width: none; font-size: 24px; line-height: 29px; }
+}
+
+/* ── Banner de promos con el panel de chat abierto (420px de ancho) ──
+   El panel le come 420px al contenido, así que el banner necesita los
+   mismos 3 tramos que ya tiene sin chat, pero corridos +420px: apilar
+   cuando el ancho real equivale a 1024px o menos sin chat, achicar
+   tipografía en el tramo intermedio, y a partir de ahí el tamaño de
+   siempre porque ya sobra lugar. */
+@media (min-width: 1025px) and (max-width: 1444px) {
+  body.chat-open .promo-banners-grid { flex-wrap: wrap; height: auto; gap: 12px; }
+  body.chat-open .promo-item--gradient { flex: 1 1 100%; height: auto; padding: 28px 24px; }
+  body.chat-open .promo-banner-title { max-width: none; font-size: 29px; line-height: 34px; }
+  body.chat-open .promo-item--image { flex: 1 1 0; height: auto; }
+}
+@media (min-width: 1445px) and (max-width: 1700px) {
+  body.chat-open .promo-item--gradient { padding: 24px 28px; }
+  body.chat-open .promo-banner-title { max-width: none; font-size: 24px; line-height: 29px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════

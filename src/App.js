@@ -65,7 +65,7 @@ function AppContent() {
     <HomeBanking chatOpen={chatOpen} onChatOpen={() => setChatOpen(true)} onChatClose={() => setChatOpen(false)} />
   );
   const hospedajePage = <Hospedaje onChatOpen={handleHotelReserve} onOpenAssistant={openAssistant} />;
-  const mochilaPage = <Mochila onOpenAssistant={openAssistant} onChatOpen={openAssistant} />;
+  const mochilaPage = <Mochila onOpenAssistant={openAssistant} />;
   const homePage = <HomePage onOpenAssistant={openAssistant} />;
   const paraTuViajePage = <ParaTuViaje onOpenAssistant={openAssistant} />;
 

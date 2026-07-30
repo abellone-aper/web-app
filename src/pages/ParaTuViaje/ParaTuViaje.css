@@ -1113,13 +1113,16 @@
   body.chat-open .ptv-cards-track {
     grid-template-columns: repeat(3, 1fr);
   }
-  /* Promo banners: 5 filling the row get squeezed too small once the
-     chat panel narrows .ptv-main — switch to a fixed width and let the
-     row scroll (with the shared .carousel-arrow) instead. */
+  /* Promo banners: grow to fill the row evenly, but never shrink past
+     240px — once the chat panel narrows .ptv-main enough that 5 cards
+     can't fit at that width, they hold at 240px and the row scrolls
+     (with the shared .carousel-arrow) instead of leaving unfilled
+     space when there's extra room to spare. */
   body.chat-open .ptv-promo-banner {
-    flex: 0 0 240px;
-    width: 240px;
-    max-width: 240px;
+    flex: 1 1 240px;
+    width: auto;
+    min-width: 240px;
+    max-width: none;
   }
   body.chat-open .ptv-promos-track {
     overflow-x: auto;

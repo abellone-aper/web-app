@@ -12,7 +12,7 @@ export const CHIPS = [
   { icon: '/icons/experiencia.svg',          label: 'Experiencias' },
 ];
 
-export const MOCHILA_PRODUCT = { id: 'mochila-1', img: getPublicUrl('Imagenes', 'Mochila/1.png'), price: '$74.500', title: 'Mochila Tomtoc, equipaje de mano', to: '/mochila' };
+export const MOCHILA_PRODUCT = { id: 'mochila-1', to: '/mochila', img: getPublicUrl('Imagenes', 'Mochila/1.png'), price: '$74.500', title: 'Mochila Tomtoc, equipaje de mano' };
 
 export const TECH_PRODUCTS = [
   { id: 'tech-1', img: getPublicUrl('Imagenes', 'madrid.png'), price: '$1.339.208', install: 'Mismo precio en 12 cuotas de $199.560', title: 'Vuelos desde Buenos Aires a Madrid ida y vuelta', badge: 'Oferta imperdible', withPoints: true, imgFilled: true },
