@@ -240,6 +240,7 @@
   height: 100%;
   min-width: 0;
   box-sizing: border-box;
+  overflow: hidden;
   padding: 40px 60px 40px 40px;
   display: flex;
   flex-direction: column;
@@ -257,6 +258,8 @@
   gap: 24px;
 }
 .promo-banner-title {
+  align-self: stretch;
+  min-width: 0;
   margin: 0;
   max-width: 480px;
   font-size: 36px;
@@ -264,6 +267,7 @@
   line-height: 43px;
   letter-spacing: 0.072px;
   color: var(--neutral-eight);
+  overflow-wrap: break-word;
 }
 .promo-banner-btn {
   display: flex;
@@ -1637,17 +1641,17 @@
 }
 
 /* ── Banner de promos con el panel de chat abierto (420px de ancho) ──
-   En desktop grande sobra ancho de sobra: la card de gradiente ya crece
-   sola (flex:1 0 0 de la regla base) y llena el espacio, sin achicar
-   nada — el título solo baja un nivel (permitido) para tener más aire.
-   En desktop estándar (1025-1280px) el ancho que queda no alcanza para
-   las 2 imágenes cuadradas a 292px + la card de texto sin scrollear ni
-   recortarse — ahí además de bajar el título un nivel, achicamos un
-   poco la altura de fila para que ninguna card quede cortada. */
+   Solo a partir de ~1420px sobra ancho de sobra: la card de gradiente
+   ya crece sola (flex:1 0 0 de la regla base) y llena el espacio, sin
+   achicar nada — el título solo baja un nivel (permitido) para tener
+   más aire. Por debajo de eso (hasta 1025px) el ancho que queda no
+   alcanza para las 2 imágenes cuadradas a 292px + la card de texto sin
+   que el botón "Ver entradas" quede cortado — ahí además de bajar el
+   título un nivel, achicamos un poco la altura de fila. */
 @media (min-width: 1025px) {
   body.chat-open .promo-banner-title { font-size: 28px; line-height: 34px; }
 }
-@media (min-width: 1025px) and (max-width: 1280px) {
+@media (min-width: 1025px) and (max-width: 1420px) {
   body.chat-open .promo-banners-grid { height: 240px; }
   body.chat-open .promo-banner-title { font-size: 16px; line-height: 20px; }
 }
