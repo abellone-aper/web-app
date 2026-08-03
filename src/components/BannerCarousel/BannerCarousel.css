@@ -39,10 +39,7 @@
   cursor: pointer;
   color: #242226;
   font-size: 16px;
-  opacity: 0;
-  transition: opacity 0.2s;
 }
-.banner-carousel:hover .banner-carousel-arrow { opacity: 1; }
 .banner-carousel-arrow--left  { left: 12px; }
 .banner-carousel-arrow--right { right: 12px; }
 

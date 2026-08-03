@@ -424,30 +424,17 @@
   color: var(--neutral-eight);
 }
 .carousel-arrow:hover { background: var(--neutral-two); }
-/* Arrows stay invisible until the card flush against that side of the
-   track is hovered (.carousel-arrow--edge-hover, set in JS via
-   useCarouselNav), then fade in — .carousel-arrow--hidden (no more
-   content in that direction) always wins, via the :not() below. */
 .carousel-arrow {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s ease, background 0.15s, border-color 0.15s, color 0.15s;
-}
-.carousel-arrow.carousel-arrow--edge-hover:not(.carousel-arrow--hidden),
-.carousel-arrow:hover:not(.carousel-arrow--hidden),
-.carousel-arrow:focus-visible {
-  opacity: 1;
-  pointer-events: auto;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 .carousel-arrow--hidden { visibility: hidden; pointer-events: none; }
-/* .carousel-viewport fills the available space and is only used to
-   measure it (ProductCarousel reads its width to compute how many
-   217px cards fit). .carousel-track gets that exact pixel width set
-   inline on desktop, so it always holds a whole number of cards —
-   never a partial one cropped at the edge — and is the positioning
-   frame for the arrows, so they hug the last visible card instead of
-   the section's outer edge. The actual scrolling/clipping happens on
-   the nested .carousel-track-scroll. */
+/* .carousel-viewport fills the available space; ProductCarousel reads
+   its width to compute how many 217px cards fit (for the repeatList
+   decision only). .carousel-track is the positioning frame for the
+   arrows. The peek effect (next card visible at the trailing edge)
+   comes from .container's extra right padding on tablet/desktop, not
+   from this box — that way every row on the page, carousel or not,
+   ends at the same right edge. */
 .carousel-viewport {
   flex: 1; min-width: 0;
 }
@@ -1245,7 +1232,10 @@
   /* ─── Container ─── */
   .container {
     max-width: 100%; margin: 0;
-    padding: 0 32px;
+    /* Right padding is 48px wider than left — the same amount the
+       carousels below need to peek the next card at their trailing
+       edge — so every row on the page ends at that same right edge. */
+    padding: 0 80px 0 32px;
   }
 
   /* ─── Desktop home: 3 columns (trip panel + explore + promos) ─── */
@@ -1431,8 +1421,11 @@
   .container {
     max-width: 1440px; margin: 0 auto;
     /* Trimmed from 80px so the product carousels below have enough
-       room to fit one extra 217px card at wide desktop widths. */
-    padding: 0 40px;
+       room to fit one extra 217px card at wide desktop widths. Right
+       padding is 48px wider than left — the same amount the carousels
+       need to peek the next card at their trailing edge — so every
+       row on the page ends at that same right edge. */
+    padding: 0 88px 0 40px;
   }
 
   /* ─── Desktop home: 6-column grid ─── */
@@ -1538,7 +1531,13 @@
   }
   .mas-accedidos-title { font-size: 24px; font-weight: 500; }
   .mas-accedidos-grid { gap: 10px; overflow-x: auto; flex-wrap: nowrap; }
-  .mas-accedidos-card { flex: 0 0 217px; width: 217px; height: 154px; padding: 24px; }
+  /* 205px (not 217, like the product cards) so all 6 fit inside the
+     container's content width — including its extra 48px of right
+     padding reserved for carousel peek — without scrolling; the row
+     stays aligned with the rest of the grid instead of bleeding into
+     that padding. Scrolling only kicks in if something narrows the
+     row further (e.g. the chat panel opening). */
+  .mas-accedidos-card { flex: 0 0 205px; width: 205px; height: 154px; padding: 24px; }
   .mas-accedidos-icon { width: 54px; height: 54px; }
   .mas-accedidos-icon i { font-size: 32px; }
   .mas-accedidos-label { font-size: 16px; }
@@ -1616,7 +1615,7 @@
 
   /* ── Layout adapts when chat panel is open ── */
   body.chat-open .desktop-greeting { padding: 20px 40px 0; }
-  body.chat-open .container        { padding: 0 40px; }
+  body.chat-open .container        { padding: 0 88px 0 40px; }
   body.chat-open .search           { max-width: 350px; }
   body.chat-open .carousel-arrow {
     z-index: 10;
@@ -1632,7 +1631,7 @@
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   .desktop-greeting  { padding: 20px 48px 0; }
-  .container         { padding: 0 48px; }
+  .container         { padding: 0 96px 0 48px; }
   .search            { max-width: 400px; }
   .categories-row    { grid-template-columns: repeat(4, 1fr); }
   .featured-section  { gap: 16px; }
@@ -1668,7 +1667,7 @@
 @media (min-width: 481px) and (max-width: 640px) {
 
   /* Tighter container and greeting bar */
-  .container        { padding: 0 16px; }
+  .container        { padding: 0 64px 0 16px; }
   .desktop-greeting { padding: 16px 16px 0; }
 
   /* Collapse 3-col grid (220px 1fr 1fr) → 2-col */

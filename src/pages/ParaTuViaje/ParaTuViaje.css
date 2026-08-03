@@ -717,11 +717,14 @@
   .ptv-mobile-bar { display: none !important; }
 
   /* Page layout — 40px side padding matches HomePage's .container
-     (trimmed from 80px so carousels fit the same 6 cards per row as home) */
+     (trimmed from 80px so carousels fit the same 6 cards per row as home).
+     Right padding is 48px wider than left — the same amount the carousels
+     need to peek the next card at their trailing edge — so every row on
+     the page ends at that same right edge. */
   .ptv-page {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 40px 60px;
+    padding: 0 88px 60px 40px;
     background: transparent;
   }
 
@@ -899,7 +902,7 @@
 
   /* Matches HomePage's .container padding at this same breakpoint */
   .ptv-page {
-    padding: 0 48px 60px;
+    padding: 0 96px 60px 48px;
   }
 }
 
@@ -914,7 +917,7 @@
   /* Page wrapper */
   .ptv-page {
     max-width: 100%;
-    padding: 0 32px 48px;
+    padding: 0 80px 48px 32px;
     background: transparent;
   }
 
@@ -1055,7 +1058,7 @@
 @media (min-width: 481px) and (max-width: 640px) {
 
   /* Tighter page padding */
-  .ptv-page       { padding: 0 16px 48px; }
+  .ptv-page       { padding: 0 64px 48px 16px; }
   .ptv-breadcrumb { padding: 12px 16px 0; }
 
   /* Cards: 2 columns instead of 3 */
@@ -1104,7 +1107,7 @@
 @media (min-width: 1280px) {
   body.chat-open .ptv-page {
     padding-left: 40px;
-    padding-right: 40px;
+    padding-right: 88px;
   }
   body.chat-open .ptv-breadcrumb {
     padding-left: 40px;

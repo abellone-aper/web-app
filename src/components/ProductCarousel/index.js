@@ -33,8 +33,13 @@ export default function ProductCarousel({ title, subtitle, badge, products, show
       const cardWidth = card.getBoundingClientRect().width;
       const gap = parseFloat(getComputedStyle(row).columnGap) || 0;
       if (!available || !cardWidth) return;
-      const count = Math.floor((available + gap) / (cardWidth + gap));
-      setRepeatList(count >= products.length && products.length > 1);
+      // Repeat unless there's at least one full extra card's worth of
+      // content left to scroll to — anything less (e.g. the last card
+      // barely cropped by a few px) makes the arrow feel dead rather
+      // than like a real "next page", so we repeat instead of leaving it.
+      const rowWidth = products.length * cardWidth + (products.length - 1) * gap;
+      const overflow = rowWidth - available;
+      setRepeatList(overflow < cardWidth && products.length > 1);
     }
 
     recompute();
