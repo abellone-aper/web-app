@@ -65,8 +65,11 @@
   --sp-12: 48px;
 
   /* ─── Layout ────────────────────────────────────────────────── */
-  --container-px:  136px;
-  --container-max: 1440px;
+  /* Breakpoints canónicos del sitio (tienda): mobile ≤480, tablet chica 481-640,
+     tablet 641-1024, desktop chico 1025-1280, desktop grande ≥1281. */
+  --container-px:      40px;
+  --container-max:     1440px;
+  --chat-panel-push:  420px;  /* cuánto se achica el contenido cuando el chat está abierto (solo desktop) */
   --page-px:        16px;  /* horizontal page inset (mobile) */
 
   /* ─── Surface gradients ─────────────────────────────────────── */
@@ -204,7 +207,6 @@ img { max-width: 100%; display: block; }
   padding: 0 var(--container-px);
 }
 
-
 .icon-blue { color: var(--action-primary); }
 
 /* ─── Responsive :root overrides ────────────────────────────── */
@@ -220,15 +222,14 @@ img { max-width: 100%; display: block; }
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   :root {
-    --container-px: 20px;
+    --container-px: 16px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --container-px: 16px;
     --text-xs:   14px;
     --text-sm:   15px;
     --text-base: 17px;

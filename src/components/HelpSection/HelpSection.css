@@ -7,9 +7,9 @@
 }
 
 .help-inner {
-  max-width: 1440px;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 40px 48px;
+  padding: 0 var(--container-px) 48px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -168,21 +168,11 @@
   min-width: 0;
 }
 
-/* ── Chat open: match container padding reduction ── */
-@media (min-width: 1025px) {
-  body.chat-open .help-inner { padding: 0 40px 48px; }
-}
-
-/* Matches HomePage's .container padding at this same breakpoint */
-@media (min-width: 1025px) and (max-width: 1280px) {
-  .help-inner { padding: 0 48px 48px; }
-}
-
 /* ═══════════════════════════════════════════════════════════════
    TABLET — 641px – 1024px
    ═══════════════════════════════════════════════════════════════ */
 @media (min-width: 641px) and (max-width: 1024px) {
-  .help-inner { padding: 0 32px 40px; }
+  .help-inner { padding: 0 var(--container-px) 40px; }
 
   /* Título + botón en columna: no entran uno al lado del otro en este ancho */
   .help-arrepentimiento {
@@ -207,7 +197,7 @@
    SMALL TABLET — 481px – 640px
    ═══════════════════════════════════════════════════════════════ */
 @media (min-width: 481px) and (max-width: 640px) {
-  .help-inner { padding: 0 16px 32px; gap: 12px; }
+  .help-inner { padding: 0 var(--container-px) 32px; gap: 12px; }
   .help-grid  { grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .help-item-card { padding: 0 14px; }
   .help-item-label { font-size: 13px; }
@@ -236,7 +226,7 @@
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
   .help-section { padding: 24px 0 0; }
-  .help-inner   { padding: 0 16px 24px; gap: 10px; }
+  .help-inner   { padding: 0 var(--container-px) 24px; gap: 10px; }
 
   .help-title { font-size: 19px; font-weight: 700; }
 

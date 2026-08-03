@@ -41,11 +41,18 @@
 }
 .search-suggestions__chip:hover { background: var(--neutral-four); }
 
+.search-suggestions__section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 12px;
+}
+
 .search-suggestions__section-title {
   font-size: 14px;
   font-weight: 700;
   color: var(--neutral-eight);
-  margin: 0 0 12px;
+  margin: 0;
 }
 
 .search-suggestions__cards-wrap {

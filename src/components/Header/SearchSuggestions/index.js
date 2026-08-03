@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CHIPS, TECH_PRODUCTS, ELECTRO_PRODUCTS, MOCHILA_PRODUCT } from '../../../data/homeProducts';
 import { useBrand } from '../../../brands/BrandContext';
+import LinkButton from '../../Buttons/LinkButton';
 
 const SUGGESTED_CHIPS = CHIPS.map(c => c.label);
 const CONTINUE_SHOPPING = [MOCHILA_PRODUCT, ...TECH_PRODUCTS, ...ELECTRO_PRODUCTS].slice(0, 5);
@@ -45,7 +46,10 @@ export default function SearchSuggestions({ onChipClick }) {
       </div>
 
       <div className="search-suggestions__section">
-        <p className="search-suggestions__section-title">Continuar comprando</p>
+        <div className="search-suggestions__section-header">
+          <p className="search-suggestions__section-title">Continuar comprando</p>
+          <LinkButton as="a" href="#">Mostrar todo</LinkButton>
+        </div>
         <div className="search-suggestions__cards-wrap" ref={wrapRef}>
           <div className="search-suggestions__cards">
             {CONTINUE_SHOPPING.slice(0, visibleCount).map(p => {

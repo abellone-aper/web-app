@@ -242,7 +242,7 @@
   .chat-panel {
     position: fixed;
     top: 0; right: 0; bottom: 0;
-    width: 420px !important;
+    width: var(--chat-panel-push) !important;
     height: 100vh !important;
     border-radius: 0 !important;
     box-shadow: -4px 0 32px rgba(0,0,0,0.12) !important;
@@ -254,18 +254,18 @@
     animation: chatOpenPanel 0.26s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
   body.chat-open .tienda-main {
-    padding-right: 420px;
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-right: var(--chat-panel-push);
+    transition: padding-right var(--transition-panel);
   }
   body:not(.chat-open) .tienda-main {
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: padding-right var(--transition-panel);
   }
   body.chat-open .help-section {
-    padding-right: 420px;
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-right: var(--chat-panel-push);
+    transition: padding-right var(--transition-panel);
   }
   body:not(.chat-open) .help-section {
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: padding-right var(--transition-panel);
   }
   body.chat-open .help-grid {
     grid-template-columns: repeat(3, 1fr);

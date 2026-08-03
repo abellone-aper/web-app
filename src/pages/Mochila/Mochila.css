@@ -426,8 +426,9 @@
   .mo-gallery-mobile { display: none; }
   .mo-mobile-detail { display: none; }
 
-  /* 40px side padding matches HomePage's .container */
-  .mo-page { max-width: 1440px; margin: 0 auto; padding: 24px 40px 60px; background: transparent; }
+  /* mo-page no tiene carrusel a sangrado (el contenido va en una columna
+     1fr acotada por el sidebar de precio), padding simétrico via --container-px */
+  .mo-page { max-width: var(--container-max); margin: 0 auto; padding: 24px var(--container-px) 60px; background: transparent; }
 
   .mo-layout { display: block; }
   .mo-col-main { display: block; }
@@ -472,22 +473,17 @@
   .mo-price-box { position: sticky; top: 80px; }
 
   body.chat-open .mo-main {
-    padding-right: 420px;
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-right: var(--chat-panel-push);
+    transition: padding-right var(--transition-panel);
   }
   body:not(.chat-open) .mo-main {
-    transition: padding-right 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: padding-right var(--transition-panel);
   }
-  body.chat-open .breadcrumb { padding-left: 40px; padding-right: 40px; }
-  body.chat-open .mo-page { padding-left: 40px; padding-right: 40px; }
   body.chat-open .mo-layout { grid-template-columns: 1fr 360px; }
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   .mo-gallery-main { height: 400px; }
-
-  /* Matches HomePage's .container padding at this same breakpoint */
-  .mo-page { padding: 24px 48px 60px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -498,7 +494,7 @@
   .mo-gallery-mobile { display: none; }
   .mo-mobile-detail { display: none; }
 
-  .mo-page { max-width: 100%; padding: 24px 32px 60px; background: transparent; }
+  .mo-page { max-width: 100%; padding: 24px var(--container-px) 60px; background: transparent; }
 
   .mo-layout {
     display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start;
@@ -526,8 +522,8 @@
 }
 
 /* ─── Small tablet: stack layout ─────────────────────────────── */
-@media (min-width: 481px) and (max-width: 680px) {
-  .mo-page { padding: 16px 16px 60px; }
+@media (min-width: 481px) and (max-width: 640px) {
+  .mo-page { padding: 16px var(--container-px) 60px; }
   .mo-layout { grid-template-columns: 1fr; gap: 16px; }
   .mo-gallery-main { height: 280px; }
   .mo-comparison-grid { grid-template-columns: 1fr; }

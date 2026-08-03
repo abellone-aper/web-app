@@ -158,11 +158,9 @@
     background: #fff;
     border-bottom: 1px solid var(--neutral-four);
   }
-  .header-search-left { left: 32px; }
-  .header-search-right { right: 32px; }
   .header-top {
     display: flex; align-items: center; gap: 16px;
-    height: 64px; padding: 0 32px;
+    height: 64px; padding: 0 var(--container-px);
     max-width: 100%; margin: 0;
     flex-wrap: nowrap; /* reset del max-width:768px que pone wrap */
   }
@@ -201,8 +199,8 @@
   }
   .header-top {
     display: flex; align-items: center; gap: 24px;
-    height: 68px; padding: 0 40px;
-    max-width: 1440px; margin: 0 auto;
+    height: 68px; padding: 0 var(--container-px);
+    max-width: var(--container-max); margin: 0 auto;
   }
   .header-left { gap: 24px; flex: 1; min-width: 0; display: flex; align-items: center; }
   .header-left .logo { display: flex; }
@@ -225,26 +223,16 @@
   .header-icon-btn .icon-wrap { width: 24px; height: 24px; }
   .header-icon-btn .icon-wrap i { font-size: 24px; }
   .header-icon-btn i { font-size: 24px; }
-
-  body.chat-open .header-top { padding: 0 40px; }
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-  .header-top { padding: 0 48px; }
-  .search     { width: 380px; }
+  .search { width: 380px; }
 }
 
 /* ─── Small tablet ── */
 @media (min-width: 481px) and (max-width: 640px) {
-  .header-top { padding: 0 16px; gap: 8px; }
+  .header-top { gap: 8px; }
   .logo       { flex-shrink: 0; }
-  .header-search-left { left: 16px; }
-  .header-search-right { right: 16px; }
-}
-
-@media (min-width: 1025px) and (max-width: 1280px) {
-  .header-search-left { left: 48px; }
-  .header-search-right { right: 48px; }
 }
 
 /* ─── Scrolled state desktop / tablet ────────────────────────── */
@@ -254,16 +242,15 @@
   }
 
   .header-search--scrolled {
-    width: 560px;
-    flex-shrink: 0;
+    flex: 1;
+    min-width: 220px;
     height: 44px;
     animation: searchSlideIn 0.2s ease;
   }
 
-  /* Balance left/right so the search bar is truly centered */
-  .header--home.header--scrolled .header-top .header-icons {
-    flex: 1;
-    justify-content: flex-end;
+  /* Only the search bar should grow — the logo keeps its own size */
+  .header--scrolled .header-left {
+    flex: 0 0 auto;
   }
 
   @keyframes searchSlideIn {
@@ -272,35 +259,25 @@
   }
 }
 
-@media (min-width: 481px) and (max-width: 1024px) {
-  .header-search--scrolled { width: 360px; }
-}
-
-@media (min-width: 1025px) and (max-width: 1280px) {
-  .header-search--scrolled { width: 480px; }
-}
-
-/* Desktop / tablet search mode */
-.header--search-open .header-top {
-  position: relative;
-  justify-content: center;
+/* Desktop / tablet: search bar fills the row (scrolled or fully open) */
+.header--search-open .header-top,
+.header--scrolled .header-top {
+  gap: 48px;
 }
 
 .header-search-left {
-  position: absolute;
-  left: 40px;
   display: flex; align-items: center;
+  flex-shrink: 0;
 }
 
 .header-search-right {
-  position: absolute;
-  right: 40px;
   display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
 }
 
 .search--expanded {
-  width: 560px;
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 220px;
 }
 
 /* ─── User avatar chip (desktop / tablet) ────────────────────── */
