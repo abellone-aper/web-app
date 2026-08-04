@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { getPublicUrl } from '../../lib/storage';
 import { CURRENT_USER } from '../../lib/currentUser';
 import Header from '../../components/Header';
-import ProductCarousel from '../../components/ProductCarousel';
+import HomeDashboard from '../../components/HomeDashboard';
 import TripCard from '../../components/TripCard';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SecondaryButton from '../../components/Buttons/SecondaryButton';
@@ -19,7 +19,7 @@ import BannerCarousel from '../../components/BannerCarousel';
 import RecommendationsCarousel from '../../components/RecommendationsCarousel';
 import { useBrand } from '../../brands/BrandContext';
 import BrandLogo from '../../components/BrandLogo';
-import { CHIPS, TECH_PRODUCTS, ELECTRO_PRODUCTS } from '../../data/homeProducts';
+import { CHIPS } from '../../data/homeProducts';
 
 const CTX_CAR_ICON = '/icons/vehículo.svg';
 
@@ -360,31 +360,7 @@ export default function HomePage({ onOpenAssistant }) {
             </div>
           </section>
 
-          <div className="dashboard-grid">
-            <div className="dashboard-main">
-              <ProductCarousel title="Para comprar con tus puntos" badge="54.000 puntos disponibles - Vence el 31/05" products={TECH_PRODUCTS} />
-              <ProductCarousel title="Relacionados con tu última compra" products={ELECTRO_PRODUCTS} />
-
-            </div>
-
-            <div className="dashboard-aside">
-              <section className="section">
-                <div className="section-header">
-                  <h2 className="section-title">Tiendas Oficiales</h2>
-                  <LinkButton as="a" href="#">Mostrar todo</LinkButton>
-                </div>
-                <div className="carousel-wrap">
-                  <button className="carousel-arrow"><i className="ph ph-caret-left"></i></button>
-                  <div className="carousel-track">
-                    <div className="stores-row">
-                      {['Samsung','Apple','LG','Sony','Motorola','Xiaomi'].map(s => <div key={s} className="store-card">{s}</div>)}
-                    </div>
-                  </div>
-                  <button className="carousel-arrow"><i className="ph ph-caret-right"></i></button>
-                </div>
-              </section>
-            </div>
-          </div>
+          <HomeDashboard />
 
           <section className="promo-banners-section">
             <div className="promo-banners-grid">

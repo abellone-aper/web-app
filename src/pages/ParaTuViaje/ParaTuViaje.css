@@ -891,7 +891,7 @@
 }
 
 /* ─── Mid breakpoint: 2 columns ──────────────────────────────── */
-@media (min-width: 1025px) and (max-width: 1280px) {
+@media (min-width: 1025px) and (max-width: 1440px) {
   .ptv-cards-track {
     grid-template-columns: repeat(3, 1fr);
   }

@@ -12,7 +12,7 @@
   object-fit: cover; object-position: center top;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 480px) {
   .insurance-card--overlay .insurance-bg {
     height: 360px;
   }
@@ -95,7 +95,7 @@
 }
 
 /* ── Responsive: card variant on tablet/desktop ── */
-@media (min-width: 641px) {
+@media (min-width: 481px) {
   .insurance-card--card .insurance-media { height: 200px; }
   .insurance-card--card .insurance-body  { padding: 20px; }
   .insurance-card--card .insurance-sub   { font-size: 16px; }

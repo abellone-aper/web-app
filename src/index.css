@@ -66,7 +66,7 @@
 
   /* ─── Layout ────────────────────────────────────────────────── */
   /* Breakpoints canónicos del sitio (tienda): mobile ≤480, tablet chica 481-640,
-     tablet 641-1024, desktop chico 1025-1280, desktop grande ≥1281. */
+     tablet 641-1024, desktop chico/normal 1025-1440, desktop grande ≥1441. */
   --container-px:      40px;
   --container-max:     1440px;
   --chat-panel-push:  420px;  /* cuánto se achica el contenido cuando el chat está abierto (solo desktop) */
@@ -210,7 +210,7 @@ img { max-width: 100%; display: block; }
 .icon-blue { color: var(--action-primary); }
 
 /* ─── Responsive :root overrides ────────────────────────────── */
-@media (max-width: 1280px) {
+@media (max-width: 1440px) {
   :root {
     --container-px: 48px;
   }

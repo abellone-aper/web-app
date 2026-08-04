@@ -482,7 +482,7 @@
   body.chat-open .mo-layout { grid-template-columns: 1fr 360px; }
 }
 
-@media (min-width: 1025px) and (max-width: 1280px) {
+@media (min-width: 1025px) and (max-width: 1440px) {
   .mo-gallery-main { height: 400px; }
 }
 

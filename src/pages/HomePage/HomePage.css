@@ -53,7 +53,7 @@
   line-height: 1.15; margin: 0;
   font-family: var(--font-body);
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .hero-slide-inner { padding: 28px 32px; }
   .hero-slide-title { font-size: 28px; }
 }
@@ -557,29 +557,6 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   STORES
-   ═══════════════════════════════════════════════════════════════ */
-.stores-row {
-  display: flex;
-  gap: 24px;
-  padding: 8px 0;
-}
-.store-card {
-  flex: 0 0 165px;
-  width: 165px;
-  height: 99px;
-  background: var(--neutral-one); border: 1px solid var(--neutral-five);
-  border-radius: var(--radius-s);
-  display: flex; align-items: center; justify-content: center;
-  padding: 16px 24px;
-  font-weight: 700; font-size: 22px; letter-spacing: -0.5px;
-  color: var(--neutral-nine);
-}
-.store-card img {
-  max-width: 100%; max-height: 100%; object-fit: contain; display: block;
-}
-
-/* ═══════════════════════════════════════════════════════════════
    NEWSLETTER
    ═══════════════════════════════════════════════════════════════ */
 .newsletter {
@@ -747,11 +724,6 @@
 .desktop-greeting { display: none; }
 .desktop-home    { display: none; }
 
-/* ─── Dashboard ──────────────────────────────────────────────── */
-.dashboard-grid { }
-.dashboard-main { }
-.dashboard-aside { }
-
 /* ─── New mobile home (hidden by default) ─────────────────────── */
 .new-mobile-home { display: none; }
 
@@ -887,12 +859,6 @@
     padding-left: var(--page-px);
     padding-right: var(--page-px);
   }
-  .stores-row {
-    gap: 12px;
-    padding-left: var(--page-px);
-    padding-right: var(--page-px);
-  }
-
   .promo-row {
     grid-template-columns: 1fr;
     margin-left: calc(-1 * var(--container-px));
@@ -918,8 +884,6 @@
   .category-icon { height: 80px; }
   .category-icon i { font-size: 36px; }
   .category-name { font-size: 15px; }
-
-  .store-card { font-size: 16px; padding: 12px; height: 72px; flex: 0 0 130px; width: 130px; }
 
   .newsletter {
     flex-direction: column;
@@ -1048,9 +1012,6 @@
   }
   .section-header { padding: 0 var(--page-px) 14px; }
 
-  /* Add flex gap between product sections */
-  .dashboard-main { display: flex; flex-direction: column; gap: 0; }
-
   /* Show new home, hide old desktop content */
   .new-mobile-home {
     display: flex;
@@ -1061,7 +1022,6 @@
   }
   .hero-wrap        { display: none !important; }
   .feature-strip    { display: none !important; }
-  .dashboard-aside  { display: none !important; }
   main.container    { padding-top: 0; padding-bottom: 8px; }
 
   body { background: #fff; padding-bottom: 0; }
@@ -1320,14 +1280,6 @@
   .mas-accedidos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; overflow-x: visible; }
   .mas-accedidos-card { width: auto; min-width: 0; height: 144px; }
 
-  /* ─── Dashboard grid ─── */
-  .dashboard-grid {
-    display: block;
-    padding-top: 48px; padding-bottom: 0;
-  }
-  .dashboard-aside { display: none !important; }
-  .dashboard-main  { display: flex; flex-direction: column; gap: 16px; }
-
   /* ─── Sections ─── */
   .section {
     background: transparent; border: none;
@@ -1365,8 +1317,6 @@
   .carousel-track--product .carousel-arrow:last-child  { right: 8px; }
   .carousel-track-scroll { overflow: hidden; width: 100%; }
   .product-row    { display: flex; gap: 14px; }
-  .product-card   { flex: 0 0 190px; width: 190px; }
-  .product-image  { width: 190px; height: 180px; }
 
   /* ─── Promo banners: a este ancho las 2 imágenes cuadradas fijas no
      dejan lugar para el texto (se rompe en una columna de 1 letra) —
@@ -1543,14 +1493,6 @@
   .mas-accedidos-icon i { font-size: 32px; }
   .mas-accedidos-label { font-size: 16px; }
 
-  /* ─── Dashboard grid: full-width, no aside ─── */
-  .dashboard-grid {
-    display: block;
-    padding-top: 48px; padding-bottom: 0;
-  }
-  .dashboard-aside  { display: none !important; }
-  .dashboard-main   { display: flex; flex-direction: column; gap: 16px; }
-
   /* ─── Sections ─── */
   .section {
     background: transparent; border: none;
@@ -1595,10 +1537,6 @@
   .carousel-arrow:hover { background: var(--action-secondary); border-color: var(--action-primary); color: var(--action-primary); }
   .carousel-track-scroll { overflow: hidden; width: 100%; }
   .product-row { display: flex; gap: 10px; }
-  .product-card {
-    flex: 0 0 217px; width: 217px;
-  }
-  .product-image { width: 217px; height: 190px; }
 
   /* ─── Categories ─── */
   .categories-row { grid-template-columns: repeat(8, 1fr); gap: 12px; }
@@ -1625,10 +1563,10 @@
   body.chat-open .carousel-arrow:last-child  { right: 8px; }
 }
 
-/* ── Desktop estándar (1025-1280px): container más angosto que en
+/* ── Desktop chico/normal (1025-1440px): container más angosto que en
    desktop grande, así que necesita su propio padding/tamaños ── */
 
-@media (min-width: 1025px) and (max-width: 1280px) {
+@media (min-width: 1025px) and (max-width: 1440px) {
   .desktop-greeting  { padding: 20px 48px 0; }
   .categories-row    { grid-template-columns: repeat(4, 1fr); }
   .featured-section  { gap: 16px; }
@@ -1638,6 +1576,32 @@
      líneas y desborda la altura fija de 292px del banner. */
   .promo-item--gradient { padding: 24px 28px; }
   .promo-banner-title { max-width: none; font-size: 24px; line-height: 29px; }
+}
+
+/* ── Desktop grande (≥1441px, pantalla más ancha que una Mac de 13")
+   con chat abierto: a este ancho sobra espacio incluso con los 420px
+   del chat, así que las cards vuelven a llenar la fila (grid, sin
+   scroll) en vez de quedar en ancho fijo de 205px con scroll horizontal
+   (eso queda para desktop chico/normal —hasta 1440px—, donde sí hace
+   falta). Solo esta combinación (grande + chat abierto). ── */
+@media (min-width: 1441px) {
+  body.chat-open .mas-accedidos-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    overflow-x: visible;
+  }
+  body.chat-open .mas-accedidos-card {
+    flex: initial;
+    width: auto;
+    min-width: 0;
+    /* Cards más angostas por el grid de 6 columnas: la etiqueta envuelve
+       más seguido, así que en vez de altura fija + space-between (que
+       aprieta ícono y texto), altura libre + gap explícito para que
+       siempre quede aire entre ambos. */
+    height: auto;
+    justify-content: flex-start;
+    gap: 16px;
+  }
 }
 
 /* ── Banner de promos con el panel de chat abierto (420px de ancho) ──
@@ -1692,10 +1656,6 @@
     grid-column: 1 / -1;
     grid-row: auto;
   }
-
-  /* Narrower product cards to fit more per scroll */
-  .product-card { flex: 0 0 160px; width: 160px; }
-  .product-image { width: 160px; height: 150px; }
 
   /* Carousel arrows inset so they don't overflow */
   .carousel-arrow:first-child { left: -12px; }

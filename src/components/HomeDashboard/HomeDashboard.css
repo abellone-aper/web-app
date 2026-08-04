@@ -1,0 +1,56 @@
+.dashboard-grid { }
+.dashboard-main { }
+.dashboard-aside { }
+
+.stores-row {
+  display: flex;
+  gap: 24px;
+  padding: 8px 0;
+}
+.store-card {
+  flex: 0 0 165px;
+  width: 165px;
+  height: 99px;
+  background: var(--neutral-one); border: 1px solid var(--neutral-five);
+  border-radius: var(--radius-s);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px 24px;
+  font-weight: 700; font-size: 22px; letter-spacing: -0.5px;
+  color: var(--neutral-nine);
+}
+.store-card img {
+  max-width: 100%; max-height: 100%; object-fit: contain; display: block;
+}
+
+/* ─── Mobile (≤480px) ─── */
+@media (max-width: 480px) {
+  .stores-row {
+    gap: 12px;
+    padding-left: var(--page-px);
+    padding-right: var(--page-px);
+  }
+  .store-card { font-size: 16px; padding: 12px; height: 72px; flex: 0 0 130px; width: 130px; }
+
+  .dashboard-main { display: flex; flex-direction: column; gap: 0; }
+  .dashboard-aside { display: none !important; }
+}
+
+/* ─── Tablet (481px–1024px) ─── */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .dashboard-grid {
+    display: block;
+    padding-top: 48px; padding-bottom: 0;
+  }
+  .dashboard-aside { display: none !important; }
+  .dashboard-main  { display: flex; flex-direction: column; gap: 16px; }
+}
+
+/* ─── Desktop (≥1025px) — full-width, no aside ─── */
+@media (min-width: 1025px) {
+  .dashboard-grid {
+    display: block;
+    padding-top: 48px; padding-bottom: 0;
+  }
+  .dashboard-aside  { display: none !important; }
+  .dashboard-main   { display: flex; flex-direction: column; gap: 16px; }
+}
