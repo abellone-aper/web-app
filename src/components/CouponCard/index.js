@@ -1,8 +1,8 @@
 import './CouponCard.css';
 
-export default function CouponCard({ coupons, toggles, onToggle }) {
+export default function CouponCard({ coupons, toggles, onToggle, className, style }) {
   return (
-    <div className="coupon-card">
+    <div className={`coupon-card${className ? ' ' + className : ''}`} style={style}>
       <div className="coupon-card-header">
         <span className="coupon-card-title">Cupones a vencer</span>
         <a href="#" className="coupon-card-link">Ver todos</a>

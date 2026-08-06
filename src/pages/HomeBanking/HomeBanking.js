@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LinkButton from '../../components/Buttons/LinkButton';
 import { useBrand } from '../../brands/BrandContext';
+import useReveal from '../../hooks/useReveal';
 
 function getTransactions(brand) {
   return [
@@ -37,6 +38,9 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
   const TRANSACTIONS = getTransactions(brand);
   const MOB_TRANSACTIONS = getMobTransactions(brand);
   const [filterTab, setFilterTab] = useState('Todos');
+  const [txnRevealRef, txnRevealVisible] = useReveal();
+  const [vencRevealRef, vencRevealVisible] = useReveal();
+  const [mobTxnRevealRef, mobTxnRevealVisible] = useReveal();
 
   function openChat(e) {
     e.preventDefault();
@@ -120,18 +124,18 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
           </div>
 
           <div className="bottom-grid">
-            <div className="panel">
+            <div ref={txnRevealRef} className={`panel reveal${txnRevealVisible ? ' is-visible' : ''}`}>
               <div className="panel-header">
                 <div className="panel-title">Últimos movimientos</div>
                 <LinkButton as="a" href="#">Ver todos</LinkButton>
               </div>
               <div className="filter-tabs">
-                {['Todos','Ingresos','Egresos','Tarjeta'].map(t => (
-                  <div key={t} className={`filter-tab${filterTab === t ? ' active' : ''}`} onClick={() => setFilterTab(t)}>{t}</div>
+                {['Todos','Ingresos','Egresos','Tarjeta'].map((t, i) => (
+                  <div key={t} className={`filter-tab${filterTab === t ? ' active' : ''} mount-in`} style={{'--index': i}} onClick={() => setFilterTab(t)}>{t}</div>
                 ))}
               </div>
               {TRANSACTIONS.map((tx, i) => (
-                <div key={i} className="txn-item">
+                <div key={i} className="txn-item mount-in" style={{'--index': i}}>
                   <div className={`txn-icon ${tx.icon}`}><i className={tx.iconClass}></i></div>
                   <div className="txn-body">
                     <div className="txn-name">{tx.name}</div>
@@ -143,13 +147,13 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
             </div>
 
             <div className="right-col">
-              <div className="panel">
+              <div ref={vencRevealRef} className={`panel reveal${vencRevealVisible ? ' is-visible' : ''}`}>
                 <div className="panel-header">
                   <div className="panel-title">Vencimientos</div>
                   <LinkButton as="a" href="#">Ver todos</LinkButton>
                 </div>
                 {VENCIMIENTOS.map((v, i) => (
-                  <div key={i} className="venc-item">
+                  <div key={i} className="venc-item mount-in" style={{'--index': i}}>
                     <div className="venc-badge" style={v.badgeStyle}>{v.badge}</div>
                     <div className="venc-body">
                       <div className="venc-name">{v.day}</div>
@@ -245,9 +249,9 @@ export default function HomeBankingPage({ chatOpen, onChatOpen }) {
               <span className="mob-section-title">Últimos movimientos</span>
               <i className="ph ph-caret-right"></i>
             </div>
-            <div className="mob-card">
+            <div ref={mobTxnRevealRef} className={`mob-card reveal${mobTxnRevealVisible ? ' is-visible' : ''}`}>
               {MOB_TRANSACTIONS.map((tx, i) => (
-                <div key={i} className="mob-txn-item">
+                <div key={i} className="mob-txn-item mount-in" style={{'--index': i}}>
                   <div className={`mob-txn-icon ${tx.icon}`}><i className={tx.iconClass}></i></div>
                   <div className="mob-txn-body">
                     <div className="mob-txn-name">{tx.name}</div>

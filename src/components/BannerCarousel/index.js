@@ -56,7 +56,7 @@ export default function BannerCarousel() {
     <section className="banner-carousel">
       <div className="banner-carousel-scroll" ref={trackRef}>
         {banners.map((src, i) => (
-          <div className="banner-carousel-item" key={i}>
+          <div className="banner-carousel-item mount-in" key={i} style={{ '--index': i }}>
             <img src={src} alt="" />
           </div>
         ))}

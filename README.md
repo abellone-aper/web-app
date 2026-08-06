@@ -1,10 +1,10 @@
-# Tienda de Puntos — Multi-marca
+# Tienda Bancaria — Multi-marca
 
-Prototipo funcional (front-end) de una tienda de canje de puntos, pensado para reutilizarse entre distintas marcas bancarias con una sola base de código.
+Prototipo funcional (front-end) de una tienda bancaria, pensado para reutilizarse entre distintos bancos con una sola base de código.
 
 ## Qué es
 
-Una SPA en React que simula el ecosistema de "canjeá tus puntos" de un banco: home de tienda, catálogo de productos con carrusel, página de detalle de producto y sección "Para tu viaje" (seguros, hospedaje, mochila de viaje). Todo el flujo de compra/asistencia se apoya en un asistente conversacional (chat) embebido en cada página.
+Una SPA en React que simula el ecosistema de tienda de un banco: home de tienda, catálogo de productos con carrusel, página de detalle de producto y sección "Para tu viaje" (seguros, hospedaje, mochila de viaje). Todo el flujo de compra/asistencia se apoya en un asistente conversacional (chat) embebido en cada página.
 
 ## Multi-marca
 

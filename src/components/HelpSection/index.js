@@ -1,5 +1,6 @@
 import './HelpSection.css';
 import { getPublicUrl } from '../../lib/storage';
+import useReveal from '../../hooks/useReveal';
 
 const HELP_ITEMS = [
   { icon: '/icons/preguntas frecuentes.svg', label: 'Preguntas frecuentes' },
@@ -15,14 +16,15 @@ const LOGO_SSN         = getPublicUrl('Imagenes', 'SSN.png');
 const LOGO_CACE        = getPublicUrl('Imagenes', 'cace.png');
 
 export default function HelpSection() {
+  const [revealRef, revealVisible] = useReveal();
   return (
-    <section className="help-section">
+    <section ref={revealRef} className={`help-section reveal${revealVisible ? ' is-visible' : ''}`}>
       <div className="help-inner">
         <h2 className="help-title">Ayuda</h2>
 
         <div className="help-grid">
-          {HELP_ITEMS.map(item => (
-            <a key={item.label} href="#" className="help-item-card">
+          {HELP_ITEMS.map((item, i) => (
+            <a key={item.label} href="#" className="help-item-card mount-in" style={{'--index': i}}>
               <img src={item.icon} alt="" className="help-item-icon" />
               <span className="help-item-label">{item.label}</span>
               <img src="/icons/flecha derecha.svg" alt="" className="help-item-chevron" />

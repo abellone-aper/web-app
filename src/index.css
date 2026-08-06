@@ -209,6 +209,45 @@ img { max-width: 100%; display: block; }
 
 .icon-blue { color: var(--action-primary); }
 
+/* ─── Mount stagger ──────────────────────────────────────────────
+   Entrada con fade + desplazamiento al montar, con delay incremental
+   entre hermanos vía --index (seteado inline por cada item mapeado). */
+@keyframes mountIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.mount-in {
+  animation: mountIn 0.4s ease both;
+  animation-delay: calc(var(--index, 0) * 80ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mount-in { animation: none; }
+}
+
+/* ─── Scroll reveal ──────────────────────────────────────────────
+   Entrada al hacer scroll: la sección arranca oculta y desplazada,
+   y se revela una sola vez cuando entra en viewport (useReveal +
+   IntersectionObserver le agrega "is-visible"). */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* mount-in items inside a not-yet-revealed section would otherwise finish
+   their stagger instantly on page load (mount happens regardless of the
+   ancestor's opacity), so pause them until the ancestor is revealed —
+   the delay clock only starts advancing once this is lifted. */
+.reveal:not(.is-visible) .mount-in {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
 /* ─── Responsive :root overrides ────────────────────────────── */
 @media (max-width: 1440px) {
   :root {

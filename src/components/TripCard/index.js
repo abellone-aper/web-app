@@ -37,7 +37,7 @@ const CLASSES = {
   },
 };
 
-export default function TripCard({ card, variant = 'mobile' }) {
+export default function TripCard({ card, variant = 'mobile', className, style }) {
   const cls = CLASSES[variant];
 
   const inner = (
@@ -63,7 +63,15 @@ export default function TripCard({ card, variant = 'mobile' }) {
 
   if (card.to) {
     const rootClass = cls.rootLink ?? cls.root;
-    return <Link to={card.to} className={rootClass}>{inner}</Link>;
+    return (
+      <Link to={card.to} className={`${rootClass}${className ? ' ' + className : ''}`} style={style}>
+        {inner}
+      </Link>
+    );
   }
-  return <div className={cls.root}>{inner}</div>;
+  return (
+    <div className={`${cls.root}${className ? ' ' + className : ''}`} style={style}>
+      {inner}
+    </div>
+  );
 }

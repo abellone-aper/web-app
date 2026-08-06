@@ -1,6 +1,7 @@
 import './HomePage.css';
 import { useState, useEffect, useRef } from 'react';
 import useCarouselNav from '../../hooks/useCarouselNav';
+import useReveal from '../../hooks/useReveal';
 import { Link } from 'react-router-dom';
 import { getPublicUrl } from '../../lib/storage';
 import { CURRENT_USER } from '../../lib/currentUser';
@@ -143,7 +144,7 @@ function HeroSlider() {
       <section className="hero">
         <div className="hero-slider" style={{transform:`translateX(-${current * 100}%)`}}>
           {HERO_SLIDES.map((s, i) => (
-            <div key={i} className={`hero-slide ${s.cls}`}>
+            <div key={i} className={`hero-slide ${s.cls} mount-in`} style={{'--index': i}}>
               <div className="hero-slide-inner">
                 <p className="hero-slide-eyebrow">{s.eyebrow}</p>
                 <h2 className="hero-slide-title">{s.title.split('\n').map((l, j) => <span key={j}>{l}{j === 0 && <br />}</span>)}</h2>
@@ -178,6 +179,10 @@ export default function HomePage({ onOpenAssistant }) {
     setCouponToggles(prev => prev.map((v, j) => j === i ? !v : v));
   }
   const masAccedidosNav = useCarouselNav('.mas-accedidos-card');
+  const [featureStripRevealRef, featureStripRevealVisible] = useReveal();
+  const [statusRevealRef, statusRevealVisible] = useReveal();
+  const [masAccedidosRevealRef, masAccedidosRevealVisible] = useReveal();
+  const [promoBannersRevealRef, promoBannersRevealVisible] = useReveal();
 
   return (
     <>
@@ -219,7 +224,7 @@ export default function HomePage({ onOpenAssistant }) {
               <p className="nmh-trip-heading">Ya tenés el vuelo. Armamos todo lo que necesitas para el viaje.</p>
             </div>
             <TripScrollWrap innerClass="nmh-trip-cards">
-              {tripCards.map(c => <TripCard key={c.name} card={c} />)}
+              {tripCards.map((c, i) => <TripCard key={c.name} card={c} className="mount-in" style={{'--index': i}} />)}
             </TripScrollWrap>
             <ContextBanner
               icon={CTX_CAR_ICON}
@@ -236,8 +241,8 @@ export default function HomePage({ onOpenAssistant }) {
               <LinkButton as="a" href="#">Conocer todas</LinkButton>
             </div>
             <div className="nmh-chips-row">
-              {CHIPS.map(c => (
-                <div key={c.label} className="nmh-chip">
+              {CHIPS.map((c, i) => (
+                <div key={c.label} className="nmh-chip mount-in" style={{'--index': i}}>
                   <img src={c.icon} alt="" className="nmh-chip-icon" />
                   <span>{c.label}</span>
                 </div>
@@ -267,7 +272,7 @@ export default function HomePage({ onOpenAssistant }) {
                 <p className="dh-ctx-title">Ya tenés el vuelo. Armamos todo lo que necesitas para el viaje.</p>
               </div>
               <TripScrollWrap innerClass="dh-trip-cards" compact>
-                {tripCards.map(c => <TripCard key={c.name} card={c} variant="desktop" />)}
+                {tripCards.map((c, i) => <TripCard key={c.name} card={c} variant="desktop" className="mount-in" style={{'--index': i}} />)}
               </TripScrollWrap>
               <ContextBanner
                 icon={CTX_CAR_ICON}
@@ -284,8 +289,8 @@ export default function HomePage({ onOpenAssistant }) {
                 <LinkButton as="a" href="#">Conocer todas</LinkButton>
               </div>
               <div className="dh-chips-row">
-                {CHIPS.map(c => (
-                  <div key={c.label} className="dh-chip">
+                {CHIPS.map((c, i) => (
+                  <div key={c.label} className="dh-chip mount-in" style={{'--index': i}}>
                     <img src={c.icon} alt={c.label} />
                     <span>{c.label}</span>
                   </div>
@@ -306,14 +311,14 @@ export default function HomePage({ onOpenAssistant }) {
             <InsuranceCard variant="overlay" imgSrc={getPublicUrl('Imagenes', 'cobertura.png')} />
           </div>
 
-          <div className="feature-strip">
+          <div ref={featureStripRevealRef} className={`feature-strip reveal${featureStripRevealVisible ? ' is-visible' : ''}`}>
             {[
               { iconUrl: '/icons/medios de pago.svg', label: 'Cuotas', sub: 'Hasta 24 sin interés' },
               { iconUrl: '/icons/descuento tecnologia.svg', label: 'Promos', sub: 'Hasta 50% descuento' },
               { iconUrl: '/icons/seguimiento de envios.svg', label: 'Envíos', sub: 'A todo el país' },
               { iconPh: 'ph-storefront', label: 'Entregas', sub: 'En tiendas sin costo' },
-            ].map(({ iconUrl, iconPh, label, sub }) => (
-              <div key={label} className="feature-card">
+            ].map(({ iconUrl, iconPh, label, sub }, i) => (
+              <div key={label} className="feature-card mount-in" style={{'--index': i}}>
                 <div className="feature-icon">
                   {iconUrl ? <img src={iconUrl} alt="" style={{width:'28px',height:'28px'}} /> : <i className={`ph ${iconPh}`}></i>}
                 </div>
@@ -325,13 +330,13 @@ export default function HomePage({ onOpenAssistant }) {
 
           <RecommendationsCarousel />
 
-          <section className="status-section">
-            {STATUS_CARDS.map(card => (
-              <StatusCard key={card.label} card={card} />
+          <section ref={statusRevealRef} className={`status-section reveal${statusRevealVisible ? ' is-visible' : ''}`}>
+            {STATUS_CARDS.map((card, i) => (
+              <StatusCard key={card.label} card={card} className="mount-in" style={{'--index': i}} />
             ))}
           </section>
 
-          <section className="mas-accedidos-section">
+          <section ref={masAccedidosRevealRef} className={`mas-accedidos-section reveal${masAccedidosRevealVisible ? ' is-visible' : ''}`}>
             <h2 className="mas-accedidos-title">Más accedidos</h2>
             <div className="carousel-track">
               <button
@@ -345,8 +350,8 @@ export default function HomePage({ onOpenAssistant }) {
                 onMouseOver={masAccedidosNav.handleCardHover}
                 onMouseLeave={masAccedidosNav.handleRowLeave}
               >
-                {MAS_ACCEDIDOS.map(item => (
-                  <a href="#" key={item.label} className="mas-accedidos-card">
+                {MAS_ACCEDIDOS.map((item, i) => (
+                  <a href="#" key={item.label} className="mas-accedidos-card mount-in" style={{'--index': i}}>
                     <div className="mas-accedidos-icon">
                       <img src={item.icon} alt="" />
                     </div>
@@ -364,7 +369,7 @@ export default function HomePage({ onOpenAssistant }) {
 
           <HomeDashboard />
 
-          <section className="promo-banners-section">
+          <section ref={promoBannersRevealRef} className={`promo-banners-section reveal${promoBannersRevealVisible ? ' is-visible' : ''}`}>
             <div className="promo-banners-grid">
               <div className="promo-item promo-item--gradient">
                 <div className="promo-banner-content">

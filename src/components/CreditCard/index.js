@@ -1,8 +1,8 @@
 import './CreditCard.css';
 
-export default function CreditCard({ label, amount, sub, btnLabel = 'Solicitar crédito', onRequest }) {
+export default function CreditCard({ label, amount, sub, btnLabel = 'Solicitar crédito', onRequest, className, style }) {
   return (
-    <div className="credit-card">
+    <div className={`credit-card${className ? ' ' + className : ''}`} style={style}>
       <p className="credit-label">{label}</p>
       <div className="credit-body">
         <div className="credit-info">

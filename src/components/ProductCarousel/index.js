@@ -2,6 +2,7 @@ import { useRef, useState, useLayoutEffect } from 'react';
 import ProductCard from '../ProductCard';
 import LinkButton from '../Buttons/LinkButton';
 import useCarouselNav from '../../hooks/useCarouselNav';
+import useReveal from '../../hooks/useReveal';
 
 // Below this width the carousel switches to native touch scrolling
 // (see the max-width: 1024px rules in HomePage.css) and cards are
@@ -12,6 +13,7 @@ export default function ProductCarousel({ title, subtitle, badge, products, show
   const { trackRef, canLeft, canRight, edgeHover, scroll, handleCardHover, handleRowLeave } = useCarouselNav('.product-card');
   const viewportRef = useRef(null);
   const [repeatList, setRepeatList] = useState(false);
+  const [revealRef, revealVisible] = useReveal();
 
   // .carousel-track fills the section's full width by itself (see its
   // CSS) — the last card lands wherever it lands, cropped by
@@ -53,7 +55,7 @@ export default function ProductCarousel({ title, subtitle, badge, products, show
   const displayProducts = repeatList ? [...products, ...products] : products;
 
   return (
-    <section className="section">
+    <section ref={revealRef} className={`section reveal${revealVisible ? ' is-visible' : ''}`}>
       <div className="section-header">
         <div className="section-header-text">
           <div className="section-title-group">
@@ -70,7 +72,7 @@ export default function ProductCarousel({ title, subtitle, badge, products, show
             <button className={`carousel-arrow${!canLeft ? ' carousel-arrow--hidden' : ''}${edgeHover === 'left' ? ' carousel-arrow--edge-hover' : ''}`} aria-label="Anterior" onClick={() => scroll(-1)}><i className="ph ph-caret-left"></i></button>
             <div className="carousel-track-scroll" ref={trackRef} onMouseOver={handleCardHover} onMouseLeave={handleRowLeave}>
               <div className="product-row">
-                {displayProducts.map((p, i) => <ProductCard key={i < products.length ? (p.id ?? p.title ?? i) : `repeat-${i}-${p.id ?? p.title ?? i}`} product={p} />)}
+                {displayProducts.map((p, i) => <ProductCard key={i < products.length ? (p.id ?? p.title ?? i) : `repeat-${i}-${p.id ?? p.title ?? i}`} product={p} className="mount-in" style={{ '--index': i % products.length }} />)}
               </div>
             </div>
             <button className={`carousel-arrow${!canRight ? ' carousel-arrow--hidden' : ''}${edgeHover === 'right' ? ' carousel-arrow--edge-hover' : ''}`} aria-label="Siguiente" onClick={() => scroll(1)}><i className="ph ph-caret-right"></i></button>

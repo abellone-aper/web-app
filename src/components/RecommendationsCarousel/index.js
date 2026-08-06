@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getPublicUrl } from '../../lib/storage';
 import useCarouselNav from '../../hooks/useCarouselNav';
 import { useBrand } from '../../brands/BrandContext';
+import useReveal from '../../hooks/useReveal';
 
 const RECOMMENDATIONS = [
   {
@@ -52,17 +53,18 @@ const RECOMMENDATIONS = [
 export default function RecommendationsCarousel() {
   const brand = useBrand();
   const { trackRef, canLeft, canRight, edgeHover, scroll, handleCardHover, handleRowLeave } = useCarouselNav('.reco-card');
+  const [revealRef, revealVisible] = useReveal();
 
   return (
-    <section className="section reco-section">
+    <section ref={revealRef} className={`section reco-section reveal${revealVisible ? ' is-visible' : ''}`}>
       <div className="carousel-track">
         <button className={`carousel-arrow${!canLeft ? ' carousel-arrow--hidden' : ''}${edgeHover === 'left' ? ' carousel-arrow--edge-hover' : ''}`} aria-label="Anterior" onClick={() => scroll(-1)}><i className="ph ph-caret-left"></i></button>
         <div className="reco-row" ref={trackRef} onMouseOver={handleCardHover} onMouseLeave={handleRowLeave}>
-          {RECOMMENDATIONS.map(item => {
+          {RECOMMENDATIONS.map((item, i) => {
             const CardTag = item.to ? Link : 'article';
             const cardProps = item.to ? { to: brand.path(item.to) } : {};
             return (
-            <CardTag key={item.label} className="reco-card" {...cardProps}>
+            <CardTag key={item.label} className="reco-card mount-in" style={{ '--index': i }} {...cardProps}>
               <p className="reco-card-label">{item.label}</p>
               <div className={`reco-card-image${item.imgFill ? ' reco-card-image--fill' : ''}`}>
                 <img src={item.img} alt={item.title} />

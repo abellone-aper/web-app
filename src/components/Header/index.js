@@ -70,7 +70,7 @@ export default function Header({
   const handleBack = onBack || (() => navigate(-1));
 
   return (
-    <header ref={headerRef} className={`header header--${variant}${scrollHidden ? ' header--scroll-hidden' : ''}${searchMode ? ' header--search-open' : ''}${scrolledDown && variant === 'home' ? ' header--scrolled' : ''}`}>
+    <header ref={headerRef} className={`header header--${variant} mount-in${scrollHidden ? ' header--scroll-hidden' : ''}${searchMode ? ' header--search-open' : ''}${scrolledDown && variant === 'home' ? ' header--scrolled' : ''}`}>
 
       {/* ── Mobile: home variant ──────────────────────────────── */}
       <div className="header__mobile-home">

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import FavButton from '../Buttons/FavButton';
 import './ProductCard.css';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, className, style }) {
   const content = (
     <>
       <div className="product-image">
@@ -41,7 +41,19 @@ export default function ProductCard({ product }) {
   );
 
   if (product.to) {
-    return <Link to={product.to} className="product-card product-card--link">{content}</Link>;
+    return (
+      <Link
+        to={product.to}
+        className={`product-card product-card--link${className ? ' ' + className : ''}`}
+        style={style}
+      >
+        {content}
+      </Link>
+    );
   }
-  return <article className="product-card">{content}</article>;
+  return (
+    <article className={`product-card${className ? ' ' + className : ''}`} style={style}>
+      {content}
+    </article>
+  );
 }

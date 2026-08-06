@@ -23,7 +23,7 @@ export default function HomeDashboard() {
             <button className="carousel-arrow"><i className="ph ph-caret-left"></i></button>
             <div className="carousel-track">
               <div className="stores-row">
-                {STORES.map(s => <div key={s} className="store-card">{s}</div>)}
+                {STORES.map((s, i) => <div key={s} className="store-card mount-in" style={{'--index': i}}>{s}</div>)}
               </div>
             </div>
             <button className="carousel-arrow"><i className="ph ph-caret-right"></i></button>

@@ -1,10 +1,10 @@
 import PrimaryButton from '../Buttons/PrimaryButton';
 import './InsuranceCard.css';
 
-export default function InsuranceCard({ variant = 'card', imgSrc, features }) {
+export default function InsuranceCard({ variant = 'card', imgSrc, features, className, style }) {
   if (variant === 'overlay') {
     return (
-      <div className="insurance-card--overlay">
+      <div className={`insurance-card--overlay${className ? ' ' + className : ''}`} style={style}>
         <img src={imgSrc} alt="Seguro de viaje" className="insurance-bg" />
         <div className="insurance-body">
           <p className="insurance-sub">Recomendado para el viaje</p>
@@ -16,7 +16,7 @@ export default function InsuranceCard({ variant = 'card', imgSrc, features }) {
   }
 
   return (
-    <div className="insurance-card--card">
+    <div className={`insurance-card--card${className ? ' ' + className : ''}`} style={style}>
       <div className="insurance-media">
         <img src={imgSrc} alt="Seguro de viaje" />
       </div>

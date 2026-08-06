@@ -11,6 +11,7 @@ import FavButton from '../../components/Buttons/FavButton';
 import GalleryActions from '../../components/GalleryActions';
 import DateRangePicker from '../../components/DateRangePicker';
 import { useBrand } from '../../brands/BrandContext';
+import useReveal from '../../hooks/useReveal';
 
 const GALLERY_IMGS = [
   { src: getPublicUrl('Imagenes', 'Hospedaje/1.jpg'), alt: 'Habitación' },
@@ -36,6 +37,7 @@ function fmtARS(n) {
 
 function BookingWidget({ onReserve }) {
   const uid = useId();
+  const [roomOptionsRef, roomOptionsVisible] = useReveal();
   const [guestCount, setGuestCount] = useState(1);
   const [nights, setNights] = useState(7);
   const [dateLabel, setDateLabel] = useState('26 jun – 2 jul (7 noches)');
@@ -82,13 +84,13 @@ function BookingWidget({ onReserve }) {
 
       <div className="hd-field">
         <label className="hd-field-label">Tipo de habitación</label>
-        <div className="hd-room-options">
+        <div ref={roomOptionsRef} className={`hd-room-options reveal${roomOptionsVisible ? ' is-visible' : ''}`}>
           {[
             { value:'doble', name:'Habitación Doble Estándar', sub:'1 cama doble', tags:['28m²','Vista al lago'] },
             { value:'extragrande', name:'Habitación Cama Extragrande', sub:'1 cama doble extragrande', tags:['28m²','Vista montaña'] },
             { value:'suite', name:'Suite Superior', sub:'1 cama doble + sala de estar, jacuzzi y terraza privada', tags:['28m²','Panorámica'] },
-          ].map(opt => (
-            <label key={opt.value} className="hd-room-option">
+          ].map((opt, i) => (
+            <label key={opt.value} className="hd-room-option mount-in" style={{'--index': i}}>
               <input type="radio" name={`roomType_${uid}`} value={opt.value} checked={roomType === opt.value} className="hd-room-radio" onChange={() => setRoomType(opt.value)} />
               <div className="hd-room-option-body">
                 <div className="hd-room-text">
@@ -161,9 +163,15 @@ function Stars({ count = 5 }) {
 }
 
 function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
+  const [galleryRef, galleryVisible] = useReveal();
+  const [includesRef, includesVisible] = useReveal();
+  const [amenitiesRef, amenitiesVisible] = useReveal();
+  const [ratingBarsRef, ratingBarsVisible] = useReveal();
+  const [reviewsRef, reviewsVisible] = useReveal();
+
   return (
     <div className="hd-info">
-      <div className="hd-gallery-desktop">
+      <div ref={galleryRef} className={`hd-gallery-desktop reveal${galleryVisible ? ' is-visible' : ''}`}>
         <div className="hd-gallery-main">
           <img src={GALLERY_IMGS[galleryIdx].src} alt={GALLERY_IMGS[galleryIdx].alt} id="desktopMainImg" />
           <span className="hd-gallery-badge">{galleryIdx + 1} / {GALLERY_IMGS.length}</span>
@@ -171,7 +179,7 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
         </div>
         <div className="hd-gallery-thumbs">
           {GALLERY_IMGS.map((img, i) => (
-            <button key={i} className={`hd-thumb${i === galleryIdx ? ' active' : ''}`} onClick={() => setGalleryIdx(i)}>
+            <button key={i} className={`hd-thumb${i === galleryIdx ? ' active' : ''} mount-in`} style={{'--index': i}} onClick={() => setGalleryIdx(i)}>
               <img src={img.src} alt={img.alt} />
             </button>
           ))}
@@ -207,11 +215,11 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
         </div>
       </div>
 
-      <div className="hd-section">
+      <div ref={includesRef} className={`hd-section reveal${includesVisible ? ' is-visible' : ''}`}>
         <h2 className="hd-section-title">Lo que incluye</h2>
         <div className="hd-includes-grid">
-          {INCLUDES.map(item => (
-            <div key={item.label} className="hd-include-item">
+          {INCLUDES.map((item, i) => (
+            <div key={item.label} className="hd-include-item mount-in" style={{'--index': i}}>
               <i className={item.icon}></i>
               <span>{item.label}</span>
             </div>
@@ -219,10 +227,10 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
         </div>
       </div>
 
-      <div className="hd-section">
+      <div ref={amenitiesRef} className={`hd-section reveal${amenitiesVisible ? ' is-visible' : ''}`}>
         <h2 className="hd-section-title">Servicios y comodidades</h2>
         <div className="hd-amenities-list">
-          {AMENITIES.map(a => <span key={a} className="hd-amenity"><i className="ph ph-check"></i> {a}</span>)}
+          {AMENITIES.map((a, i) => <span key={a} className="hd-amenity mount-in" style={{'--index': i}}><i className="ph ph-check"></i> {a}</span>)}
         </div>
       </div>
 
@@ -245,9 +253,9 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
             <div className="hd-rating-stars-big"><Stars /></div>
             <span className="hd-rating-total">47 reseñas</span>
           </div>
-          <div className="hd-rating-bars">
-            {RATING_BARS.map(rb => (
-              <div key={rb.label} className="hd-rating-bar-row">
+          <div ref={ratingBarsRef} className={`hd-rating-bars reveal${ratingBarsVisible ? ' is-visible' : ''}`}>
+            {RATING_BARS.map((rb, i) => (
+              <div key={rb.label} className="hd-rating-bar-row mount-in" style={{'--index': i}}>
                 <span>{rb.label}</span>
                 <div className="hd-bar"><div className="hd-bar-fill" style={{width:rb.pct}}></div></div>
                 <span>{rb.val}</span>
@@ -255,9 +263,9 @@ function HotelInfo({ onReserve, galleryIdx, setGalleryIdx }) {
             ))}
           </div>
         </div>
-        <div className="hd-reviews-list">
-          {REVIEWS.map(r => (
-            <div key={r.name} className="hd-review">
+        <div ref={reviewsRef} className={`hd-reviews-list reveal${reviewsVisible ? ' is-visible' : ''}`}>
+          {REVIEWS.map((r, i) => (
+            <div key={r.name} className="hd-review mount-in" style={{'--index': i}}>
               <div className="hd-review-header">
                 <div className="hd-review-avatar">{r.initial}</div>
                 <div className="hd-review-meta">
@@ -336,7 +344,7 @@ export default function DesignSuitesPage({ onChatOpen, onOpenAssistant }) {
               }
             }}>
               {GALLERY_IMGS.map((img, i) => (
-                <div key={i} className="hd-gallery-slide">
+                <div key={i} className="hd-gallery-slide mount-in" style={{'--index': i}}>
                   <img src={img.src} alt={img.alt} />
                 </div>
               ))}
@@ -375,8 +383,8 @@ export default function DesignSuitesPage({ onChatOpen, onOpenAssistant }) {
               <div className="hd-section">
                 <h2 className="hd-section-title">Lo que incluye</h2>
                 <div className="hd-includes-grid">
-                  {INCLUDES.map(item => (
-                    <div key={item.label} className="hd-include-item">
+                  {INCLUDES.map((item, i) => (
+                    <div key={item.label} className="hd-include-item mount-in" style={{'--index': i}}>
                       <i className={item.icon}></i><span>{item.label}</span>
                     </div>
                   ))}
@@ -395,8 +403,8 @@ export default function DesignSuitesPage({ onChatOpen, onOpenAssistant }) {
               <div className="hd-section">
                 <h2 className="hd-section-title">Reseñas de huéspedes</h2>
                 <div className="hd-reviews-list">
-                  {REVIEWS.map(r => (
-                    <div key={r.name} className="hd-review">
+                  {REVIEWS.map((r, i) => (
+                    <div key={r.name} className="hd-review mount-in" style={{'--index': i}}>
                       <div className="hd-review-header">
                         <div className="hd-review-avatar">{r.initial}</div>
                         <div className="hd-review-meta">

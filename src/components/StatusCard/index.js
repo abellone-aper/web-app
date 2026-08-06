@@ -1,10 +1,10 @@
 import './StatusCard.css';
 
-export default function StatusCard({ card }) {
+export default function StatusCard({ card, className, style }) {
   const { label, title, img, icon, href } = card;
 
   return (
-    <a href={href || '#'} className="status-card">
+    <a href={href || '#'} className={`status-card${className ? ' ' + className : ''}`} style={style}>
       <div className="status-card-image">
         {img && <img src={img} alt={title} />}
         {!img && icon && <i className={`ph ${icon}`}></i>}

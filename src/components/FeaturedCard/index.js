@@ -1,10 +1,10 @@
 import './FeaturedCard.css';
 
-export default function FeaturedCard({ card }) {
+export default function FeaturedCard({ card, className, style }) {
   const { label, img, title, price, priceNote, oldPrice, badge, shipping, href, imgFit } = card;
 
   return (
-    <a href={href || '#'} className="featured-card">
+    <a href={href || '#'} className={`featured-card${className ? ' ' + className : ''}`} style={style}>
       <p className="featured-card-label">{label}</p>
       <div className={`featured-card-image${imgFit === 'cover' ? ' featured-card-image--cover' : ''}`}>
         <img src={img} alt={title} />

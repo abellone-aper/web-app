@@ -10,6 +10,7 @@ import SecondaryButton from '../../components/Buttons/SecondaryButton';
 import GalleryActions from '../../components/GalleryActions';
 import TripCard from '../../components/TripCard';
 import { useBrand } from '../../brands/BrandContext';
+import useReveal from '../../hooks/useReveal';
 
 const GALLERY_IMGS = [1, 2, 3, 4, 5, 6, 7].map(n => ({
   src: getPublicUrl('Imagenes', `Mochila/${n}.png`),
@@ -129,31 +130,38 @@ const QA_QUESTIONS = [
 ];
 
 const COLORS = [
-  { name: 'Verde', hex: '#3f5d47' },
-  { name: 'Gris', hex: '#8a8a8a' },
-  { name: 'Negro', hex: '#1c1c1c' },
-  { name: 'Azul', hex: '#2c3e6b' },
+  { name: 'Verde', img: getPublicUrl('Imagenes', 'Mochila/1.png') },
+  { name: 'Gris claro', img: getPublicUrl('Imagenes', 'Mochila/mochila-grisclaro.png') },
+  { name: 'Gris', img: getPublicUrl('Imagenes', 'Mochila/mochila-gris.png') },
+  { name: 'Negro', img: getPublicUrl('Imagenes', 'Mochila/mochila-negra.png') },
 ];
 const SIZES = ['28 L', '40 L'];
+
+const PAYMENT_METHODS = [
+  { name: 'Visa', img: getPublicUrl('Imagenes', 'Mochila/visa.png') },
+  { name: 'Mastercard', img: getPublicUrl('Imagenes', 'Mochila/mastercard.png') },
+  { name: 'Modo', img: getPublicUrl('Imagenes', 'Mochila/modo.png') },
+];
 
 function Stars({ count = 5 }) {
   return <>{[...Array(count)].map((_, i) => <i key={i} className="ph-fill ph-star"></i>)}</>;
 }
 
 function AiBanner({ brand }) {
+  const [bannerRef, bannerVisible] = useReveal();
   return (
-    <div className="mo-ai-banner">
+    <div ref={bannerRef} className={`mo-ai-banner reveal${bannerVisible ? ' is-visible' : ''}`}>
       <div className="mo-ai-banner-head">
         <i className="ph ph-sparkle"></i>
         <p>¿Por qué {brand.bankName} te sugiere esta mochila?</p>
       </div>
       <p className="mo-ai-banner-text">Basado en tus búsquedas recientes y tu historial de compras, detectamos que buscás una solución de equipaje liviana para viajes cortos. Esta mochila entra como equipaje de mano en la mayoría de aerolíneas, pesa solo 1.07 kg y está entre las más compradas por perfiles similares al tuyo.</p>
       <div className="mo-ai-chips">
-        {AI_FACTS_POSITIVE.map(f => (
-          <span key={f} className="mo-ai-chip"><i className="ph ph-check"></i>{f}</span>
+        {AI_FACTS_POSITIVE.map((f, i) => (
+          <span key={f} className="mo-ai-chip mount-in" style={{'--index': i}}><i className="ph ph-check"></i>{f}</span>
         ))}
-        {AI_FACTS_NEGATIVE.map(f => (
-          <span key={f} className="mo-ai-chip mo-ai-chip--warning"><i className="ph ph-warning"></i>{f}</span>
+        {AI_FACTS_NEGATIVE.map((f, i) => (
+          <span key={f} className="mo-ai-chip mo-ai-chip--warning mount-in" style={{'--index': i}}><i className="ph ph-warning"></i>{f}</span>
         ))}
       </div>
     </div>
@@ -162,6 +170,9 @@ function AiBanner({ brand }) {
 
 function ProductTabs() {
   const [tab, setTab] = useState('descripcion');
+  const [featuresRef, featuresVisible] = useReveal();
+  const [specsRef, specsVisible] = useReveal();
+  const [reviewsRef, reviewsVisible] = useReveal();
   return (
     <div className="mo-tabs">
       <div className="mo-tabs-bar">
@@ -175,30 +186,30 @@ function ProductTabs() {
           <p className="mo-description">La Navigator-T66 Liteway es la evolución de la mochila de viaje. Diseñada para reemplazar la valija de cabina (Carry-On), ofrece la capacidad máxima de 40 litros permitida por las aerolíneas, pero con un peso pluma de apenas 1.07 kg.</p>
           <p className="mo-description">A diferencia del modelo Classic, esta versión Liteway está fabricada con Nylon Ripstop de alta resistencia, un material técnico usado en paracaídas que le da durabilidad pero mucho más liviana. Con apertura tipo valija a 180°, compartimento dedicado para laptops de hasta 17.3" y aprobación IATA, es la mochila definitiva para viajes de 3 a 8 días sin pagar equipaje extra.</p>
           <p className="mo-includes-label">Incluye</p>
-          <div className="mo-features-grid">
+          <div ref={featuresRef} className={`mo-features-grid reveal${featuresVisible ? ' is-visible' : ''}`}>
             <div className="mo-features-col">
-              {FEATURES_COL1.map(f => <span key={f} className="mo-feature"><i className="ph ph-check"></i>{f}</span>)}
+              {FEATURES_COL1.map((f, i) => <span key={f} className="mo-feature mount-in" style={{'--index': i}}><i className="ph ph-check"></i>{f}</span>)}
             </div>
             <div className="mo-features-col">
-              {FEATURES_COL2.map(f => <span key={f} className="mo-feature"><i className="ph ph-check"></i>{f}</span>)}
+              {FEATURES_COL2.map((f, i) => <span key={f} className="mo-feature mount-in" style={{'--index': i}}><i className="ph ph-check"></i>{f}</span>)}
             </div>
           </div>
         </div>
       )}
 
       {tab === 'caracteristicas' && (
-        <div className="mo-tab-panel">
+        <div ref={specsRef} className={`mo-tab-panel reveal${specsVisible ? ' is-visible' : ''}`}>
           <div className="mo-info-list">
-            {INFO_LIST.map(item => (
-              <div key={item.label} className="mo-info-item">
+            {INFO_LIST.map((item, i) => (
+              <div key={item.label} className="mo-info-item mount-in" style={{'--index': i}}>
                 <i className={`ph ${item.icon}`}></i>
                 <span>{item.label}: <strong>{item.value}</strong></span>
               </div>
             ))}
           </div>
           <div className="mo-spec-tables">
-            {SPEC_TABLES.map(table => (
-              <div key={table.title} className="mo-spec-table">
+            {SPEC_TABLES.map((table, i) => (
+              <div key={table.title} className="mo-spec-table mount-in" style={{'--index': i}}>
                 <p className="mo-spec-table-title">{table.title}</p>
                 <div className="mo-spec-table-rows">
                   {table.rows.map(([label, value]) => (
@@ -215,7 +226,7 @@ function ProductTabs() {
       )}
 
       {tab === 'evaluaciones' && (
-        <div className="mo-tab-panel">
+        <div ref={reviewsRef} className={`mo-tab-panel reveal${reviewsVisible ? ' is-visible' : ''}`}>
           <div className="mo-reviews-head">
             <p className="mo-reviews-heading">Evaluaciones de producto <span>(184)</span></p>
           </div>
@@ -224,22 +235,22 @@ function ProductTabs() {
             <div className="mo-rating-stars-big"><Stars /></div>
           </div>
           <div className="mo-review-tags">
-            {REVIEW_TAGS.map(t => <span key={t} className="mo-review-tag">{t}</span>)}
+            {REVIEW_TAGS.map((t, i) => <span key={t} className="mo-review-tag mount-in" style={{'--index': i}}>{t}</span>)}
           </div>
           <p className="mo-review-ai-summary"><i className="ph ph-sparkle"></i> {REVIEW_AI_SUMMARY}</p>
 
           <p className="mo-includes-label">Fotos y videos</p>
           <div className="mo-review-photos">
             {REVIEW_PHOTOS.map((photo, i) => (
-              <div key={i} className="mo-review-photo" style={{ backgroundImage: `url(${photo.src})` }}>
+              <div key={i} className="mo-review-photo mount-in" style={{ backgroundImage: `url(${photo.src})`, '--index': i }}>
                 <span><i className="ph-fill ph-star"></i>{photo.rating}</span>
               </div>
             ))}
           </div>
 
           <div className="mo-reviews-list">
-            {REVIEWS.map(r => (
-              <div key={r.name} className="mo-review">
+            {REVIEWS.map((r, i) => (
+              <div key={r.name} className="mo-review mount-in" style={{'--index': i}}>
                 <div className="mo-review-header">
                   <div className="mo-review-avatar">{r.initial}</div>
                   <span className="mo-review-name">{r.name}</span>
@@ -258,8 +269,9 @@ function ProductTabs() {
 }
 
 function ComparisonCard() {
+  const [comparisonRef, comparisonVisible] = useReveal();
   return (
-    <div className="mo-comparison">
+    <div ref={comparisonRef} className={`mo-comparison reveal${comparisonVisible ? ' is-visible' : ''}`}>
       <div className="mo-comparison-head">
         <i className="ph ph-sparkle"></i>
         <p>Análisis hecho por IA</p>
@@ -267,14 +279,14 @@ function ComparisonCard() {
       <div className="mo-comparison-grid">
         <div className="mo-comparison-col">
           <p className="mo-comparison-title">Ideal para</p>
-          {IDEAL_PARA.map(t => (
-            <div key={t} className="mo-comparison-item"><i className="ph ph-check mo-comparison-check"></i><span>{t}</span></div>
+          {IDEAL_PARA.map((t, i) => (
+            <div key={t} className="mo-comparison-item mount-in" style={{'--index': i}}><i className="ph ph-check mo-comparison-check"></i><span>{t}</span></div>
           ))}
         </div>
         <div className="mo-comparison-col">
           <p className="mo-comparison-title">No tan ideal para</p>
-          {NO_IDEAL_PARA.map(t => (
-            <div key={t} className="mo-comparison-item"><i className="ph ph-x mo-comparison-x"></i><span>{t}</span></div>
+          {NO_IDEAL_PARA.map((t, i) => (
+            <div key={t} className="mo-comparison-item mount-in" style={{'--index': i}}><i className="ph ph-x mo-comparison-x"></i><span>{t}</span></div>
           ))}
         </div>
       </div>
@@ -283,11 +295,12 @@ function ComparisonCard() {
 }
 
 function Sugerencias() {
+  const [sugerenciasRef, sugerenciasVisible] = useReveal();
   return (
-    <div className="mo-section-block">
+    <div ref={sugerenciasRef} className={`mo-section-block reveal${sugerenciasVisible ? ' is-visible' : ''}`}>
       <h2 className="mo-section-title">Productos relacionados</h2>
       <div className="mo-sugerencias-track">
-        {SUGERENCIAS.map(card => <TripCard key={card.name} card={card} variant="page" />)}
+        {SUGERENCIAS.map((card, i) => <TripCard key={card.name} card={card} variant="page" className="mount-in" style={{'--index': i}} />)}
       </div>
     </div>
   );
@@ -295,8 +308,9 @@ function Sugerencias() {
 
 function QASection() {
   const [query, setQuery] = useState('');
+  const [qaRef, qaVisible] = useReveal();
   return (
-    <div className="mo-section-block">
+    <div ref={qaRef} className={`mo-section-block reveal${qaVisible ? ' is-visible' : ''}`}>
       <h2 className="mo-section-title">Preguntas y respuestas</h2>
       <div className="mo-qa-search">
         <input
@@ -310,21 +324,21 @@ function QASection() {
         </button>
       </div>
       <div className="mo-qa-chips">
-        {QA_QUESTIONS.map(q => (
-          <button key={q} type="button" className="mo-qa-chip" onClick={() => setQuery(q)}>{q}</button>
+        {QA_QUESTIONS.map((q, i) => (
+          <button key={q} type="button" className="mo-qa-chip mount-in" style={{'--index': i}} onClick={() => setQuery(q)}>{q}</button>
         ))}
       </div>
     </div>
   );
 }
 
-function PriceBox({ brand, hideTitle = false }) {
-  const [color, setColor] = useState(COLORS[0].name);
+function PriceBox({ brand, hideTitle = false, color, setColor }) {
   const [size, setSize] = useState('40 L');
   const [qty, setQty] = useState(1);
   const [delivery, setDelivery] = useState('envio');
   const install = Math.round(PRICE_CURRENT / INSTALLMENTS);
   const cashback = Math.round(PRICE_CURRENT * CASHBACK_PCT);
+  const cardPrice = PRICE_CURRENT - cashback;
 
   return (
     <div className="mo-price-box">
@@ -363,9 +377,16 @@ function PriceBox({ brand, hideTitle = false }) {
           <p>Mejor opción de pago para vos</p>
         </div>
         <div className="mo-payment-info">
-          <div className="mo-payment-details">
-            <span className="mo-payment-name">{brand.cardName} · 20% cashback</span>
-            <span className="mo-payment-sub">Válido hasta fin de mes en toda la tienda</span>
+          <div className="mo-payment-info-main">
+            <span className="mo-payment-icon"><img src={PAYMENT_METHODS[0].img} alt="Visa" /></span>
+            <div className="mo-payment-details">
+              <span className="mo-payment-name">{brand.cardName} · 20% cashback</span>
+              <span className="mo-payment-sub">Válido hasta fin de mes en toda la tienda</span>
+            </div>
+          </div>
+          <div className="mo-payment-price">
+            <span className="mo-payment-price-old">{fmtARS(PRICE_ORIGINAL)}</span>
+            <span className="mo-payment-price-new">{fmtARS(cardPrice)}</span>
           </div>
         </div>
         <div className="mo-cashback-info">
@@ -374,20 +395,34 @@ function PriceBox({ brand, hideTitle = false }) {
         </div>
       </div>
 
+      <div className="mo-payment-options">
+        <p className="mo-field-label">Opciones de pago</p>
+        <div className="mo-payment-options-row">
+          <div className="mo-payment-options-icons">
+            {PAYMENT_METHODS.map(m => (
+              <span key={m.name} className="mo-payment-option-icon"><img src={m.img} alt={m.name} /></span>
+            ))}
+          </div>
+          <button type="button" className="mo-payment-options-link">Más opciones de pago</button>
+        </div>
+      </div>
+
       <div className="mo-divider"></div>
 
       <div className="mo-field">
         <p className="mo-field-label">Color: <strong>{color}</strong></p>
         <div className="mo-swatches">
-          {COLORS.map(c => (
+          {COLORS.map((c, i) => (
             <button
               key={c.name}
               type="button"
-              className={`mo-swatch${color === c.name ? ' active' : ''}`}
-              style={{ background: c.hex }}
+              className={`mo-swatch${color === c.name ? ' active' : ''} mount-in`}
+              style={{'--index': i}}
               aria-label={c.name}
               onClick={() => setColor(c.name)}
-            />
+            >
+              <img src={c.img} alt={c.name} />
+            </button>
           ))}
         </div>
       </div>
@@ -395,8 +430,8 @@ function PriceBox({ brand, hideTitle = false }) {
       <div className="mo-field">
         <p className="mo-field-label">Tamaño</p>
         <div className="mo-size-options">
-          {SIZES.map(s => (
-            <button key={s} type="button" className={`mo-size-chip${size === s ? ' active' : ''}`} onClick={() => setSize(s)}>{s}</button>
+          {SIZES.map((s, i) => (
+            <button key={s} type="button" className={`mo-size-chip${size === s ? ' active' : ''} mount-in`} style={{'--index': i}} onClick={() => setSize(s)}>{s}</button>
           ))}
         </div>
       </div>
@@ -446,6 +481,7 @@ export default function MochilaPage({ onOpenAssistant }) {
   const brand = useBrand();
   const [galleryIdx, setGalleryIdx] = useState(0);
   const [barHidden, setBarHidden] = useState(false);
+  const [color, setColor] = useState(COLORS[0].name);
   const trackRef = useRef(null);
 
   useEffect(() => {
@@ -458,6 +494,13 @@ export default function MochilaPage({ onOpenAssistant }) {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => { setGalleryIdx(0); }, [color]);
+
+  const activeColorImg = COLORS.find(c => c.name === color)?.img ?? GALLERY_IMGS[0].src;
+  const galleryImgs = GALLERY_IMGS.map((img, i) => (
+    i === 0 ? { src: activeColorImg, alt: `Mochila Tomtoc — color ${color}` } : img
+  ));
 
   return (
     <>
@@ -489,13 +532,13 @@ export default function MochilaPage({ onOpenAssistant }) {
                 setGalleryIdx(idx);
               }
             }}>
-              {GALLERY_IMGS.map((img, i) => (
-                <div key={i} className="mo-gallery-slide">
+              {galleryImgs.map((img, i) => (
+                <div key={i} className="mo-gallery-slide mount-in" style={{'--index': i}}>
                   <img src={img.src} alt={img.alt} />
                 </div>
               ))}
             </div>
-            <div className="mo-gallery-counter">{galleryIdx + 1} / {GALLERY_IMGS.length}</div>
+            <div className="mo-gallery-counter">{galleryIdx + 1} / {galleryImgs.length}</div>
             <GalleryActions />
           </div>
 
@@ -503,14 +546,14 @@ export default function MochilaPage({ onOpenAssistant }) {
             <div className="mo-col-main">
               <div className="mo-gallery-desktop">
                 <div className="mo-gallery-thumbs">
-                  {GALLERY_IMGS.map((img, i) => (
-                    <button key={i} className={`mo-thumb${i === galleryIdx ? ' active' : ''}`} onClick={() => setGalleryIdx(i)}>
+                  {galleryImgs.map((img, i) => (
+                    <button key={i} className={`mo-thumb${i === galleryIdx ? ' active' : ''} mount-in`} style={{'--index': i}} onClick={() => setGalleryIdx(i)}>
                       <img src={img.src} alt={img.alt} />
                     </button>
                   ))}
                 </div>
                 <div className="mo-gallery-main">
-                  <img src={GALLERY_IMGS[galleryIdx].src} alt={GALLERY_IMGS[galleryIdx].alt} />
+                  <img src={galleryImgs[galleryIdx].src} alt={galleryImgs[galleryIdx].alt} />
                   <GalleryActions />
                 </div>
               </div>
@@ -532,7 +575,7 @@ export default function MochilaPage({ onOpenAssistant }) {
             </div>
 
             <div className="mo-col-aside">
-              <PriceBox brand={brand} />
+              <PriceBox brand={brand} color={color} setColor={setColor} />
             </div>
           </div>
 
@@ -541,12 +584,12 @@ export default function MochilaPage({ onOpenAssistant }) {
             <h1 className="mo-title-mobile-sr">Mochila de viaje Tomtoc, equipaje de mano aprobado para vuelos, moderna, minimalista</h1>
 
             <div className="mo-price-box-mobile">
-              <PriceBox brand={brand} />
+              <PriceBox brand={brand} color={color} setColor={setColor} />
             </div>
 
-            <AiBanner brand={brand} />
-            <ProductTabs />
-            <ComparisonCard />
+            <div className="mo-section-block"><AiBanner brand={brand} /></div>
+            <div className="mo-section-block"><ProductTabs /></div>
+            <div className="mo-section-block"><ComparisonCard /></div>
             <Sugerencias />
             <QASection />
           </div>
