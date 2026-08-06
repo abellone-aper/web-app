@@ -15,7 +15,6 @@ const FILTER_ICONS = { alojamiento:'ph-bed', moda:'ph-t-shirt', transporte:'ph-b
 
 const POPULARES = [
   { img: getPublicUrl('Imagenes', 'Hospedaje/1.jpg'), title: 'Design Suites Bariloche', seller: 'Booking.com', rating: { score: '5.0', reviews: '47 reseñas' }, price: '$346.999', install: '2 noches, 1 adulto', badge: 'Excepcional', favActive: true, to: '/hospedaje', imgFilled: true },
-  { img: getPublicUrl('Imagenes', 'Mochila/1.png'), title: 'Mochila Tomtoc, equipaje de mano', seller: 'Tomtoc Oficial', rating: { score: '4.8', reviews: '47 evaluaciones' }, price: '$74.500', install: '3 cuotas sin interés', badge: 'Envío gratis', to: '/mochila' },
   { img: getPublicUrl('Imagenes', 'Para-tu-viaje/Las Marias Del Nahuel.png'), title: 'Cabañas Las Marías Del Nahuel', seller: 'Booking.com', rating: { score: '8.7', reviews: '151 comentarios' }, price: '$783.201', install: '6 cuotas sin interés', badge: 'Fantástico', imgFilled: true },
   { img: getPublicUrl('Imagenes', 'Para-tu-viaje/Nido del Condor Hotel Spa.png'), title: 'Nido del Cóndor Hotel & Spa', seller: 'Booking.com', rating: { score: '8.5', reviews: '801 comentarios' }, price: '$2.587.467', install: '6 cuotas sin interés', badge: 'Muy bueno', imgFilled: true },
   { img: getPublicUrl('Imagenes', 'Para-tu-viaje/Postal del Nahuel.png'), title: 'Postal del Nahuel', seller: 'Booking.com', rating: { score: '9.6', reviews: '62 comentarios' }, price: '$1.179.999', install: '8 noches, 1 adulto', badge: 'Excepcional', imgFilled: true },
@@ -46,6 +45,7 @@ const ACTIVIDADES = [
 ];
 
 const EQUIPAMIENTO_NIEVE = [
+  { img: getPublicUrl('Imagenes', 'Mochila/1.png'), title: 'Mochila Tomtoc, equipaje de mano', seller: 'Tomtoc Oficial', rating: { score: '4.8', reviews: '47 evaluaciones' }, price: '$74.500', install: '3 cuotas sin interés', badge: 'Envío gratis', to: '/mochila' },
   { img: getPublicUrl('Imagenes', 'Para-tu-viaje/Patagonia Chaqueta Unisex Antiviento Upf50.png'), title: 'Patagonia Chaqueta Unisex Antiviento Upf50+', seller: 'PATAGONIA', rating: { score: '4.9', reviews: '+50 vendidos' }, price: '$92.873', shipping: 'Envío gratis', badge: '25% OFF', imgFilled: true },
   { img: getPublicUrl('Imagenes', 'Para-tu-viaje/Mochila The North Face Borealis Commuter.png'), title: 'Mochila The North Face Borealis Commuter', seller: 'THE NORTH FACE', rating: { score: '4.7', reviews: '+200 vendidos' }, price: '$284.262', shipping: 'Envío gratis' },
   { img: getPublicUrl('Imagenes', 'Para-tu-viaje/Guante Primera Piel Antideslizante Naturehike.png'), title: 'Guante Primera Piel Antideslizante Naturehike', seller: 'NATUREHIKE', rating: { score: '4.8', reviews: '+100 vendidos' }, price: '$24.653', shipping: 'Envío gratis', badge: '25% OFF' },
@@ -63,6 +63,7 @@ const GALICIA_PLANS = [
 export default function ParaTuViajePage({ onOpenAssistant }) {
   const brand = useBrand();
   const populares = POPULARES.map(c => c.to ? { ...c, to: brand.path(c.to) } : c);
+  const equipamientoNieve = EQUIPAMIENTO_NIEVE.map(c => c.to ? { ...c, to: brand.path(c.to) } : c);
   const [filter] = useState('todo');
   const [barHidden, setBarHidden] = useState(false);
   const promosNav = useCarouselNav('.ptv-promo-banner');
@@ -101,52 +102,61 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
           <div className="ptv-page-top">
             <div className="ptv-page-top-left">
               <div className="ptv-page-header">
-                <h1 className="ptv-page-title">Para tu viaje</h1>
+                <div className="ptv-page-heading">
+                  <Link to={brand.path('/')} className="ptv-page-back" aria-label="Volver">
+                    <i className="ph ph-arrow-left"></i>
+                  </Link>
+                  <h1 className="ptv-page-title">Para tu viaje</h1>
+                </div>
                 <p className="ptv-page-subtitle">Seleccionamos lo mejor para que disfrutes Bariloche al máximo</p>
               </div>
+            </div>
 
-              <div className={`ptv-filters-wrap${barHidden ? ' ptv-filters-wrap--bar-hidden' : ''}`}>
-                <div className="ptv-filters">
-                  {FILTERS.map(f => (
-                    <button key={f} className={`ptv-filter${filter === f ? ' active' : ''}`}>
-                      {FILTER_ICONS[f] && <i className={`ph ${FILTER_ICONS[f]} ptv-filter-icon`}></i>}
-                      {FILTER_LABELS[f]}
-                    </button>
-                  ))}
+            <div className={`ptv-filters-wrap${barHidden ? ' ptv-filters-wrap--bar-hidden' : ''}`}>
+              <div className="ptv-filters">
+                {FILTERS.map(f => (
+                  <button key={f} className={`ptv-filter${filter === f ? ' active' : ''}`}>
+                    {FILTER_ICONS[f] && <i className={`ph ${FILTER_ICONS[f]} ptv-filter-icon`}></i>}
+                    {FILTER_LABELS[f]}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="ptv-package-row">
+            <div className="ptv-package-card">
+              <div className="ptv-package-left">
+                <span className="ptv-package-badge">Ahorrá armando tu paquete</span>
+                <div className="ptv-package-text">
+                  <h2 className="ptv-package-title">Alojamiento + traslado + experiencias en un solo pago</h2>
+                  <p className="ptv-package-sub">Ya tenés el vuelo. Sumá alojamiento, traslado y ahorrá hasta un 18% frente a comprarlos por separado.</p>
                 </div>
+                <div className="ptv-package-tags">
+                  <span className="ptv-package-tag"><i className="ph ph-bed"></i>Alojamiento</span>
+                  <span className="ptv-package-tag"><i className="ph ph-bus"></i>Transporte</span>
+                  <span className="ptv-package-tag"><i className="ph ph-mountains"></i>Experiencias</span>
+                </div>
+              </div>
+              <div className="ptv-package-right">
+                <div className="ptv-package-price-group">
+                  <span className="ptv-package-price-old">$182.998</span>
+                  <span className="ptv-package-price-new">$148.999</span>
+                  <span className="ptv-package-savings">Ahorrás $34.999 (18%)</span>
+                </div>
+                <button className="ptv-package-btn">Armar mi paquete</button>
               </div>
             </div>
 
             <div className="ptv-benefit-banner">
               <img className="ptv-benefit-img" src={getPublicUrl('Imagenes', 'banner-reintegro.png')} alt="" />
-              <div className="ptv-benefit-text">
-                <p className="ptv-benefit-title">Hasta 12 cuotas sin interés + 30% de reintegro</p>
-                <p className="ptv-benefit-sub">Pagá con tu {brand.cardName} en todo lo que reserves para tu viaje.</p>
+              <div className="ptv-benefit-content">
+                <div className="ptv-benefit-text">
+                  <p className="ptv-benefit-title">Hasta 12 cuotas sin interés + 30% de reintegro</p>
+                  <p className="ptv-benefit-sub">Pagá con tu {brand.cardName} en todo lo que reserves para tu viaje.</p>
+                </div>
+                <button className="ptv-benefit-btn">Ver condiciones</button>
               </div>
-              <button className="ptv-benefit-btn">Ver condiciones</button>
-            </div>
-          </div>
-
-          <div className="ptv-package-card">
-            <div className="ptv-package-left">
-              <span className="ptv-package-badge">Ahorrá armando tu paquete</span>
-              <div className="ptv-package-text">
-                <h2 className="ptv-package-title">Alojamiento + traslado + experiencias en un solo pago</h2>
-                <p className="ptv-package-sub">Ya tenés el vuelo. Sumá alojamiento, traslado y ahorrá hasta un 18% frente a comprarlos por separado.</p>
-              </div>
-              <div className="ptv-package-tags">
-                <span className="ptv-package-tag"><i className="ph ph-bed"></i>Alojamiento</span>
-                <span className="ptv-package-tag"><i className="ph ph-bus"></i>Transporte</span>
-                <span className="ptv-package-tag"><i className="ph ph-mountains"></i>Experiencias</span>
-              </div>
-            </div>
-            <div className="ptv-package-right">
-              <div className="ptv-package-price-group">
-                <span className="ptv-package-price-old">$182.998</span>
-                <span className="ptv-package-price-new">$148.999</span>
-                <span className="ptv-package-savings">Ahorrás $34.999 (18%)</span>
-              </div>
-              <button className="ptv-package-btn">Armar mi paquete</button>
             </div>
           </div>
 
@@ -155,7 +165,7 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
           )}
 
           {filter === 'todo' && (
-            <ProductCarousel title="Actividades para tu estadía" subtitle="Excursiones y experiencias imperdibles en Bariloche." products={ACTIVIDADES} />
+            <ProductCarousel title="Equipate para la nieve" subtitle="Ropa y equipamiento para el frío de la Patagonia." products={equipamientoNieve} />
           )}
 
           <div className="ptv-promos">
@@ -213,7 +223,7 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
           </div>
 
           {filter === 'todo' && (
-            <ProductCarousel title="Equipate para la nieve" subtitle="Ropa y equipamiento para el frío de la Patagonia." products={EQUIPAMIENTO_NIEVE} />
+            <ProductCarousel title="Actividades para tu estadía" subtitle="Excursiones y experiencias imperdibles en Bariloche." products={ACTIVIDADES} />
           )}
 
           <div className="ptv-section ptv-galicia">

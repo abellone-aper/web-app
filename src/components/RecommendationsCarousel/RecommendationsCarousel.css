@@ -72,10 +72,6 @@
 }
 
 .reco-card-info {
-  /* Cards in the row stretch to match the tallest one (varying badge/
-     shipping lines per item) — pin the info block to the bottom instead
-     of leaving blank space under it. */
-  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);

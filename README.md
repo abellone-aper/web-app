@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Tienda de Puntos — Multi-marca
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Prototipo funcional (front-end) de una tienda de canje de puntos, pensado para reutilizarse entre distintas marcas bancarias con una sola base de código.
 
-## Available Scripts
+## Qué es
 
-In the project directory, you can run:
+Una SPA en React que simula el ecosistema de "canjeá tus puntos" de un banco: home de tienda, catálogo de productos con carrusel, página de detalle de producto y sección "Para tu viaje" (seguros, hospedaje, mochila de viaje). Todo el flujo de compra/asistencia se apoya en un asistente conversacional (chat) embebido en cada página.
 
-### `npm start`
+## Multi-marca
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+El mismo código sirve tres marcas distintas mediante un único `BrandProvider`:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Marca | Ruta |
+|---|---|
+| APER | `/` (default) |
+| Galicia | `/galicia` |
+| ICBC | `/icbc` |
 
-### `npm test`
+Cada marca define su propio nombre de tienda/banco, logo, alias de cuenta, CUIT y producto de seguro en [`src/brands/brands.js`](src/brands/brands.js). `resolveBrandId` detecta la marca activa según el pathname y `BrandContext` la expone al resto de la app — así los componentes no hardcodean textos ni assets, sino que leen del contexto de marca.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Páginas principales
 
-### `npm run build`
+- **HomePage** — home de la tienda: hero con carrusel de banners, recomendaciones, accesos rápidos y buscador con sugerencias.
+- **ParaTuViaje** — sección de seguros de viaje, con tarjetas de producto por marca.
+- **Hospedaje** — búsqueda y reserva de alojamiento, integrada con el asistente de chat para completar la reserva.
+- **Mochila** — checklist/armado de "mochila de viaje".
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Componentes destacados
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Header** — con variantes según si la página está en el tope o scrolleada, buscador expandible con sugerencias.
+- **ChatPanel** (`ChatHistory`, `ChatHeader`, `ChatInput`, `ChatOffer`, `ChatSuggestions`, `ChatProductDetails`, `ChatCvvCard`, `ChatSuccessfulOrder`) — asistente conversacional simulado, capaz de ofrecer productos, completar una reserva de hotel (flujo `hotelTabOpen`) y confirmar compras con verificación FaceID simulada.
+- **ProductCarousel / RecommendationsCarousel / BannerCarousel** — carruseles reutilizables para catálogo, recomendaciones y banners de hero.
+- **ProductCard / CreditCard / CouponCard / InsuranceCard / TripCard / FeaturedCard / StatusCard** — tarjetas de producto por caso de uso.
+- **MobileBottomNav** — navegación inferior en mobile, que se oculta al hacer scroll hacia abajo.
+- **FaceID** — componente de verificación biométrica simulada usada en el flujo de confirmación de compra del chat.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Datos e imágenes
 
-### `npm run eject`
+- Los productos de la home viven en [`src/data/homeProducts.js`](src/data/homeProducts.js).
+- Las imágenes se sirven desde un bucket de **Supabase Storage** (`Imagenes`) a través del helper `getPublicUrl` en [`src/lib/storage.js`](src/lib/storage.js), en vez de bundlearse en el repo.
+- La conexión a Supabase está en [`src/lib/supabase.js`](src/lib/supabase.js), configurada por variables de entorno (`REACT_APP_SUPABASE_URL`, `REACT_APP_SUPABASE_ANON_KEY`).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Diseño
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Sistema de diseño basado en variables CSS centralizadas en `:root` (`src/index.css`): tokens de color, tipografía y spacing consistentes entre componentes. El layout responsive contempla explícitamente dos breakpoints de escritorio (estándar 1025–1280px y grande >1280px) además de mobile, con ajustes puntuales cuando el panel de chat está abierto (para no romper el layout de las filas de tarjetas/carruseles).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+El diseño visual se apoya en el contexto del proyecto de Figma correspondiente. Hoy esa integración no está totalmente conectada: solo se tiene acceso de lectura al proyecto de Figma, sin sincronización automática de tokens/componentes.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Stack
 
-## Learn More
+- React 19 + React Router 7
+- Create React App (`react-scripts`)
+- Supabase JS client (storage de imágenes)
+- CSS puro por componente (sin librería de UI)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Cómo correrlo
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm install
+npm start        # http://localhost:3000
+npm run build     # build de producción
+npm test          # tests
+```
 
-### Code Splitting
+Requiere un archivo `.env` con:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+REACT_APP_SUPABASE_URL=...
+REACT_APP_SUPABASE_ANON_KEY=...
+```
 
-### Analyzing the Bundle Size
+## Estado actual
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Prototipo de front-end sin backend propio (no hay persistencia real de compras/reservas; el flujo de chat y checkout es simulado).

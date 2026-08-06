@@ -293,13 +293,15 @@ export default function HomePage({ onOpenAssistant }) {
               </div>
             </div>
 
-            <CreditCard
-              label="Crédito disponible"
-              amount="$450.000"
-              sub="Podés solicitarlo ahora sin trámites"
-            />
+            <div className="dh-credit-coupon-wrap">
+              <CreditCard
+                label="Crédito disponible"
+                amount="$450.000"
+                sub="Podés solicitarlo ahora sin trámites"
+              />
 
-            <CouponCard coupons={COUPONS} toggles={couponToggles} onToggle={toggleCoupon} />
+              <CouponCard coupons={COUPONS} toggles={couponToggles} onToggle={toggleCoupon} />
+            </div>
 
             <InsuranceCard variant="overlay" imgSrc={getPublicUrl('Imagenes', 'cobertura.png')} />
           </div>
