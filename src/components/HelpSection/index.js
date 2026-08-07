@@ -3,12 +3,12 @@ import { getPublicUrl } from '../../lib/storage';
 import useReveal from '../../hooks/useReveal';
 
 const HELP_ITEMS = [
-  { icon: '/icons/preguntas frecuentes.svg', label: 'Preguntas frecuentes' },
-  { icon: '/icons/chat soporte.svg',         label: 'Chat con soporte' },
-  { icon: '/icons/cambios y devoluciones.svg', label: 'Cambios y devoluciones' },
-  { icon: '/icons/seguimiento de envios.svg', label: 'Seguimiento de envíos' },
-  { icon: '/icons/reprogramar.svg',           label: 'Reprogramar una entrega' },
-  { icon: '/icons/reportar.svg',              label: 'Reportá un problema' },
+  { iconPh: 'ph-question',                label: 'Preguntas frecuentes' },
+  { iconPh: 'ph-chat-circle-dots',         label: 'Chat con soporte' },
+  { iconPh: 'ph-arrows-counter-clockwise', label: 'Cambios y devoluciones' },
+  { iconPh: 'ph-truck',                    label: 'Seguimiento de envíos' },
+  { iconPh: 'ph-calendar-check',           label: 'Reprogramar una entrega' },
+  { iconPh: 'ph-warning-circle',           label: 'Reportá un problema' },
 ];
 
 const LOGO_DATA_FISCAL = getPublicUrl('Imagenes', 'data fiscal.png');
@@ -25,9 +25,9 @@ export default function HelpSection() {
         <div className="help-grid">
           {HELP_ITEMS.map((item, i) => (
             <a key={item.label} href="#" className="help-item-card mount-in" style={{'--index': i}}>
-              <img src={item.icon} alt="" className="help-item-icon" />
+              <i className={`ph ${item.iconPh} help-item-icon`}></i>
               <span className="help-item-label">{item.label}</span>
-              <img src="/icons/flecha derecha.svg" alt="" className="help-item-chevron" />
+              <i className="ph ph-caret-right help-item-chevron"></i>
             </a>
           ))}
         </div>

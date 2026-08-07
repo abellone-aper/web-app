@@ -63,7 +63,7 @@
 .ptv-filter {
   display: inline-flex; align-items: center;
   gap: 8px;
-  height: 44px; padding: 4px 16px 4px 12px;
+  height: 44px; padding: 4px 16px;
   border-radius: var(--radius-pill);
   border: none;
   font-family: var(--font-body);
@@ -88,11 +88,6 @@
 .ptv-filter.active {
   background: var(--neutral-eight);
   color: var(--color-text-on-brand);
-  font-weight: 700;
-  /* No icon (it's the "Todo" tab) — the asymmetric 12/16 padding above
-     exists to balance an icon's visual weight on the left; without one
-     it just reads as lopsided, so square it up here. */
-  padding-left: 16px;
 }
 
 /* ─── Package row: package card + benefit banner ─────────────────
@@ -351,10 +346,10 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ptv-promo-banner:hover .ptv-promo-banner-img { transform: scale(1.06); }
+.ptv-promo-banner:hover .ptv-promo-banner-img { transform: scale(1.03); }
 
 .ptv-promo-banner:first-child {
   border: 1px solid var(--color-border-subtle);
@@ -814,7 +809,7 @@
   }
 
   .ptv-page-subtitle {
-    font-size: 17px; color: var(--neutral-seven);
+    font-size: 15px; color: var(--neutral-seven);
     margin: 0;
   }
 
@@ -840,17 +835,12 @@
   }
 
   .ptv-filter {
-    height: 44px; padding: 4px 20px 4px 14px;
+    height: 44px; padding: 4px 20px;
     font-size: 15px;
   }
 
   .ptv-filter-icon {
     font-size: 22px;
-  }
-
-  .ptv-filter.active {
-    font-weight: 700;
-    padding-left: 20px;
   }
 
   /* Package row: benefit banner + package card side by side */
@@ -1051,7 +1041,7 @@
   }
 
   .ptv-page-subtitle {
-    font-size: 16px; color: var(--neutral-seven); margin: 0;
+    font-size: 14px; color: var(--neutral-seven); margin: 0;
   }
 
   /* Filter chips: hugs its own content and fills the remaining width
@@ -1074,17 +1064,12 @@
   }
 
   .ptv-filter {
-    height: 44px; padding: 4px 18px 4px 14px;
+    height: 44px; padding: 4px 18px;
     font-size: 15px;
   }
 
   .ptv-filter-icon {
     font-size: 22px;
-  }
-
-  .ptv-filter.active {
-    font-weight: 700;
-    padding-left: 18px;
   }
 
   /* Benefit banner: stacked above the package card (.ptv-package-row

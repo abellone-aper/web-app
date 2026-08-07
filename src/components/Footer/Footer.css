@@ -142,10 +142,9 @@
   background: var(--action-secondary-hover);
 }
 
-.site-footer__social-icon.mnav-icon {
-  width: 20px;
-  height: 20px;
-  background-color: var(--action-primary);
+.site-footer__social-icon {
+  font-size: 20px;
+  color: var(--action-primary);
 }
 
 /* ── Responsive ── */

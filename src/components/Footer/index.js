@@ -18,13 +18,13 @@ export default function Footer() {
 
         <div className="site-footer__social">
           <a href="#" className="site-footer__social-btn" aria-label="Facebook">
-            <span className="mnav-icon site-footer__social-icon" style={{ WebkitMaskImage: "url('/icons/facebook.svg')", maskImage: "url('/icons/facebook.svg')" }}></span>
+            <i className="ph ph-facebook-logo site-footer__social-icon"></i>
           </a>
           <a href="#" className="site-footer__social-btn" aria-label="Instagram">
-            <span className="mnav-icon site-footer__social-icon" style={{ WebkitMaskImage: "url('/icons/instagram.svg')", maskImage: "url('/icons/instagram.svg')" }}></span>
+            <i className="ph ph-instagram-logo site-footer__social-icon"></i>
           </a>
           <a href="#" className="site-footer__social-btn" aria-label="WhatsApp">
-            <span className="mnav-icon site-footer__social-icon" style={{ WebkitMaskImage: "url('/icons/whatsapp.svg')", maskImage: "url('/icons/whatsapp.svg')" }}></span>
+            <i className="ph ph-whatsapp-logo site-footer__social-icon"></i>
           </a>
         </div>
       </div>

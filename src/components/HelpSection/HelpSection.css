@@ -53,10 +53,12 @@
 .help-item-icon {
   width: 24px;
   height: 24px;
-  object-fit: contain;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  filter: brightness(0);
+  font-size: 22px;
+  color: #242226;
 }
 
 .help-item-label {
@@ -75,10 +77,12 @@
 .help-item-chevron {
   width: 20px;
   height: 20px;
-  object-fit: contain;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  filter: invert(50%);
+  font-size: 18px;
+  color: var(--neutral-seven);
 }
 
 /* ── Bottom row: siempre en fila ── */

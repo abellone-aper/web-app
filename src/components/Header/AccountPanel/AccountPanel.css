@@ -30,18 +30,6 @@ body.account-panel-open .mobile-nav-chat-fab-wrap { display: none !important; }
 }
 .account-panel.open { transform: translateX(0); }
 
-/* ── Icon mask (recolor any /icons/*.svg via mask-image) ── */
-.account-panel-icon {
-  display: inline-block;
-  width: 24px; height: 24px; flex-shrink: 0;
-  background-color: var(--neutral-eight);
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
-}
 .account-panel-item-icon {
   width: 24px; flex-shrink: 0;
   display: inline-flex; align-items: center; justify-content: center;

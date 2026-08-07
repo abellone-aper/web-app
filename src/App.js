@@ -116,7 +116,7 @@ function AppContent() {
       >
         {chatOpen
           ? <i className="ph ph-x" style={{fontSize:'26px'}}></i>
-          : <span className="mnav-icon boti-fab-icon" style={{WebkitMaskImage:"url('/icons/chat.svg')", maskImage:"url('/icons/chat.svg')"}}></span>
+          : <i className="ph-fill ph-sparkle mnav-icon" style={{fontSize:'26px'}}></i>
         }
         {!chatOpen && <span className="boti-fab-notif"></span>}
       </button>

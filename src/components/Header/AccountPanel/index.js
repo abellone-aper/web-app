@@ -3,15 +3,6 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useBrand } from '../../../brands/BrandContext';
 
-function MaskIcon({ src }) {
-  return (
-    <span
-      className="account-panel-icon"
-      style={{ WebkitMaskImage: `url('${src}')`, maskImage: `url('${src}')` }}
-    />
-  );
-}
-
 export default function AccountPanel({ open, onClose, user, onOpenAssistant }) {
   const brand = useBrand();
   const firstName = user.name.split(' ')[0];
@@ -60,30 +51,30 @@ export default function AccountPanel({ open, onClose, user, onOpenAssistant }) {
 
           <nav className="account-panel-list">
             <a href="#" className="account-panel-item">
-              <MaskIcon src="/icons/favoritos.svg" />
+              <i className="ph ph-heart account-panel-item-icon"></i>
               <span>Favoritos</span>
             </a>
             <a href="#" className="account-panel-item">
               <span className="account-panel-item-icon-wrap">
-                <MaskIcon src="/icons/notificaciones.svg" />
+                <i className="ph ph-bell account-panel-item-icon"></i>
                 <span className="account-panel-notif-dot">1</span>
               </span>
               <span>Notificaciones</span>
             </a>
             <a href="#" className="account-panel-item">
-              <MaskIcon src="/icons/pedidos.svg" />
+              <i className="ph ph-package account-panel-item-icon"></i>
               <span>Pedidos</span>
             </a>
             <a href="#" className="account-panel-item">
-              <MaskIcon src="/icons/puntos.svg" />
+              <i className="ph ph-coins account-panel-item-icon"></i>
               <span>Puntos</span>
             </a>
             <a href="#" className="account-panel-item">
-              <MaskIcon src="/icons/prestamos.svg" />
+              <i className="ph ph-hand-coins account-panel-item-icon"></i>
               <span>Préstamos</span>
             </a>
             <a href="#" className="account-panel-item">
-              <MaskIcon src="/icons/seguros.svg" />
+              <i className="ph ph-shield-check account-panel-item-icon"></i>
               <span>Seguros</span>
             </a>
           </nav>
@@ -93,18 +84,18 @@ export default function AccountPanel({ open, onClose, user, onOpenAssistant }) {
           <nav className="account-panel-list">
             <a href="#" className="account-panel-item account-panel-item--reverse">
               <span>Recomendaciones</span>
-              <MaskIcon src="/icons/sugerencias.svg" />
+              <i className="ph ph-lightbulb account-panel-item-icon"></i>
             </a>
             <a href="#" className="account-panel-item account-panel-item--reverse">
               <span>Cupones</span>
-              <MaskIcon src="/icons/descuento.svg" />
+              <i className="ph ph-tag account-panel-item-icon"></i>
             </a>
           </nav>
 
           <div className="account-panel-divider" />
 
           <button type="button" className="account-panel-item account-panel-logout" onClick={onClose}>
-            <MaskIcon src="/icons/cerrar-sesión.svg" />
+            <i className="ph ph-sign-out account-panel-item-icon"></i>
             <span>Cerrar sesión</span>
           </button>
         </div>

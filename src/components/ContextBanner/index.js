@@ -4,10 +4,7 @@ export default function ContextBanner({ icon, sub, title, linkText, href = '#' }
   return (
     <div className="ctx-banner">
       <div className="ctx-banner-icon">
-        <span
-          className="ctx-banner-icon-mask"
-          style={{ WebkitMaskImage: `url('${icon}')`, maskImage: `url('${icon}')` }}
-        />
+        <i className={`ph ${icon} ctx-banner-icon-mask`}></i>
       </div>
       <div className="ctx-banner-body">
         <div className="ctx-banner-text">

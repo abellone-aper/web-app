@@ -70,7 +70,7 @@ export default function Header({
   const handleBack = onBack || (() => navigate(-1));
 
   return (
-    <header ref={headerRef} className={`header header--${variant} mount-in${scrollHidden ? ' header--scroll-hidden' : ''}${searchMode ? ' header--search-open' : ''}${scrolledDown && variant === 'home' ? ' header--scrolled' : ''}`}>
+    <header ref={headerRef} className={`header header--${variant} mount-in${scrollHidden ? ' header--scroll-hidden' : ''}${searchMode ? ' header--search-open' : ''}${scrolledDown ? ' header--scrolled' : ''}`}>
 
       {/* ── Mobile: home variant ──────────────────────────────── */}
       <div className="header__mobile-home">
@@ -86,16 +86,16 @@ export default function Header({
         </button>
         <div className="header__mobile-home__icons">
           <button className="header__mobile-home__icon-btn" onClick={openSearch} aria-label="Buscar">
-            <img src="/icons/buscar.svg" alt="" className="header-icon-img" />
+            <i className="ph ph-magnifying-glass header-icon-img"></i>
           </button>
           <button className="header__mobile-home__icon-btn" aria-label="Notificaciones">
             <span className="icon-wrap">
-              <img src="/icons/notificaciones.svg" alt="" className="header-icon-img" />
+              <i className="ph ph-bell header-icon-img"></i>
               <span className="notif-dot">1</span>
             </span>
           </button>
           <button className="header__mobile-home__icon-btn" aria-label="Favoritos">
-            <img src="/icons/favoritos.svg" alt="" className="header-icon-img" />
+            <i className="ph ph-heart header-icon-img"></i>
           </button>
         </div>
       </div>
@@ -103,7 +103,7 @@ export default function Header({
       {/* ── Mobile: compact search (scrolled) ───────────────── */}
       <div className="header__mobile-compact">
         <div className="header__mobile-search__bar">
-          <img src="/icons/buscar.svg" alt="" className="search-icon header-icon-img" />
+          <i className="ph ph-magnifying-glass search-icon header-icon-img"></i>
           <input
             type="text"
             placeholder="Buscar"
@@ -125,7 +125,7 @@ export default function Header({
           <i className="ph ph-arrow-left"></i>
         </button>
         <div className="header__mobile-search__bar">
-          <img src="/icons/buscar.svg" alt="" className="search-icon header-icon-img" />
+          <i className="ph ph-magnifying-glass search-icon header-icon-img"></i>
           <input
             type="text"
             placeholder="Buscar productos o marcas"
@@ -179,7 +179,7 @@ export default function Header({
               </Link>
             </div>
             <div className="search search--expanded" ref={desktopSearchRef}>
-              <img src="/icons/buscar.svg" alt="" className="search-icon header-icon-img" />
+              <i className="ph ph-magnifying-glass search-icon header-icon-img"></i>
               <input
                 type="text"
                 placeholder="Buscar productos o marcas"
@@ -201,16 +201,16 @@ export default function Header({
             <div className="header-search-right header-icons">
               <a href="#" className="header-icon-btn" aria-label="Notificaciones">
                 <span className="icon-wrap">
-                  <img src="/icons/notificaciones.svg" alt="" className="header-icon-img" />
+                  <i className="ph ph-bell header-icon-img"></i>
                   <span className="notif-dot">1</span>
                 </span>
               </a>
               <a href="#" className="header-icon-btn" aria-label="Favoritos">
-                <img src="/icons/favoritos.svg" alt="" className="header-icon-img" />
+                <i className="ph ph-heart header-icon-img"></i>
               </a>
               <a href="#" className="header-icon-btn" aria-label="Carrito">
                 <span className="icon-wrap">
-                  <img src="/icons/carrito.svg" alt="" className="header-icon-img" />
+                  <i className="ph ph-shopping-cart header-icon-img"></i>
                   <span className="notif-dot">1</span>
                 </span>
               </a>
@@ -222,7 +222,7 @@ export default function Header({
               </button>
             </div>
           </>
-        ) : scrolledDown && variant === 'home' ? (
+        ) : scrolledDown ? (
           <>
             <div className="header-left">
               <Link to={brand.path('/')} className="logo">
@@ -230,7 +230,7 @@ export default function Header({
               </Link>
             </div>
             <div className="search header-search--scrolled" ref={desktopSearchRef}>
-              <img src="/icons/buscar.svg" alt="" className="search-icon header-icon-img" />
+              <i className="ph ph-magnifying-glass search-icon header-icon-img"></i>
               <input
                 type="text"
                 placeholder="Buscar productos o marcas"
@@ -249,16 +249,16 @@ export default function Header({
             <div className="header-icons">
               <a href="#" className="header-icon-btn" aria-label="Notificaciones">
                 <span className="icon-wrap">
-                  <img src="/icons/notificaciones.svg" alt="" className="header-icon-img" />
+                  <i className="ph ph-bell header-icon-img"></i>
                   <span className="notif-dot">1</span>
                 </span>
               </a>
               <a href="#" className="header-icon-btn" aria-label="Favoritos">
-                <img src="/icons/favoritos.svg" alt="" className="header-icon-img" />
+                <i className="ph ph-heart header-icon-img"></i>
               </a>
               <a href="#" className="header-icon-btn" aria-label="Carrito">
                 <span className="icon-wrap">
-                  <img src="/icons/carrito.svg" alt="" className="header-icon-img" />
+                  <i className="ph ph-shopping-cart header-icon-img"></i>
                   <span className="notif-dot">1</span>
                 </span>
               </a>
@@ -280,20 +280,20 @@ export default function Header({
             <a href="#" className="header-cta">Ampliar el límite de tus tarjetas</a>
             <div className="header-icons">
               <button className="header-icon-btn" onClick={openSearch} aria-label="Buscar">
-                <img src="/icons/buscar.svg" alt="" className="header-icon-img" />
+                <i className="ph ph-magnifying-glass header-icon-img"></i>
               </button>
               <a href="#" className="header-icon-btn" aria-label="Notificaciones">
                 <span className="icon-wrap">
-                  <img src="/icons/notificaciones.svg" alt="" className="header-icon-img" />
+                  <i className="ph ph-bell header-icon-img"></i>
                   <span className="notif-dot">1</span>
                 </span>
               </a>
               <a href="#" className="header-icon-btn" aria-label="Favoritos">
-                <img src="/icons/favoritos.svg" alt="" className="header-icon-img" />
+                <i className="ph ph-heart header-icon-img"></i>
               </a>
               <a href="#" className="header-icon-btn" aria-label="Carrito">
                 <span className="icon-wrap">
-                  <img src="/icons/carrito.svg" alt="" className="header-icon-img" />
+                  <i className="ph ph-shopping-cart header-icon-img"></i>
                   <span className="notif-dot">1</span>
                 </span>
               </a>
@@ -333,19 +333,19 @@ export default function Header({
             </span>
           </button>
           <a className="user-nav-item" href="#">
-            <img src="/icons/favoritos.svg" alt="" className="header-icon-img" />
+            <i className="ph ph-heart header-icon-img"></i>
             <span>Favoritos</span>
           </a>
           <a className="user-nav-item" href="#">
             <span className="icon-wrap">
-              <img src="/icons/notificaciones.svg" alt="" className="header-icon-img" />
+              <i className="ph ph-bell header-icon-img"></i>
               <span className="notif-dot">1</span>
             </span>
             <span>Notificaciones</span>
           </a>
           <a className="user-nav-item" href="#">
             <span className="icon-wrap">
-              <img src="/icons/carrito.svg" alt="" className="header-icon-img" />
+              <i className="ph ph-shopping-cart header-icon-img"></i>
               <span className="notif-dot">1</span>
             </span>
             <span>Carrito</span>

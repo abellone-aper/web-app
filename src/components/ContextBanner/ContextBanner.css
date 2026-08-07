@@ -22,15 +22,11 @@
 }
 
 .ctx-banner-icon-mask {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center; justify-content: center;
   width: 24px; height: 24px;
-  background-color: var(--action-primary);
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
+  font-size: 22px;
+  color: var(--action-primary);
 }
 
 .ctx-banner-body {

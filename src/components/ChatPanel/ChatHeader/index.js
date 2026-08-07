@@ -1,33 +1,6 @@
 import './ChatHeader.css';
 import { useBrand } from '../../../brands/BrandContext';
 
-
-const MASK_CERRAR_NEUTRAL = {
-  backgroundColor: 'var(--neutral-eight)',
-  WebkitMaskImage: "url('/icons/cerrar.svg')",
-  maskImage: "url('/icons/cerrar.svg')",
-  WebkitMaskSize: 'contain',
-  maskSize: 'contain',
-  WebkitMaskRepeat: 'no-repeat',
-  maskRepeat: 'no-repeat',
-  WebkitMaskPosition: 'center',
-  maskPosition: 'center',
-};
-
-function maskCerrar(color) {
-  return {
-    backgroundColor: color,
-    WebkitMaskImage: "url('/icons/cerrar.svg')",
-    maskImage: "url('/icons/cerrar.svg')",
-    WebkitMaskSize: 'contain',
-    maskSize: 'contain',
-    WebkitMaskRepeat: 'no-repeat',
-    maskRepeat: 'no-repeat',
-    WebkitMaskPosition: 'center',
-    maskPosition: 'center',
-  };
-}
-
 export default function ChatHeader({
   histOpen,
   histDetailTitle,
@@ -55,10 +28,7 @@ export default function ChatHeader({
             </button>
           ) : (
             <div className="chat-header-fab">
-              <span
-                className="mnav-icon chat-header-fab-icon"
-                style={{ WebkitMaskImage: "url('/icons/chat.svg')", maskImage: "url('/icons/chat.svg')" }}
-              ></span>
+              <i className="ph-fill ph-sparkle chat-header-fab-icon"></i>
             </div>
           )}
           <div className="chat-header-info">
@@ -76,7 +46,7 @@ export default function ChatHeader({
             </button>
           )}
           <button className="chat-header-icon-btn" aria-label="Cerrar" onClick={onClose}>
-            <span className="chat-header-close-icon" style={MASK_CERRAR_NEUTRAL} />
+            <i className="ph ph-x chat-header-close-icon"></i>
           </button>
         </div>
       </div>
@@ -100,7 +70,7 @@ export default function ChatHeader({
           >
             <span>Oferta imperdible</span>
             <span className="chat-tab-close" onClick={e => { e.stopPropagation(); onCloseOfferTab(); }}>
-              <span className="chat-tab-close-icon" style={maskCerrar(activeTabId === 'offer' ? 'var(--action-secondary-pressed-text)' : 'var(--neutral-seven)')} />
+              <i className="ph ph-x chat-tab-close-icon" style={{ color: activeTabId === 'offer' ? 'var(--action-secondary-pressed-text)' : 'var(--neutral-seven)' }}></i>
             </span>
           </button>
           <button
@@ -109,7 +79,7 @@ export default function ChatHeader({
           >
             <span>Reservar hospedaje</span>
             <span className="chat-tab-close" onClick={e => { e.stopPropagation(); onCloseHotelTab(); }}>
-              <span className="chat-tab-close-icon" style={maskCerrar(activeTabId === 'hotel' ? 'var(--action-secondary-pressed-text)' : 'var(--neutral-seven)')} />
+              <i className="ph ph-x chat-tab-close-icon" style={{ color: activeTabId === 'hotel' ? 'var(--action-secondary-pressed-text)' : 'var(--neutral-seven)' }}></i>
             </span>
           </button>
         </div>

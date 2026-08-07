@@ -1,15 +1,15 @@
 import { getPublicUrl } from '../lib/storage';
 
 export const CHIPS = [
-  { icon: '/icons/compras.svg',              label: 'Compras recurrentes' },
-  { icon: '/icons/super.svg',                label: 'Ahorrar en el super' },
-  { icon: '/icons/puntos.svg',               label: 'Hasta 54.000 puntos' },
-  { icon: '/icons/computadora.svg',          label: 'Computadoras' },
-  { icon: '/icons/audio.svg',                label: 'Audio' },
-  { icon: '/icons/smartphone.svg',           label: 'Renovar mi Smartphone' },
-  { icon: '/icons/deporte.svg',              label: 'Deporte' },
-  { icon: '/icons/vehículo.svg',             label: 'Para tu vehículo' },
-  { icon: '/icons/experiencia.svg',          label: 'Experiencias' },
+  { iconPh: 'ph-shopping-bag',   label: 'Compras recurrentes' },
+  { iconPh: 'ph-basket',         label: 'Ahorrar en el super' },
+  { iconPh: 'ph-coins',          label: 'Hasta 54.000 puntos' },
+  { iconPh: 'ph-laptop',         label: 'Computadoras' },
+  { iconPh: 'ph-headphones',     label: 'Audio' },
+  { iconPh: 'ph-device-mobile',  label: 'Renovar mi Smartphone' },
+  { iconPh: 'ph-barbell',        label: 'Deporte' },
+  { iconPh: 'ph-car',            label: 'Para tu vehículo' },
+  { iconPh: 'ph-confetti',       label: 'Experiencias' },
 ];
 
 export const MOCHILA_PRODUCT = { id: 'mochila-1', to: '/mochila', img: getPublicUrl('Imagenes', 'Mochila/1.png'), price: '$74.500', title: 'Mochila Tomtoc, equipaje de mano' };

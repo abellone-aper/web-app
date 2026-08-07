@@ -9,6 +9,9 @@
 }
 .chat-suggestions-icon {
   width: 24px; height: 24px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  color: var(--action-primary);
 }
 .chat-suggestions-header-text {
   display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0;
@@ -41,5 +44,6 @@
 .chat-suggestion-chip:disabled:hover { background: var(--neutral-three); }
 .chat-suggestion-chip-arrow {
   display: flex; flex-shrink: 0;
+  font-size: 16px;
   color: var(--neutral-seven);
 }

@@ -33,9 +33,8 @@
 }
 
 .chat-header-fab .chat-header-fab-icon {
-  width: 24px;
-  height: 24px;
-  background-color: var(--action-primary);
+  font-size: 24px;
+  color: var(--action-primary);
   flex-shrink: 0;
 }
 
@@ -92,8 +91,8 @@
 }
 
 .chat-header-close-icon {
-  width: 24px;
-  height: 24px;
+  font-size: 20px;
+  color: var(--neutral-eight);
   display: block;
 }
 
@@ -150,8 +149,7 @@
 }
 
 .chat-tab-close-icon {
-  width: 12px;
-  height: 12px;
+  font-size: 12px;
   display: block;
 }
 

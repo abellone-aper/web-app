@@ -15,10 +15,6 @@
   font-family: var(--font-display); font-weight: 600;
   font-size: 26.5px; line-height: 1; color: var(--brand-primary);
 }
-.logo-bag {
-  width: 28px; height: 28px;
-  color: var(--brand-primary);
-}
 .logo .secondary { color: var(--brand-secondary); }
 .logo-img {
   height: 52px; width: auto; display: block;
@@ -108,7 +104,7 @@
 }
 .icon-wrap { position: relative; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; }
 .icon-wrap i { font-size: 24px; color: var(--brand-on-secondary); }
-.header-icon-img { width: 24px; height: 24px; display: block; object-fit: contain; filter: brightness(0) saturate(100%) invert(29%) sepia(12%) saturate(471%) hue-rotate(191deg) brightness(99%) contrast(93%); }
+.header-icon-img { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 24px; line-height: 1; color: var(--brand-on-secondary); }
 .notif-dot {
   position: absolute; top: -4px; right: -6px;
   background: var(--action-primary); color: var(--neutral-one);
@@ -303,15 +299,17 @@
   .header-bottom { display: none !important; }
 
   .header--home .header__mobile-home { display: flex; }
-  .header--home.header--search-open .header__mobile-home { display: none; }
-  .header--home.header--search-open .header__mobile-search { display: flex; }
   .header--page .header__mobile-page { display: flex; }
+  .header--search-open .header__mobile-home,
+  .header--search-open .header__mobile-page { display: none; }
+  .header--search-open .header__mobile-search { display: flex; }
 
-  /* Scrolled: compact search bar, sin back */
-  .header--home.header--scrolled .header__mobile-home { display: none; }
-  .header--home.header--scrolled .header__mobile-compact { display: flex; }
-  .header--home.header--scrolled.header--search-open .header__mobile-compact { display: none; }
-  .header--home.header--scrolled.header--search-open .header__mobile-search { display: flex; }
+  /* Scrolled: compact search bar, sin back/título — cualquier variante */
+  .header--scrolled .header__mobile-home,
+  .header--scrolled .header__mobile-page { display: none; }
+  .header--scrolled .header__mobile-compact { display: flex; }
+  .header--scrolled.header--search-open .header__mobile-compact { display: none; }
+  .header--scrolled.header--search-open .header__mobile-search { display: flex; }
 }
 
 /* ─── Mobile compact (scrolled) ──────────────────────────── */

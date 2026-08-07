@@ -64,7 +64,7 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
   const brand = useBrand();
   const populares = POPULARES.map(c => c.to ? { ...c, to: brand.path(c.to) } : c);
   const equipamientoNieve = EQUIPAMIENTO_NIEVE.map(c => c.to ? { ...c, to: brand.path(c.to) } : c);
-  const [filter] = useState('todo');
+  const [filter, setFilter] = useState('todo');
   const [barHidden, setBarHidden] = useState(false);
   const promosNav = useCarouselNav('.ptv-promo-banner');
 
@@ -115,7 +115,7 @@ export default function ParaTuViajePage({ onOpenAssistant }) {
             <div className={`ptv-filters-wrap${barHidden ? ' ptv-filters-wrap--bar-hidden' : ''}`}>
               <div className="ptv-filters">
                 {FILTERS.map(f => (
-                  <button key={f} className={`ptv-filter${filter === f ? ' active' : ''}`}>
+                  <button key={f} className={`ptv-filter${filter === f ? ' active' : ''}`} onClick={() => setFilter(f)}>
                     {FILTER_ICONS[f] && <i className={`ph ${FILTER_ICONS[f]} ptv-filter-icon`}></i>}
                     {FILTER_LABELS[f]}
                   </button>

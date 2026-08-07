@@ -158,8 +158,8 @@
   transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.15s;
 }
 .boti-fab .mnav-icon {
-  background-color: var(--action-primary);
-  width: 26px; height: 26px;
+  color: var(--action-primary);
+  font-size: 26px;
 }
 .boti-fab-notif {
   position: absolute;

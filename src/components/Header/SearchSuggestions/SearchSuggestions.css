@@ -86,9 +86,9 @@
 .search-suggestions__card-image img {
   width: 100%;
   height: 100%;
-  transition: transform 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.search-suggestions__card-image:hover img { transform: scale(1.06); }
+.search-suggestions__card-image:hover img { transform: scale(1.03); }
 
 .search-suggestions__card-title {
   font-size: 12px;

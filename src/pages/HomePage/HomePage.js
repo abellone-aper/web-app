@@ -22,11 +22,11 @@ import { useBrand } from '../../brands/BrandContext';
 import BrandLogo from '../../components/BrandLogo';
 import { CHIPS } from '../../data/homeProducts';
 
-const CTX_CAR_ICON = '/icons/vehículo.svg';
+const CTX_CAR_ICON = 'ph-car';
 
 const COUPONS = [
-  { icon: '/icons/descuento tecnologia.svg', title: '15% Off en Tecnología', subtitle: 'Válido en toda sección', expires: 'Vence en 3 días' },
-  { icon: '/icons/cupones.svg', title: '$5.000 en tu próxima compra', subtitle: 'Válido en todas las secciones', expires: 'Vence en 3 días' },
+  { iconPh: 'ph ph-laptop', title: '15% Off en Tecnología', subtitle: 'Válido en toda sección', expires: 'Vence en 3 días' },
+  { iconPh: 'ph ph-ticket', title: '$5.000 en tu próxima compra', subtitle: 'Válido en todas las secciones', expires: 'Vence en 3 días' },
 ];
 
 const TRIP_CARDS = [
@@ -41,12 +41,12 @@ const BANNER_ENTRADAS = getPublicUrl('Imagenes', 'entradas.png');
 const BANNER_ROSALIA  = getPublicUrl('Imagenes', 'rosalia.png');
 
 const MAS_ACCEDIDOS = [
-  { icon: '/icons/pedidos.svg', label: 'Mis pedidos' },
-  { icon: '/icons/medios de pago.svg', label: 'Medios de pago' },
-  { icon: '/icons/seguros.svg', label: 'Seguros' },
-  { icon: '/icons/puntos2.svg', label: 'Puntos acumulados' },
-  { icon: '/icons/historial de busquedas.svg', label: 'Historial de búsquedas' },
-  { icon: '/icons/super2.svg', label: 'Ofertas de supermercado' },
+  { iconPh: 'ph-package', label: 'Mis pedidos' },
+  { iconPh: 'ph-credit-card', label: 'Medios de pago' },
+  { iconPh: 'ph-shield-check', label: 'Seguros' },
+  { iconPh: 'ph-coins', label: 'Puntos acumulados' },
+  { iconPh: 'ph-clock-counter-clockwise', label: 'Historial de búsquedas' },
+  { iconPh: 'ph-basket', label: 'Ofertas de supermercado' },
 ];
 
 const STATUS_CARDS = [
@@ -243,7 +243,7 @@ export default function HomePage({ onOpenAssistant }) {
             <div className="nmh-chips-row">
               {CHIPS.map((c, i) => (
                 <div key={c.label} className="nmh-chip mount-in" style={{'--index': i}}>
-                  <img src={c.icon} alt="" className="nmh-chip-icon" />
+                  <i className={`ph ${c.iconPh} nmh-chip-icon`}></i>
                   <span>{c.label}</span>
                 </div>
               ))}
@@ -291,7 +291,7 @@ export default function HomePage({ onOpenAssistant }) {
               <div className="dh-chips-row">
                 {CHIPS.map((c, i) => (
                   <div key={c.label} className="dh-chip mount-in" style={{'--index': i}}>
-                    <img src={c.icon} alt={c.label} />
+                    <i className={`ph ${c.iconPh}`}></i>
                     <span>{c.label}</span>
                   </div>
                 ))}
@@ -313,14 +313,14 @@ export default function HomePage({ onOpenAssistant }) {
 
           <div ref={featureStripRevealRef} className={`feature-strip reveal${featureStripRevealVisible ? ' is-visible' : ''}`}>
             {[
-              { iconUrl: '/icons/medios de pago.svg', label: 'Cuotas', sub: 'Hasta 24 sin interés' },
-              { iconUrl: '/icons/descuento tecnologia.svg', label: 'Promos', sub: 'Hasta 50% descuento' },
-              { iconUrl: '/icons/seguimiento de envios.svg', label: 'Envíos', sub: 'A todo el país' },
+              { iconPh: 'ph-credit-card', label: 'Cuotas', sub: 'Hasta 24 sin interés' },
+              { iconPh: 'ph-percent', label: 'Promos', sub: 'Hasta 50% descuento' },
+              { iconPh: 'ph-truck', label: 'Envíos', sub: 'A todo el país' },
               { iconPh: 'ph-storefront', label: 'Entregas', sub: 'En tiendas sin costo' },
-            ].map(({ iconUrl, iconPh, label, sub }, i) => (
+            ].map(({ iconPh, label, sub }, i) => (
               <div key={label} className="feature-card mount-in" style={{'--index': i}}>
                 <div className="feature-icon">
-                  {iconUrl ? <img src={iconUrl} alt="" style={{width:'28px',height:'28px'}} /> : <i className={`ph ${iconPh}`}></i>}
+                  <i className={`ph ${iconPh}`}></i>
                 </div>
                 <div className="feature-text"><strong>{label}</strong><span>{sub}</span></div>
               </div>
@@ -353,7 +353,7 @@ export default function HomePage({ onOpenAssistant }) {
                 {MAS_ACCEDIDOS.map((item, i) => (
                   <a href="#" key={item.label} className="mas-accedidos-card mount-in" style={{'--index': i}}>
                     <div className="mas-accedidos-icon">
-                      <img src={item.icon} alt="" />
+                      <i className={`ph ${item.iconPh}`}></i>
                     </div>
                     <span className="mas-accedidos-label">{item.label}</span>
                   </a>

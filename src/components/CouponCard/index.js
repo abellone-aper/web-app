@@ -11,10 +11,7 @@ export default function CouponCard({ coupons, toggles, onToggle, className, styl
         {coupons.map((c, i) => (
           <div key={c.title} className="coupon-item">
             <div className="coupon-icon">
-              {c.icon
-                ? <img src={c.icon} alt="" />
-                : <i className={c.iconPh}></i>
-              }
+              <i className={c.iconPh}></i>
             </div>
             <div className="coupon-info">
               <p className="coupon-name">{c.title}</p>
