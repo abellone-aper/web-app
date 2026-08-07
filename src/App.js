@@ -25,6 +25,7 @@ function Layout({ children }) {
 
 function AppContent() {
   const [chatOpen, setChatOpen] = useState(false);
+  const [carritoOpen, setCarritoOpen] = useState(false);
   const [hotelTabOpen, setHotelTabOpen] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
   const location = useLocation();
@@ -66,22 +67,36 @@ function AppContent() {
   }, [chatOpen]);
 
   useEffect(() => {
+    document.body.classList.toggle('carrito-open', carritoOpen);
+    return () => document.body.classList.remove('carrito-open');
+  }, [carritoOpen]);
+
+  useEffect(() => {
     document.body.classList.toggle('is-banking', isBanking);
     return () => document.body.classList.remove('is-banking');
   }, [isBanking]);
 
   function handleHotelReserve() {
+    setCarritoOpen(false);
     setHotelTabOpen(true);
     setChatOpen(true);
   }
 
-  const openAssistant = () => setChatOpen(true);
+  const openAssistant = () => { setCarritoOpen(false); setChatOpen(true); };
+  const openCarrito = () => { setChatOpen(false); setCarritoOpen(true); };
 
   const homeBankingPage = (
     <HomeBanking chatOpen={chatOpen} onChatOpen={() => setChatOpen(true)} onChatClose={() => setChatOpen(false)} />
   );
   const hospedajePage = <Hospedaje onChatOpen={handleHotelReserve} onOpenAssistant={openAssistant} />;
-  const mochilaPage = <Mochila onOpenAssistant={openAssistant} />;
+  const mochilaPage = (
+    <Mochila
+      onOpenAssistant={openAssistant}
+      carritoOpen={carritoOpen}
+      onOpenCarrito={openCarrito}
+      onCloseCarrito={() => setCarritoOpen(false)}
+    />
+  );
   const homePage = <HomePage onOpenAssistant={openAssistant} />;
   const paraTuViajePage = <ParaTuViaje onOpenAssistant={openAssistant} />;
 
@@ -107,12 +122,16 @@ function AppContent() {
         <Route path="/galicia/mochila" element={<Layout>{mochilaPage}</Layout>} />
       </Routes>
 
-      {!isBanking && <MobileBottomNav onChatOpen={() => setChatOpen(true)} hidden={navHidden} />}
+      {!isBanking && <MobileBottomNav onChatOpen={openAssistant} hidden={navHidden} />}
 
       <button
         className={`boti-fab${chatOpen ? ' is-open' : ''}`}
         aria-label={chatOpen ? 'Cerrar chat' : 'Abrir chat'}
-        onClick={() => setChatOpen(v => !v)}
+        onClick={() => setChatOpen(v => {
+          const next = !v;
+          if (next) setCarritoOpen(false);
+          return next;
+        })}
       >
         {chatOpen
           ? <i className="ph ph-x" style={{fontSize:'26px'}}></i>

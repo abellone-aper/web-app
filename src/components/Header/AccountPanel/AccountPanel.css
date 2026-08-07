@@ -19,7 +19,7 @@ body.account-panel-open .mobile-nav-chat-fab-wrap { display: none !important; }
 .account-panel {
   position: fixed;
   top: 0; right: 0; bottom: 0;
-  width: 360px;
+  width: 300px;
   max-width: 100vw;
   background: var(--neutral-one);
   z-index: 301;
@@ -118,8 +118,6 @@ body.account-panel-open .mobile-nav-chat-fab-wrap { display: none !important; }
   font-family: inherit;
 }
 .account-panel-item > span:last-child { flex: 1; min-width: 0; }
-.account-panel-item--reverse { width: auto; }
-.account-panel-item--reverse > span:last-child { flex: none; }
 .account-panel-item-icon-wrap { position: relative; width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
 .account-panel-notif-dot {
   position: absolute; top: -4px; right: -6px;

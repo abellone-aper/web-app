@@ -310,8 +310,8 @@
 .mo-payment-head { display: flex; align-items: center; gap: 5px; }
 .mo-payment-head i { font-size: 16px; color: var(--information-primary); }
 .mo-payment-head p { margin: 0; font-size: 12px; font-weight: 700; color: var(--information-primary); }
-.mo-payment-info { display: flex; flex-direction: column; gap: 8px; }
-.mo-payment-info-main { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.mo-payment-info { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.mo-payment-info-main { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1 0 0; }
 .mo-payment-icon {
   width: 40px; height: 30px; border-radius: var(--radius-xs);
   background: var(--color-bg-surface); border: 1px solid var(--neutral-four);
@@ -321,7 +321,7 @@
 .mo-payment-details { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .mo-payment-name { font-size: 14px; font-weight: 500; color: var(--neutral-nine); }
 .mo-payment-sub { font-size: 12px; color: var(--neutral-seven); }
-.mo-payment-price { display: flex; align-items: baseline; justify-content: flex-end; align-self: flex-end; gap: 6px; flex-shrink: 0; white-space: nowrap; }
+.mo-payment-price { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; white-space: nowrap; }
 .mo-payment-price-old { font-size: 12px; color: var(--neutral-seven); text-decoration: line-through; }
 .mo-payment-price-new { font-size: 16px; font-weight: 500; color: var(--neutral-nine); }
 .mo-cashback-info {
@@ -330,6 +330,7 @@
   padding: 8px; font-size: 12px; font-weight: 500; color: var(--information-primary);
 }
 .mo-cashback-info i { font-size: 16px; flex-shrink: 0; }
+.mo-payment-disclaimer { font-size: 10px; line-height: 14px; color: var(--neutral-seven); margin: 0; }
 
 .mo-payment-options { display: flex; flex-direction: column; gap: 8px; }
 .mo-payment-options-row { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
@@ -510,14 +511,16 @@
 
   .mo-price-box { position: sticky; top: 80px; }
 
-  body.chat-open .mo-main {
+  body.chat-open .mo-main,
+  body.carrito-open .mo-main {
     padding-right: var(--chat-panel-push);
     transition: padding-right var(--transition-panel);
   }
-  body:not(.chat-open) .mo-main {
+  body:not(.chat-open):not(.carrito-open) .mo-main {
     transition: padding-right var(--transition-panel);
   }
-  body.chat-open .mo-layout { grid-template-columns: 1fr 360px; }
+  body.chat-open .mo-layout,
+  body.carrito-open .mo-layout { grid-template-columns: 1fr 360px; }
 }
 
 @media (min-width: 1025px) and (max-width: 1440px) {

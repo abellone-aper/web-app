@@ -9,6 +9,7 @@ import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SecondaryButton from '../../components/Buttons/SecondaryButton';
 import GalleryActions from '../../components/GalleryActions';
 import TripCard from '../../components/TripCard';
+import CarritoPanel from '../../components/CarritoPanel';
 import { useBrand } from '../../brands/BrandContext';
 import useReveal from '../../hooks/useReveal';
 
@@ -21,6 +22,16 @@ const PRICE_ORIGINAL = 245000;
 const PRICE_CURRENT = 171500;
 const INSTALLMENTS = 12;
 const CASHBACK_PCT = 0.2;
+const DISCOUNT_PCT = 30;
+
+const BOOTS_CART_ITEM = {
+  id: 'botas-north-face',
+  img: getPublicUrl('Imagenes', 'Para-tu-viaje/Botas The North Face Hedgehog 3 Mid Wp.png'),
+  imgFit: 'contain',
+  name: 'Botas The North Face Hedgehog 3 Mid Wp',
+  priceCurrent: 340000,
+  qty: 1,
+};
 
 function fmtARS(n) {
   return '$' + Math.round(n).toLocaleString('es-AR');
@@ -332,7 +343,7 @@ function QASection() {
   );
 }
 
-function PriceBox({ brand, hideTitle = false, color, setColor }) {
+function PriceBox({ brand, hideTitle = false, color, setColor, onAddToCart }) {
   const [size, setSize] = useState('40 L');
   const [qty, setQty] = useState(1);
   const [delivery, setDelivery] = useState('envio');
@@ -393,6 +404,7 @@ function PriceBox({ brand, hideTitle = false, color, setColor }) {
           <i className="ph ph-currency-circle-dollar"></i>
           <span>Recibís {fmtARS(cashback)} de reintegro en tu próximo resumen</span>
         </div>
+        <p className="mo-payment-disclaimer">Precios finales según medio de pago. Cashback acreditado en 30–45 días hábiles.</p>
       </div>
 
       <div className="mo-payment-options">
@@ -465,7 +477,7 @@ function PriceBox({ brand, hideTitle = false, color, setColor }) {
 
       <div className="mo-price-actions">
         <PrimaryButton style={{ width: '100%' }} type="button">Comprar ahora</PrimaryButton>
-        <SecondaryButton style={{ width: '100%' }} type="button">Agregar al carrito</SecondaryButton>
+        <SecondaryButton style={{ width: '100%' }} type="button" onClick={onAddToCart}>Agregar al carrito</SecondaryButton>
       </div>
 
       <div className="mo-purchase-meta">
@@ -477,11 +489,12 @@ function PriceBox({ brand, hideTitle = false, color, setColor }) {
   );
 }
 
-export default function MochilaPage({ onOpenAssistant }) {
+export default function MochilaPage({ onOpenAssistant, carritoOpen, onOpenCarrito, onCloseCarrito }) {
   const brand = useBrand();
   const [galleryIdx, setGalleryIdx] = useState(0);
   const [barHidden, setBarHidden] = useState(false);
   const [color, setColor] = useState(COLORS[0].name);
+  const [cartItems, setCartItems] = useState([BOOTS_CART_ITEM]);
   const trackRef = useRef(null);
 
   useEffect(() => {
@@ -501,6 +514,38 @@ export default function MochilaPage({ onOpenAssistant }) {
   const galleryImgs = GALLERY_IMGS.map((img, i) => (
     i === 0 ? { src: activeColorImg, alt: `Mochila Tomtoc — color ${color}` } : img
   ));
+
+  function handleAddToCart() {
+    setCartItems(prev => {
+      const existing = prev.find(i => i.id === 'mochila-tomtoc');
+      if (existing) {
+        return prev.map(i => i.id === 'mochila-tomtoc' ? { ...i, qty: i.qty + 1, img: activeColorImg } : i);
+      }
+      return [{
+        id: 'mochila-tomtoc',
+        img: activeColorImg,
+        imgFit: 'cover',
+        name: 'Mochila de viaje Tomtoc, equipaje de mano aprobado para vuelos, moderna, minimalista',
+        priceOriginal: PRICE_ORIGINAL,
+        priceCurrent: PRICE_CURRENT,
+        discountPct: DISCOUNT_PCT,
+        qty: 1,
+      }, ...prev];
+    });
+    onOpenCarrito();
+  }
+
+  function incrementCartItem(id) {
+    setCartItems(prev => prev.map(i => i.id === id ? { ...i, qty: i.qty + 1 } : i));
+  }
+
+  function decrementCartItem(id) {
+    setCartItems(prev => prev.map(i => i.id === id && i.qty > 1 ? { ...i, qty: i.qty - 1 } : i));
+  }
+
+  function removeCartItem(id) {
+    setCartItems(prev => prev.filter(i => i.id !== id));
+  }
 
   return (
     <>
@@ -575,7 +620,7 @@ export default function MochilaPage({ onOpenAssistant }) {
             </div>
 
             <div className="mo-col-aside">
-              <PriceBox brand={brand} color={color} setColor={setColor} />
+              <PriceBox brand={brand} color={color} setColor={setColor} onAddToCart={handleAddToCart} />
             </div>
           </div>
 
@@ -584,7 +629,7 @@ export default function MochilaPage({ onOpenAssistant }) {
             <h1 className="mo-title-mobile-sr">Mochila de viaje Tomtoc, equipaje de mano aprobado para vuelos, moderna, minimalista</h1>
 
             <div className="mo-price-box-mobile">
-              <PriceBox brand={brand} color={color} setColor={setColor} />
+              <PriceBox brand={brand} color={color} setColor={setColor} onAddToCart={handleAddToCart} />
             </div>
 
             <div className="mo-section-block"><AiBanner brand={brand} /></div>
@@ -595,6 +640,15 @@ export default function MochilaPage({ onOpenAssistant }) {
           </div>
         </div>
       </div>
+
+      <CarritoPanel
+        open={carritoOpen}
+        onClose={onCloseCarrito}
+        items={cartItems}
+        onIncrement={incrementCartItem}
+        onDecrement={decrementCartItem}
+        onRemove={removeCartItem}
+      />
     </>
   );
 }

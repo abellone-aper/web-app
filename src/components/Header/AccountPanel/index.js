@@ -82,13 +82,13 @@ export default function AccountPanel({ open, onClose, user, onOpenAssistant }) {
           <div className="account-panel-divider" />
 
           <nav className="account-panel-list">
-            <a href="#" className="account-panel-item account-panel-item--reverse">
-              <span>Recomendaciones</span>
+            <a href="#" className="account-panel-item">
               <i className="ph ph-lightbulb account-panel-item-icon"></i>
+              <span>Recomendaciones</span>
             </a>
-            <a href="#" className="account-panel-item account-panel-item--reverse">
-              <span>Cupones</span>
+            <a href="#" className="account-panel-item">
               <i className="ph ph-tag account-panel-item-icon"></i>
+              <span>Cupones</span>
             </a>
           </nav>
 

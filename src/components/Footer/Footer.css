@@ -60,9 +60,12 @@
 
 @media (min-width: 1025px) {
   .footer-inner { padding: 40px var(--container-px); }
-  body.chat-open .footer-inner { grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  body.chat-open .footer-col:first-child { grid-column: 1 / -1; }
-  body.chat-open .footer-col:last-child  { grid-column: 1 / -1; }
+  body.chat-open .footer-inner,
+  body.carrito-open .footer-inner { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  body.chat-open .footer-col:first-child,
+  body.carrito-open .footer-col:first-child { grid-column: 1 / -1; }
+  body.chat-open .footer-col:last-child,
+  body.carrito-open .footer-col:last-child  { grid-column: 1 / -1; }
 }
 
 /* ─── Site footer (new component styles) ─────────────────────── */
@@ -204,11 +207,12 @@
 
 /* ── Chat panel push (solo desktop) ── */
 @media (min-width: 1025px) {
-  body.chat-open .site-footer {
+  body.chat-open .site-footer,
+  body.carrito-open .site-footer {
     padding-right: var(--chat-panel-push);
     transition: padding-right var(--transition-panel);
   }
-  body:not(.chat-open) .site-footer {
+  body:not(.chat-open):not(.carrito-open) .site-footer {
     transition: padding-right var(--transition-panel);
   }
 }
