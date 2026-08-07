@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { flushSync } from 'react-dom';
 import HomePage from './pages/HomePage/HomePage';
 import ParaTuViaje from './pages/ParaTuViaje/ParaTuViaje';
 import HomeBanking from './pages/HomeBanking/HomeBanking';
@@ -27,9 +28,24 @@ function AppContent() {
   const [hotelTabOpen, setHotelTabOpen] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
   const location = useLocation();
-  const brandId = resolveBrandId(location.pathname);
+  const [displayLocation, setDisplayLocation] = useState(location);
+  const brandId = resolveBrandId(displayLocation.pathname);
   const brandPrefix = BRANDS[brandId].prefix;
-  const isBanking = location.pathname === `${brandPrefix}/homebanking`;
+  const isBanking = displayLocation.pathname === `${brandPrefix}/homebanking`;
+
+  // Cross-dissolve between pages via the native View Transitions API —
+  // displayLocation lags behind the real location so <Routes> keeps
+  // rendering the outgoing page until the browser has snapshotted it.
+  useEffect(() => {
+    if (location.pathname === displayLocation.pathname) return;
+    if (typeof document.startViewTransition !== 'function' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplayLocation(location);
+      return;
+    }
+    document.startViewTransition(() => {
+      flushSync(() => setDisplayLocation(location));
+    });
+  }, [location, displayLocation]);
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -71,7 +87,7 @@ function AppContent() {
 
   return (
     <BrandProvider brand={brandId}>
-      <Routes>
+      <Routes location={displayLocation}>
         <Route path="/" element={<Layout>{homePage}</Layout>} />
         <Route path="/para-tu-viaje" element={<Layout>{paraTuViajePage}</Layout>} />
         <Route path="/homebanking" element={<Layout>{homeBankingPage}</Layout>} />

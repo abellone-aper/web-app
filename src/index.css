@@ -248,6 +248,16 @@ img { max-width: 100%; display: block; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
+/* ─── Page transitions ───────────────────────────────────────────
+   Cross-dissolve between routes via the native View Transitions API
+   (App.js calls document.startViewTransition on navigation; skipped
+   entirely under prefers-reduced-motion, so no override needed here). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* ─── Responsive :root overrides ────────────────────────────── */
 @media (max-width: 1440px) {
   :root {
